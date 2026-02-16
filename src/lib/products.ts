@@ -52,7 +52,7 @@ export const products: Product[] = [
   },
   {
     id: 'pipeline',
-    slug: 'crm',
+    slug: 'ses',
     color: 'purple',
     // alt_route
     iconPath:

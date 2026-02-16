@@ -62,7 +62,7 @@
 
 1. ¿El teléfono "+1-800-GRIALINK" es real o placeholder?
 2. ¿El email "<hello@grialink.com>" está activo y monitoreado?
-3. ¿El formulario de contacto debe enviar a un email, un CRM (propio), o ambos?
+3. ¿El formulario de contacto debe enviar a un email, un SES (propio), o ambos?
 4. ¿Necesitan integración con algún sistema de tickets? (Ej: Zendesk, Freshdesk, Intercom)
 5. ¿Usan algún chat en vivo? Si sí, ¿cuál? (Para embeber widget)
 6. ¿Quieren implementar Calendly o similar para agendar demos directamente?
@@ -85,14 +85,14 @@
 
 ---
 
-## PARTE 2: Contenido faltante para una landing de CRM profesional
+## PARTE 2: Contenido faltante para una landing de SES profesional
 
 ### Secciones que NO existen y SON necesarias
 
 | Prioridad | Sección | ¿Dónde va? | Justificación |
 |-----------|---------|------------|---------------|
 | **CRÍTICA** | **Testimonios / Social Proof real** | Home (después de Features) | Sin testimonios reales, la landing carece de credibilidad. Es el factor #1 de conversión en SaaS B2B healthcare. |
-| **CRÍTICA** | **Screenshots reales del producto** | Products page + Home | Actualmente solo hay mockups CSS. Ningún prospecto confía en un CRM sin ver la interfaz real. |
+| **CRÍTICA** | **Screenshots reales del producto** | Products page + Home | Actualmente solo hay mockups CSS. Ningún prospecto confía en un SES sin ver la interfaz real. |
 | **CRÍTICA** | **Página de Privacidad** | `/privacy` | Los links del footer están rotos. Es obligatorio legalmente. |
 | **CRÍTICA** | **Página de Términos de Servicio** | `/terms` | Los links del footer están rotos. Es obligatorio legalmente. |
 | **ALTA** | **"How it Works" (Cómo funciona)** | Home (después de Hero o Products) | Un flujo visual de 3-4 pasos que muestre el proceso de adopción reduce fricción y clarifica la propuesta. |
@@ -272,7 +272,7 @@ Logos reales de clínicas/empresas clientes. Si no hay clientes aún, hay 3 opci
 **Descripción de la imagen ideal:**
 Imagen con fondo degradado navy→naranja. Logo de Grialink centrado-izquierda. Texto titular de la página a la derecha. Diseño limpio, legible en miniatura (como se ve en previews de WhatsApp, LinkedIn, Twitter). Variantes:
 
-- `og-home.png`: "El CRM inteligente para clínicas"
+- `og-home.png`: "El SES inteligente para clínicas"
 - `og-products.png`: "Ecosistema tecnológico de vanguardia"
 - `og-pricing.png`: "Planes flexibles para cada clínica"
 - `og-about.png`: "Conoce al equipo detrás de Grialink"

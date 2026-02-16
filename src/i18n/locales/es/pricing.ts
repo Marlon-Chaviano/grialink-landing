@@ -157,7 +157,7 @@ export default {
           'Sí, el plan Free no tiene fecha de expiración. Puedes explorar la plataforma sin costo y actualizar a un plan de pago cuando estés listo para desbloquear funciones avanzadas de IA y más capacidad.',
       },
       {
-        question: '¿Puedo migrar mis contactos desde otro CRM?',
+        question: '¿Puedo migrar mis contactos desde otra plataforma?',
         answer:
           'Sí, puedes importar contactos de forma masiva y también usar el Prospector AI para enriquecer datos desde Apollo.io. Si necesitas migración asistida, nuestro equipo te ayuda sin costo adicional.',
       },

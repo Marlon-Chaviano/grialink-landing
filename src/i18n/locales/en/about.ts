@@ -1,15 +1,15 @@
 export default {
   /* ── SEO ── */
   seo: {
-    title: 'About Grialink — Who We Are | AI CRM for Health Clinics',
+    title: 'About Grialink — Who We Are | AI SES for Health Clinics',
     description:
-      'Grialink was born in the hallways of real clinics. Learn the story, mission, and team behind the omnichannel AI CRM designed for aesthetic, dental, and health clinics.',
+      'Grialink was born in the hallways of real clinics. Learn the story, mission, and team behind the omnichannel AI Sales Engine System (SES) designed for aesthetic, dental, and health clinics.',
   },
 
   /* ── Hero ── */
   hero: {
     badge: 'Our Mission',
-    titleLine1: 'The CRM that clinics',
+    titleLine1: 'The SES that clinics',
     titleHighlight: 'actually need',
     subtitle:
       'We were born watching healthcare professionals waste hours between Excel, WhatsApp, and manual schedules. We created Grialink so they can focus on the only thing that matters: caring for their patients.',
@@ -23,7 +23,7 @@ export default {
     paragraphs: [
       'An aesthetics specialist told us: "I lose 3 hours a day between WhatsApp, my Google Calendar, and the spreadsheet where I track leads." He wasn\'t the only one. We saw dental clinics managing patients in Excel, losing leads because nobody followed the pipeline, and confirming appointments one by one by phone.',
       'We understood that clinics didn\'t need "yet another software." They needed an intelligent platform that spoke their language: with pipelines for aesthetics, dental, and dermatology. With appointments synced to Google Calendar. With AI that analyzes calls and detects opportunities.',
-      'That\'s how Grialink was born: an omnichannel CRM with integrated AI modules, built from the ground up for the healthcare sector by a team that understands both technology and the operational reality of a clinic.',
+      'That\'s how Grialink was born: an omnichannel Sales Engine System (SES) with integrated AI modules, built from the ground up for the healthcare sector by a team that understands both technology and the operational reality of a clinic.',
     ],
     image1Alt: 'Healthcare professional frustrated with manual systems',
     image2Alt: 'Grialink team designing the platform',

@@ -1,13 +1,13 @@
 export default {
   seo: {
-    title: 'Producto — Grialink | CRM Omnicanal con IA para Clínicas de Salud',
+    title: 'Producto — Grialink | SES Omnicanal con IA para Clínicas de Salud',
     description:
       'Prospector AI, Outreach Engine, Smart Pipeline e IA Analytics: 4 módulos de IA integrados para automatizar la captación y gestión de pacientes en clínicas estéticas, dentales y de salud.',
   },
 
   hero: {
-    badge: 'CRM diseñado para clínicas',
-    titleLine1: 'Más que un CRM.',
+    badge: 'SES diseñado para clínicas',
+    titleLine1: 'Más que un SES.',
     titleHighlight: 'Tu motor de ventas con IA.',
     subtitle:
       'Cuatro módulos integrados que automatizan todo el ciclo del paciente: desde encontrarlo con IA, contactarlo por WhatsApp, agendarle cita con Google Calendar, hasta analizar cada llamada con scoring inteligente.',
@@ -111,7 +111,7 @@ export default {
         'Hasta 800 contactos enriquecidos por mes',
         'Teléfono, email, LinkedIn y datos de empresa',
         'Agregar al pipeline o secuencia con un clic',
-        'Exportar contactos a CSV o sincronizar con CRM',
+        'Exportar contactos a CSV o sincronizar con SES',
       ],
       step2ImageAlt: 'Resultados de búsqueda de Prospector AI mostrando datos de contacto enriquecidos',
       step3Title: 'Inteligencia profunda de contactos',
@@ -190,7 +190,7 @@ export default {
       badge: 'Próximamente',
       title: 'Más herramientas poderosas en camino',
       subtitle:
-        'Estamos construyendo el CRM con IA más completo para salud. Estos módulos están en desarrollo activo y se lanzan pronto.',
+        'Estamos construyendo el SES con IA más completo para salud. Estos módulos están en desarrollo activo y se lanzan pronto.',
       tag: 'Pronto',
       products: [
         {

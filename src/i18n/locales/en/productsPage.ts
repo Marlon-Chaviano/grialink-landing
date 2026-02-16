@@ -1,13 +1,13 @@
 export default {
   seo: {
-    title: 'Product — Grialink | Omnichannel AI CRM for Health Clinics',
+    title: 'Product — Grialink | Omnichannel AI SES for Health Clinics',
     description:
       'Prospector AI, Outreach Engine, Smart Pipeline & AI Analytics: 4 integrated AI modules to automate patient acquisition and management for aesthetic, dental, and health clinics.',
   },
 
   hero: {
-    badge: 'CRM designed for clinics',
-    titleLine1: 'More than a CRM.',
+    badge: 'SES designed for clinics',
+    titleLine1: 'More than a SES.',
     titleHighlight: 'Your AI sales engine.',
     subtitle:
       'Four integrated modules that automate the entire patient cycle: from finding them with AI, contacting them via WhatsApp, scheduling with Google Calendar, to analyzing every call with smart scoring.',
@@ -111,7 +111,7 @@ export default {
         'Up to 800 enriched contacts per month',
         'Phone, email, LinkedIn, and company data',
         'One-click add to pipeline or sequence',
-        'Export contacts to CSV or sync with CRM',
+        'Export contacts to CSV or sync with SES',
       ],
       step2ImageAlt: 'Prospector AI search results showing enriched contact data',
       step3Title: 'Deep contact intelligence',
@@ -190,7 +190,7 @@ export default {
       badge: 'Coming Soon',
       title: 'More powerful tools on the way',
       subtitle:
-        'We\'re building the most complete AI-powered CRM for healthcare. These modules are in active development and launching soon.',
+        'We\'re building the most complete AI-powered SES for healthcare. These modules are in active development and launching soon.',
       tag: 'Soon',
       products: [
         {

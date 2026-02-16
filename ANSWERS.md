@@ -13,13 +13,13 @@
 
 Basado en las funcionalidades reales del producto, la USP de Grialink es:
 
-> **Grialink es el único CRM omnicanal con IA integrada diseñado específicamente para clínicas de salud, que combina en una sola plataforma: prospección inteligente (Apollo.io), pipelines de ventas con templates para especialidades médicas (estética, dental, dermatología), sistema de citas con sincronización bidireccional de Google Calendar, análisis de llamadas con IA, secuencias de email automatizadas (cadencias), marketing insights de Meta Ads, y un asistente de IA (Captain) — todo con un sistema de créditos de IA por feature.**
+> **Grialink es el único SES (Sales Engine System) omnicanal con IA integrada diseñado específicamente para clínicas de salud, que combina en una sola plataforma: prospección inteligente (Apollo.io), pipelines de ventas con templates para especialidades médicas (estética, dental, dermatología), sistema de citas con sincronización bidireccional de Google Calendar, análisis de llamadas con IA, secuencias de email automatizadas (cadencias), marketing insights de Meta Ads, y un asistente de IA (Captain) — todo con un sistema de créditos de IA por feature.**
 
 Diferenciadores clave vs. competidores:
 
 - **vs. Salesforce Health Cloud**: Grialink es más accesible ($60-$150/mes vs. miles), con IA integrada de fábrica y enfocado en clínicas pequeñas/medianas.
 - **vs. HubSpot for Healthcare**: Grialink tiene pipelines pre-configurados para especialidades médicas, sistema de citas nativo con Google Calendar, y análisis de llamadas con scoring de agentes.
-- **vs. DrChrono / NexHealth**: Estos son EMR/scheduling. Grialink es CRM de adquisición de pacientes + retención, no sistema de historia clínica.
+- **vs. DrChrono / NexHealth**: Estos son EMR/scheduling. Grialink es SES de adquisición de pacientes + retención, no sistema de historia clínica.
 
 ---
 
@@ -265,7 +265,7 @@ Módulos de IA reales basados en el código:
 | **Google Translate** | Traducción | Traducción en tiempo real |
 | **Dyte** | Video/Voz | Llamadas de video/voz desde Grialink |
 | **Shopify** | E-commerce | Integración e-commerce |
-| **LeadSquared** | CRM externo | Push de actividades de conversación |
+| **LeadSquared** | SES externo | Push de actividades de conversación |
 | **Linear** | Issue tracking | Gestión de tickets |
 | **Notion** | Documentación | Workspace de Notion |
 | **Telegram** | Canal de mensajería | Bot de Telegram |
@@ -292,11 +292,11 @@ Módulos de IA reales basados en el código:
 No existe un roadmap público en el repositorio. Sin embargo, los feature flags deshabilitados sugieren funcionalidades en desarrollo:
 
 - **Voice Channel** (canal de voz)
-- **CRM V2** (nueva versión de CRM)
+- **SES V2** (nueva versión de SES)
 - **Assignment V2** (asignación avanzada)
 - **WhatsApp Campaign** (campañas por WhatsApp)
 - **Advanced Search** con indexación
-- **CRM Integration** (integración CRM nativa)
+- **SES Integration** (integración SES nativa)
 - **Quoted Email Reply** (respuesta con email citado)
 
 ⚠️ **Pendiente de confirmación** si quieren hacer un roadmap público.
@@ -322,7 +322,7 @@ No existe un roadmap público en el repositorio. Sin embargo, los feature flags 
 
 ⚠️ **Pendiente de confirmación.** No hay anécdotas en el código. Sin embargo, basándose en el producto, una anécdota realista sería:
 
-> *"Vimos cómo clínicas dentales gestionaban pacientes potenciales en Excel, perdían leads porque nadie seguía el pipeline, y las citas se confirmaban por llamada telefónica una a una. Un especialista en estética nos dijo: 'Pierdo 3 horas al día entre WhatsApp, mi agenda y la hoja de cálculo'. Ahí supimos que el sector necesitaba un CRM que hablara su idioma."*
+> *"Vimos cómo clínicas dentales gestionaban pacientes potenciales en Excel, perdían leads porque nadie seguía el pipeline, y las citas se confirmaban por llamada telefónica una a una. Un especialista en estética nos dijo: 'Pierdo 3 horas al día entre WhatsApp, mi agenda y la hoja de cálculo'. Ahí supimos que el sector necesitaba un SES que hablara su idioma."*
 
 ---
 
@@ -453,7 +453,7 @@ Pricing de add-ons:
 3. **"¿Qué pasa si se me acaban los créditos de IA?"** → Puedes comprar packs adicionales como add-on mensual.
 4. **"¿Puedo gestionar varias sucursales/clínicas?"** → Sí, en el plan Scale con multi-clínica.
 5. **"¿Qué canales de comunicación soporta?"** → WhatsApp, Instagram, Facebook Messenger, Email, Web Chat, Telegram, LINE, SMS.
-6. **"¿Puedo migrar mis contactos desde otro CRM?"** → Sí, vía importación de contactos y el Prospector de Apollo.io.
+6. **"¿Puedo migrar mis contactos desde otra plataforma?"** → Sí, vía importación de contactos y el Prospector de Apollo.io.
 7. **"¿Los datos de mis pacientes están seguros?"** → Encriptación, MFA, audit logs, y política de privacidad de Ezi Group LLC.
 8. **"¿Cómo funciona la IA para llamadas?"** → Transcribe y analiza automáticamente sentimiento, intención, probabilidad de conversión y scoring del agente.
 
@@ -475,11 +475,11 @@ El email configurado en el código es **`info@grialink.com`** (archivo `app.json
 
 ---
 
-**33. ¿El formulario de contacto debe enviar a un email, un CRM, o ambos?**
+**33. ¿El formulario de contacto debe enviar a un email, un SES, o ambos?**
 
-Grialink **es** su propio CRM. La recomendación es:
+Grialink **es** su propio SES. La recomendación es:
 
-- **Inbox de Web Widget**: El producto tiene un widget de chat en vivo (`channel/web_widget.rb`) con token configurado (`CHATWOOT_SUPPORT_WEBSITE_TOKEN`). Esto alimenta directamente el CRM.
+- **Inbox de Web Widget**: El producto tiene un widget de chat en vivo (`channel/web_widget.rb`) con token configurado (`CHATWOOT_SUPPORT_WEBSITE_TOKEN`). Esto alimenta directamente el SES.
 - **Email**: El email `info@grialink.com` puede configurarse como una inbox de email en Grialink.
 - **Recomendación**: Ambos — formulario que envía email al inbox + widget de chat embebido.
 

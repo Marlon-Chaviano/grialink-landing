@@ -31,10 +31,10 @@ export default {
     {
       title: '2. Description of Services',
       content: [
-        'Grialink provides an omnichannel CRM platform powered by artificial intelligence, designed specifically for aesthetic, dental, and healthcare clinics. Our Services include but are not limited to:',
+        'Grialink provides an omnichannel Sales Engine System (SES) platform powered by artificial intelligence, designed specifically for aesthetic, dental, and healthcare clinics. Our Services include but are not limited to:',
         '• <strong>Prospector AI:</strong> Intelligent lead discovery and qualification tools.',
         '• <strong>Outreach Engine:</strong> Automated omnichannel communication workflows.',
-        '• <strong>Smart Pipeline:</strong> Visual CRM pipeline management with AI-powered insights.',
+        '• <strong>Smart Pipeline:</strong> Visual SES pipeline management with AI-powered insights.',
         '• <strong>AI Analytics:</strong> Real-time dashboards, reporting, and performance metrics.',
         '• <strong>Captain AI:</strong> AI assistant for automated patient communications.',
         '• <strong>Call Brain:</strong> Call recording, transcription, and analysis.',

@@ -157,7 +157,7 @@ export default {
           'Yes, the Free plan never expires. You can explore the platform at no cost and upgrade to a paid plan when you\'re ready to unlock advanced AI features and more capacity.',
       },
       {
-        question: 'Can I migrate contacts from another CRM?',
+        question: 'Can I migrate contacts from another platform?',
         answer:
           'Yes, you can bulk import contacts and also use Prospector AI to enrich data from Apollo.io. If you need assisted migration, our team helps you at no additional cost.',
       },

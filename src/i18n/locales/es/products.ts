@@ -27,7 +27,7 @@ export default {
     badge: 'El problema que resolvemos',
     title: 'El caos operativo de las clínicas',
     quote:
-      '"Perdía 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo. Necesitaba un CRM que hablara el idioma de mi clínica." — Especialista en estética',
+      '"Perdía 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo. Necesitaba una plataforma que hablara el idioma de mi clínica." — Especialista en estética',
     imgAlt: 'Profesional de la salud gestionando pacientes con tecnología moderna',
   },
 };

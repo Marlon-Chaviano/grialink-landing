@@ -27,7 +27,7 @@ export default {
     badge: 'The problem we solve',
     title: 'The operational chaos of clinics',
     quote:
-      '"I was losing 3 hours a day between WhatsApp, Google Calendar, and my spreadsheet. I needed a CRM that speaks my clinic\'s language." \u2014 Aesthetic specialist',
+      '"I was losing 3 hours a day between WhatsApp, Google Calendar, and my spreadsheet. I needed a platform that speaks my clinic\'s language." \u2014 Aesthetic specialist',
     imgAlt: 'Healthcare professional managing patients with modern technology',
   },
 };

@@ -1,6 +1,6 @@
 export default {
   brand: 'Grialink',
-  tagline: 'The omnichannel CRM with AI designed for aesthetic, dental, and healthcare clinics.',
+  tagline: 'The omnichannel SES with AI designed for aesthetic, dental, and healthcare clinics.',
   copyright: '© {year} Ezi Group LLC (DBA Grialink). All rights reserved.',
   groups: [
     {
@@ -8,7 +8,7 @@ export default {
       links: [
         { label: 'Prospector AI', href: '/products#prospector' },
         { label: 'Outreach Engine', href: '/products#outreach' },
-        { label: 'Smart Pipeline', href: '/products#crm' },
+        { label: 'Smart Pipeline', href: '/products#ses' },
         { label: 'AI Analytics', href: '/products#analytics' },
       ],
     },

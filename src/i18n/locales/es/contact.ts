@@ -1,6 +1,6 @@
 export default {
   seo: {
-    title: 'Contacto — Grialink | Habla con Nuestro Equipo de CRM para Clínicas',
+    title: 'Contacto — Grialink | Habla con Nuestro Equipo de SES para Clínicas',
     description:
       'Agenda una demo personalizada o contacta a nuestro equipo. Soporte técnico, consultas comerciales y alianzas para clínicas de salud, estéticas y dentales.',
   },

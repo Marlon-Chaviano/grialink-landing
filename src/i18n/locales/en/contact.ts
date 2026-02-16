@@ -1,6 +1,6 @@
 export default {
   seo: {
-    title: 'Contact — Grialink | Talk to Our Clinic CRM Team',
+    title: 'Contact — Grialink | Talk to Our Clinic SES Team',
     description:
       'Schedule a personalized demo or contact our team. Technical support, sales inquiries, and partnerships for health, aesthetic, and dental clinics.',
   },

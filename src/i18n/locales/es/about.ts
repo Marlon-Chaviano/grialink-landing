@@ -1,15 +1,15 @@
 export default {
   /* ── SEO ── */
   seo: {
-    title: 'Sobre Grialink — Quiénes Somos | CRM con IA para Clínicas de Salud',
+    title: 'Sobre Grialink — Quiénes Somos | SES con IA para Clínicas de Salud',
     description:
-      'Grialink nació en los pasillos de clínicas reales. Conoce la historia, misión y el equipo detrás del CRM omnicanal con IA diseñado para clínicas estéticas, dentales y de salud.',
+      'Grialink nació en los pasillos de clínicas reales. Conoce la historia, misión y el equipo detrás del SES (Sales Engine System) omnicanal con IA diseñado para clínicas estéticas, dentales y de salud.',
   },
 
   /* ── Hero ── */
   hero: {
     badge: 'Nuestra Misión',
-    titleLine1: 'El CRM que las clínicas',
+    titleLine1: 'El SES que las clínicas',
     titleHighlight: 'realmente necesitan',
     subtitle:
       'Nacimos observando cómo los profesionales de la salud perdían horas entre Excel, WhatsApp y agendas manuales. Creamos Grialink para que se enfoquen en lo único que importa: cuidar a sus pacientes.',
@@ -23,7 +23,7 @@ export default {
     paragraphs: [
       'Un especialista en estética nos dijo: "Pierdo 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo donde apunto los leads". No era el único. Vimos cómo clínicas dentales gestionaban pacientes en Excel, perdían leads porque nadie seguía el pipeline, y confirmaban citas una por una por teléfono.',
       'Entendimos que las clínicas no necesitaban "otro software más". Necesitaban una plataforma inteligente que hablara su idioma: con pipelines para estética, dental y dermatología. Con citas sincronizadas a Google Calendar. Con IA que analiza llamadas y detecta oportunidades.',
-      'Así nació Grialink: un CRM omnicanal con módulos de IA integrados, construido desde cero para el sector salud por un equipo que entiende tanto la tecnología como la realidad operativa de una clínica.',
+      'Así nació Grialink: un SES (Sales Engine System) omnicanal con módulos de IA integrados, construido desde cero para el sector salud por un equipo que entiende tanto la tecnología como la realidad operativa de una clínica.',
     ],
     image1Alt: 'Profesional de la salud frustrado con sistemas manuales',
     image2Alt: 'Equipo de Grialink diseñando la plataforma',

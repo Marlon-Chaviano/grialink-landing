@@ -3,7 +3,7 @@
  * honeypot anti-spam, and full i18n via translation props.
  *
  * Hydrated with client:visible for minimal JS.
- * Prepared for future API/email/CRM integration.
+ * Prepared for future API/email/SES integration.
  */
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

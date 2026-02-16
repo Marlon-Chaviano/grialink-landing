@@ -6,7 +6,7 @@ export default {
       suiteLabel: 'Marketing Suite',
       title: 'Measure the real ROI of every campaign',
       description:
-        'Connect Meta Ads directly to your CRM. Visualize CPL, ROAS, and creative fatigue in real time. AI detects underperforming campaigns and suggests optimizations before you waste budget.',
+        'Connect Meta Ads directly to your SES. Visualize CPL, ROAS, and creative fatigue in real time. AI detects underperforming campaigns and suggests optimizations before you waste budget.',
       buttonText: 'See Marketing features',
     },
     {
