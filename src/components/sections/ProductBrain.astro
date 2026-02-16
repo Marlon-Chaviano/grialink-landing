@@ -1,0 +1,100 @@
+---
+/**
+ * ProductBrain — "The Brain of Grialink" dark tech section.
+ * Showcases NLP + Predictive Models with an abstract AI visualization.
+ */
+import { Image } from "astro:assets";
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+import { brainFeatures } from "@/lib/products";
+import productBrainImg from "@/assets/product-brain.jpg";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const p = getTranslations(lang, "productsPage") as Record<string, any>;
+const brain = p.brain as Record<string, any>;
+const featureTranslations = brain.features as Record<string, { title: string; description: string }>;
+---
+
+<section class="section-spacing bg-brand-navy relative overflow-hidden">
+	<!-- Dot grid background -->
+	<div
+		class="absolute inset-0 opacity-15"
+		aria-hidden="true"
+		style="background-image: radial-gradient(rgba(148,163,184,0.5) 1px, transparent 1px); background-size: 30px 30px;"
+	>
+	</div>
+
+	<Container class="relative z-10">
+		<div class="grid lg:grid-cols-2 gap-16 items-center">
+			<!-- Text column -->
+			<div data-animate>
+				<!-- Badge -->
+				<div
+					class="inline-block px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase mb-8"
+				>
+					{brain.badge}
+				</div>
+
+				<h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+					{brain.title}
+				</h2>
+
+				<p class="text-white/60 text-lg mb-8 leading-relaxed">
+					{brain.subtitle}
+				</p>
+
+				<!-- Feature list -->
+				<ul class="space-y-4">
+					{
+						brainFeatures.map((feature) => {
+							const ft = featureTranslations[feature.id];
+							return (
+								<li class="flex items-start gap-3">
+									<svg
+										class="w-6 h-6 text-primary mt-0.5 shrink-0"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path d={feature.iconPath} />
+									</svg>
+									<div>
+										<h4 class="text-white font-medium">{ft.title}</h4>
+										<p class="text-white/40 text-sm">{ft.description}</p>
+									</div>
+								</li>
+							);
+						})
+					}
+				</ul>
+			</div>
+
+			<!-- AI visualization image -->
+			<div
+				class="relative h-80 lg:h-96 w-full rounded-2xl border border-white/10 overflow-hidden"
+				data-animate
+			>
+				<Image
+					src={productBrainImg}
+					alt={brain.visualAlt}
+					class="w-full h-full object-cover"
+					loading="lazy"
+					decoding="async"
+					widths={[480, 800]}
+					sizes="(max-width: 1024px) 100vw, 50vw"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent"></div>
+				<!-- Overlay label -->
+				<div class="absolute bottom-6 left-6 right-6 text-center">
+					<div class="text-xs font-mono text-primary/80 uppercase tracking-[0.2em]">
+						{brain.processingLabel}
+					</div>
+				</div>
+			</div>
+		</div>
+	</Container>
+</section>

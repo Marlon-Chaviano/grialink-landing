@@ -1,0 +1,78 @@
+---
+/**
+ * HistorySection — Origin story two-column layout with staggered images.
+ */
+import { Image } from "astro:assets";
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+import history1 from "@/assets/history-1.jpg";
+import history2 from "@/assets/history-2.jpg";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const about = getTranslations(lang, "about") as Record<string, any>;
+const history = about.history as Record<string, any>;
+const paragraphs = history.paragraphs as string[];
+---
+
+<section class="section-spacing bg-card">
+	<Container>
+		<div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+			<!-- Text content -->
+			<div
+				class="mb-12 lg:mb-0"
+				data-animate
+			>
+				<h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">
+					{history.title}
+				</h2>
+				<div class="space-y-6 text-lg text-muted-foreground leading-relaxed">
+					{paragraphs.map((p: string, i: number) => (i === paragraphs.length - 1 ? <p class="font-medium text-primary">{p}</p> : <p>{p}</p>))}
+				</div>
+			</div>
+
+			<!-- Images -->
+			<div
+				class="relative"
+				data-animate
+			>
+				<!-- Decorative circles -->
+				<div
+					class="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-primary/10 rounded-full"
+					aria-hidden="true"
+				>
+				</div>
+				<div
+					class="absolute bottom-0 left-0 -ml-4 -mb-4 w-32 h-32 bg-accent/10 rounded-full"
+					aria-hidden="true"
+				>
+				</div>
+
+				<div class="grid grid-cols-2 gap-4 relative z-10">
+					<Image
+						src={history1}
+						alt={history.image1Alt}
+						class="rounded-xl shadow-lg w-full h-64 object-cover translate-y-8 hover:-translate-y-2 transition-transform duration-500"
+						loading="lazy"
+						decoding="async"
+						widths={[320, 480, 640]}
+						sizes="(max-width: 1024px) 50vw, 320px"
+					/>
+					<Image
+						src={history2}
+						alt={history.image2Alt}
+						class="rounded-xl shadow-lg w-full h-64 object-cover hover:-translate-y-2 transition-transform duration-500"
+						loading="lazy"
+						decoding="async"
+						widths={[320, 480, 640]}
+						sizes="(max-width: 1024px) 50vw, 320px"
+					/>
+				</div>
+			</div>
+		</div>
+	</Container>
+</section>

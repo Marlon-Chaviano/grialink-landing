@@ -1,0 +1,318 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   Design Tokens — Grialink Brand System
+   CSS Custom Properties for Dark / Light Mode
+   ───────────────────────────────────────────── */
+
+/* Brand constants (theme-independent) */
+@theme {
+  --color-brand-navy: #17222F;
+  --color-brand-gray: #3F444B;
+  --color-brand-orange: #FD7100;
+  --color-brand-red: #E94E1B;
+  --color-brand-yellow: #F8CB2E;
+
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --container-2xl: 1400px;
+}
+
+/* ── Dark mode (default) ── */
+:root {
+  --clr-primary: #FD7100;
+  --clr-primary-hover: #E56500;
+  --clr-primary-foreground: #FFFFFF;
+
+  --clr-secondary: #1E2D3F;
+  --clr-secondary-hover: #263A4F;
+  --clr-secondary-foreground: #F1F5F9;
+
+  --clr-accent: #F8CB2E;
+  --clr-accent-hover: #E5B91E;
+  --clr-accent-foreground: #17222F;
+
+  --clr-destructive: #E94E1B;
+  --clr-destructive-hover: #D14316;
+  --clr-destructive-foreground: #FFFFFF;
+
+  --clr-background: #0F1923;
+  --clr-background-lighter: #162231;
+  --clr-foreground: #F1F5F9;
+
+  --clr-surface: #1E2D3F;
+  --clr-surface-foreground: #F1F5F9;
+  --clr-card: #162231;
+  --clr-card-foreground: #F1F5F9;
+
+  --clr-muted: #263A4F;
+  --clr-muted-foreground: #94A3B8;
+
+  --clr-border: #263A4F;
+  --clr-border-light: rgba(255, 255, 255, 0.08);
+  --clr-ring: #FD7100;
+
+  --glow: 0 0 24px rgba(253, 113, 0, 0.2);
+  --glow-lg: 0 0 48px rgba(253, 113, 0, 0.18);
+
+  /* Spacing rhythm */
+  --section-gap: 6rem;
+  --section-gap-lg: 8rem;
+}
+
+/* ── Light mode ── */
+:root.light {
+  --clr-primary: #E06500;
+  --clr-primary-hover: #C45800;
+  --clr-primary-foreground: #FFFFFF;
+
+  --clr-secondary: #F4F6F8;
+  --clr-secondary-hover: #E8ECF0;
+  --clr-secondary-foreground: #17222F;
+
+  --clr-accent: #F8CB2E;
+  --clr-accent-hover: #E5B91E;
+  --clr-accent-foreground: #17222F;
+
+  --clr-destructive: #E94E1B;
+  --clr-destructive-hover: #D14316;
+  --clr-destructive-foreground: #FFFFFF;
+
+  --clr-background: #FFFFFF;
+  --clr-background-lighter: #FAFBFC;
+  --clr-foreground: #111827;
+
+  --clr-surface: #F4F6F8;
+  --clr-surface-foreground: #111827;
+  --clr-card: #FFFFFF;
+  --clr-card-foreground: #111827;
+
+  --clr-muted: #E5E7EB;
+  --clr-muted-foreground: #6B7280;
+
+  --clr-border: #E5E7EB;
+  --clr-border-light: rgba(0, 0, 0, 0.06);
+  --clr-ring: #FD7100;
+
+  --glow: 0 0 24px rgba(253, 113, 0, 0.1);
+  --glow-lg: 0 0 48px rgba(253, 113, 0, 0.08);
+}
+
+/* ── Expose CSS vars to Tailwind ── */
+@theme inline {
+  --color-primary: var(--clr-primary);
+  --color-primary-hover: var(--clr-primary-hover);
+  --color-primary-foreground: var(--clr-primary-foreground);
+
+  --color-secondary: var(--clr-secondary);
+  --color-secondary-hover: var(--clr-secondary-hover);
+  --color-secondary-foreground: var(--clr-secondary-foreground);
+
+  --color-accent: var(--clr-accent);
+  --color-accent-hover: var(--clr-accent-hover);
+  --color-accent-foreground: var(--clr-accent-foreground);
+
+  --color-destructive: var(--clr-destructive);
+  --color-destructive-hover: var(--clr-destructive-hover);
+  --color-destructive-foreground: var(--clr-destructive-foreground);
+
+  --color-background: var(--clr-background);
+  --color-background-lighter: var(--clr-background-lighter);
+  --color-foreground: var(--clr-foreground);
+
+  --color-surface: var(--clr-surface);
+  --color-surface-foreground: var(--clr-surface-foreground);
+  --color-card: var(--clr-card);
+  --color-card-foreground: var(--clr-card-foreground);
+
+  --color-muted: var(--clr-muted);
+  --color-muted-foreground: var(--clr-muted-foreground);
+
+  --color-border: var(--clr-border);
+  --color-border-light: var(--clr-border-light);
+  --color-ring: var(--clr-ring);
+
+  --shadow-glow: var(--glow);
+  --shadow-glow-lg: var(--glow-lg);
+}
+
+/* ─────────────────────────────────────────────
+   Base Styles
+   ───────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--clr-background);
+    color: var(--clr-foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--clr-foreground);
+  }
+
+  h1 { letter-spacing: -0.04em; }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background-color: var(--clr-primary);
+    color: white;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Scroll-Reveal Animations
+   ───────────────────────────────────────────── */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stagger-children.is-visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: none; }
+.stagger-children.is-visible > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: none; }
+.stagger-children.is-visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: none; }
+.stagger-children.is-visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: none; }
+.stagger-children.is-visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: none; }
+.stagger-children.is-visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate],
+  .stagger-children > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Hover & Interaction Animations
+   ───────────────────────────────────────────── */
+
+/* Elevated card hover */
+.card-hover {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px -12px rgba(0, 0, 0, 0.2),
+    0 0 0 1px var(--clr-border-light);
+}
+
+/* Subtle pulse for badges / indicators */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Gradient border glow */
+@keyframes glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-destructive));
+  z-index: -1;
+  animation: glow 3s ease-in-out infinite;
+  filter: blur(8px);
+  opacity: 0.4;
+}
+
+/* ─────────────────────────────────────────────
+   Utility Classes
+   ───────────────────────────────────────────── */
+.role-gradient {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-destructive) 50%, var(--clr-accent) 100%);
+}
+
+.text-gradient-primary {
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-destructive));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-anim {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Section spacing utility */
+.section-spacing {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: var(--section-gap-lg);
+    padding-bottom: var(--section-gap-lg);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Theme-aware Image Switching
+   ───────────────────────────────────────────── */
+.dark-only { display: block; }
+.light-only { display: none; }
+.light .dark-only { display: none; }
+.light .light-only { display: block; }

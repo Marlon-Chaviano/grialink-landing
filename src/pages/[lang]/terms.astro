@@ -1,0 +1,44 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+import LegalPage from "@/components/sections/LegalPage.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+	return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const terms = getTranslations(lang, "terms") as Record<string, any>;
+const seo = terms.seo as Record<string, string>;
+const hero = terms.hero as Record<string, string>;
+const intro = terms.intro as Record<string, any>;
+const sections = terms.sections as Array<{ title: string; content: string[] }>;
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO
+			lang={lang}
+			title={seo.title}
+			description={seo.description}
+		/>
+	</Fragment>
+
+	<main>
+		<LegalPage
+			lang={lang}
+			badge={hero.badge}
+			title={hero.title}
+			lastUpdated={hero.lastUpdated}
+			introText={intro.text}
+			introBullets={[]}
+			introExtra={intro.important}
+			sections={sections}
+			footerNote={terms.footerNote as string}
+			footerContact={terms.footerContact as string}
+		/>
+	</main>
+</Layout>

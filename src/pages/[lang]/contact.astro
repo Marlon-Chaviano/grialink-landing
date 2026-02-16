@@ -1,0 +1,85 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+
+import ContactHero from "@/components/sections/ContactHero.astro";
+import ContactInfo from "@/components/sections/ContactInfo.astro";
+import ContactForm from "@/components/sections/ContactForm";
+import ContactResources from "@/components/sections/ContactResources.astro";
+import ContactCTA from "@/components/sections/ContactCTA.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+	return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const contact = getTranslations(lang, "contact");
+const seo = contact.seo as Record<string, string>;
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO
+			lang={lang}
+			title={seo.title}
+			description={seo.description}
+		/>
+		{/* Structured data — ContactPage + LocalBusiness schema */}
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "ContactPage",
+				name: seo.title,
+				description: seo.description,
+				url: `https://grialink.com/${lang}/contact`,
+				mainEntity: {
+					"@type": "Organization",
+					name: "Grialink",
+					url: "https://grialink.com",
+					email: "hello@grialink.com",
+					telephone: "+1-800-GRIALINK",
+					contactPoint: {
+						"@type": "ContactPoint",
+						telephone: "+1-800-GRIALINK",
+						contactType: "customer service",
+						availableLanguage: ["English", "Spanish"],
+					},
+				},
+			})}
+		/>
+	</Fragment>
+
+	<main>
+		<ContactHero lang={lang} />
+
+		{/* Main contact section — Form + Info sidebar */}
+		<section
+			class="section-spacing !pt-0 bg-background"
+			data-animate
+		>
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+					{/* Form — takes 2/3 */}
+					<div class="lg:col-span-2">
+						<ContactForm
+							translations={contact as any}
+							client:visible
+						/>
+					</div>
+
+					{/* Info sidebar — takes 1/3 */}
+					<div class="lg:col-span-1">
+						<ContactInfo lang={lang} />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<ContactResources lang={lang} />
+		<ContactCTA lang={lang} />
+	</main>
+</Layout>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Grialink</title>
+  <meta name="description" content="Privacy Policy for Grialink - Ezi Group LLC">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <style>
+
+    /* ===== CSS Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== CSS Variables - Light Mode ===== */
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #fdf8f4;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a68;
+      --text-muted: #7f7f9e;
+      --border-color: #e8e0d8;
+      --accent: #FD7100;
+      --accent-light: #fff3e8;
+      --accent-dark: #e06400;
+      --link-color: #FD7100;
+      --link-hover: #e06400;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --header-bg: rgba(255,255,255,0.92);
+      --divider: #f0e8e0;
+    }
+
+    /* ===== CSS Variables - Dark Mode ===== */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f1117;
+        --bg-secondary: #161820;
+        --bg-card: #1a1c26;
+        --text-primary: #e8e6f0;
+        --text-secondary: #a8a6b8;
+        --text-muted: #6e6d82;
+        --border-color: #2a2c38;
+        --accent: #FD7100;
+        --accent-light: #2a1a08;
+        --accent-dark: #ff8c33;
+        --link-color: #ff8c33;
+        --link-hover: #FD7100;
+        --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+        --header-bg: rgba(15,17,23,0.92);
+        --divider: #252730;
+      }
+    }
+
+    /* ===== Typography ===== */
+    body {
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== Header ===== */
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.875rem 1.5rem;
+    }
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-logo { height: 36px; width: auto; }
+    .header-logo-dark { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .header-logo-light { display: none; }
+      .header-logo-dark { display: block; }
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    /* ===== Main Container ===== */
+    .page-container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      text-align: center;
+      padding: 2rem 0 2.5rem;
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 2.5rem;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero .subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .hero .accent-line {
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 1.25rem auto 0;
+    }
+
+    /* ===== Content Styles ===== */
+    .privacy-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    @media (max-width: 640px) {
+      .privacy-content { padding: 1.5rem; border-radius: 8px; }
+      .hero h1 { font-size: 1.5rem; }
+    }
+
+    /* Override Termly data-custom-class styles */
+    [data-custom-class="body"], [data-custom-class="body"] * {
+      background: transparent !important;
+    }
+    [data-custom-class="title"], [data-custom-class="title"] * {
+      font-family: inherit !important;
+      font-size: 1.75rem !important;
+      font-weight: 800 !important;
+      color: var(--text-primary) !important;
+      letter-spacing: -0.02em !important;
+    }
+    [data-custom-class="subtitle"], [data-custom-class="subtitle"] * {
+      font-family: inherit !important;
+      color: var(--text-muted) !important;
+      font-size: 0.875rem !important;
+    }
+    [data-custom-class="heading_1"], [data-custom-class="heading_1"] * {
+      font-family: inherit !important;
+      font-size: 1.25rem !important;
+      font-weight: 700 !important;
+      color: var(--text-primary) !important;
+    }
+    [data-custom-class="heading_2"], [data-custom-class="heading_2"] * {
+      font-family: inherit !important;
+      font-size: 1.1rem !important;
+      font-weight: 600 !important;
+      color: var(--text-primary) !important;
+    }
+    [data-custom-class="body_text"], [data-custom-class="body_text"] * {
+      color: var(--text-secondary) !important;
+      font-size: 0.9375rem !important;
+      font-family: inherit !important;
+      line-height: 1.7 !important;
+    }
+    [data-custom-class="link"], [data-custom-class="link"] * {
+      color: var(--link-color) !important;
+      font-size: 0.9375rem !important;
+      font-family: inherit !important;
+      word-break: break-word !important;
+      text-decoration: none !important;
+      transition: color 0.15s ease !important;
+    }
+    [data-custom-class="link"]:hover, [data-custom-class="link"]:hover * {
+      color: var(--link-hover) !important;
+      text-decoration: underline !important;
+    }
+
+    /* Content element styling */
+    .privacy-content h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 0 0 0.25rem;
+      letter-spacing: -0.02em;
+      border: none;
+    }
+    .privacy-content h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--divider);
+    }
+    .privacy-content h2:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .privacy-content ul {
+      padding-left: 1.5rem;
+      margin: 0.75rem 0;
+    }
+    .privacy-content li {
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.7;
+    }
+    .privacy-content a {
+      color: var(--link-color);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .privacy-content a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+    .privacy-content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .privacy-content div {
+      color: var(--text-secondary);
+    }
+
+    /* ===== Footer ===== */
+    .page-footer {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--divider);
+      text-align: center;
+    }
+    .footer-text {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+    .footer-text a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-text a:hover { text-decoration: underline; }
+
+    /* ===== Scrollbar ===== */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    /* ===== Selection ===== */
+    ::selection { background: var(--accent); color: #fff; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="page-header">
+    <div class="header-inner">
+      <a href="https://app.grialink.com" aria-label="Go to Grialink">
+        <img src="/brand-assets/logo.svg" alt="Grialink" class="header-logo header-logo-light">
+        <img src="/brand-assets/logo_dark.svg" alt="Grialink" class="header-logo header-logo-dark">
+      </a>
+      <span class="header-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Legal
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="page-container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Privacy Policy</h1>
+      <p class="subtitle">Last updated: February 06, 2026</p>
+      <span class="accent-line"></span>
+    </section>
+
+    <!-- Privacy Content -->
+    <article class="privacy-content">
+<div data-custom-class="body">
+      <div><strong><span style="font-size: 26px;"><span data-custom-class="title"><bdt class="block-component"></bdt><bdt class="question"><h1>PRIVACY POLICY</h1></bdt><bdt class="statement-end-if-in-editor"></bdt></span></span></strong></div><div><span style="color: rgb(127, 127, 127);"><strong><span style="font-size: 15px;"><span data-custom-class="subtitle">Last updated <bdt class="question">February 06, 2026</bdt></span></span></strong></span></div><div><br></div><div><br></div><div><br></div><div style="line-height: 1.5;"><span style="color: rgb(127, 127, 127);"><span style="color: rgb(89, 89, 89); font-size: 15px;"><span data-custom-class="body_text">This Privacy Notice for <bdt class="question noTranslate">Ezi Group Llc</bdt><bdt class="block-component"> (doing business as <bdt class="question noTranslate">Grialink</bdt>)<bdt class="statement-end-if-in-editor"></bdt></bdt> (<bdt class="block-component"></bdt>"<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>"<bdt class="statement-end-if-in-editor"></bdt></span><span data-custom-class="body_text">), describes how and why we might access, collect, store, use, and/or share (<bdt class="block-component"></bdt>"<strong>process</strong>"<bdt class="statement-end-if-in-editor"></bdt>) your personal information when you use our services (<bdt class="block-component"></bdt>"<strong>Services</strong>"<bdt class="statement-end-if-in-editor"></bdt>), including when you:</span></span></span><span style="font-size: 15px;"><span style="color: rgb(127, 127, 127);"><span data-custom-class="body_text"><span style="color: rgb(89, 89, 89);"><span data-custom-class="body_text"><bdt class="block-component"></bdt></span></span></span></span></span></div><ul><li data-custom-class="body_text" style="line-height: 1.5;"><span style="font-size: 15px; color: rgb(89, 89, 89);"><span style="font-size: 15px; color: rgb(89, 89, 89);"><span data-custom-class="body_text">Visit our website<bdt class="block-component"></bdt> at <span style="color: rgb(0, 58, 250);"><bdt class="question noTranslate">app.grialink.com</bdt></span><span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><span data-custom-class="body_text"><span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><bdt class="statement-end-if-in-editor"> or any website of ours that links to this Privacy Notice</bdt></span></span></span></span></span></span></span></span></li></ul><div><bdt class="block-component"><span style="font-size: 15px;"><span style="font-size: 15px;"><span style="color: rgb(127, 127, 127);"><span data-custom-class="body_text"><span style="color: rgb(89, 89, 89);"><span data-custom-class="body_text"><bdt class="block-component"></bdt></bdt></span></span></span></span></span></span></span></span></li></ul><div style="line-height: 1.5;"><bdt class="block-component"><span style="font-size: 15px;"></span></bdt></li></ul><div style="line-height: 1.5;"><span style="font-size: 15px;"><span style="color: rgb(127, 127, 127);"><span data-custom-class="body_text"><span style="color: rgb(89, 89, 89);"><span data-custom-class="body_text"><bdt class="block-component"></bdt></span></span></span></span></span></div><ul><li data-custom-class="body_text" style="line-height: 1.5;"><span style="font-size: 15px; color: rgb(89, 89, 89);"><span style="font-size: 15px; color: rgb(89, 89, 89);"><span data-custom-class="body_text">Engage with us in other related ways, including any marketing or events<span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><span data-custom-class="body_text"><span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><bdt class="statement-end-if-in-editor"></bdt></span></span></span></span></span></span></span></span></li></ul><div style="line-height: 1.5;"><span style="font-size: 15px;"><span style="color: rgb(127, 127, 127);"><span data-custom-class="body_text"><strong>Questions or concerns? </strong>Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services.<bdt class="block-component"></bdt> If you still have any questions or concerns, please contact us at <bdt class="question noTranslate"><a target="_blank" data-custom-class="link" href="mailto:info@grialink.com">info@grialink.com</a></bdt>.</span></span></span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><strong><span style="font-size: 15px;"><span data-custom-class="heading_1"><h2>SUMMARY OF KEY POINTS</h2></span></span></strong></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong><em>This summary provides key points from our Privacy Notice, but you can find out more details about any of these topics by clicking the link following each key point or by using our </em></strong></span></span><a data-custom-class="link" href="#toc"><span style="color: rgb(0, 58, 250); font-size: 15px;"><span data-custom-class="body_text"><strong><em>table of contents</em></strong></span></span></a><span style="font-size: 15px;"><span data-custom-class="body_text"><strong><em> below to find the section you are looking for.</em></strong></span></span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>What personal information do we process?</strong> When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use. Learn more about </span></span><a data-custom-class="link" href="#personalinfo"><span style="color: rgb(0, 58, 250); font-size: 15px;"><span data-custom-class="body_text">personal information you disclose to us</span></span></a><span data-custom-class="body_text">.</span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>Do we process any sensitive personal information? </strong>Some of the information may be considered <bdt class="block-component"></bdt>"special" or "sensitive"<bdt class="statement-end-if-in-editor"></bdt> in certain jurisdictions, for example your racial or ethnic origins, sexual orientation, and religious beliefs. <bdt class="block-component"></bdt>We do not process sensitive personal information.<bdt class="else-block"></bdt></span></span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>Do we collect any information from third parties?</strong> <bdt class="block-component"></bdt>We do not collect any information from third parties.<bdt class="else-block"></bdt></span></span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>How do we process your information?</strong> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We may also process your information for other purposes with your consent. We process your information only when we have a valid legal reason to do so. Learn more about </span></span><a data-custom-class="link" href="#infouse"><span style="color: rgb(0, 58, 250); font-size: 15px;"><span data-custom-class="body_text">how we process your information</span></span></a><span data-custom-class="body_text">.</span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>In what situations and with which <bdt class="block-component"></bdt>parties do we share personal information?</strong> We may share information in specific situations and with specific <bdt class="block-component"></bdt>third parties. Learn more about </span></span><a data-custom-class="link" href="#whoshare"><span style="color: rgb(0, 58, 250); font-size: 15px;"><span data-custom-class="body_text">when and with whom we share your personal information</span></span></a><span style="font-size: 15px;"><span data-custom-class="body_text">.<bdt class="block-component"></bdt></span></span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>How do we keep your information safe?</strong> We have adequate <bdt class="block-component"></bdt>organizational<bdt class="statement-end-if-in-editor"></bdt> and technical processes and procedures in place to protect your personal information. However, no electronic transmission over the internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other <bdt class="block-component"></bdt>unauthorized<bdt class="statement-end-if-in-editor"></bdt> third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information. Learn more about </span></span><a data-custom-class="link" href="#infosafe"><span style="color: rgb(0, 58, 250); font-size: 15px;"><span data-custom-class="body_text">how we keep your information safe</span></span></a><span data-custom-class="body_text">.</span><span style="font-size: 15px;"><span data-custom-class="body_text"><bdt class="statement-end-if-in-editor"></bdt></span></span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>What are your rights?</strong> Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding your personal information. Learn more about </span></span><a data-custom-class="link" href="#privacyrights"><span style="color: rgb(0, 58, 250); font-size: 15px;"><span data-custom-class="body_text">your privacy rights</span></span></a><span data-custom-class="body_text">.</span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text"><strong>How do you exercise your rights?</strong> The easiest way to exercise your rights is by <bdt class="block-component">submitting a </bdt></span></span><a data-custom-class="link" href="https://app.termly.io/dsar/21aa4626-d935-47b8-a7a7-7bfc89da9392" rel="noopener noreferrer" target="_blank"><span style="color: rgb(0, 58, 250); font-size: 15px;"><span data-custom-class="body_text">data subject access request</span></span></a><span style="font-size: 15px;"><span data-custom-class="body_text"><bdt class="block-component"></bdt>, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws.</span></span></div><div style="line-height: 1.5;"><br></div><div style="line-height: 1.5;"><span style="font-size: 15px;"><span data-custom-class="body_text">Want to learn more abo
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p class="footer-text">
+      &copy; 2026 <a href="https://app.grialink.com">Grialink</a> &mdash; Ezi Group LLC. All rights reserved.
+    </p>
+    <p class="footer-text" style="margin-top: 0.5rem;">
+      Questions? Contact us at <a href="mailto:info@grialink.com">info@grialink.com</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+---
+/**
+ * IdentitySection — The meaning of "Grial" (brand story).
+ * Uses semantic HTML with set:html for controlled <strong> tags inside translations.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const about = getTranslations(lang, "about") as Record<string, any>;
+const identity = about.identity as Record<string, any>;
+const paragraphs = identity.paragraphs as string[];
+---
+
+<section class="section-spacing bg-card overflow-hidden">
+	<Container>
+		<div
+			class="bg-background rounded-2xl p-8 md:p-16 border border-border-light shadow-sm relative"
+			data-animate
+		>
+			<!-- Decorative quote -->
+			<span
+				class="absolute top-8 left-8 text-[8rem] leading-none text-primary/5 font-serif pointer-events-none select-none"
+				aria-hidden="true"
+			>
+				&ldquo;
+			</span>
+
+			<div class="relative z-10 flex flex-col md:flex-row items-center gap-12">
+				<!-- Icon orb -->
+				<div
+					class="md:w-1/3 flex justify-center"
+					data-animate
+				>
+					<div
+						class="w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center shadow-2xl shadow-primary/20"
+					>
+						<svg
+							class="w-20 h-20 md:w-28 md:h-28 text-white"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							viewBox="0 0 24 24"
+						>
+							<path d="M12 2a4 4 0 0 0-4 4c0 2 2 3 2 6h4c0-3 2-4 2-6a4 4 0 0 0-4-4ZM10 12h4M10 15h4M11 18h2v2a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-2Z"></path>
+						</svg>
+					</div>
+				</div>
+
+				<!-- Text -->
+				<div
+					class="md:w-2/3"
+					data-animate
+				>
+					<h2 class="text-3xl font-bold text-foreground mb-6">{identity.title}</h2>
+					<div class="space-y-6">
+						{
+							paragraphs.map((p: string) => (
+								<p
+									class="text-lg text-muted-foreground leading-relaxed"
+									set:html={p}
+								/>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</Container>
+</section>

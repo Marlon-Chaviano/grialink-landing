@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+import Hero from "@/components/sections/Hero.astro";
+import LogoCloud from "@/components/sections/LogoCloud.astro";
+import HowItWorks from "@/components/sections/HowItWorks.astro";
+import AIImpact from "@/components/sections/AIImpact.astro";
+import RoleFeatures from "@/components/sections/RoleFeatures.astro";
+import Products from "@/components/sections/Products.astro";
+import CTA from "@/components/sections/CTA.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { useTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+	return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO
+			lang={lang}
+			title={t("seo.title")}
+			description={t("seo.description")}
+		/>
+	</Fragment>
+
+	<main>
+		<Hero lang={lang} />
+		<LogoCloud lang={lang} />
+		<HowItWorks lang={lang} />
+		<AIImpact lang={lang} />
+		<RoleFeatures lang={lang} />
+		<Products lang={lang} />
+		<CTA lang={lang} />
+	</main>
+</Layout>

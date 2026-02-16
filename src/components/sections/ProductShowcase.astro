@@ -1,0 +1,585 @@
+---
+/**
+ * ProductShowcase — Detailed product sections with theme-aware screenshots/demos.
+ * Alternating layout: text ↔ media, with light/dark image switching.
+ * Leaves space for upcoming products (sales dashboard, marketing dashboard,
+ * call analytics, email sequences).
+ */
+import { Image } from 'astro:assets';
+import Container from '@/components/ui/Container.astro';
+import { type Lang, localizedHref } from '@/i18n/config';
+import { getTranslations } from '@/i18n/utils';
+
+/* ── Prospector assets ── */
+import prospectorSearch from '@/assets/prospector/prospector-search.png';
+import prospectorResults from '@/assets/prospector/prospector-results.png';
+import prospectorModal from '@/assets/prospector/prospector-modal.png';
+import lightProspectorSearch from '@/assets/prospector/light-prospector-search.png';
+import lightProspectorResults from '@/assets/prospector/light-prospector-results.png';
+import lightProspectorModal from '@/assets/prospector/light-prospector-modal.png';
+
+/* ── Pipeline assets ── */
+import pipelineView from '@/assets/pipeline/pipeline.png';
+import pipelineLarge from '@/assets/pipeline/large-pipeline.png';
+import lightPipelineView from '@/assets/pipeline/light-pipeline.png';
+import lightPipelineLarge from '@/assets/pipeline/light-large-pipeline.png';
+
+/* ── Calendar assets ── */
+import calendarCreate from '@/assets/calendar/create-appointment.png';
+import lightCalendarCreate from '@/assets/calendar/light-create-appointment.png';
+
+
+
+/* ── Sales Hub assets ── */
+import salesHub from '@/assets/sales-hub/sales-hub.png';
+import lightSalesHub from '@/assets/sales-hub/light-sales-hub.png';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang, 'productsPage') as Record<string, any>;
+const showcase = t.showcase as Record<string, any>;
+
+/* ── Coming Soon — resolve colors & icons in frontmatter ── */
+const comingSoonColorMap: Record<string, { bg: string; text: string; border: string }> = {
+  emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+  blue: { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/20' },
+  purple: { bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'border-purple-500/20' },
+  orange: { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20' },
+};
+
+const comingSoonIconPaths: Record<string, string> = {
+  chart: 'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z',
+  megaphone: 'M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z',
+  phone: 'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z',
+  mail: 'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75',
+};
+
+interface ComingSoonProduct { name: string; description: string; icon: string; color: string }
+const comingSoonProducts = (showcase.comingSoon.products as ComingSoonProduct[]).map((p) => ({
+  ...p,
+  colors: comingSoonColorMap[p.color] ?? comingSoonColorMap.orange,
+  iconPath: comingSoonIconPaths[p.icon] ?? comingSoonIconPaths.chart,
+}));
+---
+
+<!-- ═══════════════════════════════════════════════
+     PRODUCT 1 — PROSPECTOR AI
+     ═══════════════════════════════════════════════ -->
+<section class="section-spacing bg-background relative overflow-hidden" id="prospector">
+  <!-- Decorative -->
+  <div class="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <Container>
+    <!-- Section header -->
+    <div class="text-center mb-16" data-animate>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-4">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M10 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.42 0-8 1.79-8 4v2h12.5M20.59 16.93l-3.54-3.54a5.003 5.003 0 10-1.41 1.41l3.54 3.54 1.41-1.41zM14.5 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        {showcase.prospector.badge}
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+        {showcase.prospector.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+        {showcase.prospector.subtitle}
+      </p>
+    </div>
+
+    <!-- Step 1: Search -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20" data-animate>
+      <div class="order-2 lg:order-1">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm flex items-center justify-center">1</span>
+          <h3 class="text-xl font-bold text-foreground">{showcase.prospector.step1Title}</h3>
+        </div>
+        <p class="text-muted-foreground leading-relaxed mb-6">
+          {showcase.prospector.step1Description}
+        </p>
+        <ul class="space-y-3">
+          {(showcase.prospector.step1Features as string[]).map((f: string) => (
+            <li class="flex items-start gap-2 text-sm text-muted-foreground">
+              <svg class="w-5 h-5 text-primary mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="order-1 lg:order-2 relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-orange-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-border shadow-2xl">
+          <Image
+            src={prospectorSearch}
+            alt={showcase.prospector.step1ImageAlt}
+            class="w-full h-auto dark-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <Image
+            src={lightProspectorSearch}
+            alt={showcase.prospector.step1ImageAlt}
+            class="w-full h-auto light-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Results -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20" data-animate>
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-orange-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-border shadow-2xl">
+          <Image
+            src={prospectorResults}
+            alt={showcase.prospector.step2ImageAlt}
+            class="w-full h-auto dark-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <Image
+            src={lightProspectorResults}
+            alt={showcase.prospector.step2ImageAlt}
+            class="w-full h-auto light-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm flex items-center justify-center">2</span>
+          <h3 class="text-xl font-bold text-foreground">{showcase.prospector.step2Title}</h3>
+        </div>
+        <p class="text-muted-foreground leading-relaxed mb-6">
+          {showcase.prospector.step2Description}
+        </p>
+        <ul class="space-y-3">
+          {(showcase.prospector.step2Features as string[]).map((f: string) => (
+            <li class="flex items-start gap-2 text-sm text-muted-foreground">
+              <svg class="w-5 h-5 text-primary mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 3: Contact detail modal -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center" data-animate>
+      <div class="order-2 lg:order-1">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm flex items-center justify-center">3</span>
+          <h3 class="text-xl font-bold text-foreground">{showcase.prospector.step3Title}</h3>
+        </div>
+        <p class="text-muted-foreground leading-relaxed mb-6">
+          {showcase.prospector.step3Description}
+        </p>
+        <ul class="space-y-3">
+          {(showcase.prospector.step3Features as string[]).map((f: string) => (
+            <li class="flex items-start gap-2 text-sm text-muted-foreground">
+              <svg class="w-5 h-5 text-primary mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="order-1 lg:order-2 relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-orange-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-border shadow-2xl">
+          <Image
+            src={prospectorModal}
+            alt={showcase.prospector.step3ImageAlt}
+            class="w-full h-auto dark-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <Image
+            src={lightProspectorModal}
+            alt={showcase.prospector.step3ImageAlt}
+            class="w-full h-auto light-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Prospector demo video -->
+    <div class="mt-16 text-center" data-animate>
+      <h3 class="text-xl font-bold text-foreground mb-6">{showcase.prospector.demoTitle}</h3>
+      <div class="relative max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-2xl">
+        <video
+          class="w-full h-auto dark-only"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="/assets/prospector/prospector-demo.mp4" type="video/mp4" />
+        </video>
+        <video
+          class="w-full h-auto light-only"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="/assets/prospector/light-prospector-demo.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRODUCT 2 — SMART PIPELINE
+     ═══════════════════════════════════════════════ -->
+<section class="section-spacing bg-background-lighter relative overflow-hidden" id="crm">
+  <div class="absolute bottom-20 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <Container>
+    <div class="text-center mb-16" data-animate>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-4">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 11.16l-1.42 1.42a7.282 7.282 0 01-1.79-2.94l1.94-.49c.32.89.77 1.5 1.27 2.01zM11 6L7 2 3 6h3.02c.02.81.08 1.54.19 2.17l1.94-.49C8.08 7.2 8.03 6.63 8.02 6H11zm10 0l-4-4-4 4h3.02c-.02.81-.08 1.54-.19 2.17l-1.94-.49c.07-.48.12-1.05.13-1.68H18z"/></svg>
+        {showcase.pipeline.badge}
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+        {showcase.pipeline.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+        {showcase.pipeline.subtitle}
+      </p>
+    </div>
+
+    <!-- Pipeline view -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20" data-animate>
+      <div>
+        <h3 class="text-xl font-bold text-foreground mb-4">{showcase.pipeline.viewTitle}</h3>
+        <p class="text-muted-foreground leading-relaxed mb-6">
+          {showcase.pipeline.viewDescription}
+        </p>
+        <ul class="space-y-3">
+          {(showcase.pipeline.viewFeatures as string[]).map((f: string) => (
+            <li class="flex items-start gap-2 text-sm text-muted-foreground">
+              <svg class="w-5 h-5 text-purple-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-purple-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-border shadow-2xl">
+          <Image
+            src={pipelineView}
+            alt={showcase.pipeline.viewImageAlt}
+            class="w-full h-auto dark-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <Image
+            src={lightPipelineView}
+            alt={showcase.pipeline.viewImageAlt}
+            class="w-full h-auto light-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Full pipeline expanded -->
+    <div class="mb-16" data-animate>
+      <h3 class="text-xl font-bold text-foreground mb-4 text-center">{showcase.pipeline.expandedTitle}</h3>
+      <p class="text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+        {showcase.pipeline.expandedDescription}
+      </p>
+      <div class="relative group max-w-6xl mx-auto">
+        <div class="absolute -inset-1 bg-gradient-to-r from-purple-500/10 to-purple-600/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-border shadow-2xl overflow-x-auto">
+          <Image
+            src={pipelineLarge}
+            alt={showcase.pipeline.expandedImageAlt}
+            class="w-full h-auto min-w-[800px] dark-only"
+            loading="lazy"
+            decoding="async"
+            widths={[800, 1200, 1600]}
+            sizes="(max-width: 1024px) 800px, 100vw"
+          />
+          <Image
+            src={lightPipelineLarge}
+            alt={showcase.pipeline.expandedImageAlt}
+            class="w-full h-auto min-w-[800px] light-only"
+            loading="lazy"
+            decoding="async"
+            widths={[800, 1200, 1600]}
+            sizes="(max-width: 1024px) 800px, 100vw"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline demo video -->
+    <div class="text-center" data-animate>
+      <h3 class="text-xl font-bold text-foreground mb-6">{showcase.pipeline.demoTitle}</h3>
+      <div class="relative max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-2xl">
+        <video
+          class="w-full h-auto dark-only"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="/assets/pipeline/pipeline.mp4" type="video/mp4" />
+        </video>
+        <video
+          class="w-full h-auto light-only"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="/assets/pipeline/light-pipeline.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRODUCT 3 — SMART CALENDAR
+     ═══════════════════════════════════════════════ -->
+<section class="section-spacing bg-background relative overflow-hidden" id="calendar-detail">
+  <div class="absolute top-10 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <Container>
+    <div class="text-center mb-16" data-animate>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-4">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+        {showcase.calendar.badge}
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+        {showcase.calendar.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+        {showcase.calendar.subtitle}
+      </p>
+    </div>
+
+    <!-- Calendar appointment creation -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20" data-animate>
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-blue-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-border shadow-2xl">
+          <Image
+            src={calendarCreate}
+            alt={showcase.calendar.createImageAlt}
+            class="w-full h-auto dark-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <Image
+            src={lightCalendarCreate}
+            alt={showcase.calendar.createImageAlt}
+            class="w-full h-auto light-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-foreground mb-4">{showcase.calendar.createTitle}</h3>
+        <p class="text-muted-foreground leading-relaxed mb-6">
+          {showcase.calendar.createDescription}
+        </p>
+        <ul class="space-y-3">
+          {(showcase.calendar.createFeatures as string[]).map((f: string) => (
+            <li class="flex items-start gap-2 text-sm text-muted-foreground">
+              <svg class="w-5 h-5 text-blue-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Calendar demo video -->
+    <div class="text-center" data-animate>
+      <h3 class="text-xl font-bold text-foreground mb-6">{showcase.calendar.demoTitle}</h3>
+      <div class="relative max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-2xl">
+        <video
+          class="w-full h-auto dark-only"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="/assets/calendar/calendar-demo.mp4" type="video/mp4" />
+        </video>
+        <video
+          class="w-full h-auto light-only"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="/assets/calendar/lightcalendar-demo.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRODUCT 4 — SALES DASHBOARD
+     ═══════════════════════════════════════════════ -->
+<section class="section-spacing bg-background-lighter relative overflow-hidden" id="sales-dashboard">
+  <div class="absolute bottom-10 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <Container>
+    <div class="text-center mb-16" data-animate>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-4">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+        {showcase.salesDashboard.badge}
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+        {showcase.salesDashboard.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+        {showcase.salesDashboard.subtitle}
+      </p>
+    </div>
+
+    <!-- Sales Dashboard view -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center" data-animate>
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-border shadow-2xl">
+          <Image
+            src={salesHub}
+            alt={showcase.salesDashboard.viewImageAlt}
+            class="w-full h-auto dark-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <Image
+            src={lightSalesHub}
+            alt={showcase.salesDashboard.viewImageAlt}
+            class="w-full h-auto light-only"
+            loading="lazy"
+            decoding="async"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-foreground mb-4">{showcase.salesDashboard.viewTitle}</h3>
+        <p class="text-muted-foreground leading-relaxed mb-6">
+          {showcase.salesDashboard.viewDescription}
+        </p>
+        <ul class="space-y-3">
+          {(showcase.salesDashboard.viewFeatures as string[]).map((f: string) => (
+            <li class="flex items-start gap-2 text-sm text-muted-foreground">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     COMING SOON — Future Products
+     ═══════════════════════════════════════════════ -->
+<section class="section-spacing bg-background-lighter relative overflow-hidden" id="coming-soon">
+  <div class="absolute top-10 right-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <Container>
+    <div class="text-center mb-16" data-animate>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+        {showcase.comingSoon.badge}
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+        {showcase.comingSoon.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {showcase.comingSoon.subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      {comingSoonProducts.map((product) => (
+        <div
+          class:list={[
+            'relative p-8 rounded-2xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group',
+            product.colors.border,
+          ]}
+          data-animate
+        >
+          <!-- Coming soon tag -->
+          <div class="absolute top-4 right-4">
+            <span class:list={['text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full', product.colors.bg, product.colors.text]}>
+              {showcase.comingSoon.tag}
+            </span>
+          </div>
+
+          <div class:list={['w-12 h-12 rounded-xl flex items-center justify-center mb-5', product.colors.bg, product.colors.text]}>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d={product.iconPath} />
+            </svg>
+          </div>
+
+          <h3 class="text-lg font-bold text-foreground mb-2">{product.name}</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

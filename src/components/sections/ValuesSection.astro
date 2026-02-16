@@ -1,0 +1,72 @@
+---
+/**
+ * ValuesSection — Core values / pillars displayed as interactive cards.
+ * Icons are mapped from translation keys to inline SVGs to avoid external dependencies.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const about = getTranslations(lang, "about") as Record<string, any>;
+const values = about.values as Record<string, any>;
+const items = values.items as Array<{ title: string; description: string; icon: string }>;
+
+/**
+ * Map icon key → SVG path data.
+ * Using Lucide-style 24×24 paths for consistency.
+ */
+const iconPaths: Record<string, string> = {
+	brain:
+		"M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7ZM9 21h6M10 17v4M14 17v4",
+	shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4",
+	chart: "M3 3v18h18M7 16l4-8 4 4 4-6",
+};
+---
+
+<section class="section-spacing bg-background relative">
+	<Container>
+		<!-- Header -->
+		<div
+			class="text-center max-w-3xl mx-auto mb-16"
+			data-animate
+		>
+			<h2 class="text-3xl font-bold text-foreground mb-4">{values.title}</h2>
+			<p class="text-muted-foreground">{values.subtitle}</p>
+		</div>
+
+		<!-- Cards grid -->
+		<div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+			{
+				items.map((item) => (
+					<div
+						class="bg-card p-8 rounded-xl shadow-sm border border-border-light hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-start group"
+						data-animate
+					>
+						{/* Icon container */}
+						<div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 text-primary">
+							<svg
+								class="w-7 h-7"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								viewBox="0 0 24 24"
+							>
+								<path d={iconPaths[item.icon] ?? iconPaths.brain} />
+							</svg>
+						</div>
+
+						<h3 class="text-xl font-bold text-foreground mb-3">{item.title}</h3>
+						<p class="text-muted-foreground leading-relaxed">{item.description}</p>
+					</div>
+				))
+			}
+		</div>
+	</Container>
+</section>

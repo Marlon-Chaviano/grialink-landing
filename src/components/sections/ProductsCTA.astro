@@ -1,0 +1,80 @@
+---
+/**
+ * ProductsCTA — Final CTA section for the Products page.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const p = getTranslations(lang, "productsPage") as Record<string, any>;
+const cta = p.cta as Record<string, string>;
+---
+
+<section class="section-spacing bg-background-lighter relative overflow-hidden">
+	<!-- Decorative blobs -->
+	<div
+		class="absolute inset-0 pointer-events-none"
+		aria-hidden="true"
+	>
+		<div class="absolute top-10 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+		<div class="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+	</div>
+
+	<Container class="relative z-10 text-center">
+		<h2
+			class="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6"
+			data-animate
+		>
+			{cta.title}
+		</h2>
+
+		<p
+			class="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
+			data-animate
+		>
+			{cta.subtitle}
+		</p>
+
+		<div
+			class="flex flex-col sm:flex-row items-center justify-center gap-4"
+			data-animate
+		>
+			<a
+				href="https://app.grialink.com/app/auth/register"
+				class="group inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-200 w-full sm:w-auto"
+			>
+				{cta.primaryButton}
+				<svg
+					class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M17 8l4 4m0 0l-4 4m4-4H3"
+					></path></svg
+				>
+			</a>
+			<a
+				href={localizedHref("/pricing", lang)}
+				class="px-7 py-3.5 rounded-full text-muted-foreground font-medium hover:text-foreground hover:bg-secondary transition-all duration-200 w-full sm:w-auto text-center"
+			>
+				{cta.secondaryButton}
+			</a>
+		</div>
+
+		<p
+			class="mt-8 text-sm text-muted-foreground"
+			data-animate
+		>
+			{cta.disclaimer}
+		</p>
+	</Container>
+</section>

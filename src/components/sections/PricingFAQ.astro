@@ -1,0 +1,54 @@
+---
+/**
+ * PricingFAQ — Accordion-style FAQ section for pricing questions.
+ * Pure HTML/CSS accordion using <details> — zero JS.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const p = getTranslations(lang, "pricing") as Record<string, any>;
+const faq = p.faq as Record<string, any>;
+const items = faq.items as Array<{ question: string; answer: string }>;
+---
+
+<section
+	class="section-spacing bg-background"
+	data-animate
+>
+	<Container class="max-w-3xl">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-bold text-foreground mb-4">{faq.title}</h2>
+			<p class="text-muted-foreground">{faq.subtitle}</p>
+		</div>
+
+		<div class="space-y-3">
+			{
+				items.map((item) => (
+					<details class="group border border-border-light rounded-xl bg-card transition-all hover:border-border open:shadow-sm">
+						<summary class="flex items-center justify-between cursor-pointer px-6 py-5 text-foreground font-semibold text-sm select-none list-none [&::-webkit-details-marker]:hidden">
+							<span>{item.question}</span>
+							<svg
+								class="w-5 h-5 text-muted-foreground shrink-0 ml-4 transition-transform duration-200 group-open:rotate-45"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								viewBox="0 0 24 24"
+							>
+								<path d="M12 5v14M5 12h14" />
+							</svg>
+						</summary>
+						<div class="px-6 pb-5 text-sm text-muted-foreground leading-relaxed">{item.answer}</div>
+					</details>
+				))
+			}
+		</div>
+	</Container>
+</section>

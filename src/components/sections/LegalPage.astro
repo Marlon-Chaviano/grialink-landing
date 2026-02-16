@@ -1,0 +1,146 @@
+---
+/**
+ * LegalPage — Reusable layout for legal pages (Privacy Policy, Terms of Service).
+ * Adapted from the design/privacy-policy.html reference, translated into our
+ * design system with Tailwind tokens, dark/light mode, and i18n.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+
+interface Section {
+	title: string;
+	content: string[];
+}
+
+interface Props {
+	lang: Lang;
+	badge: string;
+	title: string;
+	lastUpdated: string;
+	introText: string;
+	introBullets?: string[];
+	introExtra?: string; // "questions" or "important" paragraph
+	sections: Section[];
+	footerNote: string;
+	footerContact: string;
+}
+
+const { lang, badge, title, lastUpdated, introText, introBullets, introExtra, sections, footerNote, footerContact } = Astro.props;
+---
+
+<!-- Hero -->
+<section class="relative pt-32 pb-16 lg:pt-40 lg:pb-20 overflow-hidden">
+	<div
+		class="absolute inset-0 overflow-hidden -z-10 pointer-events-none"
+		aria-hidden="true"
+	>
+		<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
+		<div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl"></div>
+	</div>
+
+	<Container class="text-center relative z-10">
+		<div
+			class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-6"
+			data-animate
+		>
+			<svg
+				class="w-3.5 h-3.5"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				viewBox="0 0 24 24"
+			>
+				<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+			</svg>
+			{badge}
+		</div>
+
+		<h1
+			class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground mb-4 leading-[1.08]"
+			data-animate
+		>
+			{title}
+		</h1>
+
+		<p
+			class="text-muted-foreground text-sm font-medium"
+			data-animate
+		>
+			{lastUpdated}
+		</p>
+
+		<!-- Accent line -->
+		<div
+			class="w-12 h-[3px] bg-primary rounded-full mx-auto mt-6"
+			aria-hidden="true"
+		>
+		</div>
+	</Container>
+</section>
+
+<!-- Content -->
+<section class="section-spacing !pt-0 bg-background">
+	<Container>
+		<article class="max-w-4xl mx-auto">
+			<!-- Main card -->
+			<div
+				class="bg-card border border-border-light rounded-2xl p-8 md:p-12 shadow-sm"
+				data-animate
+			>
+				<!-- Intro -->
+				<div class="mb-10">
+					<p class="text-muted-foreground leading-relaxed mb-4">{introText}</p>
+
+					{
+						introBullets && introBullets.length > 0 && (
+							<ul class="space-y-2 mb-4 pl-5">
+								{introBullets.map((bullet) => (
+									<li class="text-muted-foreground text-sm leading-relaxed list-disc">{bullet}</li>
+								))}
+							</ul>
+						)
+					}
+
+					{
+						introExtra && (
+							<p class="text-muted-foreground leading-relaxed text-sm bg-surface/50 rounded-xl p-4 border border-border-light">{introExtra}</p>
+						)
+					}
+				</div>
+
+				<!-- Sections -->
+				{
+					sections.map((section, i) => (
+						<div class:list={["py-8", i > 0 && "border-t border-border-light"]}>
+							<h2 class="text-xl font-bold text-foreground mb-5 tracking-tight">{section.title}</h2>
+							<div class="space-y-3">
+								{section.content.map((paragraph) => (
+									<p
+										class="text-muted-foreground text-[15px] leading-[1.75]"
+										set:html={paragraph}
+									/>
+								))}
+							</div>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- Page footer note -->
+			<div class="mt-10 text-center border-t border-border-light pt-8">
+				<p class="text-sm text-muted-foreground">{footerNote}</p>
+				<p class="text-sm text-muted-foreground mt-1">
+					{footerContact}{" "}
+					<a
+						href="mailto:info@grialink.com"
+						class="text-primary hover:underline font-medium"
+					>
+						info@grialink.com
+					</a>
+				</p>
+			</div>
+		</article>
+	</Container>
+</section>

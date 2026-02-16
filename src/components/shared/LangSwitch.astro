@@ -1,0 +1,38 @@
+---
+import { languages, type Lang } from '@/i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+// Build alternate links: switch language but keep current path
+const currentPath = Astro.url.pathname;
+const alternates = Object.keys(languages).map((l) => ({
+  code: l as Lang,
+  label: languages[l as Lang],
+  href: currentPath.replace(`/${lang}`, `/${l}`),
+  active: l === lang,
+}));
+---
+
+<div class="flex items-center gap-1 rounded-lg border border-border p-0.5">
+  {
+    alternates.map((alt) => (
+      <a
+        href={alt.href}
+        class:list={[
+          'px-2.5 py-1 text-xs font-medium rounded-md transition-colors',
+          alt.active
+            ? 'bg-primary text-primary-foreground'
+            : 'text-muted-foreground hover:text-foreground',
+        ]}
+        aria-label={`Switch to ${alt.label}`}
+        aria-current={alt.active ? 'true' : undefined}
+      >
+        {alt.code.toUpperCase()}
+      </a>
+    ))
+  }
+</div>

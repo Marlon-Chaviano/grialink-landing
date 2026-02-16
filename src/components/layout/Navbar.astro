@@ -1,0 +1,158 @@
+---
+import Container from "@/components/ui/Container.astro";
+import ThemeToggle from "@/components/shared/ThemeToggle";
+import LangSwitch from "@/components/shared/LangSwitch.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+	class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const nav = getTranslations(lang, "navbar") as Record<string, any>;
+
+const loginHref = nav.links?.login?.startsWith("http") ? nav.links.login : localizedHref(nav.links?.login ?? "/login", lang);
+const registerHref = nav.links?.register?.startsWith("http") ? nav.links.register : localizedHref(nav.links?.register ?? "/register", lang);
+
+const navLinks = [
+	{ href: localizedHref(nav.links?.product ?? "/products", lang), label: nav.product },
+	{ href: localizedHref(nav.links?.about ?? "/about", lang), label: nav.about },
+	{ href: localizedHref(nav.links?.pricing ?? "/pricing", lang), label: nav.pricing },
+	{ href: localizedHref(nav.links?.contact ?? "/contact", lang), label: nav.contact },
+];
+---
+
+<nav class:list={["fixed w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border-light/50 transition-colors duration-300", className]}>
+	<Container>
+		<div class="flex justify-between h-16 items-center">
+			<!-- Logo -->
+			<a
+				href={`/${lang}`}
+				class="shrink-0 flex items-center gap-2.5 group"
+			>
+				<img
+					src="/logo.png"
+					alt="Grialink"
+					class="h-8 w-8 rounded-lg object-cover group-hover:scale-110 transition"
+				/>
+				<span class="font-bold text-xl tracking-tight text-foreground">Grialink</span>
+			</a>
+
+			<!-- Desktop Nav -->
+			<div class="hidden md:flex space-x-8">
+				{
+					navLinks.map((link) => (
+						<a
+							href={link.href}
+							class="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+						>
+							{link.label}
+						</a>
+					))
+				}
+			</div>
+
+			<!-- Right side -->
+			<div class="hidden md:flex items-center space-x-4">
+				<LangSwitch lang={lang} />
+				<ThemeToggle client:idle />
+				<a
+					href={loginHref}
+					class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors ml-4"
+				>
+					{nav.login}
+				</a>
+				<a
+					href={registerHref}
+					class="bg-primary hover:bg-primary-hover text-primary-foreground px-5 py-2 rounded-full text-sm font-medium duration-200 transition shadow-md shadow-primary/30 hover:shadow-lg hover:shadow-primary/40"
+				>
+					{nav.cta}
+				</a>
+			</div>
+
+			<!-- Mobile hamburger -->
+			<button
+				id="mobile-menu-btn"
+				class="md:hidden p-2 rounded-lg hover:bg-surface transition-colors"
+				aria-label={nav.openMenu}
+				aria-expanded="false"
+			>
+				<svg
+					class="w-6 h-6 text-muted-foreground"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						id="menu-icon-open"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h16M4 18h16"
+					></path>
+					<path
+						id="menu-icon-close"
+						class="hidden"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M6 18L18 6M6 6l12 12"
+					></path>
+				</svg>
+			</button>
+		</div>
+	</Container>
+
+	<!-- Mobile Menu -->
+	<div
+		id="mobile-menu"
+		class="hidden md:hidden bg-background border-b border-border-light"
+	>
+		<div class="px-4 py-4 space-y-3">
+			{
+				navLinks.map((link) => (
+					<a
+						href={link.href}
+						class="block text-muted-foreground hover:text-primary transition-colors font-medium py-1"
+					>
+						{link.label}
+					</a>
+				))
+			}
+			<hr class="border-border-light" />
+			<div class="flex items-center gap-3 py-1">
+				<LangSwitch lang={lang} />
+				<ThemeToggle client:idle />
+			</div>
+			<a
+				href={loginHref}
+				class="block text-muted-foreground hover:text-primary transition-colors font-medium py-1"
+			>
+				{nav.login}
+			</a>
+			<a
+				href={registerHref}
+				class="block bg-primary text-primary-foreground text-center px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary-hover transition-colors"
+			>
+				{nav.cta}
+			</a>
+		</div>
+	</div>
+</nav>
+
+<script>
+	const btn = document.getElementById("mobile-menu-btn");
+	const menu = document.getElementById("mobile-menu");
+	const iconOpen = document.getElementById("menu-icon-open");
+	const iconClose = document.getElementById("menu-icon-close");
+
+	btn?.addEventListener("click", () => {
+		const isOpen = !menu?.classList.contains("hidden");
+		menu?.classList.toggle("hidden");
+		iconOpen?.classList.toggle("hidden");
+		iconClose?.classList.toggle("hidden");
+		btn.setAttribute("aria-expanded", String(!isOpen));
+	});
+</script>

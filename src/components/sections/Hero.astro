@@ -1,0 +1,113 @@
+---
+import Container from "@/components/ui/Container.astro";
+import HeroCard from "./HeroCard";
+import { type Lang } from "@/i18n/config";
+import { useTranslations, getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const heroCardData = getTranslations(lang, "heroCard");
+---
+
+<section class="relative pt-28 pb-16 lg:pt-36 lg:pb-28 overflow-hidden">
+	<!-- Background — refined ambient glow -->
+	<div
+		class="absolute inset-0 -z-10 overflow-hidden"
+		aria-hidden="true"
+	>
+		<div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary/8 rounded-full blur-[120px]"></div>
+		<div class="absolute bottom-[-15%] left-[-8%] w-[500px] h-[500px] bg-accent/6 rounded-full blur-[100px]"></div>
+		<!-- Subtle grid overlay for depth -->
+		<div
+			class="absolute inset-0 bg-[linear-gradient(var(--clr-border-light)_1px,transparent_1px),linear-gradient(90deg,var(--clr-border-light)_1px,transparent_1px)] bg-[size:64px_64px] opacity-30"
+		>
+		</div>
+	</div>
+
+	<Container>
+		<div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+			<!-- Left: Content -->
+			<div
+				class="flex-1 text-center lg:text-left z-10"
+				data-animate
+			>
+				<!-- Badge — refined pill -->
+				<div
+					class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 text-xs font-medium tracking-wide text-primary bg-primary/8 rounded-full border border-primary/15"
+				>
+					<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+					{t("hero.badge")}
+				</div>
+
+				<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground mb-6 leading-[1.06] tracking-tight">
+					{t("hero.titleLine1")}
+					<br class="hidden sm:block" />
+					<span class="text-gradient-primary">{t("hero.titleHighlight")}</span>
+				</h1>
+
+				<p class="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+					{t("hero.subtitle")}
+				</p>
+
+				<!-- CTAs -->
+				<div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+					<a
+						href="https://app.grialink.com/app/auth/register"
+						class="group inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-7 py-3.5 rounded-full text-base font-semibold transition-all duration-200 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
+					>
+						{t("hero.ctaPrimary")}
+						<svg
+							class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M17 8l4 4m0 0l-4 4m4-4H3"
+							></path>
+						</svg>
+					</a>
+					<a
+						href={`/${lang}/products`}
+						class="inline-flex items-center justify-center gap-2 text-muted-foreground px-7 py-3.5 rounded-full text-base font-medium hover:text-foreground hover:bg-surface/60 transition-all duration-200 border border-border-light hover:border-border"
+					>
+						{t("hero.ctaSecondary")}
+					</a>
+				</div>
+
+				<p class="mt-8 text-xs text-muted-foreground/70 tracking-wide">{t("hero.disclaimer")}</p>
+			</div>
+
+			<!-- Right: Interactive Card -->
+			<div
+				class="flex-1 relative w-full max-w-lg lg:max-w-xl"
+				data-animate
+			>
+				<div class="float-anim">
+					<HeroCard
+						translations={heroCardData}
+						client:visible
+					/>
+				</div>
+				<!-- Ambient card glow -->
+				<div
+					class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary/15 rounded-full blur-3xl"
+					aria-hidden="true"
+				>
+				</div>
+				<div
+					class="absolute -left-8 top-8 w-28 h-28 bg-accent/10 rounded-full blur-3xl"
+					aria-hidden="true"
+				>
+				</div>
+			</div>
+		</div>
+	</Container>
+</section>

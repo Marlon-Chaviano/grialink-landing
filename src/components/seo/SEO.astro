@@ -1,0 +1,76 @@
+---
+import { supportedLanguages, type Lang, defaultLang } from '@/i18n/config';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  robots?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = '/logo.png',
+  robots = 'index, follow',
+} = Astro.props;
+
+const siteName = 'Grialink';
+const siteUrl = Astro.site?.origin ?? 'https://grialink.com';
+
+// Build hreflang alternates
+const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+const alternates = supportedLanguages.map((l) => ({
+  lang: l,
+  href: `${siteUrl}/${l}${currentPath === '/' ? '' : currentPath}`,
+}));
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={canonical} />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Hreflang alternates -->
+{alternates.map((alt) => (
+  <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+))}
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}/${defaultLang}`} />
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#17222F" />
+<meta name="msapplication-TileColor" content="#17222F" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+<!-- Manifest -->
+<link rel="manifest" href="/manifest.json" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

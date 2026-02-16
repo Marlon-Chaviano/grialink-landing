@@ -1,0 +1,123 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+
+import PricingHero from "@/components/sections/PricingHero.astro";
+import PricingPlans from "@/components/sections/PricingPlans";
+import TrustBadges from "@/components/sections/TrustBadges.astro";
+import PricingAddons from "@/components/sections/PricingAddons.astro";
+import PricingFAQ from "@/components/sections/PricingFAQ.astro";
+import PricingCTA from "@/components/sections/PricingCTA.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+	return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const pricing = getTranslations(lang, "pricing") as Record<string, any>;
+const seo = pricing.seo as Record<string, string>;
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO
+			lang={lang}
+			title={seo.title}
+			description={seo.description}
+		/>
+		{/* Structured data — Product/Offer schema for pricing */}
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Product",
+				name: "Grialink",
+				description: seo.description,
+				brand: { "@type": "Brand", name: "Grialink" },
+				offers: [
+					{
+						"@type": "Offer",
+						name: "Free",
+						price: "0",
+						priceCurrency: "USD",
+						priceValidUntil: "2027-12-31",
+						url: `https://grialink.com/${lang}/pricing`,
+					},
+					{
+						"@type": "Offer",
+						name: "Starter",
+						price: "60",
+						priceCurrency: "USD",
+						priceValidUntil: "2027-12-31",
+						url: `https://grialink.com/${lang}/pricing`,
+					},
+					{
+						"@type": "Offer",
+						name: "Growth",
+						price: "100",
+						priceCurrency: "USD",
+						priceValidUntil: "2027-12-31",
+						url: `https://grialink.com/${lang}/pricing`,
+					},
+					{
+						"@type": "Offer",
+						name: "Scale",
+						price: "150",
+						priceCurrency: "USD",
+						priceValidUntil: "2027-12-31",
+						url: `https://grialink.com/${lang}/pricing`,
+					},
+				],
+			})}
+		/>
+		{/* FAQPage structured data for SEO */}
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				mainEntity: (pricing.faq as any).items.map((item: { question: string; answer: string }) => ({
+					"@type": "Question",
+					name: item.question,
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: item.answer,
+					},
+				})),
+			})}
+		/>
+	</Fragment>
+
+	<main>
+		<PricingHero lang={lang} />
+
+		{/* Interactive plans section — React for toggle */}
+		<section
+			class="section-spacing !pb-0"
+			data-animate
+		>
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<PricingPlans
+					translations={pricing}
+					client:visible
+				/>
+			</div>
+		</section>
+
+		<TrustBadges lang={lang} />
+		<PricingAddons lang={lang} />
+
+		{/* Disclaimer */}
+		<div class="max-w-4xl mx-auto text-center border-t border-border-light pt-8 mb-20 px-4">
+			<p class="text-[11px] text-muted-foreground italic leading-normal">
+				{pricing.disclaimer}
+			</p>
+		</div>
+
+		<PricingFAQ lang={lang} />
+		<PricingCTA lang={lang} />
+	</main>
+</Layout>

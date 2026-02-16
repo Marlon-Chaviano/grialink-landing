@@ -1,0 +1,123 @@
+---
+/**
+ * TeamSection — Team members grid with social links.
+ * All data comes from i18n. Easily scalable by adding entries to the translations file.
+ * Images fall back to initials when the photo file is missing.
+ */
+import { Image } from "astro:assets";
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+/* ── Team photos (src/assets/team/) ── */
+import imgYozamy from "@/assets/team/yozamy.webp";
+import imgMarlon from "@/assets/team/marlon.webp";
+import imgFabian from "@/assets/team/fabian.webp";
+import imgRogelio from "@/assets/team/rogelio.webp";
+import imgSofia from "@/assets/team/sofia.webp";
+
+const teamImages: Record<string, ImageMetadata> = {
+	yozamy: imgYozamy,
+	marlon: imgMarlon,
+	fabian: imgFabian,
+	rogelio: imgRogelio,
+	sofia: imgSofia,
+};
+
+interface Props {
+	lang: Lang;
+}
+
+interface Social {
+	linkedin?: string;
+	twitter?: string;
+}
+
+interface Member {
+	name: string;
+	role: string;
+	bio: string;
+	image: string;
+	social?: Social;
+}
+
+const { lang } = Astro.props;
+const about = getTranslations(lang, "about") as Record<string, any>;
+const team = about.team as Record<string, any>;
+const members = team.members as Member[];
+
+/** Extract initials for avatar fallback */
+function getInitials(name: string): string {
+	return name
+		.split(" ")
+		.filter((_, i, a) => i === 0 || i === a.length - 1)
+		.map((w) => w[0])
+		.join("")
+		.toUpperCase();
+}
+---
+
+<section class="section-spacing bg-background">
+	<Container>
+		<!-- Header -->
+		<div
+			class="text-center max-w-3xl mx-auto mb-16"
+			data-animate
+		>
+			<h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{team.title}</h2>
+			<p class="text-muted-foreground text-lg">{team.subtitle}</p>
+		</div>
+
+		<!-- Members grid -->
+		<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+			{
+				members.map((member) => (
+					<div
+						class="group bg-card rounded-2xl border border-border-light overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+						data-animate
+					>
+						{/* Large photo area */}
+						<div class="relative w-full aspect-[3/4] bg-primary/5 overflow-hidden">
+							{teamImages[member.image] ? (
+								<Image
+									src={teamImages[member.image]}
+									alt={member.name}
+									width={400}
+									height={533}
+									class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+									loading="lazy"
+									decoding="async"
+								/>
+							) : (
+								<img
+									src={member.image}
+									alt={member.name}
+									class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+									loading="lazy"
+									decoding="async"
+									onerror={`this.style.display='none';this.nextElementSibling.style.display='flex'`}
+								/>
+							)}
+							{/* Initials fallback */}
+							<div
+								class="absolute inset-0 items-center justify-center bg-primary/10 text-primary text-5xl font-bold hidden"
+								aria-hidden="true"
+							>
+								{getInitials(member.name)}
+							</div>
+							{/* Gradient overlay at bottom */}
+							<div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+						</div>
+
+						{/* Info */}
+						<div class="p-5 -mt-4 relative">
+							<h3 class="text-lg font-bold text-foreground leading-tight">{member.name}</h3>
+							<p class="text-primary text-sm font-medium mb-2">{member.role}</p>
+							<p class="text-muted-foreground text-sm leading-relaxed mb-3 line-clamp-3">{member.bio}</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</Container>
+</section>

@@ -1,0 +1,69 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+
+import ProductsHero from "@/components/sections/ProductsHero.astro";
+import ProductsGrid from "@/components/sections/ProductsGrid.astro";
+import ProductShowcase from "@/components/sections/ProductShowcase.astro";
+import ProductBrain from "@/components/sections/ProductBrain.astro";
+import ProductIntegrations from "@/components/sections/ProductIntegrations.astro";
+import ProductsCTA from "@/components/sections/ProductsCTA.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+	return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const pp = getTranslations(lang, "productsPage") as Record<string, any>;
+const seo = pp.seo as Record<string, string>;
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO
+			lang={lang}
+			title={seo.title}
+			description={seo.description}
+		/>
+		{/* Structured data — SoftwareApplication schema */}
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "SoftwareApplication",
+				name: "Grialink",
+				applicationCategory: "BusinessApplication",
+				description: seo.description,
+				operatingSystem: "Web",
+				brand: { "@type": "Brand", name: "Grialink" },
+				offers: {
+					"@type": "Offer",
+					price: "0",
+					priceCurrency: "USD",
+					url: `https://grialink.com/${lang}/pricing`,
+				},
+				featureList: [
+					"Prospector AI",
+					"Outreach Engine",
+					"Smart Pipeline",
+					"AI Analytics",
+					"Sales Dashboard",
+					"Natural Language Processing",
+					"Predictive Models",
+				],
+			})}
+		/>
+	</Fragment>
+
+	<main>
+		<ProductsHero lang={lang} />
+		<ProductsGrid lang={lang} />
+		<ProductShowcase lang={lang} />
+		<ProductBrain lang={lang} />
+		<ProductIntegrations lang={lang} />
+		<ProductsCTA lang={lang} />
+	</main>
+</Layout>

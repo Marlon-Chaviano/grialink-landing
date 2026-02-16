@@ -1,0 +1,116 @@
+---
+/**
+ * TrustBadges — Security and compliance section.
+ * Dark card with certifications and encryption info.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const p = getTranslations(lang, "pricing") as Record<string, any>;
+const trust = p.trust as Record<string, any>;
+const certs = trust.certifications as string[];
+
+const certIcons = ["shield-check", "lock", "shield"] as const;
+const certColors = ["text-green-400", "text-blue-400", "text-purple-400"] as const;
+
+const iconPaths: Record<string, string> = {
+	"shield-check": "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4",
+	lock: "M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2ZM7 11V7a5 5 0 0 1 10 0v4",
+	shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z",
+	encrypted:
+		"M12 2a4 4 0 0 0-4 4v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4ZM8 6a4 4 0 0 1 8 0v3H8V6Zm4 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z",
+	security: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z",
+};
+---
+
+<section
+	class="mb-20"
+	data-animate
+>
+	<Container>
+		<div class="bg-card rounded-3xl p-8 lg:p-10 relative overflow-hidden border border-border-light shadow-2xl">
+			<!-- Decorative blob -->
+			<div
+				class="absolute top-0 right-0 w-2/3 h-full bg-primary opacity-5 rounded-l-full blur-3xl translate-x-1/4 pointer-events-none"
+				aria-hidden="true"
+			>
+			</div>
+
+			<div class="relative z-10 grid lg:grid-cols-2 gap-10 items-center">
+				<!-- Left: Text -->
+				<div>
+					<div class="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-3 py-1 rounded-full mb-6 border border-primary/20">
+						<svg
+							class="w-4 h-4 text-primary"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							viewBox="0 0 24 24"
+						>
+							<path d={iconPaths.security}></path>
+						</svg>
+						<span class="text-[10px] font-bold tracking-widest uppercase text-primary">{trust.badge}</span>
+					</div>
+
+					<h2 class="text-2xl md:text-3xl font-extrabold mb-4 tracking-tight text-foreground">
+						{trust.title}
+					</h2>
+					<p class="text-muted-foreground leading-relaxed mb-6 text-sm md:text-base max-w-md">
+						{trust.subtitle}
+					</p>
+
+					<!-- Certification badges -->
+					<div class="flex flex-wrap gap-3">
+						{
+							certs.map((cert, i) => (
+								<div class="flex items-center gap-2 bg-surface rounded-md px-3 py-1.5 border border-border-light">
+									<svg
+										class:list={["w-4 h-4", certColors[i % certColors.length]]}
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										viewBox="0 0 24 24"
+									>
+										<path d={iconPaths[certIcons[i % certIcons.length]]} />
+									</svg>
+									<span class="font-semibold text-xs text-muted-foreground">{cert}</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+
+				<!-- Right: Encryption card -->
+				<div class="flex justify-center lg:justify-end">
+					<div class="bg-surface backdrop-blur-md rounded-xl p-6 border border-border-light flex flex-col items-center text-center w-full max-w-xs">
+						<svg
+							class="w-8 h-8 text-primary mb-2"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							viewBox="0 0 24 24"
+						>
+							<path d={iconPaths.encrypted}></path>
+						</svg>
+						<h3 class="text-base font-bold mb-1 text-foreground">{trust.encryptionTitle}</h3>
+						<p class="text-muted-foreground text-[10px] leading-relaxed uppercase tracking-wider">
+							{trust.encryptionSubtitle}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</Container>
+</section>

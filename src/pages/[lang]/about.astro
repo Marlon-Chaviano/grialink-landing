@@ -1,0 +1,63 @@
+---
+/**
+ * ┌──────────────────────────────────────────────────────────────────────────┐
+ * │ ARCHITECTURAL DECISION — Single /about page                             │
+ * │                                                                          │
+ * │ The history-vision.html design was evaluated for splitting into:         │
+ * │   /about, /history, /vision                                             │
+ * │                                                                          │
+ * │ Decision: Keep as ONE unified /about page.                              │
+ * │                                                                          │
+ * │ Reasons:                                                                 │
+ * │  1. Content depth: Each section is ~2-3 paragraphs — not enough for     │
+ * │     standalone pages that rank independently.                            │
+ * │  2. SEO authority: A single comprehensive page consolidates link        │
+ * │     equity and avoids thin-content penalties.                            │
+ * │  3. UX flow: Users expect About Us as a single narrative.               │
+ * │     Splitting creates unnecessary navigation friction.                   │
+ * │  4. Scalability: Sections are modular components. If content grows      │
+ * │     significantly, they can be extracted to dedicated routes later.      │
+ * │                                                                          │
+ * │ Each section is its own component for maintainability and reuse.        │
+ * └──────────────────────────────────────────────────────────────────────────┘
+ */
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+
+import AboutHero from "@/components/sections/AboutHero.astro";
+import HistorySection from "@/components/sections/HistorySection.astro";
+import ValuesSection from "@/components/sections/ValuesSection.astro";
+import IdentitySection from "@/components/sections/IdentitySection.astro";
+import TeamSection from "@/components/sections/TeamSection.astro";
+import AboutCTA from "@/components/sections/AboutCTA.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+	return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const about = getTranslations(lang, "about") as Record<string, any>;
+const seo = about.seo as Record<string, string>;
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO
+			lang={lang}
+			title={seo.title}
+			description={seo.description}
+		/>
+	</Fragment>
+
+	<main>
+		<AboutHero lang={lang} />
+		<HistorySection lang={lang} />
+		<ValuesSection lang={lang} />
+		<IdentitySection lang={lang} />
+		<TeamSection lang={lang} />
+		<AboutCTA lang={lang} />
+	</main>
+</Layout>
