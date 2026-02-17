@@ -1,9 +1,9 @@
 /**
  * ContactForm — React form with Zod validation, react-hook-form,
- * honeypot anti-spam, and full i18n via translation props.
+ * honeypot anti-spam, toast notifications, and full i18n via translation props.
  *
  * Hydrated with client:visible for minimal JS.
- * Prepared for future API/email/SES integration.
+ * Sends POST to /api/contact (Astro server endpoint).
  */
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,6 +16,7 @@ import { Textarea } from '@/components/ui/Textarea';
 import { Select } from '@/components/ui/Select';
 import { FormField } from '@/components/ui/FormField';
 import { Button } from '@/components/ui/Button';
+import { Toaster, toast } from '@/components/ui/Toast';
 
 /* ─── Types ─── */
 
@@ -109,23 +110,54 @@ export default function ContactForm({ translations }: ContactFormProps) {
   const [status, setStatus] = useState<FormStatus>('idle');
 
   async function onSubmit(data: FormData) {
-    // Honeypot check
+    // Honeypot check — silently ignore
     if (data._hp) return;
 
     setStatus('loading');
 
     try {
-      // ── Future integration point ──
-      // Replace with actual API call:
-      // await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) });
+      const baseUrl = import.meta.env.PUBLIC_BACKEND_URL;
+      const res = await fetch(`${baseUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept-Language': document.documentElement.lang || 'en',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          subject: data.subject,
+          message: data.message,
+        }),
+      });
 
-      // Simulate network delay for now
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        // 429 — Rate limited
+        if (res.status === 429) {
+          toast.error(json?.message ?? t.error);
+          setStatus('idle');
+          return;
+        }
+        // 400 — Validation errors from server
+        if (res.status === 400 && json?.fields) {
+          const fieldMessages = Object.values(json.fields).join(' ');
+          toast.error(fieldMessages || t.error);
+          setStatus('idle');
+          return;
+        }
+        // Other server errors (500, etc.)
+        throw new Error(json?.message ?? 'Request failed');
+      }
 
       setStatus('success');
+      toast.success(json?.message ?? t.success);
       reset();
     } catch {
       setStatus('error');
+      toast.error(t.error);
     }
   }
 
@@ -133,59 +165,14 @@ export default function ContactForm({ translations }: ContactFormProps) {
 
   return (
     <div className="bg-card rounded-2xl border border-border shadow-sm p-8 md:p-12">
+      {/* Toast container */}
+      <Toaster />
+
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-foreground mb-3">{t.title}</h2>
         <p className="text-muted-foreground">{t.subtitle}</p>
       </div>
-
-      {/* Success message */}
-      {status === 'success' && (
-        <div
-          className="mb-8 p-4 rounded-lg bg-green-500/10 border border-green-500/30 text-green-600 text-sm text-center font-medium"
-          role="status"
-          aria-live="polite"
-        >
-          <svg
-            className="w-5 h-5 inline-block mr-2 -mt-0.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          {t.success}
-        </div>
-      )}
-
-      {/* Error message */}
-      {status === 'error' && (
-        <div
-          className="mb-8 p-4 rounded-lg bg-destructive/10 border border-destructive/30 text-destructive text-sm text-center font-medium"
-          role="alert"
-          aria-live="assertive"
-        >
-          <svg
-            className="w-5 h-5 inline-block mr-2 -mt-0.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          {t.error}
-        </div>
-      )}
 
       <form
         onSubmit={handleSubmit(onSubmit)}

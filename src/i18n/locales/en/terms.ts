@@ -36,7 +36,7 @@ export default {
         '• <strong>Outreach Engine:</strong> Automated omnichannel communication workflows.',
         '• <strong>Smart Pipeline:</strong> Visual SES pipeline management with AI-powered insights.',
         '• <strong>AI Analytics:</strong> Real-time dashboards, reporting, and performance metrics.',
-        '• <strong>Captain AI:</strong> AI assistant for automated patient communications.',
+        '• <strong>Copilot AI:</strong> AI assistant with contextual suggestions for agents.',
         '• <strong>Call Brain:</strong> Call recording, transcription, and analysis.',
         'We reserve the right to modify, suspend, or discontinue any aspect of the Services at any time, with or without notice.',
       ],

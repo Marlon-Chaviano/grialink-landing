@@ -29,7 +29,7 @@ export default {
       number: 'Paso 4',
       title: 'Activa la IA',
       description:
-        'Captain AI responde automáticamente, agenda citas con Google Calendar y analiza cada interacción.',
+        'La IA de Grialink responde automáticamente, agenda citas con Google Calendar y analiza cada interacción.',
       icon: 'ai',
     },
   ],

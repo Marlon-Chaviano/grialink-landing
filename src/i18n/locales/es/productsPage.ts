@@ -60,12 +60,12 @@ export default {
     badge: 'Módulos de IA',
     title: 'El cerebro de Grialink: GPT-4o al servicio de tu clínica',
     subtitle:
-      'Cada acción inteligente de Grialink está potenciada por modelos de lenguaje avanzados. Desde respuestas automáticas con Captain AI hasta transcripción de llamadas con Whisper, todo funciona con un sistema de créditos transparente.',
+      'Cada acción inteligente de Grialink está potenciada por modelos de lenguaje avanzados. Desde sugerencias contextuales con Copilot IA hasta transcripción de llamadas con Whisper, todo funciona con un sistema de créditos transparente.',
     visualAlt: 'Visualización de red neuronal de IA de Grialink',
     processingLabel: 'Procesando datos clínicos',
     features: {
       nlp: {
-        title: 'Captain AI + Copilot',
+        title: 'Copilot IA + Asistente',
         description: 'Respuestas automáticas, sugerencias contextuales, resumen de conversaciones y etiquetado inteligente para agentes.',
       },
       predictive: {

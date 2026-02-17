@@ -29,7 +29,7 @@ export default {
       number: 'Step 4',
       title: 'Activate AI',
       description:
-        'Captain AI auto-responds, schedules appointments with Google Calendar, and analyzes every interaction.',
+        'Grialink AI auto-responds, schedules appointments with Google Calendar, and analyzes every interaction.',
       icon: 'ai',
     },
   ],

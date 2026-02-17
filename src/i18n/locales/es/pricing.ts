@@ -52,28 +52,57 @@ export default {
   /* ── Feature categories ── */
   categories: {
     prospecting: 'Prospección & IA',
-    sales: 'Ventas',
+    platform: 'Plataforma',
+    advanced: 'Funciones Avanzadas',
   },
 
   /* ── Feature labels ── */
   features: {
-    basicProspecting: 'Prospección básica',
-    noAdvancedAI: 'Sin IA avanzada',
-    contacts: '{count} Contactos',
-    aiCredits: '{count} AI Credits',
-    lists: '{count} Listas',
+    /* Prospección */
+    enrichedContacts: '{count} Contactos enriquecidos',
+    aiCredits: '{count} Créditos de IA',
     sequences: '{count} Secuencias',
-    aiAgents: '{count} Agentes de IA',
-    unlimitedAgentsLists: 'Agentes/Listas Ilimitados',
-    adminAccounts: '{count} Cuenta Admin',
-    adminAccountsPlural: '{count} Cuentas Admin',
-    agentLimit: 'Límite {count} agentes',
-    unlimitedAgents: 'Agentes Ilimitados',
+    noSequences: 'Sin secuencias',
+    emailsPerMonth: '{count} Emails/mes',
+    basicProspecting: 'Prospección básica',
+    advancedAI: 'IA avanzada',
+    noAdvancedAI: 'Sin IA avanzada',
+    unlimitedSequences: 'Secuencias ilimitadas',
+    unlimitedEmails: 'Emails ilimitados',
+
+    /* Plataforma */
+    agentLimit: '{count} Agentes',
+    adminAccounts: '{count} Admin',
+    adminAccountsPlural: '{count} Admins',
+    unlimitedInboxes: 'Inboxes ilimitados',
+    contactsLimit: '{count} Contactos',
+    unlimitedContacts: 'Contactos ilimitados',
+    conversationsPerMonth: '{count} Conversaciones/mes',
+    unlimitedConversations: 'Conversaciones ilimitadas',
+    teams: '{count} Equipos',
+    unlimitedTeams: 'Equipos ilimitados',
+    automationRules: '{count} Reglas de automatización',
+    unlimitedAutomationRules: 'Reglas ilimitadas',
+    segments: '{count} Segmentos',
+    unlimitedSegments: 'Segmentos ilimitados',
+    unlimitedAgents: 'Agentes ilimitados',
+
+    /* Avanzadas */
     callTranscription: 'Transcripción de llamadas',
+    noCallTranscription: 'Sin transcripción de llamadas',
     smartDashboard: 'Dashboard inteligente',
-    scoringDashboard: 'Dashboard Scoring',
-    corporateFeatures: 'Funciones Corporativas',
-    extraSeller: '+ Vendedor adicional: <strong>{price}/mes</strong>',
+    noSmartDashboard: 'Sin dashboard inteligente',
+    prioritySupport: 'Soporte prioritario',
+    noPrioritySupport: 'Sin soporte prioritario',
+    multiClinic: 'Multi-clínica',
+    noMultiClinic: 'Sin multi-clínica',
+    corporateReports: 'Reportes corporativos',
+    noCorporateReports: 'Sin reportes corporativos',
+
+    /* Notas al pie */
+    extraAgent: '+ Agente adicional: <strong>{price}/mes</strong>',
+    extraAdmin: '+ Admin adicional: <strong>{price}/mes</strong>',
+    trialLabel: 'Prueba gratis de {days} días',
   },
 
   /* ── Trust / Security ── */
@@ -94,29 +123,34 @@ export default {
 
   /* ── Add-ons ── */
   addons: {
-    title: 'Complementos adicionales (Overages)',
+    title: 'Complementos adicionales',
     items: [
       {
-        title: 'Paquetes de Contactos',
-        tiers: [
-          { label: '+200', price: '$15' },
-          { label: '+500', price: '$30' },
-        ],
-      },
-      {
         title: 'Paquetes AI Credits',
+        availability: 'Todos los planes',
         tiers: [
-          { label: '+2k', price: '$15' },
-          { label: '+10k', price: '$60' },
+          { label: '+2,000', price: '$15/mes' },
+          { label: '+5,000 ⭐', price: '$35/mes' },
+          { label: '+10,000', price: '$60/mes' },
         ],
       },
       {
-        title: 'Vendedores Extra',
-        description: 'Amplía tu equipo desde <strong>$20/mes</strong> por vendedor adicional.',
+        title: 'Paquetes de Contactos',
+        availability: 'Todos los planes',
+        tiers: [
+          { label: '+200', price: '$15/mes' },
+          { label: '+500', price: '$30/mes' },
+        ],
       },
       {
-        title: 'Admin Extra',
-        description: 'Subcuenta administrativa adicional por <strong>$10/mes</strong>.',
+        title: 'Agente adicional',
+        availability: 'Starter y Growth',
+        description: 'Amplía tu equipo por <strong>$20/mes</strong> por agente adicional.',
+      },
+      {
+        title: 'Admin adicional',
+        availability: 'Starter, Growth y Scale',
+        description: 'Subcuenta administrativa adicional por <strong>$5–$10/mes</strong> según plan.',
       },
     ],
   },

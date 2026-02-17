@@ -1,6 +1,6 @@
 ---
 import Container from "@/components/ui/Container.astro";
-import RoleTabs from "./RoleTabs";
+import RoleTabs, { type RoleTabsProps } from "./RoleTabs";
 import { type Lang } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
 
@@ -9,10 +9,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const roleTabsData = getTranslations(lang, "roleTabs") as {
-	tabs: Array<{ label: string; description: string; features: string[] }>;
-	kanban: Record<string, unknown>;
-};
+const roleTabsData = getTranslations(lang, "roleTabs") as RoleTabsProps["translations"];
 ---
 
 <section class="section-spacing bg-secondary">

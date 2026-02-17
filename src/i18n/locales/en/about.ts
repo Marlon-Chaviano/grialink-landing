@@ -37,7 +37,7 @@ export default {
       {
         title: 'AI with purpose',
         description:
-          'We don\'t implement AI for trends. Every module solves a real problem: from Captain AI for automatic responses to call analysis with agent scoring.',
+          'We don\'t implement AI for trends. Every module solves a real problem: from Copilot AI for contextual suggestions to call analysis with agent scoring.',
         icon: 'brain',
       },
       {

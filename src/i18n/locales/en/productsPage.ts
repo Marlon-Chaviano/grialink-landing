@@ -60,12 +60,12 @@ export default {
     badge: 'AI Modules',
     title: "Grialink's brain: GPT-4o powering your clinic",
     subtitle:
-      "Every smart action in Grialink is powered by advanced language models. From automatic responses with Captain AI to call transcription with Whisper, everything runs on a transparent credit system.",
+      "Every smart action in Grialink is powered by advanced language models. From contextual suggestions with Copilot AI to call transcription with Whisper, everything runs on a transparent credit system.",
     visualAlt: 'Grialink AI neural network visualization',
     processingLabel: 'Processing clinical data',
     features: {
       nlp: {
-        title: 'Captain AI + Copilot',
+        title: 'Copilot AI + Assistant',
         description: 'Automatic responses, contextual suggestions, conversation summaries, and intelligent tagging for agents.',
       },
       predictive: {

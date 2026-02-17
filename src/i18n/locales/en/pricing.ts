@@ -52,28 +52,57 @@ export default {
   /* ── Feature categories ── */
   categories: {
     prospecting: 'Prospecting & AI',
-    sales: 'Sales',
+    platform: 'Platform',
+    advanced: 'Advanced Features',
   },
 
   /* ── Feature labels ── */
   features: {
-    basicProspecting: 'Basic prospecting',
-    noAdvancedAI: 'No advanced AI',
-    contacts: '{count} Contacts',
+    /* Prospecting */
+    enrichedContacts: '{count} Enriched Contacts',
     aiCredits: '{count} AI Credits',
-    lists: '{count} Lists',
     sequences: '{count} Sequences',
-    aiAgents: '{count} AI Agents',
-    unlimitedAgentsLists: 'Unlimited Agents/Lists',
-    adminAccounts: '{count} Admin Account',
-    adminAccountsPlural: '{count} Admin Accounts',
-    agentLimit: 'Limit {count} agents',
+    noSequences: 'No sequences',
+    emailsPerMonth: '{count} Emails/month',
+    basicProspecting: 'Basic prospecting',
+    advancedAI: 'Advanced AI',
+    noAdvancedAI: 'No advanced AI',
+    unlimitedSequences: 'Unlimited Sequences',
+    unlimitedEmails: 'Unlimited Emails',
+
+    /* Platform */
+    agentLimit: '{count} Agents',
+    adminAccounts: '{count} Admin',
+    adminAccountsPlural: '{count} Admins',
+    unlimitedInboxes: 'Unlimited Inboxes',
+    contactsLimit: '{count} Contacts',
+    unlimitedContacts: 'Unlimited Contacts',
+    conversationsPerMonth: '{count} Conversations/month',
+    unlimitedConversations: 'Unlimited Conversations',
+    teams: '{count} Teams',
+    unlimitedTeams: 'Unlimited Teams',
+    automationRules: '{count} Automation Rules',
+    unlimitedAutomationRules: 'Unlimited Rules',
+    segments: '{count} Segments',
+    unlimitedSegments: 'Unlimited Segments',
     unlimitedAgents: 'Unlimited Agents',
+
+    /* Advanced */
     callTranscription: 'Call transcription',
+    noCallTranscription: 'No call transcription',
     smartDashboard: 'Smart dashboard',
-    scoringDashboard: 'Scoring dashboard',
-    corporateFeatures: 'Corporate features',
-    extraSeller: '+ Extra seller: <strong>{price}/mo</strong>',
+    noSmartDashboard: 'No smart dashboard',
+    prioritySupport: 'Priority support',
+    noPrioritySupport: 'No priority support',
+    multiClinic: 'Multi-clinic',
+    noMultiClinic: 'No multi-clinic',
+    corporateReports: 'Corporate reports',
+    noCorporateReports: 'No corporate reports',
+
+    /* Footnotes */
+    extraAgent: '+ Extra agent: <strong>{price}/mo</strong>',
+    extraAdmin: '+ Extra admin: <strong>{price}/mo</strong>',
+    trialLabel: '{days}-day free trial',
   },
 
   /* ── Trust / Security ── */
@@ -94,29 +123,34 @@ export default {
 
   /* ── Add-ons ── */
   addons: {
-    title: 'Additional Add-ons (Overages)',
+    title: 'Additional Add-ons',
     items: [
       {
-        title: 'Contact Packages',
-        tiers: [
-          { label: '+200', price: '$15' },
-          { label: '+500', price: '$30' },
-        ],
-      },
-      {
         title: 'AI Credit Packages',
+        availability: 'All plans',
         tiers: [
-          { label: '+2k', price: '$15' },
-          { label: '+10k', price: '$60' },
+          { label: '+2,000', price: '$15/mo' },
+          { label: '+5,000 ⭐', price: '$35/mo' },
+          { label: '+10,000', price: '$60/mo' },
         ],
       },
       {
-        title: 'Extra Sellers',
-        description: 'Expand your team from <strong>$20/mo</strong> per additional seller.',
+        title: 'Contact Packages',
+        availability: 'All plans',
+        tiers: [
+          { label: '+200', price: '$15/mo' },
+          { label: '+500', price: '$30/mo' },
+        ],
+      },
+      {
+        title: 'Extra Agent',
+        availability: 'Starter & Growth',
+        description: 'Expand your team for <strong>$20/mo</strong> per additional agent.',
       },
       {
         title: 'Extra Admin',
-        description: 'Additional administrative sub-account for <strong>$10/mo</strong>.',
+        availability: 'Starter, Growth & Scale',
+        description: 'Additional admin sub-account for <strong>$5–$10/mo</strong> depending on plan.',
       },
     ],
   },

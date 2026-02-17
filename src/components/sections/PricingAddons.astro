@@ -2,74 +2,83 @@
 /**
  * PricingAddons — Add-on packages grid (overages).
  */
-import Container from '@/components/ui/Container.astro';
-import { type Lang } from '@/i18n/config';
-import { getTranslations } from '@/i18n/utils';
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
 
 interface Props {
-  lang: Lang;
+	lang: Lang;
 }
 
 const { lang } = Astro.props;
-const p = getTranslations(lang, 'pricing') as Record<string, any>;
+const p = getTranslations(lang, "pricing") as Record<string, any>;
 const addons = p.addons as Record<string, any>;
 const items = addons.items as Array<{
-  title: string;
-  tiers?: Array<{ label: string; price: string }>;
-  description?: string;
+	title: string;
+	availability?: string;
+	tiers?: Array<{ label: string; price: string }>;
+	description?: string;
 }>;
 
 const addonIcons = [
-  'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM19 8v6M22 11h-6', // user-plus
-  'M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7ZM9 21h6', // brain
-  'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75', // users
-  'M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM20 21a8 8 0 0 0-16 0', // admin
+	"M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7ZM9 21h6", // brain (AI credits)
+	"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM19 8v6M22 11h-6", // user-plus (contacts)
+	"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75", // users (agents)
+	"M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM20 21a8 8 0 0 0-16 0", // admin
 ];
 ---
 
-<section class="mb-20" data-animate>
-  <Container>
-    <h3 class="text-xl font-bold mb-8 text-center text-foreground">{addons.title}</h3>
+<section
+	class="mb-20"
+	data-animate
+>
+	<Container>
+		<h3 class="text-xl font-bold mb-8 text-center text-foreground">{addons.title}</h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-      {items.map((item, index) => (
-        <div class="border border-border-light p-5 rounded-xl flex flex-col items-start gap-4 bg-card shadow-sm hover:shadow-md transition-shadow group h-full">
-          {/* Icon */}
-          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform shrink-0">
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              viewBox="0 0 24 24"
-            >
-              <path d={addonIcons[index % addonIcons.length]} />
-            </svg>
-          </div>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+			{
+				items.map((item, index) => (
+					<div class="border border-border-light p-5 rounded-xl flex flex-col gap-4 bg-card shadow-sm hover:shadow-md transition-shadow group h-full">
+						{/* Icon + Title row */}
+						<div class="flex items-center gap-3">
+							<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform shrink-0">
+								<svg
+									class="w-5 h-5"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									viewBox="0 0 24 24"
+								>
+									<path d={addonIcons[index % addonIcons.length]} />
+								</svg>
+							</div>
+							<div class="flex flex-col">
+								<h4 class="font-bold text-sm text-foreground">{item.title}</h4>
+								{item.availability && <span class="text-[10px] text-muted-foreground font-medium">{item.availability}</span>}
+							</div>
+						</div>
 
-          <div>
-            <h4 class="font-bold text-sm text-foreground">{item.title}</h4>
-
-            {item.tiers ? (
-              <div class="text-xs text-muted-foreground mt-2 space-y-1">
-                {item.tiers.map((tier) => (
-                  <div class="flex justify-between gap-4">
-                    <span>{tier.label}</span>
-                    <span class="font-bold text-foreground">{tier.price}</span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p
-                class="text-xs text-muted-foreground mt-2 leading-snug"
-                set:html={item.description}
-              />
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-  </Container>
+						{/* Content */}
+						{item.tiers ? (
+							<div class="flex-1 flex flex-col justify-center w-full space-y-2">
+								{item.tiers.map((tier) => (
+									<div class="flex items-center justify-between w-full rounded-lg bg-surface/60 px-4 py-2.5">
+										<span class="text-sm text-muted-foreground">{tier.label}</span>
+										<span class="text-sm font-bold text-primary">{tier.price}</span>
+									</div>
+								))}
+							</div>
+						) : (
+							<p
+								class="flex-1 text-xs text-muted-foreground leading-relaxed"
+								set:html={item.description}
+							/>
+						)}
+					</div>
+				))
+			}
+		</div>
+	</Container>
 </section>

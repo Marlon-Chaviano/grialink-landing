@@ -37,7 +37,7 @@ export default {
       {
         title: 'IA con propósito',
         description:
-          'No implementamos IA por moda. Cada módulo resuelve un problema real: desde Captain AI para respuestas automáticas hasta análisis de llamadas con scoring de agentes.',
+          'No implementamos IA por moda. Cada módulo resuelve un problema real: desde Copilot IA para sugerencias contextuales hasta análisis de llamadas con scoring de agentes.',
         icon: 'brain',
       },
       {

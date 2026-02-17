@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 interface HeroCardProps {
@@ -24,12 +24,15 @@ export default function HeroCard({ translations }: HeroCardProps) {
     teal: { dot: 'bg-teal-400', bg: 'bg-teal-500/10', text: 'text-teal-400' },
   };
 
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.3, ease: 'easeOut' }}
       className="bg-card rounded-2xl shadow-2xl border border-border-light p-6 sm:p-8 relative z-10"
+      aria-hidden="true"
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
@@ -61,9 +64,9 @@ export default function HeroCard({ translations }: HeroCardProps) {
             {[40, 65, 50, 80, 70, 90, 75].map((h, i) => (
               <motion.div
                 key={i}
-                initial={{ height: 0 }}
+                initial={prefersReducedMotion ? false : { height: 0 }}
                 animate={{ height: `${h}%` }}
-                transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.6 + i * 0.08 }}
                 className="flex-1 bg-primary/30 rounded-[1px]"
               />
             ))}
@@ -78,9 +81,9 @@ export default function HeroCard({ translations }: HeroCardProps) {
           return (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: -10 }}
+              initial={prefersReducedMotion ? false : { opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 + idx * 0.1 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.5 + idx * 0.1 }}
               className="flex items-center gap-3 p-2.5 rounded-lg border border-border-light/50 hover:bg-background-lighter transition-colors"
             >
               <span className={`w-2 h-2 rounded-full ${colors.dot} shrink-0`} />

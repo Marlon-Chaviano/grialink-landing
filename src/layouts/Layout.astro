@@ -60,29 +60,66 @@ const { lang, class: className, noNav = false, noFooter = false } = Astro.props;
 		</script>
 	</head>
 	<body class:list={["bg-background text-foreground antialiased", className]}>
+		<!-- Skip to content — keyboard a11y -->
+		<a
+			href="#main-content"
+			class="skip-to-content"
+		>
+			{lang === "es" ? "Ir al contenido principal" : "Skip to main content"}
+		</a>
+
 		{!noNav && <Navbar lang={lang} />}
 
-		<slot />
+		<div id="main-content">
+			<slot />
+		</div>
 
 		{!noFooter && <Footer lang={lang} />}
 
 		<script>
-			// Scroll-triggered reveal animations
-			const observer = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add("is-visible");
-							observer.unobserve(entry.target);
-						}
-					});
-				},
-				{ threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
-			);
+			// Scroll-triggered reveal animations (respects reduced motion)
+			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-			document.querySelectorAll("[data-animate]").forEach((el) => {
-				observer.observe(el);
-			});
+			if (prefersReducedMotion) {
+				// Show everything immediately
+				document.querySelectorAll("[data-animate]").forEach((el) => {
+					el.classList.add("is-visible");
+				});
+			} else {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add("is-visible");
+								observer.unobserve(entry.target);
+							}
+						});
+					},
+					{ threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+				);
+
+				document.querySelectorAll("[data-animate]").forEach((el) => {
+					observer.observe(el);
+				});
+			}
+		</script>
+
+		<!-- Chatwoot live chat -->
+		<script is:inline>
+			(function (d, t) {
+				var BASE_URL = "https://app.grialink.com";
+				var g = d.createElement(t),
+					s = d.getElementsByTagName(t)[0];
+				g.src = BASE_URL + "/packs/js/sdk.js";
+				g.async = true;
+				s.parentNode.insertBefore(g, s);
+				g.onload = function () {
+					window.chatwootSDK.run({
+						websiteToken: "NLwCp3aUkuV5jVCUcv7Xzmdv",
+						baseUrl: BASE_URL,
+					});
+				};
+			})(document, "script");
 		</script>
 	</body>
 </html>

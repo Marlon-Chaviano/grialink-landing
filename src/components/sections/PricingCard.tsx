@@ -16,26 +16,55 @@ const icons: Record<string, string> = {
   phone: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z',
   chart: 'M3 3v18h18M7 16l4-8 4 4 4-6',
   building: 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2',
+  mail: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2ZM22 6l-10 7L2 6',
+  messageSquare: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
+  zap: 'M13 2 3 14h9l-1 10 10-12h-9l1-10z',
+  filter: 'M22 3H2l8 9.46V19l4 2v-8.54L22 3Z',
+  headphones: 'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3ZM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3Z',
 };
 
 /** Map feature labelKey → icon key */
 const featureIconMap: Record<string, string> = {
-  basicProspecting: 'search',
-  noAdvancedAI: 'block',
-  contacts: 'contacts',
+  /* Prospecting & AI */
+  enrichedContacts: 'contacts',
   aiCredits: 'brain',
-  lists: 'list',
   sequences: 'send',
-  aiAgents: 'bot',
-  unlimitedAgentsLists: 'infinity',
+  noSequences: 'send',
+  emailsPerMonth: 'mail',
+  basicProspecting: 'search',
+  advancedAI: 'brain',
+  noAdvancedAI: 'block',
+  unlimitedSequences: 'send',
+  unlimitedEmails: 'mail',
+
+  /* Platform */
+  agentLimit: 'users',
   adminAccounts: 'admin',
   adminAccountsPlural: 'admin',
-  agentLimit: 'users',
+  unlimitedInboxes: 'list',
+  contactsLimit: 'contacts',
+  unlimitedContacts: 'contacts',
+  conversationsPerMonth: 'messageSquare',
+  unlimitedConversations: 'messageSquare',
+  teams: 'users',
+  unlimitedTeams: 'users',
+  automationRules: 'zap',
+  unlimitedAutomationRules: 'zap',
+  segments: 'filter',
+  unlimitedSegments: 'filter',
   unlimitedAgents: 'users',
+
+  /* Advanced */
   callTranscription: 'phone',
+  noCallTranscription: 'phone',
   smartDashboard: 'chart',
-  scoringDashboard: 'chart',
-  corporateFeatures: 'building',
+  noSmartDashboard: 'chart',
+  prioritySupport: 'headphones',
+  noPrioritySupport: 'headphones',
+  multiClinic: 'building',
+  noMultiClinic: 'building',
+  corporateReports: 'chart',
+  noCorporateReports: 'chart',
 };
 
 /* ─── Helpers ─── */
@@ -59,7 +88,6 @@ interface PricingCardProps {
 export default function PricingCard({ plan, isYearly, translations }: PricingCardProps) {
   const planT = translations.plans[plan.id] as Record<string, string>;
   const featuresT = translations.features as Record<string, string>;
-  const categoriesT = translations.categories as Record<string, string>;
 
   const price = isYearly
     ? Math.round(plan.priceYearly / 12)
@@ -67,10 +95,15 @@ export default function PricingCard({ plan, isYearly, translations }: PricingCar
   const periodLabel = isYearly ? translations.plans.perYear : translations.plans.perMonth;
   const displayPeriod = isYearly ? translations.plans.perMonth : translations.plans.perMonth;
 
+  // Flatten all features into enabled / disabled lists (no category headers → much shorter cards)
+  const allFeatures = plan.featureGroups.flatMap((g) => g.features);
+  const enabledFeatures = allFeatures.filter((f) => !f.disabled);
+  const disabledFeatures = allFeatures.filter((f) => f.disabled);
+
   return (
     <div
       className={cn(
-        'flex flex-col rounded-2xl p-6 h-full transition-all duration-300 group',
+        'flex flex-col rounded-2xl p-5 h-full transition-all duration-300 group',
         plan.highlighted
           ? 'border-2 border-primary shadow-[0_30px_60px_-15px_rgba(253,113,0,0.2)] bg-card relative z-10 xl:scale-105 xl:-mt-2'
           : 'border border-border-light bg-card hover:border-border shadow-sm'
@@ -84,10 +117,10 @@ export default function PricingCard({ plan, isYearly, translations }: PricingCar
       )}
 
       {/* Header */}
-      <div className={cn('mb-6', planT.badge && 'pt-2')}>
+      <div className={cn('mb-4', planT.badge && 'pt-2')}>
         <h3
           className={cn(
-            'text-lg font-extrabold mb-2 uppercase tracking-wide',
+            'text-lg font-extrabold mb-1.5 uppercase tracking-wide',
             plan.highlighted ? 'text-primary' : 'text-foreground'
           )}
         >
@@ -99,7 +132,7 @@ export default function PricingCard({ plan, isYearly, translations }: PricingCar
           <span
             className={cn(
               'font-extrabold tracking-tighter transition-all duration-300',
-              plan.highlighted ? 'text-5xl' : 'text-4xl',
+              plan.highlighted ? 'text-4xl' : 'text-3xl',
               'text-foreground'
             )}
           >
@@ -112,12 +145,12 @@ export default function PricingCard({ plan, isYearly, translations }: PricingCar
 
         {/* Yearly total hint */}
         {isYearly && plan.priceYearly > 0 && (
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-muted-foreground mt-0.5">
             ${Math.round(plan.priceYearly)}{periodLabel}
           </p>
         )}
 
-        <p className="text-sm text-muted-foreground mt-3 font-medium">
+        <p className="text-xs text-muted-foreground mt-2 font-medium leading-snug">
           {planT.description}
         </p>
       </div>
@@ -126,7 +159,7 @@ export default function PricingCard({ plan, isYearly, translations }: PricingCar
       <a
         href="https://app.grialink.com/app/auth/register"
         className={cn(
-          'w-full py-3 px-4 rounded-xl text-sm font-bold transition-all mb-6 text-center block',
+          'w-full py-2.5 px-4 rounded-xl text-sm font-bold transition-all mb-4 text-center block',
           plan.highlighted
             ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-xl shadow-primary/30'
             : plan.priceMonthly === 0
@@ -137,79 +170,93 @@ export default function PricingCard({ plan, isYearly, translations }: PricingCar
         {planT.cta}
       </a>
 
-      {/* Feature groups */}
-      <div className="flex-grow space-y-6">
-        {plan.featureGroups.map((group: FeatureGroup) => (
-          <div key={group.categoryKey}>
-            <h4
-              className={cn(
-                'text-[10px] font-bold uppercase tracking-widest mb-3 border-b pb-1',
-                plan.highlighted
-                  ? 'text-primary border-primary/20'
-                  : 'text-muted-foreground border-border-light'
-              )}
-            >
-              {categoriesT[group.categoryKey]}
-            </h4>
-            <div className="space-y-3">
-              {group.features.map((feat: PlanFeature) => {
-                const iconKey = featureIconMap[feat.labelKey] ?? 'search';
-                const label = interpolate(featuresT[feat.labelKey] ?? feat.labelKey, feat.values);
-                return (
-                  <div
-                    key={feat.labelKey + JSON.stringify(feat.values)}
-                    className={cn(
-                      'flex items-center gap-3',
-                      feat.disabled && 'opacity-50',
-                      feat.highlight && plan.highlighted && 'bg-primary/5 p-1.5 rounded-lg -mx-1.5',
-                      feat.highlight && !plan.highlighted && 'bg-surface p-1.5 rounded-lg -mx-1.5',
-                    )}
-                  >
-                    <svg
-                      className={cn(
-                        'w-[18px] h-[18px] shrink-0',
-                        feat.disabled
-                          ? 'text-muted-foreground'
-                          : feat.bold || plan.highlighted
-                            ? 'text-primary'
-                            : 'text-muted-foreground'
-                      )}
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d={icons[iconKey]} />
-                    </svg>
-                    <span
-                      className={cn(
-                        'text-sm',
-                        feat.bold ? 'font-bold text-foreground' : 'text-muted-foreground',
-                        feat.disabled && 'text-muted-foreground'
-                      )}
-                    >
-                      {label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+      {/* Enabled features — compact list */}
+      <div className="grow">
+        <div className="space-y-2">
+          {enabledFeatures.map((feat: PlanFeature) => {
+            const iconKey = featureIconMap[feat.labelKey] ?? 'search';
+            const label = interpolate(featuresT[feat.labelKey] ?? feat.labelKey, feat.values);
+            return (
+              <div
+                key={feat.labelKey + JSON.stringify(feat.values)}
+                className={cn(
+                  'flex items-center gap-2',
+                  feat.highlight && plan.highlighted && 'bg-primary/5 py-1 px-1.5 rounded-lg -mx-1.5',
+                  feat.highlight && !plan.highlighted && 'bg-surface py-1 px-1.5 rounded-lg -mx-1.5',
+                )}
+              >
+                <svg
+                  className={cn(
+                    'w-4 h-4 shrink-0',
+                    feat.bold || plan.highlighted ? 'text-primary' : 'text-muted-foreground'
+                  )}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path d={icons[iconKey]} />
+                </svg>
+                <span
+                  className={cn(
+                    'text-xs leading-tight',
+                    feat.bold ? 'font-bold text-foreground' : 'text-muted-foreground',
+                  )}
+                >
+                  {label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Disabled features — compact inline with ✕ */}
+        {disabledFeatures.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-border-light space-y-1.5">
+            {disabledFeatures.map((feat: PlanFeature) => {
+              const label = interpolate(featuresT[feat.labelKey] ?? feat.labelKey, feat.values);
+              return (
+                <div
+                  key={feat.labelKey}
+                  className="flex items-center gap-2 opacity-40"
+                >
+                  <svg className="w-3.5 h-3.5 shrink-0 text-muted-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M18 6 6 18M6 6l12 12" />
+                  </svg>
+                  <span className="text-[11px] text-muted-foreground">{label}</span>
+                </div>
+              );
+            })}
           </div>
-        ))}
+        )}
       </div>
 
-      {/* Extra seller footnote */}
-      <div className="mt-6 pt-4 border-t border-border-light">
-        {plan.extraSellerPrice ? (
+      {/* Plan extras footnote */}
+      <div className="mt-4 pt-3 border-t border-border-light space-y-0.5">
+        {plan.trialDays ? (
+          <p className="text-[11px] text-center text-primary font-semibold">
+            {interpolate(featuresT.trialLabel, { days: plan.trialDays })}
+          </p>
+        ) : null}
+        {plan.extraAgentPrice ? (
           <p
             className="text-[11px] text-center text-muted-foreground italic"
             dangerouslySetInnerHTML={{
-              __html: interpolate(featuresT.extraSeller, { price: plan.extraSellerPrice }),
+              __html: interpolate(featuresT.extraAgent, { price: plan.extraAgentPrice }),
             }}
           />
-        ) : (
+        ) : null}
+        {plan.extraAdminPrice ? (
+          <p
+            className="text-[11px] text-center text-muted-foreground italic"
+            dangerouslySetInnerHTML={{
+              __html: interpolate(featuresT.extraAdmin, { price: plan.extraAdminPrice }),
+            }}
+          />
+        ) : null}
+        {!plan.trialDays && !plan.extraAgentPrice && !plan.extraAdminPrice && (
           <p className="text-xs text-center text-transparent select-none" aria-hidden="true">.</p>
         )}
       </div>
