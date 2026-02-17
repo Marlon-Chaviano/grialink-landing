@@ -52,7 +52,7 @@ export default {
         label: 'Asunto',
         placeholder: '¿Cómo te podemos ayudar?',
         options: {
-          sales: 'Quiero una demo personalizada',
+          demo: 'Quiero una demo personalizada',
           support: 'Soporte Técnico',
           partners: 'Alianzas y partnerships',
           other: 'Otro',

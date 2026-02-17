@@ -52,7 +52,7 @@ export default {
         label: 'Subject',
         placeholder: 'How can we help?',
         options: {
-          sales: 'I want a personalized demo',
+          demo: 'I want a personalized demo',
           support: 'Technical Support',
           partners: 'Partnerships & Alliances',
           other: 'Other',
