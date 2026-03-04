@@ -10,7 +10,7 @@ export default {
   hero: {
     badge: 'Legal',
     title: 'Privacy Policy',
-    lastUpdated: 'Last updated: February 06, 2026',
+    lastUpdated: 'Last updated: March 04, 2026',
   },
 
   /* ── Content sections ── */
@@ -46,6 +46,7 @@ export default {
         '<strong>Sensitive information.</strong> We do not process sensitive information.',
         '<strong>Payment data.</strong> We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number and the security code associated with your payment instrument. All payment data is handled and stored by Stripe. You may find their privacy notice link here: https://stripe.com/privacy.',
         '<strong>Information automatically collected.</strong> We automatically collect certain information when you visit, use, or navigate the Services. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device name, country, location, information about how and when you use our Services, and other technical information. This information is primarily needed to maintain the security and operation of our Services, and for our internal analytics and reporting purposes.',
+        '<strong>Google Calendar data.</strong> If you choose to connect your Google Calendar account through our Services, we access your calendar data via Google OAuth 2.0 authentication. This includes calendar events, event metadata (titles, times, attendees, descriptions), and your Google email address. We securely store OAuth 2.0 access tokens and refresh tokens to maintain your connection. We only request the minimum scopes necessary to provide our scheduling and calendar synchronization features.',
       ],
     },
     {
@@ -74,31 +75,44 @@ export default {
         '<strong>When we use Google Analytics.</strong> We may share your information with Google Analytics to track and analyze the use of the Services. To opt out of being tracked by Google Analytics across the Services, visit https://tools.google.com/dlpage/gaoptout.',
         '<strong>Affiliates.</strong> We may share your information with our affiliates, in which case we will require those affiliates to honor this Privacy Notice.',
         '<strong>Business partners.</strong> We may share your information with our business partners to offer you certain products, services, or promotions.',
+        '<strong>Google Calendar integration.</strong> If you connect your Google Calendar, we process your calendar data solely to provide scheduling features within our Services. We do not share your Google Calendar data with any third parties. Our use of Google Calendar data adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.',
       ],
     },
     {
-      title: '4. Do We Use Cookies and Other Tracking Technologies?',
+      title: '4. Google API Services User Data Policy Compliance',
+      content: [
+        'Our use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.',
+        '<strong>Scope of access.</strong> When you authorize your Google account, we may request access to Google Calendar data (events, schedules, attendees) and basic profile information (name, email address) through Google OAuth 2.0.',
+        '<strong>OAuth tokens.</strong> We securely store OAuth 2.0 access tokens and refresh tokens, encrypted at rest using AES-256 encryption. These tokens are used exclusively to access your Google data on your behalf and are never shared with third parties.',
+        `<strong>Limited Use disclosure.</strong> Grialink's use of Google user data is limited to providing and improving the calendar synchronization and scheduling features within our platform. We do not use Google user data for serving advertisements. We do not allow humans to read your Google user data unless: (a) we have your affirmative agreement, (b) it is necessary for security purposes (e.g., investigating abuse), (c) it is necessary to comply with applicable law, or (d) our use is limited to internal operations and the data has been aggregated and anonymized.`,
+        '<strong>Data retention and deletion.</strong> Your Google Calendar data and associated OAuth tokens are retained only while your account is active and the Google Calendar integration is enabled. You may disconnect your Google Calendar integration at any time through your account settings at app.grialink.com, which will trigger the immediate deletion of your stored OAuth tokens and cached Google Calendar data from our servers.',
+        '<strong>Account deletion.</strong> Upon deletion of your Grialink account, all Google-related data — including OAuth tokens, cached calendar data, and any derived data — will be permanently and irreversibly deleted from our systems within 30 days.',
+        `<strong>Revoking access.</strong> In addition to disconnecting the integration from your Grialink settings, you can revoke Grialink's access to your Google account at any time by visiting your Google Account permissions page at <a href="https://myaccount.google.com/permissions">https://myaccount.google.com/permissions</a>.`,
+      ],
+    },
+    {
+      title: '5. Do We Use Cookies and Other Tracking Technologies?',
       content: [
         'We may use cookies and similar tracking technologies (like web beacons and pixels) to gather information when you interact with our Services. Some online tracking technologies help us maintain the security of our Services and your account, prevent crashes, fix bugs, save your preferences, and assist with basic site functions.',
         'We also permit third parties and service providers to use online tracking technologies on our Services for analytics and advertising, including to help manage and display advertisements, to tailor advertisements to your interests, or to send abandoned shopping cart reminders (depending on your communication preferences). The third parties and service providers use their technology to provide advertising about products and services tailored to your interests which may appear either on our Services or on other websites.',
       ],
     },
     {
-      title: '5. How Long Do We Keep Your Information?',
+      title: '6. How Long Do We Keep Your Information?',
       content: [
         'We will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements). No purpose in this notice will require us keeping your personal information for longer than the period of time in which users have an account with us.',
         'When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.',
       ],
     },
     {
-      title: '6. How Do We Keep Your Information Safe?',
+      title: '7. How Do We Keep Your Information Safe?',
       content: [
         'We have implemented appropriate and reasonable technical and organizational security measures designed to protect the security of any personal information we process. These measures include AES-256 encryption, multi-factor authentication, role-based access control (RBAC), and comprehensive audit logging.',
         'However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information.',
       ],
     },
     {
-      title: '7. What Are Your Privacy Rights?',
+      title: '8. What Are Your Privacy Rights?',
       content: [
         '<strong>Withdrawing your consent.</strong> If we are relying on your consent to process your personal information, you have the right to withdraw your consent at any time. You can withdraw your consent at any time by contacting us at info@grialink.com.',
         '<strong>Account information.</strong> If you would at any time like to review or change the information in your account or terminate your account, you can: log in to your account settings and update your user account, or contact us using the contact information provided.',
@@ -107,19 +121,19 @@ export default {
       ],
     },
     {
-      title: '8. Controls for Do-Not-Track Features',
+      title: '9. Controls for Do-Not-Track Features',
       content: [
         'Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online.',
       ],
     },
     {
-      title: '9. Do We Make Updates to This Notice?',
+      title: '10. Do We Make Updates to This Notice?',
       content: [
         'We may update this Privacy Notice from time to time. The updated version will be indicated by an updated "Last updated" date at the top of this Privacy Notice. If we make material changes to this Privacy Notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this Privacy Notice frequently to be informed of how we are protecting your information.',
       ],
     },
     {
-      title: '10. How Can You Contact Us About This Notice?',
+      title: '11. How Can You Contact Us About This Notice?',
       content: [
         'If you have questions or comments about this notice, you may email us at info@grialink.com or contact us by post at:',
         'Ezi Group LLC (DBA Grialink)',
@@ -127,7 +141,7 @@ export default {
       ],
     },
     {
-      title: '11. How Can You Review, Update, or Delete the Data We Collect From You?',
+      title: '12. How Can You Review, Update, or Delete the Data We Collect From You?',
       content: [
         'Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information.',
         'To request to review, update, or delete your personal information, please contact us at info@grialink.com.',
