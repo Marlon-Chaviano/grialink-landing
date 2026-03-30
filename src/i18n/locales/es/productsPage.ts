@@ -2,15 +2,15 @@ export default {
   seo: {
     title: 'Producto — Grialink | SES Omnicanal con IA para Clínicas de Salud',
     description:
-      'Prospector AI, Outreach Engine, Smart Pipeline e IA Analytics: 4 módulos de IA integrados para automatizar la captación y gestión de pacientes en clínicas estéticas, dentales y de salud.',
+      'Prospector AI, Outreach Engine, Smart Pipeline e IA Analytics: 4 módulos de IA integrados para automatizar la captación y gestión de leads en clínicas estéticas, dentales y de salud.',
   },
 
   hero: {
     badge: 'SES diseñado para clínicas',
-    titleLine1: 'Más que un SES.',
-    titleHighlight: 'Tu motor de ventas con IA.',
+    titleLine1: 'Tu propio Auditor',
+    titleHighlight: 'de ventas con Ai',
     subtitle:
-      'Cuatro módulos integrados que automatizan todo el ciclo del paciente: desde encontrarlo con IA, contactarlo por WhatsApp, agendarle cita con Google Calendar, hasta analizar cada llamada con scoring inteligente.',
+      'Grialink automatiza todo el proceso: encuentra nuevos leads con IA, genera secuencias de post ventas y analiza cada llamada para que ningún leads se pierda...y Mucho Más',
     dashboardAlt: 'Grialink Sales Hub — dashboard inteligente de ventas con métricas en tiempo real',
     previewAlt: 'Vista previa del Sales Hub con embudo de conversión',
     alertsTitle: 'Alertas Críticas',
@@ -22,9 +22,9 @@ export default {
   },
 
   grid: {
-    title: 'Un ecosistema completo para cada área de tu clínica',
+    title: 'La arquitectura detrás de Grialink',
     subtitle:
-      'Cada módulo resuelve un problema real. Juntos, transforman tu operación clínica en una máquina de crecimiento inteligente.',
+      'Cinco módulos conectados que automatizan todo el ciclo de ventas de tu clínica.',
     viewDetails: 'VER DETALLES',
   },
 
@@ -32,27 +32,22 @@ export default {
     prospector: {
       name: 'Prospector AI',
       description:
-        'Encuentra pacientes potenciales con búsqueda en lenguaje natural. Integración nativa con Apollo.io para enriquecer datos automáticamente: teléfono, email, empresa. Hasta 800 contactos enriquecidos/mes.',
+        'Descubre leads potenciales con búsqueda en lenguaje natural y enriquece sus datos automáticamente. El selector inteligente detecta usuarios que interactúan con perfiles y publicaciones de clínicas que ofrecen los mismos tratamientos que tú.',
     },
     outreach: {
       name: 'Outreach Engine',
       description:
-        'Secuencias de email multi-paso con tracking de aperturas, clics y rebotes vía SendGrid. Multi-dominio, inscripción masiva, cumplimiento RFC 8058 (one-click unsubscribe) y análisis con IA.',
+        'Automatiza el primer contacto y el seguimiento con secuencias inteligentes de email y mensajería.',
     },
     pipeline: {
       name: 'Smart Pipeline',
       description:
-        'Pipelines pre-configurados para clínicas estéticas, dentales y de dermatología. 7 etapas con SLA de 2h a 72h, vinculación de citas, tracking de valor monetario y tasa de conversión en tiempo real.',
+        'Organiza el proceso comercial de tu clínica desde lead hasta cita confirmada. La IA actualiza cada etapa en tiempo real para que automatizaciones, seguimiento y métricas del funnel funcionen sin fallos.',
     },
     analytics: {
       name: 'IA Analytics',
       description:
-        'Transcripción y análisis de llamadas con scoring de agentes. Marketing Insights de Meta Ads con detección de fatiga creativa. Alertas inteligentes de ventas: show_rate, close_rate, ROAS.',
-    },
-    salesDashboard: {
-      name: 'Sales Dashboard',
-      description:
-        'Analíticos de ventas con IA con KPIs en tiempo real, seguimiento del rendimiento del equipo, pronóstico de ingresos y alertas inteligentes para deals en riesgo.',
+        'Analiza llamadas, campañas y conversiones para descubrir oportunidades de crecimiento. Los datos alimentan un modelo inteligente que audita tu proceso comercial y optimiza cómo vende tu clínica.',
     },
   },
 
@@ -82,7 +77,7 @@ export default {
   cta: {
     title: '¿Listo para ver Grialink en acción?',
     subtitle:
-      'Agenda una demo personalizada y descubre cómo automatizar la captación, citas y retención de pacientes en tu clínica.',
+      'Agenda una demo personalizada y descubre cómo automatizar la captación, citas y retención de leads en tu clínica.',
     primaryButton: 'Comenzar gratis',
     secondaryButton: 'Ver planes y precios',
     disclaimer: 'Sin tarjeta de crédito • Configuración en 5 minutos • Cancela cuando quieras',
@@ -91,9 +86,9 @@ export default {
   showcase: {
     prospector: {
       badge: 'Prospector AI',
-      title: 'Encuentra tus pacientes ideales con IA',
+      title: 'Encuentra tus leads ideales con IA',
       subtitle:
-        'Busca pacientes potenciales usando lenguaje natural. Grialink se conecta con Apollo.io para enriquecer automáticamente cada contacto con teléfono, email, empresa y más.',
+        'Busca leads potenciales usando lenguaje natural. Grialink se conecta con Apollo.io para enriquecer automáticamente cada contacto con teléfono, email, empresa y más.',
       step1Title: 'Búsqueda en lenguaje natural',
       step1Description:
         'Escribe lo que buscas en español — "dermatólogos en Miami con más de 50 empleados" — y Prospector AI encuentra al instante leads que coinciden.',
@@ -144,7 +139,7 @@ export default {
       viewImageAlt: 'Tablero Kanban de Smart Pipeline con etapas específicas para salud',
       expandedTitle: 'Vista completa del pipeline',
       expandedDescription:
-        'Ve tu embudo completo de adquisición de pacientes expandido. Identifica cuellos de botella, rastrea incumplimientos de SLA y optimiza cada etapa del proceso de conversión.',
+        'Ve tu embudo completo de adquisición de leads expandido. Identifica cuellos de botella, rastrea incumplimientos de SLA y optimiza cada etapa del proceso de conversión.',
       expandedImageAlt: 'Vista expandida de Smart Pipeline mostrando todas las etapas y deals',
       demoTitle: 'Mira Smart Pipeline en acción',
     },
@@ -157,14 +152,14 @@ export default {
       createDescription:
         'Crea citas en segundos con auto-llenado desde tus contactos del pipeline. Vincula a deals específicos, configura recordatorios y sincroniza al instante con Google Calendar.',
       createFeatures: [
-        'Auto-llenado de datos del paciente desde contactos del pipeline',
+        'Auto-llenado de datos del lead desde contactos del pipeline',
         'Sincronización bidireccional con Google Calendar',
         'Recordatorios automáticos por email y SMS',
         'Tipos de cita personalizados por servicio',
         'Programación con reconocimiento de zona horaria',
         'Seguimiento de inasistencias y sugerencias de reagendamiento',
       ],
-      createImageAlt: 'Modal de crear cita con datos del paciente y sincronización de calendario',
+      createImageAlt: 'Modal de crear cita con datos del lead y sincronización de calendario',
       demoTitle: 'Mira Smart Calendar en acción',
     },
     salesDashboard: {

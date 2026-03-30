@@ -15,7 +15,7 @@ export default {
       number: 'Step 2',
       title: 'Connect your channels',
       description:
-        'WhatsApp, Instagram, Email, Web Chat, and more. Connect every channel where your patients reach out.',
+        'WhatsApp, Instagram, Email, Web Chat, and more. Connect every channel where your leads reach out.',
       icon: 'channels',
     },
     {

@@ -1,7 +1,7 @@
 {
   "name": "Grialink – Sistema Operativo Inteligente para Clínicas",
   "short_name": "Grialink",
-  "description": "Automatiza la captación, seguimiento y retención de pacientes con IA.",
+  "description": "Automatiza la captación, seguimiento y retención de leads con IA.",
   "icons": [
     {
       "src": "/android-icon-36x36.png",

@@ -12,7 +12,7 @@ export default {
     titleLine1: 'El SES que las clínicas',
     titleHighlight: 'realmente necesitan',
     subtitle:
-      'Nacimos observando cómo los profesionales de la salud perdían horas entre Excel, WhatsApp y agendas manuales. Creamos Grialink para que se enfoquen en lo único que importa: cuidar a sus pacientes.',
+      'Nacimos observando cómo los profesionales de la salud perdían horas entre Excel, WhatsApp y agendas manuales. Creamos Grialink para que se enfoquen en lo único que importa: hacer crecer su clínica.',
     imageOverlay: 'Operación inteligente',
     imageAlt: 'Recepción de clínica moderna con tecnología integrada',
   },
@@ -21,7 +21,7 @@ export default {
   history: {
     title: 'Nacidos de una frustración real',
     paragraphs: [
-      'Un especialista en estética nos dijo: "Pierdo 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo donde apunto los leads". No era el único. Vimos cómo clínicas dentales gestionaban pacientes en Excel, perdían leads porque nadie seguía el pipeline, y confirmaban citas una por una por teléfono.',
+      'Un especialista en estética nos dijo: "Pierdo 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo donde apunto los leads". No era el único. Vimos cómo clínicas dentales gestionaban leads en Excel, perdían oportunidades porque nadie seguía el pipeline, y confirmaban citas una por una por teléfono.',
       'Entendimos que las clínicas no necesitaban "otro software más". Necesitaban una plataforma inteligente que hablara su idioma: con pipelines para estética, dental y dermatología. Con citas sincronizadas a Google Calendar. Con IA que analiza llamadas y detecta oportunidades.',
       'Así nació Grialink: un SES (Sales Engine System) omnicanal con módulos de IA integrados, construido desde cero para el sector salud por un equipo que entiende tanto la tecnología como la realidad operativa de una clínica.',
     ],
@@ -43,7 +43,7 @@ export default {
       {
         title: 'Seguridad sin concesiones',
         description:
-          'Encriptación AES-256, autenticación multifactor, roles personalizados (RBAC), audit logs y protección anti-bot. Tus datos de pacientes están protegidos en cada capa.',
+          'Encriptación AES-256, autenticación multifactor, roles personalizados (RBAC), audit logs y protección anti-bot. Tus datos están protegidos en cada capa.',
         icon: 'shield',
       },
       {

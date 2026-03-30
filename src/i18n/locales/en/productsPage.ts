@@ -2,15 +2,15 @@ export default {
   seo: {
     title: 'Product — Grialink | Omnichannel AI SES for Health Clinics',
     description:
-      'Prospector AI, Outreach Engine, Smart Pipeline & AI Analytics: 4 integrated AI modules to automate patient acquisition and management for aesthetic, dental, and health clinics.',
+      'Prospector AI, Outreach Engine, Smart Pipeline & AI Analytics: 4 integrated AI modules to automate lead acquisition and management for aesthetic, dental, and health clinics.',
   },
 
   hero: {
     badge: 'SES designed for clinics',
-    titleLine1: 'More than a SES.',
-    titleHighlight: 'Your AI sales engine.',
+    titleLine1: 'Your own Sales',
+    titleHighlight: 'Auditor with AI',
     subtitle:
-      'Four integrated modules that automate the entire patient cycle: from finding them with AI, contacting them via WhatsApp, scheduling with Google Calendar, to analyzing every call with smart scoring.',
+      'Grialink automates the entire process: find new leads with AI, generate post-sale sequences, and analyze every call so no lead is lost...and Much More',
     dashboardAlt: 'Grialink Sales Hub — intelligent sales dashboard with real-time metrics',
     previewAlt: 'Sales Hub preview with conversion funnel',
     alertsTitle: 'Critical Alerts',
@@ -22,9 +22,9 @@ export default {
   },
 
   grid: {
-    title: 'A complete ecosystem for every area of your clinic',
+    title: 'The architecture behind Grialink',
     subtitle:
-      'Each module solves a real problem. Together, they transform your clinical operation into an intelligent growth engine.',
+      'Five connected modules that automate the entire sales cycle of your clinic.',
     viewDetails: 'VIEW DETAILS',
   },
 
@@ -32,27 +32,22 @@ export default {
     prospector: {
       name: 'Prospector AI',
       description:
-        'Find potential patients with natural language search. Native Apollo.io integration to automatically enrich data: phone, email, company. Up to 800 enriched contacts/month.',
+        'Discover potential leads with natural language search and automatically enrich their data. The smart selector detects users who interact with profiles and posts from clinics offering the same treatments as you.',
     },
     outreach: {
       name: 'Outreach Engine',
       description:
-        'Multi-step email sequences with open, click, and bounce tracking via SendGrid. Multi-domain, bulk enrollment, RFC 8058 compliance (one-click unsubscribe), and AI-powered analysis.',
+        'Automate first contact and follow-up with intelligent email and messaging sequences.',
     },
     pipeline: {
       name: 'Smart Pipeline',
       description:
-        'Pre-configured pipelines for aesthetic, dental, and dermatology clinics. 7 stages with 2h to 72h SLAs, appointment linking, monetary value tracking, and real-time conversion rates.',
+        'Organize your clinic\'s sales process from lead to confirmed appointment. AI updates each stage in real time so automations, follow-ups, and funnel metrics work flawlessly.',
     },
     analytics: {
       name: 'AI Analytics',
       description:
-        'Call transcription and analysis with agent scoring. Meta Ads Marketing Insights with creative fatigue detection. Smart sales alerts: show_rate, close_rate, ROAS.',
-    },
-    salesDashboard: {
-      name: 'Sales Dashboard',
-      description:
-        'AI-powered sales analytics with real-time KPIs, team performance tracking, revenue forecasting, and smart alerts for at-risk deals.',
+        'Analyze calls, campaigns, and conversions to uncover growth opportunities. Data feeds an intelligent model that audits your sales process and optimizes how your clinic sells.',
     },
   },
 
@@ -82,7 +77,7 @@ export default {
   cta: {
     title: 'Ready to see Grialink in action?',
     subtitle:
-      'Schedule a personalized demo and discover how to automate patient acquisition, scheduling, and retention at your clinic.',
+      'Schedule a personalized demo and discover how to automate lead acquisition, scheduling, and retention at your clinic.',
     primaryButton: 'Get started free',
     secondaryButton: 'See plans & pricing',
     disclaimer: 'No credit card required \u2022 Setup in 5 minutes \u2022 Cancel anytime',
@@ -91,9 +86,9 @@ export default {
   showcase: {
     prospector: {
       badge: 'Prospector AI',
-      title: 'Find your ideal patients with AI',
+      title: 'Find your ideal leads with AI',
       subtitle:
-        'Search for potential patients using natural language. Grialink connects to Apollo.io to automatically enrich every contact with phone, email, company, and more.',
+        'Search for potential leads using natural language. Grialink connects to Apollo.io to automatically enrich every contact with phone, email, company, and more.',
       step1Title: 'Natural language search',
       step1Description:
         'Type what you\'re looking for in plain English — "dermatologists in Miami with 50+ employees" — and Prospector AI instantly finds matching leads.',
@@ -144,7 +139,7 @@ export default {
       viewImageAlt: 'Smart Pipeline Kanban board with healthcare-specific stages',
       expandedTitle: 'Full pipeline overview',
       expandedDescription:
-        'See your entire patient acquisition funnel expanded. Identify bottlenecks, track SLA breaches, and optimize every stage of the conversion process.',
+        'See your entire lead acquisition funnel expanded. Identify bottlenecks, track SLA breaches, and optimize every stage of the conversion process.',
       expandedImageAlt: 'Expanded view of Smart Pipeline showing all stages and deals',
       demoTitle: 'See Smart Pipeline in action',
     },
@@ -157,14 +152,14 @@ export default {
       createDescription:
         'Create appointments in seconds with auto-fill from your pipeline contacts. Link to specific deals, set reminders, and sync instantly with Google Calendar.',
       createFeatures: [
-        'Auto-fill patient data from pipeline contacts',
+        'Auto-fill lead data from pipeline contacts',
         'Google Calendar two-way sync',
         'Automated email and SMS reminders',
         'Custom appointment types per service',
         'Timezone-aware scheduling',
         'No-show tracking and rebooking suggestions',
       ],
-      createImageAlt: 'Create appointment modal with patient data and calendar sync',
+      createImageAlt: 'Create appointment modal with lead data and calendar sync',
       demoTitle: 'See Smart Calendar in action',
     },
     salesDashboard: {

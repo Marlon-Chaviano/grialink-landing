@@ -10,7 +10,7 @@ export default {
     titleLine1: 'Your clinic is unique.',
     titleHighlight: 'Your solution should be too.',
     subtitle:
-      'Tell us about your case and we\'ll show you how Grialink can automate patient acquisition, scheduling, and retention at your clinic.',
+      'Tell us about your case and we\'ll show you how Grialink can automate lead acquisition, scheduling, and retention at your clinic.',
   },
 
   info: {
@@ -60,7 +60,7 @@ export default {
       },
       message: {
         label: 'Message',
-        placeholder: 'Tell us about your clinic: how many patients do you manage per month? What channels do you use? What is your biggest operational challenge?',
+        placeholder: 'Tell us about your clinic: how many leads do you manage per month? What channels do you use? What is your biggest operational challenge?',
       },
     },
     submit: 'Send Message',

@@ -15,7 +15,7 @@ export default {
       number: 'Paso 2',
       title: 'Conecta tus canales',
       description:
-        'WhatsApp, Instagram, Email, Web Chat y más. Conecta todos los canales donde tus pacientes te contactan.',
+        'WhatsApp, Instagram, Email, Web Chat y más. Conecta todos los canales donde tus leads te contactan.',
       icon: 'channels',
     },
     {

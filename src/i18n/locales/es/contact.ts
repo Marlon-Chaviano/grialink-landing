@@ -10,7 +10,7 @@ export default {
     titleLine1: 'Tu clínica es única.',
     titleHighlight: 'Tu solución también.',
     subtitle:
-      'Cuéntanos tu caso y te mostraremos cómo Grialink puede automatizar la captación, agendamiento y retención de pacientes en tu clínica.',
+      'Cuéntanos tu caso y te mostraremos cómo Grialink puede automatizar la captación, agendamiento y retención de leads en tu clínica.',
   },
 
   info: {
@@ -60,7 +60,7 @@ export default {
       },
       message: {
         label: 'Mensaje',
-        placeholder: 'Cuéntanos sobre tu clínica: ¿cuántos pacientes gestionas al mes? ¿Qué canales usas? ¿Cuál es tu mayor reto operativo?',
+        placeholder: 'Cuéntanos sobre tu clínica: ¿cuántos leads gestionas al mes? ¿Qué canales usas? ¿Cuál es tu mayor reto operativo?',
       },
     },
     submit: 'Enviar Mensaje',

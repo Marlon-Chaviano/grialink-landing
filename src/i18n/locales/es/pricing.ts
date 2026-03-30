@@ -196,7 +196,7 @@ export default {
           'Sí, puedes importar contactos de forma masiva y también usar el Prospector AI para enriquecer datos desde Apollo.io. Si necesitas migración asistida, nuestro equipo te ayuda sin costo adicional.',
       },
       {
-        question: '¿Los datos de mis pacientes están seguros?',
+        question: '¿Mis datos están seguros?',
         answer:
           'Implementamos encriptación AES-256, autenticación multifactor (MFA), roles y permisos personalizados (RBAC), audit logs, y protección anti-bot con hCaptcha. Tus datos nunca se comparten con terceros.',
       },

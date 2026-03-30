@@ -86,7 +86,7 @@ export default {
       title: '7. Protección de Datos y Privacidad',
       content: [
         'Su privacidad es importante para nosotros. Nuestra Política de Privacidad, disponible en la página de Política de Privacidad de nuestro sitio web, describe cómo recopilamos, usamos y protegemos su información personal. Al utilizar los Servicios, acepta la recopilación y uso de información de acuerdo con nuestra Política de Privacidad.',
-        'Como plataforma enfocada en salud, entendemos la sensibilidad de los datos de pacientes. Implementamos medidas de seguridad integrales y cumplimos con las regulaciones de protección de datos aplicables. Sin embargo, usted es responsable de garantizar que su uso de los Servicios cumpla con todas las leyes de privacidad de salud aplicables en su jurisdicción.',
+        'Como plataforma enfocada en salud, entendemos la sensibilidad de los datos. Implementamos medidas de seguridad integrales y cumplimos con las regulaciones de protección de datos aplicables. Sin embargo, usted es responsable de garantizar que su uso de los Servicios cumpla con todas las leyes de privacidad de salud aplicables en su jurisdicción.',
       ],
     },
     {

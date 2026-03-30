@@ -12,7 +12,7 @@ export default {
     titleLine1: 'The SES that clinics',
     titleHighlight: 'actually need',
     subtitle:
-      'We were born watching healthcare professionals waste hours between Excel, WhatsApp, and manual schedules. We created Grialink so they can focus on the only thing that matters: caring for their patients.',
+      'We were born watching healthcare professionals waste hours between Excel, WhatsApp, and manual schedules. We created Grialink so they can focus on the only thing that matters: growing their clinic.',
     imageOverlay: 'Intelligent operations',
     imageAlt: 'Modern clinic reception with integrated technology',
   },
@@ -21,7 +21,7 @@ export default {
   history: {
     title: 'Born from a real frustration',
     paragraphs: [
-      'An aesthetics specialist told us: "I lose 3 hours a day between WhatsApp, my Google Calendar, and the spreadsheet where I track leads." He wasn\'t the only one. We saw dental clinics managing patients in Excel, losing leads because nobody followed the pipeline, and confirming appointments one by one by phone.',
+      'An aesthetics specialist told us: "I lose 3 hours a day between WhatsApp, my Google Calendar, and the spreadsheet where I track leads." He wasn\'t the only one. We saw dental clinics managing leads in Excel, losing opportunities because nobody followed the pipeline, and confirming appointments one by one by phone.',
       'We understood that clinics didn\'t need "yet another software." They needed an intelligent platform that spoke their language: with pipelines for aesthetics, dental, and dermatology. With appointments synced to Google Calendar. With AI that analyzes calls and detects opportunities.',
       'That\'s how Grialink was born: an omnichannel Sales Engine System (SES) with integrated AI modules, built from the ground up for the healthcare sector by a team that understands both technology and the operational reality of a clinic.',
     ],
@@ -43,7 +43,7 @@ export default {
       {
         title: 'Uncompromising security',
         description:
-          'AES-256 encryption, multi-factor authentication, custom roles (RBAC), audit logs, and anti-bot protection. Your patient data is protected at every layer.',
+          'AES-256 encryption, multi-factor authentication, custom roles (RBAC), audit logs, and anti-bot protection. Your data is protected at every layer.',
         icon: 'shield',
       },
       {

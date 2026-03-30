@@ -196,7 +196,7 @@ export default {
           'Yes, you can bulk import contacts and also use Prospector AI to enrich data from Apollo.io. If you need assisted migration, our team helps you at no additional cost.',
       },
       {
-        question: 'Is my patient data secure?',
+        question: 'Is my data secure?',
         answer:
           'We implement AES-256 encryption, multi-factor authentication (MFA), custom roles and permissions (RBAC), audit logs, and anti-bot protection with hCaptcha. Your data is never shared with third parties.',
       },

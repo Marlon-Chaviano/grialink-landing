@@ -32,7 +32,7 @@ export default {
       id: 'sales',
       label: 'Sales',
       suiteLabel: 'Sales Suite',
-      title: 'From lead to scheduled patient in minutes',
+      title: 'From lead to scheduled appointment in minutes',
       description:
         'Smart pipeline with 7 stages designed for clinics. Automatic lead scoring, WhatsApp and Instagram follow-ups, and email sequences that trigger automatically.',
       buttonText: 'See Sales features',

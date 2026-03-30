@@ -86,7 +86,7 @@ export default {
       title: '7. Data Protection and Privacy',
       content: [
         'Your privacy is important to us. Our Privacy Policy, available at the Privacy Policy page on our website, describes how we collect, use, and protect your personal information. By using the Services, you agree to the collection and use of information in accordance with our Privacy Policy.',
-        'As a healthcare-focused platform, we understand the sensitivity of patient data. We implement comprehensive security measures and comply with applicable data protection regulations. However, you are responsible for ensuring that your use of the Services complies with all applicable healthcare privacy laws and regulations in your jurisdiction.',
+        'As a healthcare-focused platform, we understand the sensitivity of data. We implement comprehensive security measures and comply with applicable data protection regulations. However, you are responsible for ensuring that your use of the Services complies with all applicable healthcare privacy laws and regulations in your jurisdiction.',
       ],
     },
     {

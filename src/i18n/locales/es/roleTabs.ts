@@ -32,7 +32,7 @@ export default {
       id: 'ventas',
       label: 'Ventas',
       suiteLabel: 'Suite de Ventas',
-      title: 'De lead a paciente agendado en minutos',
+      title: 'De lead a cita agendada en minutos',
       description:
         'Pipeline inteligente con 7 etapas diseñadas para clínicas. Scoring automático de leads, seguimiento por WhatsApp e Instagram, y secuencias de email que se activan solas.',
       buttonText: 'Ver funcionalidades de Ventas',

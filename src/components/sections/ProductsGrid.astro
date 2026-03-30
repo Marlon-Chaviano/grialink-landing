@@ -23,7 +23,6 @@ const sectionAnchor: Record<string, string> = {
 	outreach: "coming-soon",
 	ses: "ses",
 	analytics: "coming-soon",
-	"sales-dashboard": "sales-dashboard",
 };
 ---
 
@@ -60,7 +59,7 @@ const sectionAnchor: Record<string, string> = {
 							href={localizedHref(`/products#${sectionAnchor[product.slug] ?? product.slug}`, lang)}
 							id={product.slug}
 							class:list={[
-								"group bg-card p-8 rounded-2xl border border-transparent transition-all duration-300",
+								"group flex flex-col bg-card p-8 rounded-2xl border border-transparent transition-all duration-300",
 								"hover:-translate-y-1 hover:shadow-lg hover:shadow-foreground/5",
 								colors.border,
 							]}
@@ -88,7 +87,7 @@ const sectionAnchor: Record<string, string> = {
 							<h3 class="text-xl font-bold text-foreground mb-3">{t.name}</h3>
 
 							{/* Description */}
-							<p class="text-muted-foreground text-sm leading-relaxed">{t.description}</p>
+							<p class="text-muted-foreground text-sm leading-relaxed flex-1">{t.description}</p>
 
 							{/* View details link */}
 							<div class="mt-6 pt-6 border-t border-border-light">

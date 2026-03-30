@@ -4,7 +4,7 @@ export default {
   products: [
     {
       title: 'Prospector AI',
-      description: 'Encuentra pacientes potenciales con búsqueda inteligente en lenguaje natural. Enriquece datos automáticamente con Apollo.io e importa hasta 800 contactos/mes.',
+      description: 'Encuentra leads potenciales con búsqueda inteligente en lenguaje natural. Enriquece datos automáticamente con Apollo.io e importa hasta 800 contactos/mes.',
       color: 'blue',
     },
     {
@@ -28,6 +28,6 @@ export default {
     title: 'El caos operativo de las clínicas',
     quote:
       '"Perdía 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo. Necesitaba una plataforma que hablara el idioma de mi clínica." — Especialista en estética',
-    imgAlt: 'Profesional de la salud gestionando pacientes con tecnología moderna',
+    imgAlt: 'Profesional de la salud gestionando leads con tecnología moderna',
   },
 };
