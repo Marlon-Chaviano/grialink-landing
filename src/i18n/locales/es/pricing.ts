@@ -88,7 +88,7 @@ export default {
     unlimitedAgents: 'Agentes ilimitados',
 
     /* Avanzadas */
-    callTranscription: 'Transcripción de llamadas',
+    callTranscription: 'Transcripción de llamadas ({minutes} minutos incluidos)',
     noCallTranscription: 'Sin transcripción de llamadas',
     smartDashboard: 'Dashboard inteligente',
     noSmartDashboard: 'Sin dashboard inteligente',
@@ -138,8 +138,9 @@ export default {
         title: 'Paquetes de Contactos',
         availability: 'Todos los planes',
         tiers: [
-          { label: '+200', price: '$15/mes' },
-          { label: '+500', price: '$30/mes' },
+          { label: '+50', price: '$35/mes' },
+          { label: '+100', price: '$65/mes' },
+          { label: '+200', price: '$120/mes' },
         ],
       },
       {

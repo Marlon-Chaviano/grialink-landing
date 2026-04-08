@@ -104,8 +104,8 @@ export const plans: Plan[] = [
   /* ── STARTER (basic) ── */
   {
     id: 'starter',
-    priceMonthly: 60,
-    priceYearly: 60 * 12 * (1 - ANNUAL_DISCOUNT_PERCENT / 100),
+    priceMonthly: 99,
+    priceYearly: 99 * 12 * (1 - ANNUAL_DISCOUNT_PERCENT / 100),
     highlighted: false,
     active: true,
     extraAgentPrice: '$20',
@@ -115,8 +115,8 @@ export const plans: Plan[] = [
       {
         categoryKey: 'prospecting',
         features: [
-          { labelKey: 'enrichedContacts', values: { count: 80 } },
-          { labelKey: 'aiCredits', values: { count: '3,500' } },
+          { labelKey: 'enrichedContacts', values: { count: 20 } },
+          { labelKey: 'aiCredits', values: { count: '1,500' } },
           { labelKey: 'sequences', values: { count: 1 } },
           { labelKey: 'emailsPerMonth', values: { count: 500 } },
           { labelKey: 'basicProspecting' },
@@ -152,8 +152,8 @@ export const plans: Plan[] = [
   /* ── GROWTH (professional) ⭐ ── */
   {
     id: 'growth',
-    priceMonthly: 100,
-    priceYearly: 100 * 12 * (1 - ANNUAL_DISCOUNT_PERCENT / 100),
+    priceMonthly: 199,
+    priceYearly: 199 * 12 * (1 - ANNUAL_DISCOUNT_PERCENT / 100),
     highlighted: true,
     active: true,
     extraAgentPrice: '$20',
@@ -163,8 +163,8 @@ export const plans: Plan[] = [
       {
         categoryKey: 'prospecting',
         features: [
-          { labelKey: 'enrichedContacts', values: { count: 300 }, bold: true },
-          { labelKey: 'aiCredits', values: { count: '10,000' }, bold: true },
+          { labelKey: 'enrichedContacts', values: { count: 50 }, bold: true },
+          { labelKey: 'aiCredits', values: { count: '4,000' }, bold: true },
           { labelKey: 'sequences', values: { count: 5 } },
           { labelKey: 'emailsPerMonth', values: { count: '2,000' } },
           { labelKey: 'basicProspecting' },
@@ -187,7 +187,7 @@ export const plans: Plan[] = [
       {
         categoryKey: 'advanced',
         features: [
-          { labelKey: 'callTranscription' },
+          { labelKey: 'callTranscription', values: { minutes: 60 } },
           { labelKey: 'smartDashboard' },
           { labelKey: 'noPrioritySupport', disabled: true },
           { labelKey: 'noMultiClinic', disabled: true },
@@ -200,8 +200,8 @@ export const plans: Plan[] = [
   /* ── SCALE (organization) ── */
   {
     id: 'scale',
-    priceMonthly: 150,
-    priceYearly: 150 * 12 * (1 - ANNUAL_DISCOUNT_PERCENT / 100),
+    priceMonthly: 349,
+    priceYearly: 349 * 12 * (1 - ANNUAL_DISCOUNT_PERCENT / 100),
     highlighted: false,
     active: true,
     extraAgentPrice: null,
@@ -211,8 +211,8 @@ export const plans: Plan[] = [
       {
         categoryKey: 'prospecting',
         features: [
-          { labelKey: 'enrichedContacts', values: { count: 800 }, bold: true },
-          { labelKey: 'aiCredits', values: { count: '25,000' }, bold: true },
+          { labelKey: 'enrichedContacts', values: { count: 100 }, bold: true },
+          { labelKey: 'aiCredits', values: { count: '8,000' }, bold: true },
           { labelKey: 'unlimitedSequences', bold: true },
           { labelKey: 'unlimitedEmails', bold: true },
           { labelKey: 'basicProspecting' },
@@ -235,7 +235,7 @@ export const plans: Plan[] = [
       {
         categoryKey: 'advanced',
         features: [
-          { labelKey: 'callTranscription' },
+          { labelKey: 'callTranscription', values: { minutes: 200 } },
           { labelKey: 'smartDashboard' },
           { labelKey: 'prioritySupport', bold: true },
           { labelKey: 'multiClinic', bold: true },

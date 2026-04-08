@@ -88,7 +88,7 @@ export default {
     unlimitedAgents: 'Unlimited Agents',
 
     /* Advanced */
-    callTranscription: 'Call transcription',
+    callTranscription: 'Call transcription ({minutes} minutes included)',
     noCallTranscription: 'No call transcription',
     smartDashboard: 'Smart dashboard',
     noSmartDashboard: 'No smart dashboard',
@@ -138,8 +138,9 @@ export default {
         title: 'Contact Packages',
         availability: 'All plans',
         tiers: [
-          { label: '+200', price: '$15/mo' },
-          { label: '+500', price: '$30/mo' },
+          { label: '+50', price: '$35/mo' },
+          { label: '+100', price: '$65/mo' },
+          { label: '+200', price: '$120/mo' },
         ],
       },
       {
