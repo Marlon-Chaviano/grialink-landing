@@ -27,6 +27,27 @@ const t = useTranslations(lang);
 			title={t("seo.title")}
 			description={t("seo.description")}
 		/>
+		{/* Organization structured data — critical for Twilio & Google verification */}
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				name: "Grialink",
+				legalName: "Ezi Group LLC",
+				url: "https://grialink.com",
+				logo: "https://grialink.com/logo.png",
+				email: "info@grialink.com",
+				description: t("seo.description"),
+				contactPoint: {
+					"@type": "ContactPoint",
+					email: "info@grialink.com",
+					contactType: "customer service",
+					availableLanguage: ["English", "Spanish"],
+				},
+				sameAs: [],
+			})}
+		/>
 	</Fragment>
 
 	<main>
