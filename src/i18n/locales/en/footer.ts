@@ -9,7 +9,10 @@ export default {
         { label: 'Prospector AI', href: '/products#prospector' },
         { label: 'Outreach Engine', href: '/products#outreach' },
         { label: 'Smart Pipeline', href: '/products#ses' },
-        { label: 'AI Analytics', href: '/products#analytics' },
+        { label: 'Smart Calendar', href: '/products#calendar-detail' },
+        { label: 'AI Analytics Hub', href: '/products#sales-dashboard' },
+        { label: 'Grialink Dialer', href: '/products#dialer' },
+        { label: 'Grial Bots', href: '/products#grial-bots' },
       ],
     },
     {

@@ -1,164 +1,125 @@
 export default {
-  /* ── SEO ── */
   seo: {
-    title: 'Planes y Precios — Grialink | IA para Clínicas desde $0/mes',
+    title: 'Planes y Precios — Grialink | Ventas con IA desde $0/mes',
     description:
-      'Elige el plan ideal para tu clínica. Desde prospección básica gratuita hasta automatización comercial completa con IA. Sin contratos forzosos.',
+      'Elige el plan ideal para tu equipo. Desde lo esencial gratis hasta automatización comercial con IA. Mejora o cancela cuando quieras.',
   },
 
-  /* ── Hero ── */
   hero: {
-    titleLine1: 'Planes que crecen',
-    titleHighlight: 'con tu clínica',
-    subtitle:
-      'Desde una clínica independiente hasta una red de múltiples sucursales. Escala con IA sin cambiar de plataforma. Todos los planes incluyen canales ilimitados: WhatsApp, Instagram, Email y más.',
+    title: 'Planes Grialink',
+    subtitle: 'Ventas con IA para cada tamaño de equipo. Mejora o cancela cuando quieras.',
     badge: 'Sin contratos · Cancela cuando quieras',
   },
 
-  /* ── Toggle ── */
-  toggle: {
-    monthly: 'Mensual',
-    yearly: 'Anual',
-    saveLabel: 'Ahorra {percent}%',
-  },
-
-  /* ── Plans ── */
   plans: {
-    perMonth: '/mes',
-    perYear: '/año',
+    perMonthShort: 'mes',
+    extras: {
+      agent: '+ Agente + línea: {price}/mes',
+      admin: '+ Administrador adicional: {price}/mes',
+    },
     free: {
       name: 'Free',
-      description: 'Explora la plataforma sin costo.',
-      cta: 'Comenzar gratis',
+      description: 'Prueba lo esencial.',
+      cta: 'Empezar gratis',
+      highlights: [
+        '10 prospectos enriquecidos',
+        '50 créditos de IA',
+        '1 agente · 1 línea',
+        'Prospección básica',
+        '1 segmento · 1 equipo',
+      ],
     },
     starter: {
       name: 'Starter',
-      description: 'Ideal para clínicas que inician con IA.',
+      description: 'Prospección + dialer.',
       cta: 'Comenzar',
+      highlights: [
+        '20 prospectos enriquecidos',
+        '1.500 créditos de IA',
+        'Dialer · 1.000 min incluidos',
+        '5 agentes · 5 líneas',
+        '5 secuencias · 5 segmentos',
+        '1.000 correos/mes',
+        '5 equipos',
+      ],
     },
-    growth: {
-      name: 'Growth',
-      description: 'Para clínicas en crecimiento activo.',
+    pro: {
+      name: 'Pro',
+      description: 'Stack de ventas con IA.',
       cta: 'Comenzar',
-      badge: 'Más Popular',
+      badge: 'Popular',
+      highlights: [
+        '50 prospectos enriquecidos',
+        '5.000 créditos de IA',
+        'Dialer · 3.000 min incluidos',
+        'Grial Bots + IA de llamadas',
+        'Panel inteligente',
+        '10 agentes · 10 líneas',
+        '5.000 correos/mes',
+        '3 subcuentas',
+      ],
     },
     scale: {
       name: 'Scale',
-      description: 'Multi-clínica y equipos grandes.',
+      description: 'Para orgs en crecimiento.',
       cta: 'Comenzar',
+      highlights: [
+        '100 prospectos enriquecidos',
+        '12.000 créditos de IA',
+        'Dialer · 6.000 min incluidos',
+        'Grial Bots + IA de llamadas',
+        'Panel inteligente',
+        '20 agentes · 20 líneas',
+        '50.000 correos/mes',
+        'Equipos ilimitados · 5 subcuentas',
+      ],
+    },
+    enterprise: {
+      name: 'Enterprise',
+      description: 'Para redes grandes.',
+      priceLabel: 'Personalizado',
+      cta: 'Contactar ventas',
+      highlights: [
+        'Agentes y líneas personalizados',
+        'Soporte dedicado + SLA',
+        'Onboarding personalizado',
+        'Seguridad enterprise',
+      ],
     },
   },
 
-  /* ── Feature categories ── */
-  categories: {
-    prospecting: 'Prospección & IA',
-    platform: 'Plataforma',
-    advanced: 'Funciones Avanzadas',
+  integrations: {
+    title: 'Integraciones nativas',
+    metaAds: 'Meta Ads',
+    googleAds: 'Google Ads',
   },
 
-  /* ── Feature labels ── */
-  features: {
-    /* Prospección */
-    enrichedContacts: '{count} Contactos enriquecidos',
-    aiCredits: '{count} Créditos de IA',
-    sequences: '{count} Secuencias',
-    noSequences: 'Sin secuencias',
-    emailsPerMonth: '{count} Emails/mes',
-    basicProspecting: 'Prospección básica',
-    advancedAI: 'IA avanzada',
-    noAdvancedAI: 'Sin IA avanzada',
-    unlimitedSequences: 'Secuencias ilimitadas',
-    unlimitedEmails: 'Emails ilimitados',
-
-    /* Plataforma */
-    agentLimit: '{count} Agentes',
-    adminAccounts: '{count} Admin',
-    adminAccountsPlural: '{count} Admins',
-    unlimitedInboxes: 'Inboxes ilimitados',
-    contactsLimit: '{count} Contactos',
-    unlimitedContacts: 'Contactos ilimitados',
-    conversationsPerMonth: '{count} Conversaciones/mes',
-    unlimitedConversations: 'Conversaciones ilimitadas',
-    teams: '{count} Equipos',
-    unlimitedTeams: 'Equipos ilimitados',
-    automationRules: '{count} Reglas de automatización',
-    unlimitedAutomationRules: 'Reglas ilimitadas',
-    segments: '{count} Segmentos',
-    unlimitedSegments: 'Segmentos ilimitados',
-    unlimitedAgents: 'Agentes ilimitados',
-
-    /* Avanzadas */
-    callTranscription: 'Transcripción de llamadas ({minutes} minutos incluidos)',
-    noCallTranscription: 'Sin transcripción de llamadas',
-    smartDashboard: 'Dashboard inteligente',
-    noSmartDashboard: 'Sin dashboard inteligente',
-    prioritySupport: 'Soporte prioritario',
-    noPrioritySupport: 'Sin soporte prioritario',
-    multiClinic: 'Multi-clínica',
-    noMultiClinic: 'Sin multi-clínica',
-    corporateReports: 'Reportes corporativos',
-    noCorporateReports: 'Sin reportes corporativos',
-
-    /* Notas al pie */
-    extraAgent: '+ Agente adicional: <strong>{price}/mes</strong>',
-    extraAdmin: '+ Admin adicional: <strong>{price}/mes</strong>',
-    trialLabel: 'Prueba gratis de {days} días',
-  },
-
-  /* ── Trust / Security ── */
   trust: {
-    badge: 'Grado Médico',
-    title: 'Seguridad y Cumplimiento',
+    title: 'Seguridad y cumplimiento',
     subtitle:
       'Protección de datos sensibles con infraestructura certificada y encriptación de extremo a extremo para el sector salud.',
-    certifications: ['HIPAA Compliant', 'SOC 2 Type II', 'GDPR Ready'],
-    encryptionTitle: 'Encriptación AES-256',
-    encryptionSubtitle: 'Estándar bancario',
+    hipaa: 'Cumple con HIPAA',
+    soc2: 'SOC 2 Type II',
+    gdpr: 'GDPR Ready',
+    encryption: 'Encriptación AES-256',
+    encryptionDesc: 'Estándar bancario',
   },
 
-  /* ── Integrations ── */
-  integrations: {
-    title: 'Integraciones Nativas',
-  },
-
-  /* ── Add-ons ── */
   addons: {
-    title: 'Complementos adicionales',
-    items: [
-      {
-        title: 'Paquetes AI Credits',
-        availability: 'Todos los planes',
-        tiers: [
-          { label: '+2,000', price: '$15/mes' },
-          { label: '+5,000 ⭐', price: '$35/mes' },
-          { label: '+10,000', price: '$60/mes' },
-        ],
-      },
-      {
-        title: 'Paquetes de Contactos',
-        availability: 'Todos los planes',
-        tiers: [
-          { label: '+50', price: '$35/mes' },
-          { label: '+100', price: '$65/mes' },
-          { label: '+200', price: '$120/mes' },
-        ],
-      },
-      {
-        title: 'Agente adicional',
-        availability: 'Starter y Growth',
-        description: 'Amplía tu equipo por <strong>$20/mes</strong> por agente adicional.',
-      },
-      {
-        title: 'Admin adicional',
-        availability: 'Starter, Growth y Scale',
-        description: 'Subcuenta administrativa adicional por <strong>$5–$10/mes</strong> según plan.',
-      },
+    title: '¿Necesitas más capacidad?',
+    subtitle:
+      'Agrega agentes, créditos o correos cuando quieras — sin cambiar de plan.',
+    pills: [
+      'Prospectos extra · +50 enriquecidos por $35',
+      'Créditos IA extra · +5.000 por $35',
+      'Correos extra · +5.000/mes por $25',
+      'Agente + línea extra · $20/mes',
+      'Admin extra · +1 por $10/mes',
     ],
   },
 
-  /* ── FAQ ── */
   faq: {
-    title: 'Preguntas Frecuentes',
+    title: 'Preguntas frecuentes',
     subtitle: 'Las respuestas que necesitas antes de decidir.',
     items: [
       {
@@ -179,7 +140,7 @@ export default {
       {
         question: '¿Puedo gestionar varias sucursales o clínicas?',
         answer:
-          'Sí, el plan Scale incluye capacidad multi-clínica con hasta 15 cuentas administrativas y agentes ilimitados. Ideal para redes de clínicas con reportes corporativos centralizados.',
+          'Sí, el plan Scale incluye capacidad multi-cuenta con hasta 5 subcuentas y 20 agentes. Enterprise ofrece límites personalizados para redes grandes.',
       },
       {
         question: '¿Qué canales de comunicación soporta?',
@@ -204,7 +165,6 @@ export default {
     ],
   },
 
-  /* ── CTA ── */
   cta: {
     title: 'Empieza gratis y escala cuando quieras',
     subtitle:
@@ -213,7 +173,6 @@ export default {
     secondaryButton: 'Agendar demo personalizada',
   },
 
-  /* ── Disclaimer ── */
   disclaimer:
     '* Política de uso: Los límites de leads se restablecen mensualmente. Los servicios de IA están sujetos a términos de uso razonable para garantizar el rendimiento óptimo del motor clínico. Los precios mostrados no incluyen IVA donde corresponda.',
 };

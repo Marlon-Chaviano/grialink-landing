@@ -25,7 +25,8 @@ const navLinks = [
 ---
 
 <header
-	class:list={["fixed w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border-light/50 transition-colors duration-300", className]}
+	id="site-header"
+	class:list={["fixed w-full z-50 border-b border-border-light/60 transition-colors duration-300", className]}
 >
 	<nav aria-label={lang === "es" ? "Navegación principal" : "Main navigation"}>
 		<Container>
@@ -193,4 +194,14 @@ const navLinks = [
 			btn?.focus();
 		}
 	});
+
+	const header = document.getElementById("site-header");
+	const onScroll = () => {
+		if (!header) return;
+		const scrolled = window.scrollY > 24;
+		header.classList.toggle("bg-background/70", scrolled);
+		header.classList.toggle("backdrop-blur-md", scrolled);
+	};
+	onScroll();
+	window.addEventListener("scroll", onScroll, { passive: true });
 </script>

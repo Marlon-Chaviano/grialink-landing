@@ -21,26 +21,23 @@ const info = c.info as Record<string, any>;
 	data-animate
 >
 	<!-- Email -->
-	<div class="bg-card rounded-2xl p-6 border border-border-light hover:shadow-lg hover:shadow-foreground/5 transition-shadow duration-300 group">
-		<div class="flex items-start gap-4">
-			<div
-				class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300"
+	<div class="auth-panel rounded-2xl p-6 hover:shadow-lg hover:shadow-foreground/5 transition-shadow duration-300 group">
+		<div class="flex items-center gap-5">
+			<svg
+				class="h-9 w-9 shrink-0 text-primary"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true"
 			>
-				<svg
-					class="w-6 h-6"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-					></path>
-				</svg>
-			</div>
-			<div>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="1.5"
+					d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+				></path>
+			</svg>
+			<div class="min-w-0">
 				<h3 class="text-base font-bold text-foreground mb-1">{info.email.title}</h3>
 				<p class="text-muted-foreground text-sm mb-2">{info.email.description}</p>
 				<a
@@ -57,27 +54,24 @@ const info = c.info as Record<string, any>;
 	<button
 		type="button"
 		onclick="if(window.$chatwoot){window.$chatwoot.toggle('open')}else{window.open('https://app.grialink.com','_blank')}"
-		class="w-full text-left bg-card rounded-2xl p-6 border border-border-light hover:shadow-lg hover:shadow-foreground/5 hover:border-blue-500/30 transition-all duration-300 group cursor-pointer"
+		class="w-full text-left auth-panel rounded-2xl p-6 hover:shadow-lg hover:shadow-foreground/5 hover:border-primary/30 transition-all duration-300 group cursor-pointer"
 	>
-		<div class="flex items-start gap-4">
-			<div
-				class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300"
+		<div class="flex items-center gap-5">
+			<svg
+				class="h-9 w-9 shrink-0 text-primary"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true"
 			>
-				<svg
-					class="w-6 h-6"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
-					></path>
-				</svg>
-			</div>
-			<div>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="1.5"
+					d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+				></path>
+			</svg>
+			<div class="min-w-0">
 				<h3 class="text-base font-bold text-foreground mb-1">{info.phone.title}</h3>
 				<p class="text-muted-foreground text-sm mb-2">{info.phone.description}</p>
 				<p class="text-base font-semibold text-primary group-hover:text-primary-hover transition-colors">
@@ -88,26 +82,23 @@ const info = c.info as Record<string, any>;
 	</button>
 
 	<!-- Schedule -->
-	<div class="bg-card rounded-2xl p-6 border border-border-light hover:shadow-lg hover:shadow-foreground/5 transition-shadow duration-300 group">
-		<div class="flex items-start gap-4">
-			<div
-				class="w-12 h-12 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300"
+	<div class="auth-panel rounded-2xl p-6 hover:shadow-lg hover:shadow-foreground/5 transition-shadow duration-300 group">
+		<div class="flex items-center gap-5">
+			<svg
+				class="h-9 w-9 shrink-0 text-green-500"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true"
 			>
-				<svg
-					class="w-6 h-6"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-					></path>
-				</svg>
-			</div>
-			<div>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="1.5"
+					d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+				></path>
+			</svg>
+			<div class="min-w-0">
 				<h3 class="text-base font-bold text-foreground mb-1">{info.schedule.title}</h3>
 				<p class="text-muted-foreground text-sm mb-2">{info.schedule.description}</p>
 				<p class="text-base font-semibold text-foreground">{info.schedule.days}</p>
@@ -117,7 +108,7 @@ const info = c.info as Record<string, any>;
 	</div>
 
 	<!-- Trust indicator -->
-	<div class="rounded-2xl p-5 border border-border-light bg-surface/50 text-center">
+	<div class="rounded-2xl p-5 auth-panel text-center">
 		<div class="flex items-center justify-center gap-2 mb-2">
 			<svg
 				class="w-4 h-4 text-green-400"

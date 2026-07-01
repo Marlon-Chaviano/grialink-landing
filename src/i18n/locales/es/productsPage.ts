@@ -2,7 +2,7 @@ export default {
   seo: {
     title: 'Producto — Grialink | SES Omnicanal con IA para Clínicas de Salud',
     description:
-      'Prospector AI, Outreach Engine, Smart Pipeline e IA Analytics: 4 módulos de IA integrados para automatizar la captación y gestión de leads en clínicas estéticas, dentales y de salud.',
+      'Siete módulos integrados: Prospector AI, Outreach Engine, Smart Pipeline, Smart Calendar, AI Analytics Hub, Grialink Dialer y Grial Bots. Automatiza captación, citas y retención en clínicas de salud.',
   },
 
   hero: {
@@ -24,49 +24,52 @@ export default {
   grid: {
     title: 'La arquitectura detrás de Grialink',
     subtitle:
-      'Cinco módulos conectados que automatizan todo el ciclo de ventas de tu clínica.',
+      'Siete módulos conectados que automatizan todo el ciclo de ventas de tu clínica.',
     viewDetails: 'VER DETALLES',
   },
 
   products: {
     prospector: {
       name: 'Prospector AI',
+      highlight: 'Hasta 800 contactos enriquecidos al mes',
       description:
-        'Descubre leads potenciales con búsqueda en lenguaje natural y enriquece sus datos automáticamente. El selector inteligente detecta usuarios que interactúan con perfiles y publicaciones de clínicas que ofrecen los mismos tratamientos que tú.',
+        'Descubre leads potenciales con búsqueda en lenguaje natural y enriquece sus datos automáticamente.',
     },
     outreach: {
       name: 'Outreach Engine',
+      highlight: 'Secuencias de email multietapa',
       description:
         'Automatiza el primer contacto y el seguimiento con secuencias inteligentes de email y mensajería.',
     },
     pipeline: {
       name: 'Smart Pipeline',
+      highlight: 'Inbox omnicanal + Kanban',
       description:
-        'Organiza el proceso comercial de tu clínica desde lead hasta cita confirmada. La IA actualiza cada etapa en tiempo real para que automatizaciones, seguimiento y métricas del funnel funcionen sin fallos.',
+        'Organiza el proceso comercial de tu clínica desde lead hasta cita confirmada con actualizaciones de IA en tiempo real.',
+    },
+    calendar: {
+      name: 'Smart Calendar',
+      highlight: 'Sync Google Calendar + recordatorios',
+      description:
+        'Agenda citas, reduce inasistencias y sincroniza cada reserva con Google Calendar en un clic.',
     },
     analytics: {
-      name: 'IA Analytics',
+      name: 'AI Analytics Hub',
+      highlight: 'Ventas, Marketing y Call Analytics',
       description:
-        'Analiza llamadas, campañas y conversiones para descubrir oportunidades de crecimiento. Los datos alimentan un modelo inteligente que audita tu proceso comercial y optimiza cómo vende tu clínica.',
+        'Sales Hub, Marketing Insights y Call Analytics en un solo workspace. KPIs, ROAS y coaching IA en cada llamada.',
     },
-  },
-
-  brain: {
-    badge: 'Módulos de IA',
-    title: 'El cerebro de Grialink: GPT-4o al servicio de tu clínica',
-    subtitle:
-      'Cada acción inteligente de Grialink está potenciada por modelos de lenguaje avanzados. Desde sugerencias contextuales con Copilot IA hasta transcripción de llamadas con Whisper, todo funciona con un sistema de créditos transparente.',
-    visualAlt: 'Visualización de red neuronal de IA de Grialink',
-    processingLabel: 'Procesando datos clínicos',
-    features: {
-      nlp: {
-        title: 'Copilot IA + Asistente',
-        description: 'Respuestas automáticas, sugerencias contextuales, resumen de conversaciones y etiquetado inteligente para agentes.',
-      },
-      predictive: {
-        title: 'Análisis predictivo',
-        description: 'Scoring de probabilidad de conversión, detección de objeciones en llamadas, alertas de speed-to-lead y predicción de ingresos.',
-      },
+    dialer: {
+      name: 'Grialink Dialer',
+      highlight: 'Números Twilio, IVR y click-to-call',
+      description:
+        'Compra números, llama desde el navegador, construye flujos IVR y conecta AI Receptionist. Minutos incluidos en planes de pago.',
+    },
+    grialBots: {
+      name: 'Grial Bots',
+      highlight: 'WhatsApp Assistant + AI Receptionist',
+      description:
+        'Automatiza reportes por WhatsApp, flujos IVR y recepción telefónica con IA. Incluido en planes Pro y Scale.',
     },
   },
 
@@ -121,6 +124,22 @@ export default {
       step3ImageAlt: 'Modal de detalle de contacto con datos de perfil enriquecidos',
       demoTitle: 'Mira Prospector AI en acción',
     },
+    outreach: {
+      badge: 'Outreach Engine',
+      title: 'Secuencias automáticas que mantienen el interés',
+      subtitle:
+        'Crea cadencias de email multietapa, optimiza el copy con IA y rastrea aperturas y respuestas desde el mismo workspace que tu pipeline.',
+      featuresTitle: 'Sequences + Email AI Optimizer',
+      featuresDescription:
+        'Inscribe contactos desde Prospector o tu CRM, envía desde dominios verificados y deja que la IA refine asuntos y cuerpos antes de cada envío.',
+      features: [
+        'Secuencias de email multietapa con dominios propios',
+        'Email AI Optimizer para asuntos y cuerpos',
+        'Tracking de aperturas, clics y rebotes vía SendGrid',
+        'Inscripción en un clic desde Prospector o Contactos',
+        'A/B testing y programación inteligente de envíos',
+      ],
+    },
     pipeline: {
       badge: 'Smart Pipeline',
       title: 'Rastrea cada oportunidad desde el primer contacto hasta el cierre',
@@ -163,52 +182,84 @@ export default {
       demoTitle: 'Mira Smart Calendar en acción',
     },
     salesDashboard: {
-      badge: 'Sales Dashboard',
-      title: 'Analíticos de ventas con IA de un vistazo',
+      badge: 'AI Analytics Hub',
+      title: 'Ventas, marketing y llamadas en un hub',
       subtitle:
-        'KPIs en tiempo real, seguimiento del rendimiento del equipo, pronóstico de ingresos y alertas inteligentes — todo lo que tu equipo de ventas necesita en un dashboard inteligente.',
-      viewTitle: 'Vista completa de ventas',
+        'KPIs en tiempo real, rendimiento de Meta y Google Ads, y scoring IA de llamadas. Todo lo que tu equipo de ingresos necesita sin cambiar de herramienta.',
+      viewTitle: 'Vista general del Sales Hub',
       viewDescription:
-        'Monitorea toda tu operación de ventas en tiempo real. Rastrea tasas de cierre, tasas de asistencia, ROAS y salud del pipeline con insights generados por IA y alertas accionables.',
+        'Monitorea tasas de cierre, asistencia, salud del pipeline y rendimiento del equipo con insights de IA y alertas accionables.',
       viewFeatures: [
-        'KPIs en tiempo real: tasa de cierre, tasa de asistencia, ROAS',
-        'AI Call Quality Score — la IA califica tus llamadas y te da insights de coaching',
-        'Tabla de reporte de llamadas por agente y por servicio',
-        'Tablas de rendimiento y comparaciones de equipo',
-        'Pronóstico de ingresos con IA',
-        'Alertas inteligentes para deals en riesgo',
-        'Análisis del embudo de conversión por etapa',
+        'KPIs en tiempo real: cierre, asistencia, ROAS',
+        'AI Call Quality Score con coaching en cada llamada',
+        'Reporte de llamadas por agente y por servicio',
+        'Rankings de equipo y pronóstico de ingresos',
+        'Análisis del embudo por etapa del pipeline',
       ],
-      viewImageAlt: 'Sales Dashboard con KPIs en tiempo real y analíticos de IA',
+      viewImageAlt: 'AI Analytics Hub Sales Dashboard con KPIs en tiempo real',
+      marketingTitle: 'Marketing Insights',
+      marketingDescription:
+        'Analíticos unificados de Meta Ads y Google Ads. Detecta fatiga creativa, compara CPL entre campañas y actúa con recomendaciones de IA.',
+      marketingFeatures: [
+        'Seguimiento de ROAS y CPL en cuentas publicitarias',
+        'Detección de fatiga creativa en campañas activas',
+        'Comparación de canales: Meta vs Google',
+        'Insights de presupuesto y audiencia con IA',
+      ],
+      marketingRoas: 'ROAS',
+      marketingCpl: 'CPL prom.',
+      marketingPeriod: 'Últimos 7 días',
+      marketingStatusHealthy: 'Saludable',
+      marketingStatusFatigue: 'Fatiga creativa',
     },
-    comingSoon: {
-      badge: 'Próximamente',
-      title: 'Más herramientas poderosas en camino',
+    grialBots: {
+      badge: 'Grial Bots',
+      title: 'Asistentes IA para WhatsApp y teléfono',
       subtitle:
-        'Estamos construyendo el SES con IA más completo para salud. Estos módulos están en desarrollo activo y se lanzan pronto.',
-      tag: 'Pronto',
-      products: [
-        {
-          name: 'Marketing Dashboard',
-          description:
-            'Analíticos de marketing unificados de Meta Ads, Google Ads y campañas de email. Detección de fatiga creativa, optimización de ROAS y recomendaciones de presupuesto con IA.',
-          icon: 'megaphone',
-          color: 'blue',
-        },
-        {
-          name: 'Call Analytics',
-          description:
-            'Transcripción y análisis de llamadas con IA. Scoring automático del rendimiento de agentes, detección de objeciones, ratios de tiempo de habla e insights accionables de coaching.',
-          icon: 'phone',
-          color: 'purple',
-        },
-        {
-          name: 'Email Sequences',
-          description:
-            'Secuencias de email multi-paso con soporte de dominio personalizado. Tracking de aperturas, clics y rebotes vía SendGrid. A/B testing, programación inteligente y líneas de asunto optimizadas con IA.',
-          icon: 'mail',
-          color: 'orange',
-        },
+        'Automatiza reportes de negocio por WhatsApp y deja que AI Receptionist atienda llamadas, califique leads y agende citas. Incluido en Pro y Scale.',
+      whatsappTitle: 'WhatsApp Assistant',
+      whatsappDescription:
+        'Conecta tu número de WhatsApp Business, recibe reportes de ventas automáticos y haz preguntas de negocio en lenguaje natural.',
+      whatsappFeatures: [
+        'Verificación OTP y conexión segura',
+        'Reportes diarios, semanales o mensuales',
+        'Métricas de ventas y resúmenes del pipeline bajo demanda',
+        'Reportes en inglés y español',
+      ],
+      receptionistTitle: 'AI Receptionist',
+      receptionistDescription:
+        'Atiende llamadas entrantes con IA, califica leads, agenda citas y transfiere a tu equipo cuando hace falta. Se integra con flujos IVR del Dialer.',
+      receptionistFeatures: [
+        'Voz, horarios y catálogo de servicios personalizables',
+        'Reserva de citas con sync a Calendar',
+        'Nodo IVR en flujos de Grialink Dialer',
+        'Transferencia a agentes cuando el lead califica',
+      ],
+    },
+    dialer: {
+      badge: 'Grialink Dialer',
+      title: 'Telefonía en la nube para equipos de ventas',
+      subtitle:
+        'Busca y compra números Twilio, llama desde el navegador, construye flujos IVR y revisa cada llamada con scoring IA.',
+      featuresTitle: 'Todo en un solo dialer',
+      featuresDescription:
+        'Desde click-to-call en un contacto hasta árboles IVR completos con nodos de AI Receptionist. Minutos incluidos desde Starter.',
+      features: [
+        'Compra y configura números en EE.UU.',
+        'Marcador en navegador e historial de llamadas',
+        'Constructor visual de IVR con nodo AI Receptionist',
+        'CNAM y configuración de perfil de negocio',
+        'AI Call Analytics scoring en llamadas completadas',
+      ],
+      previewTitle: 'Dialer / Llamadas recientes',
+      previewKpis: [
+        { label: 'Llamadas hoy', value: '24' },
+        { label: 'Duración prom.', value: '4m 12s' },
+        { label: 'Score IA', value: '8.6' },
+      ],
+      previewCalls: [
+        { contact: 'María López', meta: 'Saliente · 5m 02s', score: 91 },
+        { contact: 'John Smith', meta: 'Entrante · 2m 48s', score: 74 },
       ],
     },
   },

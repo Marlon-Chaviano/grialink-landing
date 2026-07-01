@@ -1,7 +1,7 @@
 ---
 import Container from "@/components/ui/Container.astro";
 import AIImpactTabs, { type AIFeature } from "./AIImpactTabs";
-import { type Lang } from "@/i18n/config";
+import { type Lang, localizedHref } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
 
 interface Props {
@@ -9,53 +9,49 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const ai = getTranslations(lang, "aiImpact") as Record<string, any>;
+const ai = getTranslations(lang, "aiImpact") as Record<string, unknown>;
 const features = ai.features as AIFeature[];
+const previewLabel = ai.previewLabel as string;
+const marketingLabels = ai.marketingLabels as { roas: string; cpl: string; period: string };
 ---
 
-<section class="section-spacing bg-background text-foreground overflow-hidden relative">
-	<!-- Top glow -->
+<section id="ai-impact" class="section-spacing relative overflow-hidden bg-background-lighter text-foreground">
 	<div
-		class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-linear-to-r from-primary via-purple-500 to-blue-500 blur-[100px] opacity-40"
+		class="pointer-events-none absolute -left-24 top-1/4 h-64 w-64 rounded-full bg-primary/8 blur-3xl"
 		aria-hidden="true"
 	>
 	</div>
 
 	<Container>
-		<!-- Heading -->
-		<div
-			class="text-center mb-16 relative z-10"
-			data-animate
-		>
-			<h2 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-4">
-				{ai.headingLine1}<br />
-				<span class="text-transparent bg-clip-text bg-linear-to-r from-foreground to-muted-foreground">{ai.headingLine2}</span>
+		<div class="relative z-10 mx-auto mb-12 max-w-3xl text-center lg:mb-16" data-animate>
+			<h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+				{ai.headingLine1 as string}
+				<span class="text-primary">{ai.headingLine2 as string}</span>
 			</h2>
+			<p class="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+				{ai.subtitle as string}
+			</p>
 			<a
-				class="inline-flex items-center text-muted-foreground hover:text-foreground mt-4 border-b border-border hover:border-foreground pb-1 transition-colors group"
-				href={`/${lang}/products`}
+				class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+				href={localizedHref("/products", lang)}
 			>
-				{ai.exploreLink}
-				<svg
-					class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
+				{ai.exploreLink as string}
+				<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
 						stroke-width="2"
 						d="M17 8l4 4m0 0l-4 4m4-4H3"
-					></path>
+					/>
 				</svg>
 			</a>
 		</div>
 
-		<!-- Interactive Feature Tabs -->
 		<div data-animate>
 			<AIImpactTabs
 				features={features}
+				previewLabel={previewLabel}
+				marketingLabels={marketingLabels}
 				client:visible
 			/>
 		</div>

@@ -3,10 +3,11 @@ import Layout from "@/layouts/Layout.astro";
 import SEO from "@/components/seo/SEO.astro";
 import Hero from "@/components/sections/Hero.astro";
 import LogoCloud from "@/components/sections/LogoCloud.astro";
+import PlatformModules from "@/components/sections/PlatformModules.astro";
 import HowItWorks from "@/components/sections/HowItWorks.astro";
 import AIImpact from "@/components/sections/AIImpact.astro";
-import RoleFeatures from "@/components/sections/RoleFeatures.astro";
-import Products from "@/components/sections/Products.astro";
+import TrustBadges from "@/components/sections/TrustBadges.astro";
+import PricingTeaser from "@/components/sections/PricingTeaser.astro";
 import CTA from "@/components/sections/CTA.astro";
 
 import { supportedLanguages, type Lang } from "@/i18n/config";
@@ -27,7 +28,6 @@ const t = useTranslations(lang);
 			title={t("seo.title")}
 			description={t("seo.description")}
 		/>
-		{/* Organization structured data — critical for Twilio & Google verification */}
 		<script
 			type="application/ld+json"
 			set:html={JSON.stringify({
@@ -53,10 +53,11 @@ const t = useTranslations(lang);
 	<main>
 		<Hero lang={lang} />
 		<LogoCloud lang={lang} />
+		<PlatformModules lang={lang} />
 		<HowItWorks lang={lang} />
 		<AIImpact lang={lang} />
-		<RoleFeatures lang={lang} />
-		<Products lang={lang} />
+		<TrustBadges lang={lang} variant="standalone" />
+		<PricingTeaser lang={lang} />
 		<CTA lang={lang} />
 	</main>
 </Layout>

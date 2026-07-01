@@ -3,6 +3,7 @@
  * ProductIntegrations — Logo cloud for tool integrations (Google, Facebook, Apollo.io).
  */
 import Container from "@/components/ui/Container.astro";
+import ApolloWordmark from "@/components/ui/ApolloWordmark.astro";
 import { type Lang } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
 
@@ -69,10 +70,7 @@ const integrations = p.integrations as Record<string, string>;
 				<span class="text-lg font-semibold text-foreground">Facebook</span>
 			</div>
 
-			<!-- Apollo.io -->
-			<div class="flex items-center gap-0.5 font-bold text-2xl tracking-tight opacity-50 hover:opacity-100 transition-opacity duration-300">
-				<span class="text-foreground">Apollo</span><span class="text-primary">.io</span>
-			</div>
+			<ApolloWordmark size="md" class="opacity-50 transition-opacity duration-300 hover:opacity-100" />
 		</div>
 	</Container>
 </section>

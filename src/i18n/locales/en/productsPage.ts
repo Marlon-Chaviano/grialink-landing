@@ -2,7 +2,7 @@ export default {
   seo: {
     title: 'Product — Grialink | Omnichannel AI SES for Health Clinics',
     description:
-      'Prospector AI, Outreach Engine, Smart Pipeline & AI Analytics: 4 integrated AI modules to automate lead acquisition and management for aesthetic, dental, and health clinics.',
+      'Seven integrated modules: Prospector AI, Outreach Engine, Smart Pipeline, Smart Calendar, AI Analytics Hub, Grialink Dialer, and Grial Bots. Automate lead acquisition, scheduling, and retention for health clinics.',
   },
 
   hero: {
@@ -24,49 +24,52 @@ export default {
   grid: {
     title: 'The architecture behind Grialink',
     subtitle:
-      'Five connected modules that automate the entire sales cycle of your clinic.',
+      'Seven connected modules that automate the entire sales cycle of your clinic.',
     viewDetails: 'VIEW DETAILS',
   },
 
   products: {
     prospector: {
       name: 'Prospector AI',
+      highlight: 'Up to 800 enriched contacts per month',
       description:
-        'Discover potential leads with natural language search and automatically enrich their data. The smart selector detects users who interact with profiles and posts from clinics offering the same treatments as you.',
+        'Discover potential leads with natural language search and automatically enrich their data.',
     },
     outreach: {
       name: 'Outreach Engine',
+      highlight: 'Multi-step email sequences',
       description:
         'Automate first contact and follow-up with intelligent email and messaging sequences.',
     },
     pipeline: {
       name: 'Smart Pipeline',
+      highlight: 'Omnichannel inbox + Kanban',
       description:
-        'Organize your clinic\'s sales process from lead to confirmed appointment. AI updates each stage in real time so automations, follow-ups, and funnel metrics work flawlessly.',
+        'Organize your clinic\'s sales process from lead to confirmed appointment with real-time AI stage updates.',
+    },
+    calendar: {
+      name: 'Smart Calendar',
+      highlight: 'Google Calendar sync + reminders',
+      description:
+        'Schedule appointments, reduce no-shows, and sync every booking with Google Calendar in one click.',
     },
     analytics: {
-      name: 'AI Analytics',
+      name: 'AI Analytics Hub',
+      highlight: 'Sales, Marketing & Call Analytics',
       description:
-        'Analyze calls, campaigns, and conversions to uncover growth opportunities. Data feeds an intelligent model that audits your sales process and optimizes how your clinic sells.',
+        'Sales Hub, Marketing Insights, and Call Analytics in one workspace. KPIs, ROAS, and AI coaching on every call.',
     },
-  },
-
-  brain: {
-    badge: 'AI Modules',
-    title: "Grialink's brain: GPT-4o powering your clinic",
-    subtitle:
-      "Every smart action in Grialink is powered by advanced language models. From contextual suggestions with Copilot AI to call transcription with Whisper, everything runs on a transparent credit system.",
-    visualAlt: 'Grialink AI neural network visualization',
-    processingLabel: 'Processing clinical data',
-    features: {
-      nlp: {
-        title: 'Copilot AI + Assistant',
-        description: 'Automatic responses, contextual suggestions, conversation summaries, and intelligent tagging for agents.',
-      },
-      predictive: {
-        title: 'Predictive Analysis',
-        description: 'Conversion probability scoring, call objection detection, speed-to-lead alerts, and revenue prediction.',
-      },
+    dialer: {
+      name: 'Grialink Dialer',
+      highlight: 'Twilio numbers, IVR & click-to-call',
+      description:
+        'Buy phone numbers, run outbound calls, build IVR flows, and connect AI Receptionist. Minutes included on paid plans.',
+    },
+    grialBots: {
+      name: 'Grial Bots',
+      highlight: 'WhatsApp Assistant + AI Receptionist',
+      description:
+        'Automate WhatsApp reports, IVR flows, and AI phone reception. Included on Pro and Scale plans.',
     },
   },
 
@@ -121,6 +124,22 @@ export default {
       step3ImageAlt: 'Contact detail modal with enriched profile data',
       demoTitle: 'See Prospector AI in action',
     },
+    outreach: {
+      badge: 'Outreach Engine',
+      title: 'Automated sequences that keep leads warm',
+      subtitle:
+        'Build multi-step email cadences, optimize copy with AI, and track opens and replies from the same workspace as your pipeline.',
+      featuresTitle: 'Sequences + Email AI Optimizer',
+      featuresDescription:
+        'Enroll contacts from Prospector or your CRM, send from verified domains, and let AI refine subject lines and body copy before each send.',
+      features: [
+        'Multi-step email sequences with custom domains',
+        'Email AI Optimizer for subject lines and body copy',
+        'Open, click, and bounce tracking via SendGrid',
+        'One-click enroll from Prospector or Contacts',
+        'A/B testing and smart send scheduling',
+      ],
+    },
     pipeline: {
       badge: 'Smart Pipeline',
       title: 'Track every opportunity from first contact to close',
@@ -163,52 +182,84 @@ export default {
       demoTitle: 'See Smart Calendar in action',
     },
     salesDashboard: {
-      badge: 'Sales Dashboard',
-      title: 'AI-powered sales analytics at a glance',
+      badge: 'AI Analytics Hub',
+      title: 'Sales, marketing, and calls in one hub',
       subtitle:
-        'Real-time KPIs, team performance tracking, revenue forecasting, and smart alerts — everything your sales team needs in one intelligent dashboard.',
-      viewTitle: 'Complete sales overview',
+        'Real-time KPIs, Meta and Google Ads performance, and AI call scoring. Everything your revenue team needs without switching tools.',
+      viewTitle: 'Sales Hub overview',
       viewDescription:
-        'Monitor your entire sales operation in real time. Track close rates, show rates, ROAS, and pipeline health with AI-generated insights and actionable alerts.',
+        'Monitor close rates, show rates, pipeline health, and team performance with AI-generated insights and actionable alerts.',
       viewFeatures: [
         'Real-time KPIs: close rate, show rate, ROAS',
-        'AI Call Quality Score — AI rates every call and gives coaching insights',
-        'Calls report table by agent and by service',
-        'Team performance leaderboards and comparisons',
-        'AI-powered revenue forecasting',
-        'Smart alerts for at-risk deals',
-        'Conversion funnel analysis by stage',
+        'AI Call Quality Score with coaching insights on every call',
+        'Calls report by agent and by service',
+        'Team leaderboards and revenue forecasting',
+        'Conversion funnel analysis by pipeline stage',
       ],
-      viewImageAlt: 'Sales Dashboard with real-time KPIs and AI analytics',
+      viewImageAlt: 'AI Analytics Hub Sales Dashboard with real-time KPIs',
+      marketingTitle: 'Marketing Insights',
+      marketingDescription:
+        'Unified Meta Ads and Google Ads analytics. Spot creative fatigue, compare CPL across campaigns, and act on AI recommendations.',
+      marketingFeatures: [
+        'ROAS and CPL tracking across ad accounts',
+        'Creative fatigue detection on active campaigns',
+        'Channel comparison: Meta vs Google performance',
+        'Budget and audience insights powered by AI',
+      ],
+      marketingRoas: 'ROAS',
+      marketingCpl: 'Avg. CPL',
+      marketingPeriod: 'Last 7 days',
+      marketingStatusHealthy: 'Healthy',
+      marketingStatusFatigue: 'Creative fatigue',
     },
-    comingSoon: {
-      badge: 'Coming Soon',
-      title: 'More powerful tools on the way',
+    grialBots: {
+      badge: 'Grial Bots',
+      title: 'AI assistants for WhatsApp and phone',
       subtitle:
-        'We\'re building the most complete AI-powered SES for healthcare. These modules are in active development and launching soon.',
-      tag: 'Soon',
-      products: [
-        {
-          name: 'Marketing Dashboard',
-          description:
-            'Unified marketing analytics across Meta Ads, Google Ads, and email campaigns. Creative fatigue detection, ROAS optimization, and AI-driven budget recommendations.',
-          icon: 'megaphone',
-          color: 'blue',
-        },
-        {
-          name: 'Call Analytics',
-          description:
-            'AI-powered call transcription and analysis. Automatic scoring of agent performance, objection detection, talk-time ratios, and actionable coaching insights.',
-          icon: 'phone',
-          color: 'purple',
-        },
-        {
-          name: 'Email Sequences',
-          description:
-            'Multi-step email sequences with custom domain support. Open, click, and bounce tracking via SendGrid. A/B testing, smart scheduling, and AI-optimized subject lines.',
-          icon: 'mail',
-          color: 'orange',
-        },
+        'Automate business reports on WhatsApp and let AI Receptionist answer calls, qualify leads, and book appointments. Included on Pro and Scale.',
+      whatsappTitle: 'WhatsApp Assistant',
+      whatsappDescription:
+        'Connect your WhatsApp Business number, receive automated sales reports, and ask business questions in natural language.',
+      whatsappFeatures: [
+        'OTP verification and secure connection',
+        'Daily, weekly, or monthly report delivery',
+        'Sales metrics and pipeline summaries on demand',
+        'English and Spanish report language',
+      ],
+      receptionistTitle: 'AI Receptionist',
+      receptionistDescription:
+        'Answer inbound calls with AI, qualify leads, book appointments, and hand off to your team when needed. Plugs into Dialer IVR flows.',
+      receptionistFeatures: [
+        'Custom voice, hours, and business catalog',
+        'Appointment booking with Calendar sync',
+        'IVR node in Grialink Dialer flows',
+        'Call transfer to agents when qualified',
+      ],
+    },
+    dialer: {
+      badge: 'Grialink Dialer',
+      title: 'Cloud phone system built for sales teams',
+      subtitle:
+        'Search and buy Twilio numbers, dial from the browser, build IVR flows, and review every call with AI scoring.',
+      featuresTitle: 'Everything in one dialer',
+      featuresDescription:
+        'From click-to-call on a contact record to full IVR trees with AI Receptionist nodes. Minutes included on Starter plans and above.',
+      features: [
+        'Buy and configure US phone numbers',
+        'Browser-based dialpad and call history',
+        'Visual IVR builder with AI Receptionist node',
+        'CNAM caller ID and business profile setup',
+        'Call Analytics AI scoring on completed calls',
+      ],
+      previewTitle: 'Dialer / Recent calls',
+      previewKpis: [
+        { label: 'Calls today', value: '24' },
+        { label: 'Avg. duration', value: '4m 12s' },
+        { label: 'AI score', value: '8.6' },
+      ],
+      previewCalls: [
+        { contact: 'Maria Lopez', meta: 'Outbound · 5m 02s', score: 91 },
+        { contact: 'John Smith', meta: 'Inbound · 2m 48s', score: 74 },
       ],
     },
   },

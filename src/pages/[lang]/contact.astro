@@ -20,7 +20,7 @@ const contact = getTranslations(lang, "contact");
 const seo = contact.seo as Record<string, string>;
 ---
 
-<Layout lang={lang}>
+<Layout lang={lang} circuitVariant="full">
 	<Fragment slot="head">
 		<SEO
 			lang={lang}
@@ -57,10 +57,7 @@ const seo = contact.seo as Record<string, string>;
 		<ContactHero lang={lang} />
 
 		{/* Main contact section — Form + Info sidebar */}
-		<section
-			class="section-spacing pt-0! bg-background"
-			data-animate
-		>
+		<section class="section-spacing pt-0!" data-animate>
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
 					{/* Form — takes 2/3 */}

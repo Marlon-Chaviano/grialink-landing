@@ -1,158 +1,517 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { Building2, CheckCircle, Megaphone, MessageSquare, PhoneCall, Search, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import photoElena from '@/assets/team/sofia.webp';
+import photoJames from '@/assets/team/fabian.webp';
+import photoSofia from '@/assets/team/yozamy.webp';
 
 /* ─── Types ─── */
 
-export interface DashboardContent {
-  windowLabel: string;
-  topLeft: { label: string; value: string; desc: string };
-  topRight: { label: string; value: string; delta: string };
-  alert: { title: string; desc: string; btn: string };
-  popup: { title: string; desc: string; accept: string; dismiss: string };
-}
+export type AIFeatureVariant = 'copilot' | 'calls' | 'marketing' | 'prospector';
 
 export interface AIFeature {
   label: string;
+  tagline: string;
   color: string;
-  dashboard: DashboardContent;
+  variant: AIFeatureVariant;
+  appUrl: string;
+  copilot?: {
+    contact: string;
+    channel: string;
+    status: string;
+    inbound: string;
+    suggestionTitle: string;
+    suggestionDraft: string;
+    actions: string[];
+    chips: string[];
+  };
+  calls?: {
+    kpis: Array<{ label: string; value: string }>;
+    aiScoreLabel: string;
+    rows: Array<{
+      contact: string;
+      meta: string;
+      finding: string;
+      score: number;
+      scoreLabel: string;
+    }>;
+  };
+  marketing?: {
+    roas: string;
+    roasDelta: string;
+    cpl: string;
+    campaigns: Array<{
+      name: string;
+      spend: string;
+      cpl: string;
+      ctr: string;
+      status: 'healthy' | 'fatigue';
+    }>;
+    insight: string;
+    statusHealthy: string;
+    statusFatigue: string;
+  };
+  prospector?: {
+    query: string;
+    meta: string;
+    results: Array<{ name: string; title: string; company: string; email: string; photoKey: string; location?: string }>;
+    importLabel: string;
+  };
 }
 
 interface AIImpactTabsProps {
   features: AIFeature[];
+  previewLabel: string;
+  marketingLabels: { roas: string; cpl: string; period: string };
 }
 
-/* ─── Color System ─── */
+type ColorToken = { bg: string; text: string; border: string; ring: string };
 
-const colorClasses: Record<string, { bg: string; text: string; ring: string; border: string }> = {
-  purple: { bg: 'bg-purple-500/20', text: 'text-purple-400', ring: 'ring-purple-500/30', border: 'border-purple-500/40' },
-  blue: { bg: 'bg-blue-500/20', text: 'text-blue-400', ring: 'ring-blue-500/30', border: 'border-blue-500/40' },
-  teal: { bg: 'bg-teal-500/20', text: 'text-teal-400', ring: 'ring-teal-500/30', border: 'border-teal-500/40' },
-  yellow: { bg: 'bg-yellow-500/20', text: 'text-yellow-400', ring: 'ring-yellow-500/30', border: 'border-yellow-500/40' },
+/* ─── Color tokens ─── */
+
+const colorClasses: Record<string, ColorToken> = {
+  primary: {
+    bg: 'bg-primary/10',
+    text: 'text-primary',
+    border: 'border-primary/25',
+    ring: 'ring-primary/20',
+  },
+  accent: {
+    bg: 'bg-accent/15',
+    text: 'text-accent',
+    border: 'border-accent/30',
+    ring: 'ring-accent/20',
+  },
+  green: {
+    bg: 'bg-green-500/10',
+    text: 'text-green-400',
+    border: 'border-green-500/25',
+    ring: 'ring-green-500/20',
+  },
+  muted: {
+    bg: 'bg-surface',
+    text: 'text-foreground',
+    border: 'border-border-light',
+    ring: 'ring-border',
+  },
 };
 
-/* ─── Icons per feature (Heroicons paths) ─── */
-
-const featureIcons = [
-  // Copilot / sparkles
-  'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z',
-  // Phone / call analytics
-  'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z',
-  // Chart / marketing insights
-  'M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941',
-  // Search / prospecting
-  'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z',
-];
-
-/* ─── Bar chart data per feature ─── */
-
-const chartData: number[][] = [
-  [40, 55, 70, 85, 60, 75, 90], // Copilot
-  [65, 45, 80, 55, 70, 60, 50], // Call Analytics
-  [30, 50, 45, 75, 60, 80, 55], // Meta Ads
-  [50, 70, 40, 60, 85, 75, 65], // Prospecting
-];
-
-const accentColors: Record<string, string> = {
-  purple: 'bg-purple-500',
-  blue: 'bg-blue-500',
-  teal: 'bg-teal-500',
-  yellow: 'bg-yellow-500',
+const variantIcons = {
+  copilot: MessageSquare,
+  calls: PhoneCall,
+  marketing: Megaphone,
+  prospector: Search,
 };
 
-/* ─── Component ─── */
+const prospectorPhotos: Record<string, string> = {
+  elena: typeof photoElena === 'string' ? photoElena : photoElena.src,
+  james: typeof photoJames === 'string' ? photoJames : photoJames.src,
+  sofia: typeof photoSofia === 'string' ? photoSofia : photoSofia.src,
+};
 
-export default function AIImpactTabs({ features }: AIImpactTabsProps) {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const active = features[activeIdx];
-  const colors = colorClasses[active.color] ?? colorClasses.purple;
-  const d = active.dashboard;
-  const bars = chartData[activeIdx] ?? chartData[0];
-  const accent = accentColors[active.color] ?? 'bg-purple-500';
+const scoreTone = (score: number) => {
+  if (score >= 80) {
+    return {
+      bg: 'bg-green-500/10',
+      text: 'text-green-400',
+      bar: 'bg-green-500',
+      border: 'border-green-500/20',
+    };
+  }
+  if (score >= 60) {
+    return {
+      bg: 'bg-accent/15',
+      text: 'text-accent',
+      bar: 'bg-accent',
+      border: 'border-accent/25',
+    };
+  }
+  return {
+    bg: 'bg-destructive/10',
+    text: 'text-destructive',
+    bar: 'bg-destructive',
+    border: 'border-destructive/25',
+  };
+};
+
+function ContactAvatar({ name, src, size = 56 }: { name: string; src: string; size?: number }) {
+  const [imgError, setImgError] = useState(false);
+  const initials = name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0])
+    .join('')
+    .toUpperCase();
+
+  if (imgError || !src) {
+    return (
+      <div
+        className="flex shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold text-muted-foreground"
+        style={{ width: size, height: size }}
+        aria-hidden={!name}
+      >
+        {initials}
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-12 items-center">
-      {/* Feature list (left) — ARIA tablist */}
-      <div role="tablist" aria-label="AI features" aria-orientation="vertical" className="lg:w-1/3 space-y-3 w-full">
-        {features.map((item, i) => {
-          const c = colorClasses[item.color] ?? colorClasses.purple;
-          const isActive = i === activeIdx;
+    <img
+      src={src}
+      alt={name}
+      width={size}
+      height={size}
+      className="shrink-0 rounded-full bg-muted object-cover"
+      style={{ width: size, height: size }}
+      onError={() => setImgError(true)}
+    />
+  );
+}
 
-          return (
+function AppChrome({ appUrl, colors, previewLabel }: { appUrl: string; colors: ColorToken; previewLabel: string }) {
+  return (
+    <div className="border-b border-border-light bg-background-lighter/80 px-4 py-3 sm:px-5">
+      <div className="mb-2 flex items-center gap-1.5">
+        <div className="h-2 w-2 rounded-full bg-red-500/80" />
+        <div className="h-2 w-2 rounded-full bg-yellow-500/80" />
+        <div className="h-2 w-2 rounded-full bg-green-500/80" />
+        <span className="ml-auto truncate text-[10px] font-medium text-muted-foreground">{appUrl}</span>
+      </div>
+      <div className={cn('inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-semibold', colors.bg, colors.text, colors.border)}>
+        {previewLabel}
+      </div>
+    </div>
+  );
+}
+
+function CopilotPreview({ feature, colors }: { feature: AIFeature; colors: ColorToken }) {
+  const data = feature.copilot;
+  if (!data) return null;
+
+  return (
+    <div className="space-y-4 p-4 sm:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-bold text-foreground">{data.contact}</p>
+          <p className="text-[11px] text-muted-foreground">
+            {data.channel} · {data.status}
+          </p>
+        </div>
+        <span className={cn('rounded-full border px-2 py-0.5 text-[10px] font-semibold', colors.bg, colors.text, colors.border)}>
+          Copilot
+        </span>
+      </div>
+
+      <div className="rounded-xl border border-border-light bg-surface px-3.5 py-3">
+        <p className="text-xs leading-relaxed text-muted-foreground">{data.inbound}</p>
+      </div>
+
+      <div className={cn('rounded-xl border bg-card p-3.5', colors.border)}>
+        <div className="mb-2 flex items-center gap-2">
+          <Sparkles className={cn('h-3.5 w-3.5', colors.text)} strokeWidth={2} />
+          <span className="text-xs font-bold text-foreground">{data.suggestionTitle}</span>
+        </div>
+        <p className="text-xs leading-relaxed text-foreground">{data.suggestionDraft}</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {data.actions.map((action, idx) => (
             <button
-              key={i}
-              role="tab"
-              id={`ai-tab-${i}`}
-              aria-selected={isActive}
-              aria-controls={`ai-panel-${i}`}
-              tabIndex={isActive ? 0 : -1}
-              onClick={() => setActiveIdx(i)}
-              onKeyDown={(e) => {
-                let newIdx = i;
-                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-                  e.preventDefault();
-                  newIdx = (i + 1) % features.length;
-                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-                  e.preventDefault();
-                  newIdx = (i - 1 + features.length) % features.length;
-                } else if (e.key === 'Home') {
-                  e.preventDefault();
-                  newIdx = 0;
-                } else if (e.key === 'End') {
-                  e.preventDefault();
-                  newIdx = features.length - 1;
-                } else { return; }
-                setActiveIdx(newIdx);
-                document.getElementById(`ai-tab-${newIdx}`)?.focus();
-              }}
+              key={action}
+              type="button"
               className={cn(
-                'w-full flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 cursor-pointer text-left group',
-                isActive
-                  ? `bg-secondary/50 border-border ring-1 ${c.ring}`
-                  : 'border-transparent hover:bg-secondary/30',
+                'cursor-pointer rounded-lg px-2.5 py-1.5 text-[11px] font-semibold transition-colors duration-200',
+                idx === 0
+                  ? 'bg-primary text-primary-foreground hover:bg-primary-hover'
+                  : 'bg-surface text-muted-foreground hover:bg-background-lighter',
               )}
             >
-              <div
-                className={cn(
-                  'w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300',
-                  c.bg,
-                  c.text,
-                  isActive && 'scale-110',
-                )}
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d={featureIcons[i] ?? featureIcons[0]}
-                  />
-                </svg>
-              </div>
-              <span
-                className={cn(
-                  'text-base lg:text-lg font-medium transition-colors',
-                  isActive ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground',
-                )}
-              >
-                {item.label}
-              </span>
-
-              {/* Active indicator */}
-              {isActive && (
-                <motion.div
-                  layoutId="ai-tab-indicator"
-                  className={cn('ml-auto w-1.5 h-8 rounded-full', accentColors[item.color])}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                />
-              )}
+              {action}
             </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-1.5">
+        {data.chips.map(chip => (
+          <span key={chip} className="rounded-md bg-surface px-2 py-1 text-[10px] font-medium text-muted-foreground">
+            {chip}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CallsPreview({ feature }: { feature: AIFeature }) {
+  const data = feature.calls;
+  if (!data) return null;
+
+  return (
+    <div className="p-4 sm:p-5">
+      <div className="mb-4 grid grid-cols-3 divide-x divide-border-light rounded-xl border border-border-light bg-surface/40">
+        {data.kpis.map(kpi => (
+          <div key={kpi.label} className="px-3 py-3 sm:px-4">
+            <p className="text-[10px] font-medium text-muted-foreground">{kpi.label}</p>
+            <p className="text-lg font-extrabold tabular-nums text-foreground">{kpi.value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="space-y-2">
+        {data.rows.map(row => {
+          const tone = scoreTone(row.score);
+          return (
+            <div
+              key={row.contact}
+              className={cn(
+                'flex flex-col gap-2 rounded-xl border border-border-light bg-surface px-3.5 py-3 sm:flex-row sm:items-center sm:justify-between',
+                row.score < 60 && 'border-l-2 border-l-destructive',
+              )}
+            >
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-foreground">{row.contact}</p>
+                <p className="text-[10px] text-muted-foreground">{row.meta}</p>
+                <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{row.finding}</p>
+              </div>
+              <div className={cn('flex shrink-0 items-center gap-2 rounded-lg border px-2.5 py-1.5', tone.bg, tone.border)}>
+                <Sparkles className={cn('h-3 w-3', tone.text)} strokeWidth={2} />
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className={cn('text-[9px] font-bold uppercase tracking-wide', tone.text)}>{row.scoreLabel}</span>
+                    <span className={cn('text-xs font-bold tabular-nums', tone.text)}>{row.score}</span>
+                  </div>
+                  <div className="h-1.5 w-16 overflow-hidden rounded-full bg-background/60">
+                    <div className={cn('h-full rounded-full', tone.bar)} style={{ width: `${row.score}%` }} />
+                  </div>
+                </div>
+              </div>
+            </div>
           );
         })}
       </div>
+    </div>
+  );
+}
 
-      {/* Dashboard mockup (right) — tabpanel */}
-      <div className="lg:w-2/3 w-full">
+function MarketingPreview({
+  feature,
+  marketingLabels,
+}: {
+  feature: AIFeature;
+  marketingLabels: { roas: string; cpl: string; period: string };
+}) {
+  const data = feature.marketing;
+  if (!data) return null;
+
+  return (
+    <div className="space-y-4 p-4 sm:p-5">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="rounded-xl border border-border-light bg-surface px-3.5 py-3">
+          <p className="text-[10px] font-medium text-muted-foreground">{marketingLabels.roas}</p>
+          <p className="text-2xl font-extrabold text-foreground">{data.roas}</p>
+          <p className="text-[10px] text-green-400">{data.roasDelta}</p>
+        </div>
+        <div className="rounded-xl border border-border-light bg-surface px-3.5 py-3">
+          <p className="text-[10px] font-medium text-muted-foreground">{marketingLabels.cpl}</p>
+          <p className="text-2xl font-extrabold text-foreground">{data.cpl}</p>
+          <p className="text-[10px] text-muted-foreground">{marketingLabels.period}</p>
+        </div>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-border-light">
+        {data.campaigns.map(campaign => (
+          <div
+            key={campaign.name}
+            className="flex flex-col gap-2 border-b border-border-light bg-surface px-3.5 py-3 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-foreground">{campaign.name}</p>
+              <p className="text-[10px] text-muted-foreground">
+                Spend {campaign.spend} · CPL {campaign.cpl} · CTR {campaign.ctr}
+              </p>
+            </div>
+            <span
+              className={cn(
+                'shrink-0 self-start rounded-full px-2 py-0.5 text-[10px] font-semibold',
+                campaign.status === 'healthy' ? 'bg-green-500/10 text-green-400' : 'bg-accent/15 text-accent',
+              )}
+            >
+              {campaign.status === 'healthy' ? data.statusHealthy : data.statusFatigue}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="rounded-xl border border-accent/25 bg-accent/10 px-3.5 py-3">
+        <p className="text-xs leading-relaxed text-foreground">{data.insight}</p>
+      </div>
+    </div>
+  );
+}
+
+function ProspectorPreview({ feature }: { feature: AIFeature }) {
+  const data = feature.prospector;
+  if (!data) return null;
+
+  return (
+    <div className="space-y-4 p-4 sm:p-5">
+      <div className="rounded-xl border border-border-light bg-surface px-3 py-2.5">
+        <div className="flex items-center gap-2">
+          <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" strokeWidth={2} />
+          <p className="text-xs font-medium text-foreground">{data.query}</p>
+        </div>
+        <p className="mt-1.5 text-[10px] text-muted-foreground">{data.meta}</p>
+      </div>
+
+      <div className="space-y-3">
+        {data.results.map(result => (
+          <div
+            key={result.email}
+            className="rounded-2xl border border-border-light bg-surface p-4 shadow-sm transition-colors duration-200 hover:border-primary/20"
+          >
+            <div className="flex items-start gap-3">
+              <div
+                className="mt-1 h-4 w-4 shrink-0 rounded border border-border-light bg-background"
+                aria-hidden="true"
+              />
+              <ContactAvatar name={result.name} src={prospectorPhotos[result.photoKey] ?? ''} size={48} />
+              <div className="min-w-0 flex-1">
+                <h4 className="text-base font-semibold text-foreground">{result.name}</h4>
+                <p className="text-sm text-muted-foreground">{result.title}</p>
+                <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+                  <span className="inline-flex items-center gap-1">
+                    <Building2 className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} />
+                    {result.company}
+                  </span>
+                  {result.location ? (
+                    <>
+                      <span className="text-muted-foreground/50">·</span>
+                      <span>{result.location}</span>
+                    </>
+                  ) : null}
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">
+                    <CheckCircle className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} />
+                    <span className="truncate">{result.email}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        className="w-full cursor-pointer rounded-xl bg-primary px-3 py-2.5 text-xs font-semibold text-primary-foreground transition-colors duration-200 hover:bg-primary-hover"
+      >
+        {data.importLabel}
+      </button>
+    </div>
+  );
+}
+
+function FeaturePreview({
+  feature,
+  colors,
+  marketingLabels,
+}: {
+  feature: AIFeature;
+  colors: ColorToken;
+  marketingLabels: { roas: string; cpl: string; period: string };
+}) {
+  switch (feature.variant) {
+    case 'copilot':
+      return <CopilotPreview feature={feature} colors={colors} />;
+    case 'calls':
+      return <CallsPreview feature={feature} />;
+    case 'marketing':
+      return <MarketingPreview feature={feature} marketingLabels={marketingLabels} />;
+    case 'prospector':
+      return <ProspectorPreview feature={feature} />;
+    default:
+      return null;
+  }
+}
+
+export default function AIImpactTabs({ features, previewLabel, marketingLabels }: AIImpactTabsProps) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const active = features[activeIdx];
+  const colors = colorClasses[active.color] ?? colorClasses.primary;
+  const prefersReducedMotion = useReducedMotion();
+  const ActiveIcon = variantIcons[active.variant] ?? MessageSquare;
+
+  return (
+    <div className="flex flex-col items-stretch gap-10 lg:flex-row lg:gap-14 lg:items-start">
+      <div role="tablist" aria-label="AI features" aria-orientation="vertical" className="w-full lg:w-[38%]">
+        <div className="space-y-3">
+          {features.map((item, i) => {
+            const isActive = i === activeIdx;
+            const Icon = variantIcons[item.variant] ?? MessageSquare;
+
+            return (
+              <button
+                key={item.label}
+                type="button"
+                role="tab"
+                id={`ai-tab-${i}`}
+                aria-selected={isActive}
+                aria-controls={`ai-panel-${i}`}
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => setActiveIdx(i)}
+                onKeyDown={e => {
+                  let newIdx = i;
+                  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    newIdx = (i + 1) % features.length;
+                  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    newIdx = (i - 1 + features.length) % features.length;
+                  } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    newIdx = 0;
+                  } else if (e.key === 'End') {
+                    e.preventDefault();
+                    newIdx = features.length - 1;
+                  } else {
+                    return;
+                  }
+                  setActiveIdx(newIdx);
+                  document.getElementById(`ai-tab-${newIdx}`)?.focus();
+                }}
+                className={cn(
+                  'flex w-full cursor-pointer items-center gap-5 rounded-2xl border p-4 text-left transition-colors duration-200 sm:gap-6 sm:p-5',
+                  isActive
+                    ? 'border-primary/30 bg-card shadow-sm'
+                    : 'border-border-light bg-card hover:border-border hover:bg-background-lighter',
+                )}
+              >
+                <div className="flex w-9 shrink-0 justify-center sm:w-10">
+                  <Icon
+                    className={cn('h-8 w-8 sm:h-9 sm:w-9', isActive ? 'text-primary' : 'text-muted-foreground')}
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3
+                    className={cn(
+                      'mb-1 text-base font-bold sm:text-lg',
+                      isActive ? 'text-foreground' : 'text-foreground/80',
+                    )}
+                  >
+                    {item.label}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{item.tagline}</p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="w-full lg:w-[62%]">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeIdx}
@@ -160,110 +519,25 @@ export default function AIImpactTabs({ features }: AIImpactTabsProps) {
             role="tabpanel"
             aria-labelledby={`ai-tab-${activeIdx}`}
             tabIndex={0}
-            initial={{ opacity: 0, y: 16 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="bg-secondary border border-border rounded-2xl p-4 sm:p-6 shadow-2xl relative overflow-hidden"
+            exit={prefersReducedMotion ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.28, ease: 'easeOut' }}
+            className="overflow-hidden rounded-2xl border border-border-light bg-card shadow-2xl lg:rounded-3xl"
           >
-            {/* Window chrome */}
-            <div className="flex items-center justify-between mb-6 sm:mb-8">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-              </div>
-              <div className={cn('px-3 py-1 rounded text-xs', colors.bg, colors.text)}>
-                {d.windowLabel}
-              </div>
-            </div>
-
-            {/* Top metrics */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              {/* Chart area */}
-              <div className="col-span-2 bg-card p-4 rounded-lg">
-                <div className="text-xs text-muted-foreground mb-1">{d.topLeft.label}</div>
-                <div className="text-lg sm:text-xl font-bold text-foreground mb-3">{d.topLeft.value}</div>
-
-                {/* Bars */}
-                <div className="flex items-end gap-1 h-20">
-                  {bars.map((h, i) => {
-                    const isHighlight = h === Math.max(...bars);
-                    return (
-                      <motion.div
-                        key={i}
-                        initial={{ height: 0 }}
-                        animate={{ height: `${h}%` }}
-                        transition={{ duration: 0.5, delay: i * 0.05, ease: 'easeOut' }}
-                        className={cn(
-                          'w-1/7 rounded-t relative',
-                          isHighlight ? accent : 'bg-surface',
-                        )}
-                      >
-                        {isHighlight && (
-                          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-foreground text-background text-[10px] px-1 py-0.5 rounded shadow whitespace-nowrap">
-                            +{h}%
-                          </div>
-                        )}
-                      </motion.div>
-                    );
-                  })}
+            <AppChrome appUrl={active.appUrl} colors={colors} previewLabel={previewLabel} />
+            <div className="border-b border-border-light bg-surface/30 px-4 py-3 sm:px-5">
+              <div className="flex items-center gap-2.5">
+                <div className={cn('flex h-9 w-9 items-center justify-center rounded-lg', colors.bg, colors.text)}>
+                  <ActiveIcon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
-
-                <div className="text-[10px] text-muted-foreground mt-2">{d.topLeft.desc}</div>
-              </div>
-
-              {/* KPI card */}
-              <div className="col-span-1 bg-card p-4 rounded-lg flex flex-col justify-between">
-                <div className="text-xs text-muted-foreground">{d.topRight.label}</div>
-                <div className="text-2xl sm:text-3xl font-bold text-foreground">{d.topRight.value}</div>
-                <div className="text-[10px] text-green-400">{d.topRight.delta}</div>
-              </div>
-            </div>
-
-            {/* Alert */}
-            <div className={cn('bg-card p-4 rounded-lg border-l-4', colors.border)}>
-              <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
                 <div>
-                  <h4 className="text-sm font-semibold text-foreground mb-1">{d.alert.title}</h4>
-                  <p className="text-xs text-muted-foreground">{d.alert.desc}</p>
+                  <p className="text-sm font-bold text-foreground">{active.label}</p>
+                  <p className="text-[11px] text-muted-foreground">{active.tagline}</p>
                 </div>
-                <button
-                  className={cn(
-                    'px-3 py-1 rounded text-xs transition-colors whitespace-nowrap cursor-pointer',
-                    colors.bg,
-                    colors.text,
-                    'hover:opacity-80',
-                  )}
-                >
-                  {d.alert.btn}
-                </button>
               </div>
             </div>
-
-            {/* Popup suggestion */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.3 }}
-              className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 bg-surface border border-border p-3 sm:p-4 rounded-xl shadow-lg max-w-50 sm:max-w-xs"
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <svg className={cn('w-4 h-4', colors.text)} fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                </svg>
-                <span className="text-xs font-bold text-foreground">{d.popup.title}</span>
-              </div>
-              <p className="text-xs text-muted-foreground">{d.popup.desc}</p>
-              <div className="flex gap-2 mt-3">
-                <button className="flex-1 bg-primary text-primary-foreground text-xs py-1.5 rounded hover:bg-primary-hover transition-colors cursor-pointer">
-                  {d.popup.accept}
-                </button>
-                <button className="flex-1 bg-surface text-muted-foreground text-xs py-1.5 rounded hover:bg-background-lighter transition-colors cursor-pointer">
-                  {d.popup.dismiss}
-                </button>
-              </div>
-            </motion.div>
+            <FeaturePreview feature={active} colors={colors} marketingLabels={marketingLabels} />
           </motion.div>
         </AnimatePresence>
       </div>

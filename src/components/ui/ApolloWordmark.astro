@@ -1,0 +1,48 @@
+---
+/**
+ * Apollo.io brand — icon + wordmark (Apollo + .io), matching LogoCloud on home.
+ * No space between "Apollo" and ".io".
+ */
+interface Props {
+	size?: 'sm' | 'md' | 'lg';
+	class?: string;
+}
+
+const { size = 'sm', class: className } = Astro.props;
+
+const iconClass = {
+	sm: 'h-6 w-6',
+	md: 'h-7 w-7',
+	lg: 'h-8 w-8',
+}[size];
+
+const textClass = {
+	sm: 'text-sm font-semibold',
+	md: 'text-lg font-semibold',
+	lg: 'text-xl font-bold',
+}[size];
+---
+
+<div class:list={['inline-flex items-center gap-2.5', className]}>
+	<img
+		src="/assets/integrations/apollo-dark.svg"
+		alt=""
+		width="24"
+		height="24"
+		class:list={[iconClass, 'dark-only shrink-0']}
+		loading="lazy"
+		decoding="async"
+	/>
+	<img
+		src="/assets/integrations/apollo-light.svg"
+		alt=""
+		width="24"
+		height="24"
+		class:list={[iconClass, 'light-only shrink-0']}
+		loading="lazy"
+		decoding="async"
+	/>
+	<span class:list={[textClass, 'text-foreground']}>
+		Apollo<span class="text-primary">.io</span>
+	</span>
+</div>

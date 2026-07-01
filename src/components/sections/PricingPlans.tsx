@@ -3,23 +3,15 @@ import { plans } from '@/lib/pricing';
 
 interface PricingPlansProps {
   translations: Record<string, any>;
+  lang: string;
 }
 
-export default function PricingPlans({ translations }: PricingPlansProps) {
-  const activePlans = plans.filter((p) => p.active);
-
+export default function PricingPlans({ translations, lang }: PricingPlansProps) {
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-start">
-        {activePlans.map((plan) => (
-          <PricingCard
-            key={plan.id}
-            plan={plan}
-            isYearly={false}
-            translations={translations}
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 items-stretch gap-3 sm:grid-cols-2 xl:grid-cols-5 lg:gap-4">
+      {plans.map((plan) => (
+        <PricingCard key={plan.id} plan={plan} translations={translations} lang={lang} />
+      ))}
     </div>
   );
 }

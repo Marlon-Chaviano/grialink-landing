@@ -1,162 +1,122 @@
 export default {
-  /* ── SEO ── */
   seo: {
-    title: 'Plans & Pricing — Grialink | AI for Clinics from $0/mo',
+    title: 'Plans & Pricing — Grialink | AI Sales from $0/mo',
     description:
-      'Choose the ideal plan for your clinic. From free basic prospecting to full AI-powered sales automation. No forced contracts.',
+      'Choose the right plan for your team. From free essentials to full AI sales automation. Upgrade or cancel anytime.',
   },
 
-  /* ── Hero ── */
   hero: {
-    titleLine1: 'Plans that grow',
-    titleHighlight: 'with your clinic',
-    subtitle:
-      'From an independent clinic to a multi-location network. Scale with AI without switching platforms. All plans include unlimited channels: WhatsApp, Instagram, Email, and more.',
-    badge: 'No contracts \u00B7 Cancel anytime',
+    title: 'Grialink Plans',
+    subtitle: 'AI-powered sales for every team size. Upgrade or cancel anytime.',
+    badge: 'No contracts · Cancel anytime',
   },
 
-  /* ── Toggle ── */
-  toggle: {
-    monthly: 'Monthly',
-    yearly: 'Yearly',
-    saveLabel: 'Save {percent}%',
-  },
-
-  /* ── Plans ── */
   plans: {
-    perMonth: '/mo',
-    perYear: '/yr',
+    perMonthShort: 'mo',
+    extras: {
+      agent: '+ Agent + line: {price}/month',
+      admin: '+ Additional admin: {price}/month',
+    },
     free: {
       name: 'Free',
-      description: 'Explore the platform at no cost.',
-      cta: 'Start Free',
+      description: 'Try the essentials.',
+      cta: 'Start free',
+      highlights: [
+        '10 enriched prospects',
+        '50 AI credits',
+        '1 agent · 1 line',
+        'Basic prospecting',
+        '1 segment · 1 team',
+      ],
     },
     starter: {
       name: 'Starter',
-      description: 'Ideal for clinics starting with AI.',
+      description: 'Prospecting + dialer.',
       cta: 'Get started',
+      highlights: [
+        '20 enriched prospects',
+        '1,500 AI credits',
+        'Dialer · 1,000 min included',
+        '5 agents · 5 lines',
+        '5 sequences · 5 segments',
+        '1,000 emails/mo',
+        '5 teams',
+      ],
     },
-    growth: {
-      name: 'Growth',
-      description: 'For actively growing clinics.',
+    pro: {
+      name: 'Pro',
+      description: 'Full AI sales stack.',
       cta: 'Get started',
-      badge: 'Most Popular',
+      badge: 'Popular',
+      highlights: [
+        '50 enriched prospects',
+        '5,000 AI credits',
+        'Dialer · 3,000 min included',
+        'Grial Bots + Call Analysis AI',
+        'Smart dashboard',
+        '10 agents · 10 lines',
+        '5,000 emails/mo',
+        '3 sub-accounts',
+      ],
     },
     scale: {
       name: 'Scale',
-      description: 'Multi-clinic & large teams.',
+      description: 'For growing orgs.',
       cta: 'Get started',
+      highlights: [
+        '100 enriched prospects',
+        '12,000 AI credits',
+        'Dialer · 6,000 min included',
+        'Grial Bots + Call Analysis AI',
+        'Smart dashboard',
+        '20 agents · 20 lines',
+        '50,000 emails/mo',
+        'Unlimited teams · 5 sub-accounts',
+      ],
+    },
+    enterprise: {
+      name: 'Enterprise',
+      description: 'Built for large networks.',
+      priceLabel: 'Custom',
+      cta: 'Contact sales',
+      highlights: [
+        'Custom agents & lines',
+        'Dedicated support + SLA',
+        'Custom onboarding',
+        'Enterprise security',
+      ],
     },
   },
 
-  /* ── Feature categories ── */
-  categories: {
-    prospecting: 'Prospecting & AI',
-    platform: 'Platform',
-    advanced: 'Advanced Features',
-  },
-
-  /* ── Feature labels ── */
-  features: {
-    /* Prospecting */
-    enrichedContacts: '{count} Enriched Contacts',
-    aiCredits: '{count} AI Credits',
-    sequences: '{count} Sequences',
-    noSequences: 'No sequences',
-    emailsPerMonth: '{count} Emails/month',
-    basicProspecting: 'Basic prospecting',
-    advancedAI: 'Advanced AI',
-    noAdvancedAI: 'No advanced AI',
-    unlimitedSequences: 'Unlimited Sequences',
-    unlimitedEmails: 'Unlimited Emails',
-
-    /* Platform */
-    agentLimit: '{count} Agents',
-    adminAccounts: '{count} Admin',
-    adminAccountsPlural: '{count} Admins',
-    unlimitedInboxes: 'Unlimited Inboxes',
-    contactsLimit: '{count} Contacts',
-    unlimitedContacts: 'Unlimited Contacts',
-    conversationsPerMonth: '{count} Conversations/month',
-    unlimitedConversations: 'Unlimited Conversations',
-    teams: '{count} Teams',
-    unlimitedTeams: 'Unlimited Teams',
-    automationRules: '{count} Automation Rules',
-    unlimitedAutomationRules: 'Unlimited Rules',
-    segments: '{count} Segments',
-    unlimitedSegments: 'Unlimited Segments',
-    unlimitedAgents: 'Unlimited Agents',
-
-    /* Advanced */
-    callTranscription: 'Call transcription ({minutes} minutes included)',
-    noCallTranscription: 'No call transcription',
-    smartDashboard: 'Smart dashboard',
-    noSmartDashboard: 'No smart dashboard',
-    prioritySupport: 'Priority support',
-    noPrioritySupport: 'No priority support',
-    multiClinic: 'Multi-clinic',
-    noMultiClinic: 'No multi-clinic',
-    corporateReports: 'Corporate reports',
-    noCorporateReports: 'No corporate reports',
-
-    /* Footnotes */
-    extraAgent: '+ Extra agent: <strong>{price}/mo</strong>',
-    extraAdmin: '+ Extra admin: <strong>{price}/mo</strong>',
-    trialLabel: '{days}-day free trial',
-  },
-
-  /* ── Trust / Security ── */
-  trust: {
-    badge: 'Medical Grade',
-    title: 'Security & Compliance',
-    subtitle:
-      'Sensitive data protection with certified infrastructure and end-to-end encryption for the healthcare sector.',
-    certifications: ['HIPAA Compliant', 'SOC 2 Type II', 'GDPR Ready'],
-    encryptionTitle: 'AES-256 Encryption',
-    encryptionSubtitle: 'Banking standard',
-  },
-
-  /* ── Integrations ── */
   integrations: {
     title: 'Native Integrations',
+    metaAds: 'Meta Ads',
+    googleAds: 'Google Ads',
   },
 
-  /* ── Add-ons ── */
+  trust: {
+    title: 'Security and Compliance',
+    subtitle:
+      'Sensitive data protection with certified infrastructure and end-to-end encryption for the healthcare sector.',
+    hipaa: 'HIPAA Compliant',
+    soc2: 'SOC 2 Type II',
+    gdpr: 'GDPR Ready',
+    encryption: 'AES-256 Encryption',
+    encryptionDesc: 'Banking standard',
+  },
+
   addons: {
-    title: 'Additional Add-ons',
-    items: [
-      {
-        title: 'AI Credit Packages',
-        availability: 'All plans',
-        tiers: [
-          { label: '+2,000', price: '$15/mo' },
-          { label: '+5,000 ⭐', price: '$35/mo' },
-          { label: '+10,000', price: '$60/mo' },
-        ],
-      },
-      {
-        title: 'Contact Packages',
-        availability: 'All plans',
-        tiers: [
-          { label: '+50', price: '$35/mo' },
-          { label: '+100', price: '$65/mo' },
-          { label: '+200', price: '$120/mo' },
-        ],
-      },
-      {
-        title: 'Extra Agent',
-        availability: 'Starter & Growth',
-        description: 'Expand your team for <strong>$20/mo</strong> per additional agent.',
-      },
-      {
-        title: 'Extra Admin',
-        availability: 'Starter, Growth & Scale',
-        description: 'Additional admin sub-account for <strong>$5–$10/mo</strong> depending on plan.',
-      },
+    title: 'Need more capacity?',
+    subtitle: 'Add agents, credits, or emails anytime — no plan change required.',
+    pills: [
+      'Extra prospects · +50 enriched for $35',
+      'Extra AI credits · +5,000 for $35',
+      'Extra emails · +5,000/mo for $25',
+      'Extra agent + line · $20/mo',
+      'Extra admin · +1 for $10/mo',
     ],
   },
 
-  /* ── FAQ ── */
   faq: {
     title: 'Frequently Asked Questions',
     subtitle: 'The answers you need before deciding.',
@@ -179,7 +139,7 @@ export default {
       {
         question: 'Can I manage multiple branches or clinics?',
         answer:
-          'Yes, the Scale plan includes multi-clinic capacity with up to 15 admin accounts and unlimited agents. Ideal for clinic networks with centralized corporate reporting.',
+          'Yes, the Scale plan includes multi-account capacity with up to 5 sub-accounts and 20 agents. Enterprise offers custom limits for large networks.',
       },
       {
         question: 'What communication channels are supported?',
@@ -189,7 +149,7 @@ export default {
       {
         question: 'Can I start with the Free plan?',
         answer:
-          'Yes, the Free plan never expires. You can explore the platform at no cost and upgrade to a paid plan when you\'re ready to unlock advanced AI features and more capacity.',
+          "Yes, the Free plan never expires. You can explore the platform at no cost and upgrade to a paid plan when you're ready to unlock advanced AI features and more capacity.",
       },
       {
         question: 'Can I migrate contacts from another platform?',
@@ -204,16 +164,14 @@ export default {
     ],
   },
 
-  /* ── CTA ── */
   cta: {
     title: 'Start free and scale when ready',
     subtitle:
-      'The Free plan never expires. Explore the platform with no commitment and upgrade when you\'re ready.',
+      "The Free plan never expires. Explore the platform with no commitment and upgrade when you're ready.",
     primaryButton: 'Create free account',
     secondaryButton: 'Schedule personalized demo',
   },
 
-  /* ── Disclaimer ── */
   disclaimer:
-    '* Usage policy: Lead limits reset monthly. AI services are subject to reasonable use terms to ensure optimal performance of the clinical engine. Displayed prices do not include VAT where applicable.',
+    '* Usage policy: Lead limits reset monthly. AI services are subject to fair use terms to ensure optimal clinical engine performance. Prices shown do not include VAT where applicable.',
 };

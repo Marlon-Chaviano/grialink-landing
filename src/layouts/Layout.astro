@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import type { Lang } from "@/i18n/config";
 import Navbar from "@/components/layout/Navbar.astro";
 import Footer from "@/components/layout/Footer.astro";
+import CircuitPageBackground from "@/components/background/CircuitPageBackground.astro";
 
 interface Props {
 	lang: Lang;
@@ -11,9 +12,11 @@ interface Props {
 	noNav?: boolean;
 	/** Hide footer */
 	noFooter?: boolean;
+	/** Circuit background variant */
+	circuitVariant?: 'hero' | 'full';
 }
 
-const { lang, class: className, noNav = false, noFooter = false } = Astro.props;
+const { lang, class: className, noNav = false, noFooter = false, circuitVariant = 'hero' } = Astro.props;
 ---
 
 <!doctype html>
@@ -60,17 +63,19 @@ const { lang, class: className, noNav = false, noFooter = false } = Astro.props;
 		</script>
 	</head>
 	<body class:list={["bg-background text-foreground antialiased", className]}>
+		<CircuitPageBackground variant={circuitVariant} />
+
 		<!-- Skip to content — keyboard a11y -->
 		<a
 			href="#main-content"
-			class="skip-to-content"
+			class="skip-to-content relative z-20"
 		>
 			{lang === "es" ? "Ir al contenido principal" : "Skip to main content"}
 		</a>
 
 		{!noNav && <Navbar lang={lang} />}
 
-		<div id="main-content">
+		<div id="main-content" class="relative z-10">
 			<slot />
 		</div>
 
@@ -80,8 +85,32 @@ const { lang, class: className, noNav = false, noFooter = false } = Astro.props;
 			// Scroll-triggered reveal animations (respects reduced motion)
 			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+			const scrollToLocationHash = () => {
+				const raw = window.location.hash.slice(1);
+				if (!raw) return;
+
+				const id = decodeURIComponent(raw);
+				const target = document.getElementById(id);
+				if (!target) return;
+
+				const header = document.getElementById("site-header");
+				const offset = (header?.offsetHeight ?? 64) + 16;
+				const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+				window.scrollTo({
+					top: Math.max(0, top),
+					behavior: prefersReducedMotion ? "auto" : "smooth",
+				});
+			};
+
+			const runHashScroll = () => {
+				requestAnimationFrame(() => {
+					scrollToLocationHash();
+					window.setTimeout(scrollToLocationHash, 150);
+				});
+			};
+
 			if (prefersReducedMotion) {
-				// Show everything immediately
 				document.querySelectorAll("[data-animate]").forEach((el) => {
 					el.classList.add("is-visible");
 				});
@@ -102,6 +131,10 @@ const { lang, class: className, noNav = false, noFooter = false } = Astro.props;
 					observer.observe(el);
 				});
 			}
+
+			window.addEventListener("DOMContentLoaded", runHashScroll);
+			window.addEventListener("load", runHashScroll);
+			window.addEventListener("hashchange", scrollToLocationHash);
 		</script>
 
 		<!-- Chatwoot live chat -->

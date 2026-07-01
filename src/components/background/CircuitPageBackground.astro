@@ -1,0 +1,219 @@
+---
+/**
+ * Lateral PCB circuit backdrop — ported from PlansPageBackground.vue (app auth/plans).
+ */
+interface Props {
+	/** hero: lateral traces only (default). full: includes center horizontal lines (pricing). */
+	variant?: 'hero' | 'full';
+}
+
+const { variant = 'hero' } = Astro.props;
+
+const WOOT = '#FF8C3D';
+
+const inwardTraces = [
+  { d: 'M 0 72 H 96 V 152 H 192 V 232 H 288', len: 480, dur: 11, delay: 0 },
+  { d: 'M 0 152 H 48 V 112 H 128 V 192 H 208 V 272', len: 500, dur: 12.5, delay: 1.1 },
+  { d: 'M 0 232 H 80 V 292 H 160 V 372 H 248', len: 460, dur: 10.5, delay: 2.3 },
+  { d: 'M 0 312 H 104 V 272 H 184 V 352', len: 360, dur: 9, delay: 3.4 },
+  { d: 'M 0 392 H 88 V 432 H 168', len: 280, dur: 8, delay: 0.7 },
+  { d: 'M 0 52 H 36 V 112 H 108 V 192 H 188 V 268', len: 520, dur: 13, delay: 4.1 },
+  { d: 'M 0 432 H 56 V 396 H 120 V 456', len: 300, dur: 9.5, delay: 2.6 },
+  { d: 'M 0 192 H 28 V 152 H 72 V 228 H 136', len: 340, dur: 10, delay: 5.2 },
+  { d: 'M 0 272 H 64 V 240 H 116 V 300 H 172', len: 310, dur: 8.5, delay: 3.8 },
+  { d: 'M 0 352 H 40 V 318 H 92 V 378', len: 240, dur: 7.5, delay: 1.9 },
+  { d: 'M 0 112 H 72 V 72 H 148 V 132 H 220', len: 420, dur: 11.5, delay: 4.8 },
+  { d: 'M 0 452 H 32 V 420 H 84', len: 180, dur: 7, delay: 6.2 },
+];
+
+const inwardNodes = [
+  { x: 288, y: 232, type: 'via', r: 4 },
+  { x: 208, y: 272, type: 'via', r: 3.6 },
+  { x: 248, y: 372, type: 'pad', r: 3.2 },
+  { x: 184, y: 352, type: 'via', r: 3.5 },
+  { x: 168, y: 432, type: 'pad', r: 3 },
+  { x: 188, y: 268, type: 'via', r: 3.4 },
+  { x: 136, y: 228, type: 'dot', r: 1.8 },
+  { x: 220, y: 132, type: 'via', r: 3.8 },
+  { x: 172, y: 300, type: 'dot', r: 1.6 },
+  { x: 120, y: 456, type: 'dot', r: 1.5 },
+  { x: 148, y: 72, type: 'pad', r: 3 },
+  { x: 92, y: 378, type: 'dot', r: 1.6 },
+];
+
+const glowNodes = [
+  { cx: 288, cy: 232, r: 5, dur: 10, begin: 0.4 },
+  { cx: 220, cy: 132, r: 4.5, dur: 11, begin: 1.6 },
+  { cx: 248, cy: 372, r: 4, dur: 9.5, begin: 2.8 },
+  { cx: 208, cy: 272, r: 4, dur: 10.5, begin: 3.9 },
+];
+
+interface SideConfig {
+  prefix: string;
+  filterId: string;
+  pulseDelayOffset: number;
+  glowBeginOffset: number;
+  flip?: boolean;
+}
+
+const sides: SideConfig[] = [
+  { prefix: 'l', filterId: 'landing-circuit-glow-left', pulseDelayOffset: 0, glowBeginOffset: 0 },
+  {
+    prefix: 'r',
+    filterId: 'landing-circuit-glow-right',
+    pulseDelayOffset: 0.6,
+    glowBeginOffset: 1.1,
+    flip: true,
+  },
+];
+---
+
+<div
+	class="circuit-backdrop pointer-events-none fixed inset-0 z-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_55%,transparent_85%)]"
+	aria-hidden="true"
+>
+  <!-- Bottom woot ambient glow (auth pages) -->
+  <div
+    class="circuit-glow-ambient absolute -bottom-24 inset-x-0 h-[92vh] w-full bg-gradient-to-t from-primary/20 via-primary/8 to-transparent blur-[120px]"
+  >
+  </div>
+  <div
+    class="circuit-glow-ambient absolute -bottom-16 inset-x-0 h-[78vh] w-full bg-gradient-to-t from-primary/14 via-primary/5 to-transparent blur-3xl"
+  >
+  </div>
+
+  <!-- Center hero glow -->
+  <div class="circuit-center-glow absolute left-1/2 top-[18%] h-[min(300px,36vh)] w-[min(820px,78vw)] -translate-x-1/2 -translate-y-1/2">
+    <div class="absolute inset-0 rounded-full bg-primary/16 blur-[96px]"></div>
+    <div class="absolute inset-[16%] rounded-full bg-primary/10 blur-[56px]"></div>
+    <div class="absolute inset-[30%] animate-pulse rounded-full bg-primary/13 blur-[40px]"></div>
+  </div>
+
+  {
+    sides.map((side) => (
+      <div
+        class:list={[
+          'absolute top-0 h-full w-[min(52vw,620px)] [mask-image:linear-gradient(to_right,black_0%,black_58%,rgba(0,0,0,0.4)_78%,transparent_100%)]',
+          side.flip ? 'right-0 scale-x-[-1]' : 'left-0',
+        ]}
+      >
+        <svg
+          class="h-full w-full"
+          viewBox="0 0 320 520"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMinYMid slice"
+        >
+          <defs>
+            <filter id={side.filterId} x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <g
+            stroke={WOOT}
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.1"
+            fill="none"
+            class="circuit-trace-base"
+          >
+            {inwardTraces.map((t) => (
+              <path d={t.d} />
+            ))}
+          </g>
+
+          <g stroke={WOOT} stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill="none" class="circuit-trace-pulse">
+            {inwardTraces.map((t) => (
+              <path
+                d={t.d}
+                stroke-dasharray={`48 ${t.len + 72}`}
+                stroke-dashoffset={t.len + 48}
+                opacity="0"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  from={t.len + 48}
+                  to="-48"
+                  dur={`${t.dur}s`}
+                  begin={`${t.delay + side.pulseDelayOffset}s`}
+                  repeatCount="indefinite"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;0.88;0.88;0"
+                  keyTimes="0;0.06;0.9;1"
+                  dur={`${t.dur}s`}
+                  begin={`${t.delay + side.pulseDelayOffset}s`}
+                  repeatCount="indefinite"
+                />
+              </path>
+            ))}
+          </g>
+
+          {inwardNodes
+            .filter((n) => n.type === 'via')
+            .map((n) => (
+              <g transform={`translate(${n.x},${n.y})`}>
+                <circle r={n.r} fill="none" stroke={WOOT} stroke-width="1" opacity="0.32" />
+                <circle r={n.r * 0.38} fill={WOOT} opacity="0.24" />
+              </g>
+            ))}
+
+          {inwardNodes
+            .filter((n) => n.type === 'pad')
+            .map((n) => (
+              <g transform={`translate(${n.x},${n.y})`}>
+                <circle r={n.r} fill="none" stroke={WOOT} stroke-width="0.9" opacity="0.28" />
+              </g>
+            ))}
+
+          {inwardNodes
+            .filter((n) => n.type === 'dot')
+            .map((n) => (
+              <circle
+                cx={n.x}
+                cy={n.y}
+                r={n.r}
+                fill={WOOT}
+                opacity="0.24"
+              />
+            ))}
+
+          <g filter={`url(#${side.filterId})`}>
+            {glowNodes.map((g) => (
+              <circle cx={g.cx} cy={g.cy} r={g.r} fill={WOOT} opacity="0">
+                <animate
+                  attributeName="opacity"
+                  values="0;0.62;0"
+                  dur={`${g.dur}s`}
+                  begin={`${g.begin + side.glowBeginOffset}s`}
+                  repeatCount="indefinite"
+                />
+              </circle>
+            ))}
+          </g>
+        </svg>
+      </div>
+    ))
+  }
+
+  {
+    variant === 'full' && (
+      <>
+        <div class="absolute left-0 top-[38%] h-px w-[min(38vw,440px)] bg-gradient-to-r from-primary/35 via-primary/12 to-transparent" />
+        <div class="absolute right-0 top-[38%] h-px w-[min(38vw,440px)] bg-gradient-to-l from-primary/35 via-primary/12 to-transparent" />
+      </>
+    )
+  }
+
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-background/35 via-transparent to-background/35"
+  >
+  </div>
+</div>

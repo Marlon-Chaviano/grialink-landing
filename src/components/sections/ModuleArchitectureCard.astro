@@ -1,0 +1,110 @@
+---
+import { type Lang, localizedHref } from "@/i18n/config";
+import {
+	type Product,
+	productColorClasses,
+	productSectionAnchor,
+} from "@/lib/products";
+
+interface Props {
+	lang: Lang;
+	product: Product;
+	name: string;
+	description: string;
+	highlight?: string;
+	viewLabel: string;
+	/** When set, this card is the scroll target (grid-only modules). */
+	scrollTargetId?: string;
+	class?: string;
+}
+
+const {
+	lang,
+	product,
+	name,
+	description,
+	highlight,
+	viewLabel,
+	scrollTargetId,
+	class: className,
+} = Astro.props;
+
+const colors = productColorClasses[product.color];
+const href = localizedHref(
+	`/products#${productSectionAnchor[product.slug] ?? product.slug}`,
+	lang,
+);
+---
+
+<a
+	id={scrollTargetId}
+	href={href}
+	class:list={[
+		"group relative flex min-h-[13.5rem] w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border-light bg-card p-5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:min-h-[14.5rem] lg:rounded-3xl lg:p-6",
+		scrollTargetId && "scroll-mt-28",
+		colors.border,
+		"hover:shadow-glow",
+		className,
+	]}
+	data-animate
+>
+	<div
+		class:list={[
+			"pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full blur-3xl opacity-60 transition-opacity duration-300 group-hover:opacity-100",
+			colors.glow,
+		]}
+		aria-hidden="true"
+	>
+	</div>
+
+	<div class="relative flex flex-1 flex-col">
+		<div
+			class:list={[
+				"mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-border-light",
+				colors.bg,
+				colors.text,
+			]}
+		>
+			<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+				<path d={product.iconPath} />
+			</svg>
+		</div>
+
+		<h3 class="mb-1 text-base font-bold text-foreground lg:text-lg">{name}</h3>
+
+		{
+			highlight && (
+				<p class:list={["mb-2 text-xs font-semibold", colors.text]}>{highlight}</p>
+			)
+		}
+
+		<p class="line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+			{description}
+		</p>
+
+		<div class="mt-5 border-t border-border-light pt-4">
+			<span
+				class:list={[
+					"inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors duration-200",
+					colors.link,
+				]}
+			>
+				{viewLabel}
+				<svg
+					class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M17 8l4 4m0 0l-4 4m4-4H3"
+					/>
+				</svg>
+			</span>
+		</div>
+	</div>
+</a>

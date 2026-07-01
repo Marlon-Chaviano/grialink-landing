@@ -24,8 +24,8 @@
   --clr-primary-hover: #E56500;
   --clr-primary-foreground: #FFFFFF;
 
-  --clr-secondary: #1E2D3F;
-  --clr-secondary-hover: #263A4F;
+  --clr-secondary: #0a0f14;
+  --clr-secondary-hover: #121820;
   --clr-secondary-foreground: #F1F5F9;
 
   --clr-accent: #F8CB2E;
@@ -36,20 +36,20 @@
   --clr-destructive-hover: #D14316;
   --clr-destructive-foreground: #FFFFFF;
 
-  --clr-background: #0F1923;
-  --clr-background-lighter: #162231;
+  --clr-background: #0a0f14;
+  --clr-background-lighter: #0a0f14;
   --clr-foreground: #F1F5F9;
 
-  --clr-surface: #1E2D3F;
+  --clr-surface: rgb(255 255 255 / 0.04);
   --clr-surface-foreground: #F1F5F9;
-  --clr-card: #162231;
+  --clr-card: #0a0f14;
   --clr-card-foreground: #F1F5F9;
 
-  --clr-muted: #263A4F;
+  --clr-muted: #0a0f14;
   --clr-muted-foreground: #94A3B8;
 
-  --clr-border: #263A4F;
-  --clr-border-light: rgba(255, 255, 255, 0.08);
+  --clr-border: rgba(255, 255, 255, 0.1);
+  --clr-border-light: rgba(255, 255, 255, 0.06);
   --clr-ring: #FD7100;
 
   --glow: 0 0 24px rgba(253, 113, 0, 0.2);
@@ -66,8 +66,8 @@
   --clr-primary-hover: #C45800;
   --clr-primary-foreground: #FFFFFF;
 
-  --clr-secondary: #F4F6F8;
-  --clr-secondary-hover: #E8ECF0;
+  --clr-secondary: #f4f6f8;
+  --clr-secondary-hover: #eceff2;
   --clr-secondary-foreground: #17222F;
 
   --clr-accent: #F8CB2E;
@@ -142,6 +142,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
     color-scheme: dark;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -370,6 +371,31 @@
 .light .dark-only { display: none; }
 .light .light-only { display: block; }
 
+/* Circuit backdrop — visible in both themes */
+.circuit-backdrop .circuit-trace-base {
+  opacity: 0.22;
+}
+.light .circuit-backdrop .circuit-trace-base {
+  opacity: 0.14;
+}
+.light .circuit-backdrop .circuit-glow-ambient {
+  opacity: 0.55;
+}
+.light .circuit-backdrop .circuit-center-glow {
+  opacity: 0.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circuit-backdrop .circuit-trace-pulse,
+  .circuit-backdrop .circuit-trace-pulse * {
+    animation: none !important;
+  }
+
+  .circuit-backdrop .circuit-trace-pulse path {
+    opacity: 0 !important;
+  }
+}
+
 /* ─────────────────────────────────────────────
    Accordion (details/summary) smooth animation
    ───────────────────────────────────────────── */
@@ -402,9 +428,31 @@ details[open] > .details-content {
   }
 }
 
-/* ─────────────────────────────────────────────
-   Screen-reader only utility
-   ───────────────────────────────────────────── */
+/* Auth-style panels — matches app register (dark:bg-[#0a0f14] + glass card) */
+@layer utilities {
+  .auth-panel {
+    background-color: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  .auth-card {
+    background-color: var(--clr-background);
+    border: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  :root.light .auth-panel {
+    background-color: rgb(255 255 255 / 0.92);
+    border: 1px solid var(--clr-border);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  }
+
+  :root.light .auth-card {
+    border: 1px solid var(--clr-border);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  }
+}
 .sr-only {
   position: absolute;
   width: 1px;

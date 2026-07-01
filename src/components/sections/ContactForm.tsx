@@ -164,7 +164,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
   const subjectOptions = Object.entries(t.fields.subject.options);
 
   return (
-    <div className="bg-card rounded-2xl border border-border shadow-sm p-8 md:p-12">
+    <div className="rounded-2xl auth-panel p-8 shadow-2xl md:p-12">
       {/* Toast container */}
       <Toaster />
 
