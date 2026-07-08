@@ -1,6 +1,8 @@
 ---
 import Container from "@/components/ui/Container.astro";
 import ApolloWordmark from "@/components/ui/ApolloWordmark.astro";
+import GoHighLevelWordmark from "@/components/ui/GoHighLevelWordmark.astro";
+import RingCentralWordmark from "@/components/ui/RingCentralWordmark.astro";
 import { type Lang } from "@/i18n/config";
 import { useTranslations } from "@/i18n/utils";
 
@@ -14,9 +16,10 @@ const t = useTranslations(lang);
 type ColoredBrand = { name: string; kind: "colored"; icon: string };
 type ThemeBrand = { name: string; kind: "theme"; iconDark: string; iconLight: string };
 type ApolloBrand = { name: string; kind: "apollo" };
+type WordmarkBrand = { name: string; kind: "gohighlevel" | "ringcentral" };
 
 /** Brand marks — local SVGs where Simple Icons CDN no longer hosts the brand */
-const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand> = [
+const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand | WordmarkBrand> = [
 	{ name: "WhatsApp", kind: "colored", icon: "https://cdn.simpleicons.org/whatsapp/25D366" },
 	{
 		name: "Google Calendar",
@@ -26,6 +29,8 @@ const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand> = [
 	},
 	{ name: "Meta Ads", kind: "colored", icon: "https://cdn.simpleicons.org/meta/1877F2" },
 	{ name: "Apollo", kind: "apollo" },
+	{ name: "GoHighLevel", kind: "gohighlevel" },
+	{ name: "RingCentral", kind: "ringcentral" },
 	{ name: "Twilio", kind: "colored", icon: "/assets/integrations/twilio.svg" },
 	{ name: "SendGrid", kind: "colored", icon: "/assets/integrations/sendgrid.svg" },
 ];
@@ -45,10 +50,15 @@ const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand> = [
 					<div
 						class:list={[
 							"flex items-center gap-2.5 opacity-70 transition-opacity duration-200 hover:opacity-100",
-							brand.kind === "apollo" && "gap-0",
+							(brand.kind === "apollo" ||
+								brand.kind === "gohighlevel" ||
+								brand.kind === "ringcentral") &&
+								"gap-0",
 						]}
 					>
 						{brand.kind === "apollo" && <ApolloWordmark size="sm" />}
+						{brand.kind === "gohighlevel" && <GoHighLevelWordmark size="sm" />}
+						{brand.kind === "ringcentral" && <RingCentralWordmark size="sm" />}
 						{brand.kind === "colored" && (
 							<img
 								src={brand.icon}
@@ -82,7 +92,9 @@ const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand> = [
 								/>
 							</>
 						)}
-						{brand.kind !== "apollo" && (
+						{brand.kind !== "apollo" &&
+							brand.kind !== "gohighlevel" &&
+							brand.kind !== "ringcentral" && (
 							<span class="text-sm font-semibold text-foreground">{brand.name}</span>
 						)}
 					</div>

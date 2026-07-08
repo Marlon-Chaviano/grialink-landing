@@ -92,6 +92,8 @@ export default {
     title: 'Integraciones nativas',
     metaAds: 'Meta Ads',
     googleAds: 'Google Ads',
+    goHighLevel: 'GoHighLevel',
+    ringCentral: 'RingCentral',
   },
 
   trust: {

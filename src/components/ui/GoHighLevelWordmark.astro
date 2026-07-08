@@ -1,0 +1,31 @@
+---
+interface Props {
+	size?: 'sm' | 'md' | 'lg';
+	class?: string;
+}
+
+const { size = 'sm', class: className } = Astro.props;
+
+const heightClass = {
+	sm: 'h-5',
+	md: 'h-7',
+	lg: 'h-8',
+}[size];
+---
+
+<div class:list={['inline-flex items-center', className]}>
+	<img
+		src="/assets/integrations/gohighlevel-dark.svg"
+		alt="GoHighLevel"
+		class:list={[heightClass, 'hidden h-auto max-w-[9.5rem] shrink-0 object-contain dark-only']}
+		loading="lazy"
+		decoding="async"
+	/>
+	<img
+		src="/assets/integrations/gohighlevel-light.svg"
+		alt="GoHighLevel"
+		class:list={[heightClass, 'h-auto max-w-[9.5rem] shrink-0 object-contain light-only']}
+		loading="lazy"
+		decoding="async"
+	/>
+</div>

@@ -1,6 +1,8 @@
 ---
 import Container from "@/components/ui/Container.astro";
 import ApolloWordmark from "@/components/ui/ApolloWordmark.astro";
+import GoHighLevelWordmark from "@/components/ui/GoHighLevelWordmark.astro";
+import RingCentralWordmark from "@/components/ui/RingCentralWordmark.astro";
 import { type Lang } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
 
@@ -35,6 +37,8 @@ const integrations = p.integrations as Record<string, string>;
 				<span class="text-xl font-bold text-foreground">{integrations.googleAds}</span>
 			</div>
 			<ApolloWordmark size="lg" class="transition-all hover:opacity-100 opacity-70" />
+			<GoHighLevelWordmark size="lg" class="transition-all hover:opacity-100 opacity-70" />
+			<RingCentralWordmark size="lg" class="transition-all hover:opacity-100 opacity-70" />
 		</div>
 	</Container>
 </section>
