@@ -7,9 +7,15 @@ interface Props {
 const { size = 'sm', class: className } = Astro.props;
 
 const heightClass = {
-	sm: 'h-5',
+	sm: 'h-4',
 	md: 'h-7',
 	lg: 'h-8',
+}[size];
+
+const maxWidthClass = {
+	sm: 'max-w-[5.5rem]',
+	md: 'max-w-[10.5rem]',
+	lg: 'max-w-[10.5rem]',
 }[size];
 ---
 
@@ -17,14 +23,14 @@ const heightClass = {
 	<img
 		src="/assets/integrations/ringcentral-dark.svg"
 		alt="RingCentral"
-		class:list={[heightClass, 'hidden h-auto max-w-[10.5rem] shrink-0 object-contain dark-only']}
+		class:list={[heightClass, maxWidthClass, 'hidden h-auto shrink-0 object-contain dark-only']}
 		loading="lazy"
 		decoding="async"
 	/>
 	<img
 		src="/assets/integrations/ringcentral-light.svg"
 		alt="RingCentral"
-		class:list={[heightClass, 'h-auto max-w-[10.5rem] shrink-0 object-contain light-only']}
+		class:list={[heightClass, maxWidthClass, 'h-auto shrink-0 object-contain light-only']}
 		loading="lazy"
 		decoding="async"
 	/>

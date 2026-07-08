@@ -24,10 +24,10 @@ const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand | WordmarkBran
 	{
 		name: "Google Calendar",
 		kind: "theme",
-		iconDark: "https://cdn.simpleicons.org/googlecalendar/ffffff",
-		iconLight: "https://cdn.simpleicons.org/googlecalendar/4285F4",
+		iconDark: "/assets/integrations/google-calendar-dark.svg",
+		iconLight: "/assets/integrations/google-calendar-light.svg",
 	},
-	{ name: "Meta Ads", kind: "colored", icon: "https://cdn.simpleicons.org/meta/1877F2" },
+	{ name: "Meta Ads", kind: "colored", icon: "/assets/integrations/meta.svg" },
 	{ name: "Apollo", kind: "apollo" },
 	{ name: "GoHighLevel", kind: "gohighlevel" },
 	{ name: "RingCentral", kind: "ringcentral" },
@@ -42,14 +42,14 @@ const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand | WordmarkBran
 			{t("logoCloud.subtitle")}
 		</p>
 		<div
-			class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-12 lg:gap-x-14"
+			class="mx-auto grid max-w-3xl grid-cols-2 items-center justify-items-center gap-x-6 gap-y-8 sm:max-w-4xl sm:grid-cols-4 sm:gap-x-8"
 			data-animate
 		>
 			{
 				integrations.map((brand) => (
 					<div
 						class:list={[
-							"flex items-center gap-2.5 opacity-70 transition-opacity duration-200 hover:opacity-100",
+							"flex min-w-0 items-center justify-center gap-2.5 px-1 opacity-70 transition-opacity duration-200 hover:opacity-100",
 							(brand.kind === "apollo" ||
 								brand.kind === "gohighlevel" ||
 								brand.kind === "ringcentral") &&
