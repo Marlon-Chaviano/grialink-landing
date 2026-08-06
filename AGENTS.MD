@@ -5,6 +5,15 @@ Every task must align with the existing architecture, UI system, and development
 
 The AI agent must NOT introduce ad-hoc styles, duplicate components, or inconsistent design decisions.
 
+## Skills — CRITICAL (antes de ejecutar)
+
+Antes de implementar o cambiar código ante un prompt:
+
+1. Identificar el dominio de la tarea (UI, Astro, content, design system, etc.).
+2. Buscar un skill aplicable en `.agents/skills/`, `.cursor/skills/` y `.claude/skills/` si existen (y `find-skills` / `pnpx skills find` si no hay match local).
+3. Leer el `SKILL.md` coincidente y seguirlo **antes** de escribir código.
+4. Si no hay skill, seguir este AGENTS.MD; no inventar convenciones paralelas.
+
 ⸻
 
 1. Core Principles

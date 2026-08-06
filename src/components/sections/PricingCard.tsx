@@ -20,7 +20,7 @@ export default function PricingCard({ plan, translations, lang }: PricingCardPro
   const ctaHref =
     plan.id === 'enterprise'
       ? `/${lang}/contact`
-      : 'https://app.grialink.com/app/auth/register';
+      : `https://app.grialink.com/app/auth/register?plan=${plan.id}`;
 
   return (
     <div className={cn('relative flex h-full w-full', isFeatured && 'xl:-mt-1')}>
