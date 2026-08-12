@@ -10,7 +10,7 @@ export default {
   hero: {
     badge: 'Legal',
     title: 'Política de Privacidad',
-    lastUpdated: 'Última actualización: 6 de agosto de 2026',
+    lastUpdated: 'Última actualización: 12 de agosto de 2026',
   },
 
   /* ── Content sections ── */
@@ -36,6 +36,7 @@ export default {
         '<strong>¿En qué situaciones y con qué partes compartimos información personal?</strong> Podemos compartir información en situaciones específicas y con terceros específicos.',
         '<strong>¿Cómo mantenemos segura su información?</strong> Contamos con procesos y procedimientos organizativos y técnicos adecuados para proteger su información personal. Sin embargo, ninguna transmisión electrónica por internet o tecnología de almacenamiento de información puede garantizarse al 100%.',
         '<strong>¿Cuáles son sus derechos?</strong> Dependiendo de su ubicación geográfica, la ley de privacidad aplicable puede otorgarle ciertos derechos sobre su información personal.',
+        '<strong>¿Qué pasa con los números móviles y los mensajes de texto?</strong> Los números de teléfono móvil y el consentimiento SMS nunca se comparten ni se venden a terceros ni a afiliados con fines de marketing. Consulte la sección 13 a continuación.',
       ],
     },
     {
@@ -146,6 +147,16 @@ export default {
       content: [
         'Según las leyes aplicables de su país, puede tener derecho a solicitar acceso a la información personal que recopilamos de usted, detalles sobre cómo la hemos procesado, corregir inexactitudes o eliminar su información personal. También puede tener derecho a retirar su consentimiento para nuestro procesamiento de su información personal.',
         'Para solicitar revisar, actualizar o eliminar su información personal, contáctenos en info@grialink.com.',
+      ],
+    },
+    {
+      title: '13. SMS e Información Móvil',
+      content: [
+        '<strong>No compartimos ni vendemos información móvil.</strong> Los números de teléfono móvil y el consentimiento SMS recopilados con el fin de enviar comunicaciones por mensaje de texto nunca se comparten, venden, alquilan ni divulgan de ninguna otra forma a terceros ni a afiliados para sus propios fines de marketing o promoción. Esto aplica a todos los datos de consentimiento y suscripción del programa de mensajería. El intercambio de información con subcontratistas se limita a los proveedores de servicios que hacen posible la entrega de los mensajes (por ejemplo, nuestro operador de mensajería), y dichos proveedores tienen prohibido usar la información para cualquier otro fin.',
+        '<strong>Cómo recopilamos el consentimiento SMS.</strong> Solo enviamos mensajes de texto de marketing a personas que se han suscrito expresamente. El consentimiento se recopila en nuestra página pública de suscripción en <a href="https://grialink.com/es/sms-signup">https://grialink.com/es/sms-signup</a>, donde usted ingresa su número móvil y marca una casilla —desmarcada por defecto— aceptando recibir mensajes de texto de marketing recurrentes de Grialink. Nunca compramos, alquilamos ni importamos números de teléfono de listas de terceros.',
+        '<strong>Qué enviamos.</strong> Anuncios de producto y nuevas funciones, invitaciones a webinars y eventos, ofertas por tiempo limitado en los planes de suscripción de Grialink, y seguimientos si solicitó una demo o inició una prueba gratuita. La frecuencia varía, hasta 4 mensajes al mes. Pueden aplicar tarifas de mensajes y datos.',
+        '<strong>Cómo cancelar.</strong> Puede retirar su consentimiento en cualquier momento respondiendo STOP a cualquier mensaje. Recibirá una única confirmación y ningún otro mensaje de texto de marketing. Responda HELP a cualquier mensaje, o escriba a info@grialink.com, para obtener ayuda con el programa.',
+        '<strong>Conservación.</strong> Conservamos un registro de su suscripción —incluida la fecha, la página donde se otorgó el consentimiento y el texto exacto de la divulgación que aceptó— mientras permanezca suscrito y durante un periodo razonable posterior, con el fin de demostrar el cumplimiento de la normativa de telecomunicaciones aplicable.',
       ],
     },
   ],

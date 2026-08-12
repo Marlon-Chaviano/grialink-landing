@@ -10,7 +10,7 @@ export default {
   hero: {
     badge: 'Legal',
     title: 'Terms of Service',
-    lastUpdated: 'Last updated: February 06, 2026',
+    lastUpdated: 'Last updated: August 12, 2026',
   },
 
   /* ── Content sections ── */
@@ -31,7 +31,7 @@ export default {
     {
       title: '2. Description of Services',
       content: [
-        'Grialink provides an omnichannel Sales Engine System (SES) platform powered by artificial intelligence, designed specifically for aesthetic, dental, and healthcare clinics. Our Services include but are not limited to:',
+        'Grialink provides an omnichannel Sales Engine System (SES) platform powered by artificial intelligence, designed specifically for aesthetic, dental and wellness practices. Our Services include but are not limited to:',
         '• <strong>Prospector AI:</strong> Intelligent lead discovery and qualification tools.',
         '• <strong>Outreach Engine:</strong> Automated omnichannel communication workflows.',
         '• <strong>Smart Pipeline:</strong> Visual SES pipeline management with AI-powered insights.',
@@ -105,7 +105,7 @@ export default {
       content: [
         'THE SERVICES ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR COURSE OF PERFORMANCE.',
         'We do not warrant that the Services will function uninterrupted, secure, or available at any particular time or location; that any errors or defects will be corrected; that the Services are free of viruses or other harmful components; or that the results of using the Services will meet your requirements.',
-        'The AI-powered features of our Services are designed to assist and enhance your clinic operations. However, they should not be considered a substitute for professional medical judgment or decision-making.',
+        'The AI-powered features of our Services are designed to assist and enhance your practice operations. However, they should not be considered a substitute for professional medical judgment or decision-making.',
       ],
     },
     {
@@ -135,13 +135,26 @@ export default {
       ],
     },
     {
-      title: '13. Severability',
+      title: '13. SMS and Text Messaging Program',
+      content: [
+        'By providing your mobile number and checking the consent box on our SMS opt-in page at <a href="https://grialink.com/en/sms-signup">https://grialink.com/en/sms-signup</a>, you agree to receive recurring marketing text messages from Grialink at that number. Consent is not a condition of purchase of any goods or services.',
+        '<strong>Program description.</strong> Messages may include product announcements and new feature releases, webinar and event invitations, limited-time offers on Grialink subscription plans, and follow-ups if you requested a demo or started a free trial.',
+        '<strong>Message frequency and cost.</strong> Message frequency varies, up to 4 messages per month. Message and data rates may apply. Grialink does not charge for participation in this program, but your mobile carrier may charge you for messages sent and received.',
+        '<strong>Opting out.</strong> You may cancel at any time by replying STOP to any message from us. After you send STOP, we will send you a single message confirming that you have been unsubscribed, after which you will receive no further marketing text messages. To rejoin, sign up again on our opt-in page.',
+        '<strong>Help.</strong> Reply HELP to any message from us for assistance, or email info@grialink.com.',
+        '<strong>Carriers and delivery.</strong> Mobile carriers are not liable for delayed or undelivered messages. Not all mobile carriers or devices are supported, and delivery is subject to effective transmission by your carrier.',
+        '<strong>Privacy.</strong> Mobile phone numbers and SMS opt-in consent are never shared with or sold to third parties or affiliates for marketing purposes. See section 13 of our <a href="https://grialink.com/en/privacy">Privacy Policy</a>.',
+        '<strong>Eligibility.</strong> This program is available to residents of the United States who are 18 years of age or older and who are the account holder of, or have authority over, the mobile number provided.',
+      ],
+    },
+    {
+      title: '14. Severability',
       content: [
         'If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law, and the remaining provisions will continue in full force and effect.',
       ],
     },
     {
-      title: '14. Contact Information',
+      title: '15. Contact Information',
       content: [
         'If you have any questions about these Terms, please contact us:',
         '<strong>Ezi Group LLC (DBA Grialink)</strong>',

@@ -28,6 +28,7 @@ export default {
       links: [
         { label: 'Política de Privacidad', href: '/privacy' },
         { label: 'Términos de Servicio', href: '/terms' },
+        { label: 'Alertas SMS', href: '/sms-signup' },
       ],
     },
   ],

@@ -10,7 +10,7 @@ export default {
   hero: {
     badge: 'Legal',
     title: 'Privacy Policy',
-    lastUpdated: 'Last updated: August 06, 2026',
+    lastUpdated: 'Last updated: August 12, 2026',
   },
 
   /* ── Content sections ── */
@@ -36,6 +36,7 @@ export default {
         '<strong>In what situations and with which parties do we share personal information?</strong> We may share information in specific situations and with specific third parties.',
         '<strong>How do we keep your information safe?</strong> We have adequate organizational and technical processes and procedures in place to protect your personal information. However, no electronic transmission over the internet or information storage technology can be guaranteed to be 100% secure.',
         '<strong>What are your rights?</strong> Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding your personal information.',
+        '<strong>What about mobile numbers and text messages?</strong> Mobile phone numbers and SMS opt-in consent are never shared with or sold to third parties or affiliates for marketing purposes. See section 13 below.',
       ],
     },
     {
@@ -146,6 +147,16 @@ export default {
       content: [
         'Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information.',
         'To request to review, update, or delete your personal information, please contact us at info@grialink.com.',
+      ],
+    },
+    {
+      title: '13. SMS and Mobile Information',
+      content: [
+        '<strong>No sharing or sale of mobile information.</strong> Mobile phone numbers and SMS opt-in consent collected for the purpose of SMS communications are never shared with, sold, rented, or otherwise disclosed to third parties or affiliates for their own marketing or promotional purposes. This applies to all text messaging originator opt-in data and consent. Information sharing with subcontractors is limited to service providers who support the delivery of the messages themselves (for example, our messaging carrier), and those providers are prohibited from using the information for any other purpose.',
+        '<strong>How we collect SMS consent.</strong> We only send marketing text messages to individuals who have expressly opted in. Consent is collected on our public opt-in page at <a href="https://grialink.com/en/sms-signup">https://grialink.com/en/sms-signup</a>, where you enter your mobile number and check a box — unchecked by default — agreeing to receive recurring marketing text messages from Grialink. We never purchase, rent, or import phone numbers from third-party lists.',
+        '<strong>What we send.</strong> Product announcements and new feature releases, webinar and event invitations, limited-time offers on Grialink subscription plans, and follow-ups if you requested a demo or started a free trial. Message frequency varies, up to 4 messages per month. Message and data rates may apply.',
+        '<strong>How to opt out.</strong> You may withdraw your consent at any time by replying STOP to any message. You will receive a single confirmation and no further marketing text messages. Reply HELP to any message, or email info@grialink.com, for help with the program.',
+        '<strong>Retention.</strong> We retain a record of your opt-in — including the date, the page where consent was given, and the exact disclosure text you agreed to — for as long as you remain subscribed and for a reasonable period afterward, in order to demonstrate compliance with applicable telecommunications regulations.',
       ],
     },
   ],

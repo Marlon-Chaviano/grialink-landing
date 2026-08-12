@@ -1,0 +1,30 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+import SmsSignup from "@/components/sections/SmsSignup.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+	return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const smsSignup = getTranslations(lang, "smsSignup") as Record<string, any>;
+const seo = smsSignup.seo as Record<string, string>;
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO
+			lang={lang}
+			title={seo.title}
+			description={seo.description}
+		/>
+	</Fragment>
+
+	<main>
+		<SmsSignup lang={lang} />
+	</main>
+</Layout>

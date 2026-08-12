@@ -1,0 +1,359 @@
+---
+/**
+ * SmsSignup — public SMS opt-in page (A2P 10DLC Call-to-Action).
+ *
+ * This page is what carriers and The Campaign Registry review to verify consent,
+ * so three things must stay true:
+ *   1. It is reachable without an account.
+ *   2. The consent checkbox is required and unchecked by default.
+ *   3. The checkbox text, frequency, opt-out keywords, and "message and data
+ *      rates may apply" match the Message Flow submitted to Twilio verbatim.
+ * Changing the disclosure copy means re-submitting the campaign.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = getTranslations(lang, "smsSignup") as Record<string, any>;
+const hero = s.hero;
+const f = s.form;
+const disclosures = s.disclosures;
+
+const linkClass = "text-primary hover:underline font-medium break-all";
+/* Bare canonical URLs — matches the Message Flow submitted to Twilio/TCR. */
+const termsUrl = "https://grialink.com/terms";
+const privacyUrl = "https://grialink.com/privacy";
+const consentHtml = f.consent
+	.replace(
+		"{termsUrl}",
+		`<a href="${termsUrl}" class="${linkClass}">${termsUrl}</a>`,
+	)
+	.replace(
+		"{privacyUrl}",
+		`<a href="${privacyUrl}" class="${linkClass}">${privacyUrl}</a>`,
+	);
+
+/**
+ * Digits plus the separators people actually type: "+1 (555) 123-4567".
+ * Deliberately backslash-free — Astro strips escapes from literal attribute
+ * values, which silently turned `\s` into the letter "s" here. `-` stays last
+ * so it is read as a literal, not a range.
+ */
+const PHONE_PATTERN = "[+]?[0-9 ().-]{10,20}";
+
+const fieldClass =
+	"w-full rounded-xl border border-border-light bg-surface px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20";
+
+const endpoint = `${import.meta.env.PUBLIC_BACKEND_URL?.replace(/\/$/, "") || "https://app.grialink.com"}/api/sms_optin`;
+---
+
+<!-- Hero -->
+<section class="relative overflow-hidden pt-32 pb-12 lg:pt-40 lg:pb-16">
+	<div
+		class="absolute inset-0 -z-10 overflow-hidden pointer-events-none"
+		aria-hidden="true"
+	>
+		<div class="absolute top-[-10%] right-[-5%] h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl"></div>
+		<div class="absolute bottom-[-10%] left-[-5%] h-[400px] w-[400px] rounded-full bg-accent/5 blur-3xl"></div>
+	</div>
+
+	<Container class="relative z-10 text-center">
+		<div
+			class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
+			data-animate
+		>
+			<svg
+				class="h-3.5 w-3.5"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				viewBox="0 0 24 24"
+			>
+				<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+			</svg>
+			{hero.badge}
+		</div>
+
+		<h1
+			class="mb-4 text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-5xl md:text-6xl"
+			data-animate
+		>
+			{hero.title}
+		</h1>
+
+		<p
+			class="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground"
+			data-animate
+		>
+			{hero.subtitle}
+		</p>
+
+		<div
+			class="mx-auto mt-6 h-[3px] w-12 rounded-full bg-primary"
+			aria-hidden="true"
+		>
+		</div>
+	</Container>
+</section>
+
+<!-- Form + disclosures -->
+<section class="section-spacing !pt-0 bg-background">
+	<Container>
+		<div class="mx-auto max-w-2xl space-y-8">
+			{/* No `data-animate` on the two cards below: scroll-reveal starts them at
+			    opacity:0, and compliance reviewers and crawlers that never scroll would
+			    see the consent form and disclosures as blank. Decorative hero only. */}
+			<div class="rounded-2xl border border-border-light bg-card p-8 shadow-sm md:p-10">
+				<h2 class="mb-6 text-xl font-bold tracking-tight text-foreground">{f.heading}</h2>
+
+				<form
+					id="sms-optin-form"
+					class="space-y-5"
+					novalidate
+					data-endpoint={endpoint}
+				>
+					<div>
+						<label
+							for="sms-first-name"
+							class="mb-2 block text-sm font-medium text-foreground">{f.fields.firstName.label}</label
+						>
+						<input
+							id="sms-first-name"
+							name="firstName"
+							type="text"
+							required
+							minlength="2"
+							maxlength="100"
+							autocomplete="given-name"
+							placeholder={f.fields.firstName.placeholder}
+							class={fieldClass}
+						/>
+						<p
+							data-error-for="firstName"
+							class="mt-1.5 hidden text-xs text-destructive"
+						>
+						</p>
+					</div>
+
+					<div>
+						<label
+							for="sms-email"
+							class="mb-2 block text-sm font-medium text-foreground">{f.fields.email.label}</label
+						>
+						<input
+							id="sms-email"
+							name="email"
+							type="email"
+							required
+							autocomplete="email"
+							placeholder={f.fields.email.placeholder}
+							class={fieldClass}
+						/>
+						<p
+							data-error-for="email"
+							class="mt-1.5 hidden text-xs text-destructive"
+						>
+						</p>
+					</div>
+
+					<div>
+						<label
+							for="sms-phone"
+							class="mb-2 block text-sm font-medium text-foreground">{f.fields.phone.label}</label
+						>
+						<input
+							id="sms-phone"
+							name="phone"
+							type="tel"
+							required
+							pattern={PHONE_PATTERN}
+							autocomplete="tel"
+							placeholder={f.fields.phone.placeholder}
+							class={fieldClass}
+						/>
+						<p class="mt-1.5 text-xs text-muted-foreground">{f.fields.phone.hint}</p>
+						<p
+							data-error-for="phone"
+							class="mt-1.5 hidden text-xs text-destructive"
+						>
+						</p>
+					</div>
+
+					{/* Consent must stay required and unchecked by default — carriers verify this. */}
+					<div class="rounded-xl border border-border-light bg-surface/50 p-4">
+						<label
+							for="sms-consent"
+							class="flex cursor-pointer items-start gap-3"
+						>
+							<input
+								id="sms-consent"
+								name="consent"
+								type="checkbox"
+								required
+								class="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded border-border-light text-primary focus:ring-2 focus:ring-primary/20"
+							/>
+							<span
+								class="text-[13px] leading-relaxed text-muted-foreground"
+								set:html={consentHtml}
+							/>
+						</label>
+						<p
+							data-error-for="consent"
+							class="mt-2 hidden text-xs text-destructive"
+						>
+						</p>
+					</div>
+
+					{/* Honeypot — hidden from people, filled by bots. */}
+					<div
+						class="absolute left-[-9999px]"
+						aria-hidden="true"
+					>
+						<label for="sms-hp">Company</label>
+						<input
+							id="sms-hp"
+							name="_hp"
+							type="text"
+							tabindex="-1"
+							autocomplete="off"
+						/>
+					</div>
+
+					<button
+						type="submit"
+						data-cta="sms-optin-submit"
+						class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/35 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+					>
+						<span data-submit-idle>{f.submit}</span>
+						<span
+							data-submit-loading
+							class="hidden">{f.sending}</span
+						>
+					</button>
+
+					<p
+						data-form-status
+						role="status"
+						aria-live="polite"
+						class="hidden text-sm"
+					>
+					</p>
+				</form>
+			</div>
+
+			<div class="rounded-2xl border border-border-light bg-card p-8 shadow-sm md:p-10">
+				<h2 class="mb-6 text-xl font-bold tracking-tight text-foreground">{disclosures.title}</h2>
+				<dl class="space-y-4">
+					{
+						disclosures.items.map((item: { term: string; description: string }) => (
+							<div class="border-b border-border-light pb-4 last:border-0 last:pb-0">
+								<dt class="mb-1 text-sm font-semibold text-foreground">{item.term}</dt>
+								<dd class="text-[15px] leading-[1.75] text-muted-foreground">{item.description}</dd>
+							</div>
+						))
+					}
+				</dl>
+			</div>
+		</div>
+	</Container>
+</section>
+
+<script
+	is:inline
+	define:vars={{ messages: f.validation, states: { success: f.success, error: f.error } }}
+>
+	(() => {
+		const form = document.getElementById("sms-optin-form");
+		if (!form) return;
+
+		const status = form.querySelector("[data-form-status]");
+		const button = form.querySelector('button[type="submit"]');
+		const idle = form.querySelector("[data-submit-idle]");
+		const loading = form.querySelector("[data-submit-loading]");
+
+		function messageFor(field) {
+			const v = field.validity;
+			if (v.valueMissing) return messages[`${field.name}Required`] ?? "";
+			if (v.typeMismatch || v.patternMismatch) return messages[`${field.name}Invalid`] ?? "";
+			if (v.tooShort) return messages[`${field.name}Min`] ?? "";
+			return "";
+		}
+
+		function showError(field) {
+			const node = form.querySelector(`[data-error-for="${field.name}"]`);
+			if (!node) return field.checkValidity();
+			const text = messageFor(field);
+			node.textContent = text;
+			node.classList.toggle("hidden", !text);
+			field.setAttribute("aria-invalid", text ? "true" : "false");
+			return !text;
+		}
+
+		const inputs = () =>
+			[...form.querySelectorAll("input")].filter((field) => field.name !== "_hp");
+
+		inputs().forEach((field) => {
+			const event = field.type === "checkbox" ? "change" : "blur";
+			field.addEventListener(event, () => showError(field));
+		});
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const fields = inputs();
+			const allValid = fields.map(showError).every(Boolean);
+			if (!allValid) {
+				fields.find((field) => !field.checkValidity())?.focus();
+				return;
+			}
+
+			// Honeypot: a filled hidden field means a bot — pretend it worked.
+			if (form.querySelector('[name="_hp"]').value) return;
+
+			button.disabled = true;
+			idle.classList.add("hidden");
+			loading.classList.remove("hidden");
+			status.classList.add("hidden");
+
+			try {
+				const body = Object.fromEntries(
+					fields.map((field) => [
+						field.name,
+						field.type === "checkbox" ? field.checked : field.value,
+					]),
+				);
+				// Carriers require proof of when and where consent was captured.
+				body.consentText = form.querySelector("#sms-consent").closest("label").innerText.trim();
+				body.consentUrl = window.location.href;
+
+				const res = await fetch(form.dataset.endpoint, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						"Accept-Language": document.documentElement.lang || "en",
+					},
+					body: JSON.stringify(body),
+				});
+
+				status.textContent = res.ok ? states.success : states.error;
+				status.className = `text-sm ${res.ok ? "text-primary" : "text-destructive"}`;
+				if (res.ok) form.reset();
+			} catch {
+				status.textContent = states.error;
+				status.className = "text-sm text-destructive";
+			} finally {
+				button.disabled = false;
+				idle.classList.remove("hidden");
+				loading.classList.add("hidden");
+				status.classList.remove("hidden");
+			}
+		});
+	})();
+</script>

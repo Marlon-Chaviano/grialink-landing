@@ -6,10 +6,10 @@ import { defaultLang, supportedLanguages } from "@/i18n/config";
  * Detects browser language at runtime and redirects to the correct locale.
  */
 
-const knownPages = ["about", "contact", "pricing", "privacy", "products", "terms"];
+const knownPages = ["about", "contact", "pricing", "privacy", "products", "sms-signup", "terms"];
 
 export function getStaticPaths() {
-	const pages = ["about", "contact", "pricing", "privacy", "products", "terms"];
+	const pages = ["about", "contact", "pricing", "privacy", "products", "sms-signup", "terms"];
 	return pages.map((slug) => ({ params: { slug } }));
 }
 

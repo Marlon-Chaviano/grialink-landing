@@ -61,6 +61,19 @@ const { lang, class: className, noNav = false, noFooter = false, circuitVariant 
 				document.documentElement.classList.toggle("dark", d);
 			})();
 		</script>
+
+		{/* Scroll-reveal starts at opacity:0 and is un-hidden by JS. Without JS
+		    that never fires, which would serve the legal and SMS opt-in pages
+		    blank to crawlers and compliance reviewers. */}
+		<noscript>
+			<style>
+				[data-animate],
+				.stagger-children > * {
+					opacity: 1 !important;
+					transform: none !important;
+				}
+			</style>
+		</noscript>
 	</head>
 	<body class:list={["bg-background text-foreground antialiased", className]}>
 		<CircuitPageBackground variant={circuitVariant} />

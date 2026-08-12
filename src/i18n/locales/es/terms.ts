@@ -10,7 +10,7 @@ export default {
   hero: {
     badge: 'Legal',
     title: 'Términos de Servicio',
-    lastUpdated: 'Última actualización: 6 de febrero de 2026',
+    lastUpdated: 'Última actualización: 12 de agosto de 2026',
   },
 
   /* ── Content sections ── */
@@ -31,7 +31,7 @@ export default {
     {
       title: '2. Descripción de los Servicios',
       content: [
-        'Grialink proporciona una plataforma SES (Sales Engine System) omnicanal impulsada por inteligencia artificial, diseñada específicamente para clínicas estéticas, dentales y de salud. Nuestros Servicios incluyen, pero no se limitan a:',
+        'Grialink proporciona una plataforma SES (Sales Engine System) omnicanal impulsada por inteligencia artificial, diseñada específicamente para centros de estética, dental y bienestar. Nuestros Servicios incluyen, pero no se limitan a:',
         '• <strong>Prospector AI:</strong> Herramientas inteligentes de descubrimiento y calificación de leads.',
         '• <strong>Outreach Engine:</strong> Flujos de comunicación omnicanal automatizados.',
         '• <strong>Smart Pipeline:</strong> Gestión visual de pipeline SES con insights impulsados por IA.',
@@ -105,7 +105,7 @@ export default {
       content: [
         'LOS SERVICIOS SE PROPORCIONAN "TAL COMO ESTÁN" Y "SEGÚN DISPONIBILIDAD", SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPRESAS O IMPLÍCITAS, INCLUYENDO PERO NO LIMITÁNDOSE A GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR, NO INFRACCIÓN O CURSO DE DESEMPEÑO.',
         'No garantizamos que los Servicios funcionen de manera ininterrumpida, segura o disponible en cualquier momento o lugar particular; que cualquier error o defecto será corregido; que los Servicios estén libres de virus u otros componentes dañinos; o que los resultados de usar los Servicios cumplan con sus requisitos.',
-        'Las funciones impulsadas por IA de nuestros Servicios están diseñadas para asistir y mejorar las operaciones de su clínica. Sin embargo, no deben considerarse un sustituto del juicio o la toma de decisiones médicas profesionales.',
+        'Las funciones impulsadas por IA de nuestros Servicios están diseñadas para asistir y mejorar las operaciones de su centro. Sin embargo, no deben considerarse un sustituto del juicio o la toma de decisiones médicas profesionales.',
       ],
     },
     {
@@ -135,13 +135,26 @@ export default {
       ],
     },
     {
-      title: '13. Divisibilidad',
+      title: '13. Programa de Mensajes SMS',
+      content: [
+        'Al proporcionar su número móvil y marcar la casilla de consentimiento en nuestra página de suscripción SMS en <a href="https://grialink.com/es/sms-signup">https://grialink.com/es/sms-signup</a>, usted acepta recibir mensajes de texto de marketing recurrentes de Grialink en ese número. El consentimiento no es condición para la compra de ningún producto o servicio.',
+        '<strong>Descripción del programa.</strong> Los mensajes pueden incluir anuncios de producto y nuevas funciones, invitaciones a webinars y eventos, ofertas por tiempo limitado en los planes de suscripción de Grialink, y seguimientos si solicitó una demo o inició una prueba gratuita.',
+        '<strong>Frecuencia y costo.</strong> La frecuencia de los mensajes varía, hasta 4 mensajes al mes. Pueden aplicar tarifas de mensajes y datos. Grialink no cobra por participar en este programa, pero su operador móvil sí podría cobrarle por los mensajes enviados y recibidos.',
+        '<strong>Cómo cancelar.</strong> Puede cancelar en cualquier momento respondiendo STOP a cualquier mensaje nuestro. Después de enviar STOP, le enviaremos un único mensaje confirmando la baja, tras lo cual no recibirá más mensajes de texto de marketing. Para volver a suscribirse, regístrese nuevamente en nuestra página de suscripción.',
+        '<strong>Ayuda.</strong> Responda HELP a cualquier mensaje nuestro para recibir asistencia, o escriba a info@grialink.com.',
+        '<strong>Operadores y entrega.</strong> Los operadores móviles no son responsables por mensajes demorados o no entregados. No todos los operadores móviles ni todos los dispositivos son compatibles, y la entrega está sujeta a la transmisión efectiva por parte de su operador.',
+        '<strong>Privacidad.</strong> Los números de teléfono móvil y el consentimiento SMS nunca se comparten ni se venden a terceros ni a afiliados con fines de marketing. Consulte la sección 13 de nuestra <a href="https://grialink.com/es/privacy">Política de Privacidad</a>.',
+        '<strong>Elegibilidad.</strong> Este programa está disponible para residentes de los Estados Unidos mayores de 18 años que sean titulares del número móvil proporcionado o tengan autoridad sobre él.',
+      ],
+    },
+    {
+      title: '14. Divisibilidad',
       content: [
         'Si alguna disposición de estos Términos se considera inaplicable o inválida, dicha disposición se modificará e interpretará para lograr los objetivos de dicha disposición en la mayor medida posible bajo la ley aplicable, y las disposiciones restantes continuarán en pleno vigor y efecto.',
       ],
     },
     {
-      title: '14. Información de Contacto',
+      title: '15. Información de Contacto',
       content: [
         'Si tiene preguntas sobre estos Términos, contáctenos:',
         '<strong>Ezi Group LLC (DBA Grialink)</strong>',
