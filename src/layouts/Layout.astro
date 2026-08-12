@@ -4,6 +4,7 @@ import type { Lang } from "@/i18n/config";
 import Navbar from "@/components/layout/Navbar.astro";
 import Footer from "@/components/layout/Footer.astro";
 import CircuitPageBackground from "@/components/background/CircuitPageBackground.astro";
+import Analytics from "@/components/seo/Analytics.astro";
 
 interface Props {
 	lang: Lang;
@@ -14,9 +15,18 @@ interface Props {
 	noFooter?: boolean;
 	/** Circuit background variant */
 	circuitVariant?: 'hero' | 'full';
+	/** Page opens on a permanently dark hero band — the header adapts while unscrolled. */
+	darkHero?: boolean;
 }
 
-const { lang, class: className, noNav = false, noFooter = false, circuitVariant = 'hero' } = Astro.props;
+const {
+	lang,
+	class: className,
+	noNav = false,
+	noFooter = false,
+	circuitVariant = 'hero',
+	darkHero = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -35,22 +45,24 @@ const { lang, class: className, noNav = false, noFooter = false, circuitVariant 
 			content={Astro.generator}
 		/>
 
-		<!-- Fonts — preconnect + swap for perf -->
+		<!-- Fonts — self-hosted variable woff2, no third-party round-trip -->
 		<link
-			rel="preconnect"
-			href="https://fonts.googleapis.com"
-		/>
-		<link
-			rel="preconnect"
-			href="https://fonts.gstatic.com"
+			rel="preload"
+			href="/fonts/satoshi-variable.woff2"
+			as="font"
+			type="font/woff2"
 			crossorigin
 		/>
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&display=swap"
-			rel="stylesheet"
+			rel="preload"
+			href="/fonts/switzer-variable.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
 		/>
 
 		<slot name="head" />
+		<Analytics />
 
 		<!-- Theme initialisation (avoid FOUC) -->
 		<script is:inline>
@@ -86,7 +98,7 @@ const { lang, class: className, noNav = false, noFooter = false, circuitVariant 
 			{lang === "es" ? "Ir al contenido principal" : "Skip to main content"}
 		</a>
 
-		{!noNav && <Navbar lang={lang} />}
+		{!noNav && <Navbar lang={lang} overDarkHero={darkHero} />}
 
 		<div id="main-content" class="relative z-10">
 			<slot />

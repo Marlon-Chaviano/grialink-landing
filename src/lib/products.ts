@@ -70,45 +70,57 @@ export const products: Product[] = [
   },
 ];
 
-/** Tailwind classes mapped to product colors (dark-mode friendly) */
+/**
+ * Module accents.
+ *
+ * The site commits to a single navy + amber direction, so modules are
+ * differentiated by *intensity* rather than by hue — a green or violet chip
+ * next to the brand orange reads as an unrelated product. The key names are
+ * kept so `Product['color']` and existing markup stay untouched.
+ */
 export const productColorClasses: Record<
   Product['color'],
   { bg: string; text: string; border: string; glow: string; link: string }
 > = {
+  // Lead accent — the module we most want the eye to land on.
   orange: {
-    bg: 'bg-primary/10',
+    bg: 'bg-primary/12',
     text: 'text-primary',
-    border: 'hover:border-primary/30',
+    border: 'hover:border-primary/35',
     glow: 'bg-primary/15',
     link: 'group-hover:text-primary',
   },
+  // Warm secondary, one step down from the lead.
   blue: {
-    bg: 'bg-accent/10',
-    text: 'text-accent',
-    border: 'hover:border-accent/30',
-    glow: 'bg-accent/15',
-    link: 'group-hover:text-accent',
+    bg: 'bg-primary/8',
+    text: 'text-primary/85',
+    border: 'hover:border-primary/25',
+    glow: 'bg-primary/12',
+    link: 'group-hover:text-primary',
   },
+  // Quietest accent — supporting modules.
   violet: {
-    bg: 'bg-primary/5',
-    text: 'text-primary',
+    bg: 'bg-primary/6',
+    text: 'text-primary/70',
     border: 'hover:border-primary/20',
     glow: 'bg-primary/10',
     link: 'group-hover:text-primary',
   },
+  // Amber highlight, the only non-orange note in the palette.
   green: {
-    bg: 'bg-green-500/10',
-    text: 'text-green-400',
-    border: 'hover:border-green-400/30',
-    glow: 'bg-green-500/15',
-    link: 'group-hover:text-green-400',
+    bg: 'bg-accent/10',
+    text: 'text-accent',
+    border: 'hover:border-accent/30',
+    glow: 'bg-accent/12',
+    link: 'group-hover:text-accent',
   },
+  // Neutral, for modules that should recede.
   slate: {
-    bg: 'bg-muted',
+    bg: 'bg-surface',
     text: 'text-foreground',
     border: 'hover:border-border',
-    glow: 'bg-muted/80',
-    link: 'group-hover:text-foreground',
+    glow: 'bg-muted/60',
+    link: 'group-hover:text-primary',
   },
 };
 

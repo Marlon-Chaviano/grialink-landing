@@ -1,6 +1,6 @@
 ---
 import Container from "@/components/ui/Container.astro";
-import ThemeToggle from "@/components/shared/ThemeToggle";
+import ThemeToggle from "@/components/shared/ThemeToggle.astro";
 import LangSwitch from "@/components/shared/LangSwitch.astro";
 import { type Lang, localizedHref } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
@@ -8,24 +8,34 @@ import { getTranslations } from "@/i18n/utils";
 interface Props {
 	lang: Lang;
 	class?: string;
+	/**
+	 * Set on pages whose hero is a permanently dark band (the home page). While
+	 * unscrolled the bar floats over that band, so it needs light type in both
+	 * themes; once it gains its own background it reverts to theme tokens.
+	 */
+	overDarkHero?: boolean;
 }
 
-const { lang, class: className } = Astro.props;
+const { lang, class: className, overDarkHero = false } = Astro.props;
 const nav = getTranslations(lang, "navbar") as Record<string, any>;
 
 const loginHref = nav.links?.login?.startsWith("http") ? nav.links.login : localizedHref(nav.links?.login ?? "/login", lang);
 const registerHref = nav.links?.register?.startsWith("http") ? nav.links.register : localizedHref(nav.links?.register ?? "/register", lang);
+
+/** Trailing slashes vary between dev and the built output — compare normalized. */
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
 
 const navLinks = [
 	{ href: localizedHref(nav.links?.product ?? "/products", lang), label: nav.product },
 	{ href: localizedHref(nav.links?.about ?? "/about", lang), label: nav.about },
 	{ href: localizedHref(nav.links?.pricing ?? "/pricing", lang), label: nav.pricing },
 	{ href: localizedHref(nav.links?.contact ?? "/contact", lang), label: nav.contact },
-];
+].map((link) => ({ ...link, current: link.href.replace(/\/$/, "") === currentPath }));
 ---
 
 <header
 	id="site-header"
+	data-over-dark={overDarkHero ? "" : null}
 	class:list={["fixed w-full z-50 border-b border-border-light/60 transition-colors duration-300", className]}
 >
 	<nav aria-label={lang === "es" ? "Navegación principal" : "Main navigation"}>
@@ -55,7 +65,11 @@ const navLinks = [
 						navLinks.map((link) => (
 							<a
 								href={link.href}
-								class="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+								aria-current={link.current ? "page" : undefined}
+								class:list={[
+									"transition-colors text-sm font-medium",
+									link.current ? "text-primary" : "text-muted-foreground hover:text-primary",
+								]}
 							>
 								{link.label}
 							</a>
@@ -66,7 +80,7 @@ const navLinks = [
 				<!-- Right side -->
 				<div class="hidden md:flex items-center space-x-4">
 					<LangSwitch lang={lang} />
-					<ThemeToggle client:idle />
+					<ThemeToggle lang={lang} />
 					<a
 						href={loginHref}
 						class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors ml-4"
@@ -128,7 +142,11 @@ const navLinks = [
 				navLinks.map((link) => (
 					<a
 						href={link.href}
-						class="block text-muted-foreground hover:text-primary transition-colors font-medium py-1"
+						aria-current={link.current ? "page" : undefined}
+						class:list={[
+							"block transition-colors font-medium py-1",
+							link.current ? "text-primary" : "text-muted-foreground hover:text-primary",
+						]}
 					>
 						{link.label}
 					</a>
@@ -137,7 +155,7 @@ const navLinks = [
 			<hr class="border-border-light" />
 			<div class="flex items-center gap-3 py-1">
 				<LangSwitch lang={lang} />
-				<ThemeToggle client:idle />
+				<ThemeToggle lang={lang} />
 			</div>
 			<a
 				href={loginHref}
@@ -199,6 +217,7 @@ const navLinks = [
 	const onScroll = () => {
 		if (!header) return;
 		const scrolled = window.scrollY > 24;
+		header.classList.toggle("is-scrolled", scrolled);
 		header.classList.toggle("bg-background/70", scrolled);
 		header.classList.toggle("backdrop-blur-md", scrolled);
 	};

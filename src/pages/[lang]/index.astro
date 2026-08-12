@@ -3,15 +3,18 @@ import Layout from "@/layouts/Layout.astro";
 import SEO from "@/components/seo/SEO.astro";
 import Hero from "@/components/sections/Hero.astro";
 import LogoCloud from "@/components/sections/LogoCloud.astro";
+import Problem from "@/components/sections/Problem.astro";
 import PlatformModules from "@/components/sections/PlatformModules.astro";
+import RoleFeatures from "@/components/sections/RoleFeatures.astro";
 import HowItWorks from "@/components/sections/HowItWorks.astro";
 import AIImpact from "@/components/sections/AIImpact.astro";
 import TrustBadges from "@/components/sections/TrustBadges.astro";
 import PricingTeaser from "@/components/sections/PricingTeaser.astro";
+import HomeFAQ from "@/components/sections/HomeFAQ.astro";
 import CTA from "@/components/sections/CTA.astro";
 
 import { supportedLanguages, type Lang } from "@/i18n/config";
-import { useTranslations } from "@/i18n/utils";
+import { useTranslations, getTranslations } from "@/i18n/utils";
 
 export function getStaticPaths() {
 	return supportedLanguages.map((lang) => ({ params: { lang } }));
@@ -19,14 +22,19 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
+const faq = getTranslations(lang, "homeFaq") as {
+	items: { question: string; answer: string }[];
+};
+const siteUrl = "https://grialink.com";
 ---
 
-<Layout lang={lang}>
+<Layout lang={lang} darkHero>
 	<Fragment slot="head">
 		<SEO
 			lang={lang}
 			title={t("seo.title")}
 			description={t("seo.description")}
+			page="home"
 		/>
 		<script
 			type="application/ld+json"
@@ -35,8 +43,8 @@ const t = useTranslations(lang);
 				"@type": "Organization",
 				name: "Grialink",
 				legalName: "Ezi Group LLC",
-				url: "https://grialink.com",
-				logo: "https://grialink.com/logo.png",
+				url: siteUrl,
+				logo: `${siteUrl}/logo.png`,
 				email: "info@grialink.com",
 				description: t("seo.description"),
 				contactPoint: {
@@ -48,16 +56,31 @@ const t = useTranslations(lang);
 				sameAs: [],
 			})}
 		/>
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				mainEntity: faq.items.map((item) => ({
+					"@type": "Question",
+					name: item.question,
+					acceptedAnswer: { "@type": "Answer", text: item.answer },
+				})),
+			})}
+		/>
 	</Fragment>
 
 	<main>
 		<Hero lang={lang} />
 		<LogoCloud lang={lang} />
+		<Problem lang={lang} />
 		<PlatformModules lang={lang} />
+		<RoleFeatures lang={lang} />
 		<HowItWorks lang={lang} />
 		<AIImpact lang={lang} />
 		<TrustBadges lang={lang} variant="standalone" />
 		<PricingTeaser lang={lang} />
+		<HomeFAQ lang={lang} />
 		<CTA lang={lang} />
 	</main>
 </Layout>

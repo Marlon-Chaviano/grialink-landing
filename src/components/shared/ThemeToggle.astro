@@ -1,0 +1,73 @@
+---
+/**
+ * Theme toggle.
+ *
+ * Deliberately not a framework component: as a React island this single button
+ * pulled the whole runtime onto every page. Both icons are rendered and the
+ * `.dark-only` / `.light-only` utilities show the right one, so the correct
+ * icon is present in the initial HTML with no hydration flash.
+ */
+import { type Lang } from "@/i18n/config";
+
+interface Props {
+	lang: Lang;
+	class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+
+const label = lang === "es" ? "Cambiar tema" : "Switch theme";
+---
+
+<button
+	type="button"
+	data-theme-toggle
+	aria-label={label}
+	title={label}
+	class:list={[
+		"cursor-pointer rounded-lg p-2 text-muted-foreground transition-colors hover:bg-surface hover:text-foreground",
+		className,
+	]}
+>
+	{/* Sun shows in dark mode — it is what clicking will switch you to. */}
+	<svg
+		class="dark-only h-5 w-5"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		viewBox="0 0 24 24"
+		aria-hidden="true"
+	>
+		<circle cx="12" cy="12" r="4"></circle>
+		<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+	</svg>
+
+	<svg
+		class="light-only h-5 w-5"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		viewBox="0 0 24 24"
+		aria-hidden="true"
+	>
+		<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+	</svg>
+</button>
+
+<script>
+	// Delegated so the navbar's desktop and mobile copies both work.
+	document.addEventListener("click", (event) => {
+		const trigger = (event.target as HTMLElement)?.closest("[data-theme-toggle]");
+		if (!trigger) return;
+
+		const root = document.documentElement;
+		const next = !root.classList.contains("dark");
+		root.classList.toggle("dark", next);
+		root.classList.toggle("light", !next);
+		localStorage.setItem("theme", next ? "dark" : "light");
+	});
+</script>

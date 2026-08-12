@@ -1,3 +1,4 @@
 export default {
-  subtitle: 'Integrated with the tools you use',
+  title: 'Works with the tools your practice already runs on',
+  subtitle: 'Native integrations — nothing to migrate',
 };

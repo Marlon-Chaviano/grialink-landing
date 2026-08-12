@@ -1,6 +1,6 @@
 export default {
-  title: 'Grialink — SES con IA para Clínicas | Captación, Citas y Retención de Leads',
+  title: 'Grialink — Crecimiento de clientes con IA para centros',
   description:
-    'El SES (Sales Engine System) omnicanal con inteligencia artificial diseñado para clínicas estéticas, dentales y de salud. Automatiza prospección, citas con Google Calendar, seguimiento por WhatsApp y análisis de llamadas. Desde $0/mes.',
+    'Convierte cada consulta en una cita confirmada. Grialink automatiza WhatsApp, llamadas, captación y recordatorios para centros de estética, dental y bienestar.',
   ogSiteName: 'Grialink',
 };

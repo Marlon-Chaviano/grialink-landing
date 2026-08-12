@@ -1,0 +1,72 @@
+---
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+import { plans } from "@/lib/pricing";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const p = getTranslations(lang, "pricing") as Record<string, any>;
+const compare = p.compare as {
+	title: string;
+	subtitle: string;
+	feature: string;
+	rows: { label: string; values: string[] }[];
+};
+const planLabels = plans.map((plan) => (p.plans[plan.id] as { name: string }).name);
+---
+
+<section class="section-spacing pt-0" id="compare" data-animate>
+	<Container>
+		<div class="mx-auto mb-10 max-w-2xl text-center">
+			<h2 class="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+				{compare.title}
+			</h2>
+			<p class="text-base text-muted-foreground lg:text-lg">{compare.subtitle}</p>
+		</div>
+
+		<div class="overflow-x-auto rounded-2xl border border-border-light">
+			<table class="w-full min-w-[720px] border-collapse text-left text-sm">
+				<thead>
+					<tr class="border-b border-border-light bg-surface/60">
+						<th class="px-4 py-3 font-semibold text-muted-foreground">{compare.feature}</th>
+						{
+							planLabels.map((name, i) => (
+								<th
+									class:list={[
+										"px-3 py-3 text-center font-semibold",
+										plans[i].id === "pro" ? "text-primary" : "text-foreground",
+									]}
+								>
+									{name}
+								</th>
+							))
+						}
+					</tr>
+				</thead>
+				<tbody>
+					{
+						compare.rows.map((row) => (
+							<tr class="border-b border-border-light/80 last:border-0">
+								<td class="px-4 py-3 font-medium text-foreground">{row.label}</td>
+								{row.values.map((value, i) => (
+									<td
+										class:list={[
+											"px-3 py-3 text-center text-muted-foreground",
+											plans[i].id === "pro" && "bg-primary/5 font-medium text-foreground",
+										]}
+									>
+										{value}
+									</td>
+								))}
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
+		</div>
+	</Container>
+</section>

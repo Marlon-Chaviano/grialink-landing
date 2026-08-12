@@ -1,29 +1,29 @@
 export default {
   /* ── SEO ── */
   seo: {
-    title: 'Sobre Grialink — Quiénes Somos | SES con IA para Clínicas de Salud',
+    title: 'Sobre Grialink — Quiénes Somos | SES con IA para Centros de Salud',
     description:
-      'Grialink nació en los pasillos de clínicas reales. Conoce la historia, misión y el equipo detrás del SES (Sales Engine System) omnicanal con IA diseñado para clínicas estéticas, dentales y de salud.',
+      'Grialink nació en los pasillos de centros reales. Conoce la historia, misión y el equipo detrás del SES (Sales Engine System) omnicanal con IA diseñado para centros de estética, dental y bienestar.',
   },
 
   /* ── Hero ── */
   hero: {
     badge: 'Nuestra Misión',
-    titleLine1: 'El SES que las clínicas',
+    titleLine1: 'El SES que los centros',
     titleHighlight: 'realmente necesitan',
     subtitle:
-      'Nacimos observando cómo los profesionales de la salud perdían horas entre Excel, WhatsApp y agendas manuales. Creamos Grialink para que se enfoquen en lo único que importa: hacer crecer su clínica.',
+      'Nacimos observando cómo los profesionales de la salud perdían horas entre Excel, WhatsApp y agendas manuales. Creamos Grialink para que se enfoquen en lo único que importa: hacer crecer su centro.',
     imageOverlay: 'Operación inteligente',
-    imageAlt: 'Recepción de clínica moderna con tecnología integrada',
+    imageAlt: 'Recepción de centro moderna con tecnología integrada',
   },
 
   /* ── Historia ── */
   history: {
     title: 'Nacidos de una frustración real',
     paragraphs: [
-      'Un especialista en estética nos dijo: "Pierdo 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo donde apunto los leads". No era el único. Vimos cómo clínicas dentales gestionaban leads en Excel, perdían oportunidades porque nadie seguía el pipeline, y confirmaban citas una por una por teléfono.',
-      'Entendimos que las clínicas no necesitaban "otro software más". Necesitaban una plataforma inteligente que hablara su idioma: con pipelines para estética, dental y dermatología. Con citas sincronizadas a Google Calendar. Con IA que analiza llamadas y detecta oportunidades.',
-      'Así nació Grialink: un SES (Sales Engine System) omnicanal con módulos de IA integrados, construido desde cero para el sector salud por un equipo que entiende tanto la tecnología como la realidad operativa de una clínica.',
+      'Un especialista en estética nos dijo: "Pierdo 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo donde apunto los leads". No era el único. Vimos cómo centros dentales gestionaban leads en Excel, perdían oportunidades porque nadie seguía el pipeline, y confirmaban citas una por una por teléfono.',
+      'Entendimos que los centros no necesitaban "otro software más". Necesitaban una plataforma inteligente que hablara su idioma: con pipelines para estética, dental y dermatología. Con citas sincronizadas a Google Calendar. Con IA que analiza llamadas y detecta oportunidades.',
+      'Así nació Grialink: un SES (Sales Engine System) omnicanal con módulos de IA integrados, construido desde cero para el sector salud por un equipo que entiende tanto la tecnología como la realidad operativa de un centro.',
     ],
     image1Alt: 'Profesional de la salud frustrado con sistemas manuales',
     image2Alt: 'Equipo de Grialink diseñando la plataforma',
@@ -49,7 +49,7 @@ export default {
       {
         title: 'Resultados que se miden',
         description:
-          'Dashboards con métricas reales: tasa de conversión, valor de pipeline, speed-to-lead, ROI de campañas. Lo que Grialink mide, tu clínica mejora.',
+          'Dashboards con métricas reales: tasa de conversión, valor de pipeline, speed-to-lead, ROI de campañas. Lo que Grialink mide, tu centro mejora.',
         icon: 'chart',
       },
     ],
@@ -60,7 +60,7 @@ export default {
     title: 'El Significado de "Grial"',
     paragraphs: [
       'Nuestro nombre no es casualidad. El <strong>Grial</strong> simboliza la búsqueda de la excelencia: ese estado ideal donde la tecnología y la atención humana se fusionan sin fricción.',
-      'Al unirlo con "Link", representamos la conexión entre esa excelencia y la realidad operativa de tu clínica. Grialink es el puente que transforma el caos en claridad y el potencial en resultados tangibles.',
+      'Al unirlo con "Link", representamos la conexión entre esa excelencia y la realidad operativa de tu centro. Grialink es el puente que transforma el caos en claridad y el potencial en resultados tangibles.',
     ],
   },
 
@@ -68,7 +68,7 @@ export default {
   team: {
     title: 'El equipo detrás de Grialink',
     subtitle:
-      'Profesionales de tecnología y salud unidos por una misión: que cada clínica opere con la inteligencia que merece.',
+      'Profesionales de tecnología y salud unidos por una misión: que cada centro opere con la inteligencia que merece.',
     members: [
       {
         name: 'Marlon',
@@ -91,7 +91,7 @@ export default {
       {
         name: 'Yozi de Armas',
         role: 'Founder & CEO',
-        bio: 'Visión estratégica, crecimiento del negocio y liderazgo general de Grialink. Impulsa la misión de transformar las operaciones clínicas con inteligencia artificial.',
+        bio: 'Visión estratégica, crecimiento del negocio y liderazgo general de Grialink. Impulsa la misión de transformar la operativa de los centros con inteligencia artificial.',
         image: 'yozamy',
         social: {
           linkedin: '#',
@@ -109,7 +109,7 @@ export default {
       {
         name: 'Sofía',
         role: 'Product Design & UX Lead',
-        bio: 'Diseño visual, experiencia de usuario e interfaz del producto. Crea experiencias intuitivas que las clínicas disfrutan usar cada día.',
+        bio: 'Diseño visual, experiencia de usuario e interfaz del producto. Crea experiencias intuitivas que los centros disfrutan usar cada día.',
         image: 'sofia',
         social: {
           linkedin: '#',
@@ -122,7 +122,9 @@ export default {
   cta: {
     title: '¿Quieres ver Grialink en acción?',
     subtitle:
-      'Agenda una demo personalizada y descubre cómo podemos automatizar la operación de tu clínica en menos de una semana.',
-    button: 'Agendar mi demo',
+      'Empieza gratis o pide una demo por formulario. Te ayudamos a automatizar captación, citas y seguimiento.',
+    button: 'Pedir demo',
+    primaryButton: 'Comenzar gratis',
+    secondaryButton: 'Pedir demo (formulario)',
   },
 };

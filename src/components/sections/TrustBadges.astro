@@ -1,6 +1,6 @@
 ---
 /**
- * TrustBadges — Security section aligned with app onboarding plans page.
+ * TrustBadges — Real product security controls (no uncertified HIPAA/SOC2 claims).
  */
 import Container from "@/components/ui/Container.astro";
 import { type Lang } from "@/i18n/config";
@@ -17,9 +17,26 @@ const p = getTranslations(lang, "pricing") as Record<string, any>;
 const trust = p.trust as Record<string, string>;
 
 const badges = [
-	{ key: "hipaa", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4", color: "text-green-500" },
-	{ key: "soc2", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4", color: "text-primary" },
-	{ key: "gdpr", icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20ZM2 12h20", color: "text-muted-foreground" },
+	{
+		key: "mfa",
+		icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z",
+		color: "text-primary",
+	},
+	{
+		key: "rbac",
+		icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
+		color: "text-primary",
+	},
+	{
+		key: "audit",
+		icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8ZM14 2v6h6M16 13H8M16 17H8M10 9H8",
+		color: "text-muted-foreground",
+	},
+	{
+		key: "captcha",
+		icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4",
+		color: "text-muted-foreground",
+	},
 ] as const;
 ---
 
@@ -30,9 +47,16 @@ const badges = [
 	<Container class:list={[variant === "standalone" ? "text-center" : ""]}>
 		{
 			variant === "standalone" ? (
-				<h2 class="mb-8 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-					{trust.title}
-				</h2>
+				<>
+					<h2 class="mb-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+						{trust.title}
+					</h2>
+					{trust.subtitle && (
+						<p class="mx-auto mb-8 max-w-2xl text-sm text-muted-foreground sm:text-base">
+							{trust.subtitle}
+						</p>
+					)}
+				</>
 			) : (
 				<p class="mb-6 text-sm font-medium text-muted-foreground">{trust.title}</p>
 			)
@@ -42,7 +66,7 @@ const badges = [
 				badges.map((badge) => (
 					<div class="flex items-center gap-2 rounded-lg border border-border-light bg-surface px-4 py-2">
 						<svg
-							class:list={["h-5 w-5", badge.color]}
+							class:list={["h-5 w-5 shrink-0", badge.color]}
 							fill="none"
 							stroke="currentColor"
 							stroke-width="2"
@@ -59,7 +83,7 @@ const badges = [
 			}
 			<div class="flex items-center gap-2 rounded-lg border border-border-light bg-surface px-4 py-2">
 				<svg
-					class="h-5 w-5 text-amber-500"
+					class="h-5 w-5 shrink-0 text-primary"
 					fill="none"
 					stroke="currentColor"
 					stroke-width="2"

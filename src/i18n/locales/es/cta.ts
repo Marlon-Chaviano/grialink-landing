@@ -1,8 +1,8 @@
 export default {
-  heading: 'Tu clínica merece operar con inteligencia',
+  heading: 'Empieza a llenar tu agenda esta semana',
   subtitle:
-    'Únete a las clínicas que ya automatizan captación, citas y seguimiento de leads con IA. Comienza gratis en menos de 5 minutos.',
-  ctaPrimary: 'Comenzar gratis',
-  ctaSecondary: 'Agendar demo personalizada',
-  disclaimer: 'Sin tarjeta de crédito \u2022 Sin contratos \u2022 Cancela cuando quieras',
+    'Listo en cinco minutos. Grialink responde, hace seguimiento y agenda mientras tu equipo se centra en los clientes.',
+  ctaPrimary: 'Empezar gratis',
+  ctaSecondary: 'Pedir una demo',
+  disclaimer: 'Sin tarjeta • Sin permanencia • Cancela cuando quieras',
 };

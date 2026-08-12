@@ -97,14 +97,15 @@ export default {
   },
 
   trust: {
-    title: 'Security and Compliance',
+    title: 'Security built for your practice',
     subtitle:
-      'Sensitive data protection with certified infrastructure and end-to-end encryption for the healthcare sector.',
-    hipaa: 'HIPAA Compliant',
-    soc2: 'SOC 2 Type II',
-    gdpr: 'GDPR Ready',
-    encryption: 'AES-256 Encryption',
-    encryptionDesc: 'Banking standard',
+      'Access controls, encryption, and audit trails to protect client and team data — without claiming certifications we do not hold yet.',
+    mfa: 'MFA authentication',
+    rbac: 'Roles & permissions (RBAC)',
+    audit: 'Audit logs',
+    captcha: 'Anti-bot protection',
+    encryption: 'Encryption in transit & at rest',
+    encryptionDesc: 'TLS + modern practices',
   },
 
   addons: {
@@ -116,6 +117,22 @@ export default {
       'Extra emails · +5,000/mo for $25',
       'Extra agent + line · $20/mo',
       'Extra admin · +1 for $10/mo',
+    ],
+  },
+
+  compare: {
+    title: 'Compare plans at a glance',
+    subtitle: 'Limits and included modules — aligned with app onboarding.',
+    feature: 'Capacity',
+    rows: [
+      { label: 'Enriched prospects / mo', values: ['10', '20', '50', '100', 'Custom'] },
+      { label: 'AI credits / mo', values: ['50', '1,500', '5,000', '12,000', 'Custom'] },
+      { label: 'Dialer minutes included', values: ['—', '1,000', '3,000', '6,000', 'Custom'] },
+      { label: 'Agents · lines', values: ['1 · 1', '5 · 5', '10 · 10', '20 · 20', 'Custom'] },
+      { label: 'Grial Bots + Call Analysis', values: ['—', '—', '✓', '✓', '✓'] },
+      { label: 'Smart dashboard (insights)', values: ['—', '—', '✓', '✓', '✓'] },
+      { label: 'Emails / mo', values: ['—', '1,000', '5,000', '50,000', 'Custom'] },
+      { label: 'Sub-accounts', values: ['—', '—', '3', '5', 'Custom'] },
     ],
   },
 
@@ -139,7 +156,7 @@ export default {
           'You can purchase additional credit packages as a monthly add-on without changing plans. Unused credits do not roll over. You can also upgrade your plan to get more credits included.',
       },
       {
-        question: 'Can I manage multiple branches or clinics?',
+        question: 'Can I manage multiple branches or practices?',
         answer:
           'Yes, the Scale plan includes multi-account capacity with up to 5 sub-accounts and 20 agents. Enterprise offers custom limits for large networks.',
       },
@@ -161,7 +178,12 @@ export default {
       {
         question: 'Is my data secure?',
         answer:
-          'We implement AES-256 encryption, multi-factor authentication (MFA), custom roles and permissions (RBAC), audit logs, and anti-bot protection with hCaptcha. Your data is never shared with third parties.',
+          'We use MFA, roles & permissions (RBAC), audit logs, anti-bot protection, and encryption in transit and at rest. We do not claim HIPAA or SOC 2 certifications we do not hold yet.',
+      },
+      {
+        question: 'Is there a paid-plan trial?',
+        answer:
+          'Yes. Paid plans include a 14-day trial in the onboarding flow at app.grialink.com.',
       },
     ],
   },
@@ -171,9 +193,9 @@ export default {
     subtitle:
       "The Free plan never expires. Explore the platform with no commitment and upgrade when you're ready.",
     primaryButton: 'Create free account',
-    secondaryButton: 'Schedule personalized demo',
+    secondaryButton: 'Request demo (form)',
   },
 
   disclaimer:
-    '* Usage policy: Lead limits reset monthly. AI services are subject to fair use terms to ensure optimal clinical engine performance. Prices shown do not include VAT where applicable.',
+    '* Usage policy: Lead limits reset monthly. AI services are subject to fair use terms to ensure optimal engine performance. Prices shown do not include VAT where applicable.',
 };

@@ -97,14 +97,15 @@ export default {
   },
 
   trust: {
-    title: 'Seguridad y cumplimiento',
+    title: 'Seguridad pensada para tu centro',
     subtitle:
-      'Protección de datos sensibles con infraestructura certificada y encriptación de extremo a extremo para el sector salud.',
-    hipaa: 'Cumple con HIPAA',
-    soc2: 'SOC 2 Type II',
-    gdpr: 'GDPR Ready',
-    encryption: 'Encriptación AES-256',
-    encryptionDesc: 'Estándar bancario',
+      'Controles de acceso, cifrado y auditoría para proteger datos de clientes y del equipo — sin claims de certificación que aún no tenemos.',
+    mfa: 'Autenticación MFA',
+    rbac: 'Roles y permisos (RBAC)',
+    audit: 'Audit logs',
+    captcha: 'Protección anti-bot',
+    encryption: 'Cifrado en tránsito y en reposo',
+    encryptionDesc: 'TLS + prácticas modernas',
   },
 
   addons: {
@@ -117,6 +118,22 @@ export default {
       'Correos extra · +5.000/mes por $25',
       'Agente + línea extra · $20/mes',
       'Admin extra · +1 por $10/mes',
+    ],
+  },
+
+  compare: {
+    title: 'Compara planes de un vistazo',
+    subtitle: 'Límites y módulos incluidos — alineados con el onboarding de la app.',
+    feature: 'Capacidad',
+    rows: [
+      { label: 'Prospectos enriquecidos / mes', values: ['10', '20', '50', '100', 'Custom'] },
+      { label: 'Créditos de IA / mes', values: ['50', '1.500', '5.000', '12.000', 'Custom'] },
+      { label: 'Minutos dialer incluidos', values: ['—', '1.000', '3.000', '6.000', 'Custom'] },
+      { label: 'Agentes · líneas', values: ['1 · 1', '5 · 5', '10 · 10', '20 · 20', 'Custom'] },
+      { label: 'Grial Bots + Call Analysis', values: ['—', '—', '✓', '✓', '✓'] },
+      { label: 'Panel inteligente (insights)', values: ['—', '—', '✓', '✓', '✓'] },
+      { label: 'Correos / mes', values: ['—', '1.000', '5.000', '50.000', 'Custom'] },
+      { label: 'Subcuentas', values: ['—', '—', '3', '5', 'Custom'] },
     ],
   },
 
@@ -140,7 +157,7 @@ export default {
           'Puedes comprar paquetes adicionales de créditos como add-on mensual sin cambiar de plan. Los créditos no usados no se acumulan. También puedes actualizar tu plan para obtener más créditos incluidos.',
       },
       {
-        question: '¿Puedo gestionar varias sucursales o clínicas?',
+        question: '¿Puedo gestionar varias sucursales o centros?',
         answer:
           'Sí, el plan Scale incluye capacidad multi-cuenta con hasta 5 subcuentas y 20 agentes. Enterprise ofrece límites personalizados para redes grandes.',
       },
@@ -162,7 +179,12 @@ export default {
       {
         question: '¿Mis datos están seguros?',
         answer:
-          'Implementamos encriptación AES-256, autenticación multifactor (MFA), roles y permisos personalizados (RBAC), audit logs, y protección anti-bot con hCaptcha. Tus datos nunca se comparten con terceros.',
+          'Usamos MFA, roles y permisos (RBAC), audit logs, protección anti-bot y cifrado en tránsito y en reposo. No afirmamos certificaciones HIPAA o SOC 2 que aún no tenemos.',
+      },
+      {
+        question: '¿Hay trial en planes de pago?',
+        answer:
+          'Sí. Los planes de pago incluyen 14 días de prueba en el flujo de onboarding de app.grialink.com.',
       },
     ],
   },
@@ -172,9 +194,9 @@ export default {
     subtitle:
       'El plan Free no tiene fecha de expiración. Explora la plataforma sin compromiso y actualiza cuando estés listo.',
     primaryButton: 'Crear cuenta gratis',
-    secondaryButton: 'Agendar demo personalizada',
+    secondaryButton: 'Pedir demo (formulario)',
   },
 
   disclaimer:
-    '* Política de uso: Los límites de leads se restablecen mensualmente. Los servicios de IA están sujetos a términos de uso razonable para garantizar el rendimiento óptimo del motor clínico. Los precios mostrados no incluyen IVA donde corresponda.',
+    '* Política de uso: Los límites de leads se restablecen mensualmente. Los servicios de IA están sujetos a términos de uso razonable para garantizar el rendimiento óptimo del motor. Los precios mostrados no incluyen IVA donde corresponda.',
 };

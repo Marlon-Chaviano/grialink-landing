@@ -1,0 +1,52 @@
+---
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang, "homeFaq") as {
+	title: string;
+	subtitle: string;
+	items: { question: string; answer: string }[];
+};
+---
+
+<section class="section-spacing bg-background" id="faq" data-animate>
+	<Container>
+		<div class="mx-auto mb-10 max-w-2xl text-center">
+			<h2 class="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{t.title}</h2>
+			<p class="text-base text-muted-foreground lg:text-lg">{t.subtitle}</p>
+		</div>
+
+		<div class="mx-auto max-w-3xl space-y-3">
+			{
+				t.items.map((item) => (
+					<details class="group rounded-xl border border-border-light bg-surface/40 px-5 py-1 transition-colors open:border-primary/25 open:bg-surface/70">
+						<summary class="cursor-pointer py-4 text-left text-base font-semibold text-foreground marker:content-none [&::-webkit-details-marker]:hidden">
+							<span class="flex items-center justify-between gap-4">
+								{item.question}
+								<svg
+									class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 group-open:rotate-180"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									viewBox="0 0 24 24"
+									aria-hidden="true"
+								>
+									<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+								</svg>
+							</span>
+						</summary>
+						<div class="details-content pb-4 text-sm leading-relaxed text-muted-foreground">
+							{item.answer}
+						</div>
+					</details>
+				))
+			}
+		</div>
+	</Container>
+</section>

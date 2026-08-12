@@ -1,16 +1,16 @@
 export default {
   seo: {
-    title: 'Contacto — Grialink | Habla con Nuestro Equipo de SES para Clínicas',
+    title: 'Contacto — Grialink | Habla con Nuestro Equipo de SES para Centros',
     description:
-      'Agenda una demo personalizada o contacta a nuestro equipo. Soporte técnico, consultas comerciales y alianzas para clínicas de salud, estéticas y dentales.',
+      'Agenda una demo personalizada o contacta a nuestro equipo. Soporte técnico, consultas comerciales y alianzas para centros de salud, estéticas y dentales.',
   },
 
   hero: {
-    badge: 'Hablemos de tu clínica',
-    titleLine1: 'Tu clínica es única.',
-    titleHighlight: 'Tu solución también.',
+    badge: 'Demo por formulario',
+    titleLine1: 'Cuéntanos tu centro.',
+    titleHighlight: 'Te respondemos.',
     subtitle:
-      'Cuéntanos tu caso y te mostraremos cómo Grialink puede automatizar la captación, agendamiento y retención de leads en tu clínica.',
+      'Cuéntanos qué necesitas y te respondemos en menos de 24 horas laborables. Si prefieres, escríbenos a info@grialink.com.',
   },
 
   info: {
@@ -42,11 +42,11 @@ export default {
       },
       email: {
         label: 'Correo Electrónico',
-        placeholder: 'nombre@tuclinica.com',
+        placeholder: 'nombre@tucentro.com',
       },
       company: {
-        label: 'Nombre de tu clínica (opcional)',
-        placeholder: 'Ej: Clínica DermaPro',
+        label: 'Nombre de tu centro (opcional)',
+        placeholder: 'Ej: Centro DermaPro',
       },
       subject: {
         label: 'Asunto',
@@ -60,7 +60,7 @@ export default {
       },
       message: {
         label: 'Mensaje',
-        placeholder: 'Cuéntanos sobre tu clínica: ¿cuántos leads gestionas al mes? ¿Qué canales usas? ¿Cuál es tu mayor reto operativo?',
+        placeholder: 'Cuéntanos sobre tu centro: ¿cuántos leads gestionas al mes? ¿Qué canales usas? ¿Cuál es tu mayor reto operativo?',
       },
     },
     submit: 'Enviar Mensaje',
@@ -102,7 +102,7 @@ export default {
   cta: {
     title: '¿Ya eres cliente de Grialink?',
     subtitle:
-      'Accede directamente a tu panel de control para gestionar tu clínica, revisar analytics o contactar soporte.',
+      'Accede directamente a tu panel de control para gestionar tu centro, revisar analytics o contactar soporte.',
     button: 'Ir a app.grialink.com',
   },
 };

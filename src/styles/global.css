@@ -1,6 +1,26 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────
+   Typefaces — self-hosted variable woff2
+   Satoshi (display) + Switzer (body), Fontshare
+   ───────────────────────────────────────────── */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-variable.woff2") format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/switzer-variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────
    Design Tokens — Grialink Brand System
    CSS Custom Properties for Dark / Light Mode
    ───────────────────────────────────────────── */
@@ -13,9 +33,26 @@
   --color-brand-red: #E94E1B;
   --color-brand-yellow: #F8CB2E;
 
-  --font-display: "Inter", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-display: "Satoshi", system-ui, sans-serif;
+  --font-body: "Switzer", system-ui, sans-serif;
   --container-2xl: 1400px;
+
+  /* Fluid display scale — headline sizes that scale with viewport.
+     Body copy keeps the default Tailwind text-* scale. */
+  --text-display-xs: clamp(1.75rem, 1.45rem + 1.5vw, 2.25rem);
+  --text-display-xs--line-height: 1.15;
+  --text-display-sm: clamp(2rem, 1.55rem + 2.2vw, 2.75rem);
+  --text-display-sm--line-height: 1.12;
+  --text-display-md: clamp(2.375rem, 1.7rem + 3.4vw, 3.5rem);
+  --text-display-md--line-height: 1.08;
+  --text-display-lg: clamp(2.75rem, 1.85rem + 4.5vw, 4.25rem);
+  --text-display-lg--line-height: 1.05;
+  --text-display-xl: clamp(3.25rem, 2rem + 6vw, 5.25rem);
+  --text-display-xl--line-height: 1.02;
+
+  /* Tracking — display tightens as it grows, body stays neutral */
+  --tracking-display: -0.035em;
+  --tracking-display-tight: -0.045em;
 }
 
 /* ── Dark mode (default) ── */
@@ -163,12 +200,18 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: var(--tracking-display);
     line-height: 1.1;
     color: var(--clr-foreground);
   }
 
-  h1 { letter-spacing: -0.04em; }
+  h1 { letter-spacing: var(--tracking-display-tight); }
+
+  /* Figures never jitter between states (pricing, KPIs, compare tables) */
+  table, [data-numeric] {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
 
   a {
     color: inherit;
@@ -394,6 +437,33 @@
   .circuit-backdrop .circuit-trace-pulse path {
     opacity: 0 !important;
   }
+}
+
+/* ─────────────────────────────────────────────
+   Header over a permanently dark hero
+   While unscrolled the bar floats over the dark hero band, so it needs light
+   type in BOTH themes. Once `.is-scrolled` adds its own background it reverts
+   to the theme tokens. Keyed on the header so no section has to opt every
+   child element out of the palette.
+   ───────────────────────────────────────────── */
+#site-header[data-over-dark]:not(.is-scrolled) {
+  border-color: rgb(255 255 255 / 0.1);
+}
+
+#site-header[data-over-dark]:not(.is-scrolled) a,
+#site-header[data-over-dark]:not(.is-scrolled) button,
+#site-header[data-over-dark]:not(.is-scrolled) span {
+  color: #ffffff;
+}
+
+/* The primary CTA and the active language pill keep their own fills. */
+#site-header[data-over-dark]:not(.is-scrolled) [data-cta],
+#site-header[data-over-dark]:not(.is-scrolled) [aria-current="true"] {
+  color: var(--clr-primary-foreground);
+}
+
+#site-header[data-over-dark]:not(.is-scrolled) svg {
+  color: rgb(255 255 255 / 0.85);
 }
 
 /* ─────────────────────────────────────────────

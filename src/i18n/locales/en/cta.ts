@@ -1,8 +1,8 @@
 export default {
-  heading: 'Your clinic deserves to operate with intelligence',
+  heading: 'Start filling your schedule this week',
   subtitle:
-    'Join the clinics already automating lead acquisition, scheduling, and follow-ups with AI. Start free in less than 5 minutes.',
-  ctaPrimary: 'Get started free',
-  ctaSecondary: 'Schedule a personalized demo',
-  disclaimer: 'No credit card \u2022 No contracts \u2022 Cancel anytime',
+    'Set up in five minutes. Grialink answers, follows up and books while your team stays focused on clients.',
+  ctaPrimary: 'Start free',
+  ctaSecondary: 'Book a demo',
+  disclaimer: 'No credit card • No contracts • Cancel anytime',
 };

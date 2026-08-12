@@ -4,7 +4,7 @@ import SEO from "@/components/seo/SEO.astro";
 
 import ContactHero from "@/components/sections/ContactHero.astro";
 import ContactInfo from "@/components/sections/ContactInfo.astro";
-import ContactForm from "@/components/sections/ContactForm";
+import ContactForm from "@/components/sections/ContactForm.astro";
 import ContactResources from "@/components/sections/ContactResources.astro";
 import ContactCTA from "@/components/sections/ContactCTA.astro";
 
@@ -26,8 +26,8 @@ const seo = contact.seo as Record<string, string>;
 			lang={lang}
 			title={seo.title}
 			description={seo.description}
+			page="contact"
 		/>
-		{/* Structured data — ContactPage + LocalBusiness schema */}
 		<script
 			type="application/ld+json"
 			set:html={JSON.stringify({
@@ -41,10 +41,9 @@ const seo = contact.seo as Record<string, string>;
 					name: "Grialink",
 					url: "https://grialink.com",
 					email: "info@grialink.com",
-					telephone: "+1-800-GRIALINK",
 					contactPoint: {
 						"@type": "ContactPoint",
-						telephone: "+1-(786) 495-2002",
+						email: "info@grialink.com",
 						contactType: "customer service",
 						availableLanguage: ["English", "Spanish"],
 					},
@@ -62,10 +61,7 @@ const seo = contact.seo as Record<string, string>;
 				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
 					{/* Form — takes 2/3 */}
 					<div class="lg:col-span-2">
-						<ContactForm
-							translations={contact as any}
-							client:visible
-						/>
+						<ContactForm lang={lang} />
 					</div>
 
 					{/* Info sidebar — takes 1/3 */}

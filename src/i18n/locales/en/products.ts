@@ -1,5 +1,5 @@
 export default {
-  heading: 'Four AI modules working together to grow your clinic',
+  heading: 'Four AI modules working together to grow your practice',
   learnMore: 'View details \u2192',
   products: [
     {
@@ -14,7 +14,7 @@ export default {
     },
     {
       title: 'Smart Pipeline',
-      description: 'Pre-configured sales pipelines for aesthetic, dental, and dermatology clinics. 7 stages with SLA and monetary value tracking.',
+      description: 'Pre-configured sales pipelines for aesthetic, dental, and dermatology practices. 7 stages with SLA and monetary value tracking.',
       color: 'purple',
     },
     {
@@ -25,9 +25,9 @@ export default {
   ],
   caseStudy: {
     badge: 'The problem we solve',
-    title: 'The operational chaos of clinics',
+    title: 'The operational chaos of practices',
     quote:
-      '"I was losing 3 hours a day between WhatsApp, Google Calendar, and my spreadsheet. I needed a platform that speaks my clinic\'s language." \u2014 Aesthetic specialist',
+      '"I was losing 3 hours a day between WhatsApp, Google Calendar, and my spreadsheet. I needed a platform that speaks my practice\'s language." \u2014 Aesthetic specialist',
     imgAlt: 'Healthcare professional managing leads with modern technology',
   },
 };

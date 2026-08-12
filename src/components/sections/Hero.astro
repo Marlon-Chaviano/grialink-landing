@@ -1,8 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import Container from "@/components/ui/Container.astro";
-import HeroCard from "./HeroCard";
+import heroAtmosphere from "@/assets/marketing/hero-reception.webp";
 import { type Lang } from "@/i18n/config";
-import { useTranslations, getTranslations } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
 
 interface Props {
 	lang: Lang;
@@ -10,56 +11,86 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const heroCardData = getTranslations(lang, "heroCard");
+const registerHref = "https://app.grialink.com/app/auth/register";
 ---
 
-<section class="relative overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-24">
-	<Container>
-		<div class="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
-			<div class="z-10 flex-1 text-center lg:text-left" data-animate>
-				<h1 class="mb-6 text-4xl font-extrabold leading-[1.06] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[3.25rem]">
-					{t("hero.titleLine1")}
-					<br class="hidden sm:block" />
-					<span class="text-gradient-primary">{t("hero.titleHighlight")}</span>
-				</h1>
+<section class="relative isolate min-h-[100svh] overflow-hidden pt-20 lg:pt-24">
+	{/* Full-bleed visual plane */}
+	<div class="absolute inset-0 -z-10">
+		<Image
+			src={heroAtmosphere}
+			alt=""
+			class="h-full w-full object-cover object-center"
+			widths={[640, 960, 1280, 1920]}
+			sizes="100vw"
+			loading="eager"
+			fetchpriority="high"
+		/>
+		{/*
+		  The hero stays dark in both themes. The photograph is intrinsically a deep
+		  navy frame; washing it with the light-mode background turns it to grey mud
+		  and kills the amber shaft. Committing to one dark band is also the stronger
+		  brand signal, so these washes use fixed brand values, not theme tokens.
+		*/}
+		<div
+			class="absolute inset-0 bg-gradient-to-r from-[#080d12] via-[#080d12]/72 to-transparent"
+			aria-hidden="true"
+		></div>
+		<div
+			class="absolute inset-0 bg-gradient-to-t from-[#080d12] via-transparent to-[#080d12]/35"
+			aria-hidden="true"
+		></div>
+	</div>
 
-				<p class="mx-auto mb-10 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0">
-					{t("hero.subtitle")}
-				</p>
+	<Container class="relative flex min-h-[calc(100svh-5rem)] flex-col justify-center pb-16 pt-8 lg:pb-24">
+		<div class="max-w-2xl" data-animate>
+			<p
+				class="mb-5 inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+			>
+				{t("hero.badge")}
+			</p>
 
-				<div class="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-					<a
-						href="https://app.grialink.com/app/auth/register"
-						class="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-200 hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+			<h1 class="mb-5 text-display-lg font-black tracking-display-tight text-white">
+				{t("hero.titleLine1")}
+				<br class="hidden sm:block" />
+				<span class="text-gradient-primary">{t("hero.titleHighlight")}</span>
+			</h1>
+
+			<p class="mb-8 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+				{t("hero.subtitle")}
+			</p>
+
+			<div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+				<a
+					href={registerHref}
+					data-cta="register-hero"
+					class="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 ease-in-out hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/35 active:scale-[0.98] sm:w-auto"
+				>
+					{t("hero.ctaPrimary")}
+					<svg
+						class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
 					>
-						{t("hero.ctaPrimary")}
-						<svg
-							class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17 8l4 4m0 0l-4 4m4-4H3"
-							/>
-						</svg>
-					</a>
-					<a
-						href={`/${lang}/products`}
-						class="inline-flex items-center justify-center gap-2 rounded-full border border-border-light px-7 py-3.5 text-base font-medium text-muted-foreground transition-all duration-200 hover:border-border hover:bg-surface/60 hover:text-foreground active:scale-[0.98]"
-					>
-						{t("hero.ctaSecondary")}
-					</a>
-				</div>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M17 8l4 4m0 0l-4 4m4-4H3"
+						/>
+					</svg>
+				</a>
+				<a
+					href="#how-it-works"
+					class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-base font-medium text-white backdrop-blur-sm transition-all duration-300 ease-in-out hover:border-primary/40 hover:bg-white/10 active:scale-[0.98] sm:w-auto"
+				>
+					{t("hero.ctaSecondary")}
+				</a>
 			</div>
 
-			<div class="relative w-full max-w-lg flex-1 lg:max-w-xl" data-animate>
-				<HeroCard translations={heroCardData} client:visible />
-			</div>
+			<p class="mt-5 text-xs text-slate-400 sm:text-sm">{t("hero.disclaimer")}</p>
 		</div>
 	</Container>
 </section>

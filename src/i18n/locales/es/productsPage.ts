@@ -1,30 +1,25 @@
 export default {
   seo: {
-    title: 'Producto — Grialink | SES Omnicanal con IA para Clínicas de Salud',
+    title: 'Producto — Grialink | SES Omnicanal con IA para Centros de Salud',
     description:
-      'Siete módulos integrados: Prospector AI, Outreach Engine, Smart Pipeline, Smart Calendar, AI Analytics Hub, Grialink Dialer y Grial Bots. Automatiza captación, citas y retención en clínicas de salud.',
+      'Siete módulos integrados: Prospector AI, Outreach Engine, Smart Pipeline, Smart Calendar, AI Analytics Hub, Grialink Dialer y Grial Bots. Automatiza captación, citas y retención en centros de salud.',
   },
 
   hero: {
-    badge: 'SES diseñado para clínicas',
-    titleLine1: 'Tu propio Auditor',
-    titleHighlight: 'de ventas con Ai',
+    badge: 'SES diseñado para centros',
+    titleLine1: 'Siete módulos.',
+    titleHighlight: 'Un solo embudo.',
     subtitle:
-      'Grialink automatiza todo el proceso: encuentra nuevos leads con IA, genera secuencias de post ventas y analiza cada llamada para que ningún leads se pierda...y Mucho Más',
-    dashboardAlt: 'Grialink Sales Hub — dashboard inteligente de ventas con métricas en tiempo real',
-    previewAlt: 'Vista previa del Sales Hub con embudo de conversión',
-    alertsTitle: 'Alertas Críticas',
-    alerts: [
-      { label: 'Tiempo de Respuesta', value: '2.4h', trend: 'ALTO' },
-      { label: 'Tasa de Asistencia', value: '41.2%', trend: 'BAJO' },
-      { label: 'Tasa de Cierre', value: '18.5%', trend: 'BAJO' },
-    ],
+      'Prospector, cadencias, pipeline comercial, calendario, dialer, analytics y Grial Bots — para que ningún lead se enfríe entre WhatsApp y la cita.',
+    ctaPrimary: 'Comenzar gratis',
+    ctaSecondary: 'Ver precios',
+    previewAlt: 'Bandeja de conversaciones de Grialink con los mensajes de clientes del día',
   },
 
   grid: {
     title: 'La arquitectura detrás de Grialink',
     subtitle:
-      'Siete módulos conectados que automatizan todo el ciclo de ventas de tu clínica.',
+      'Siete módulos conectados que automatizan todo el ciclo de ventas de tu centro.',
     viewDetails: 'VER DETALLES',
   },
 
@@ -45,7 +40,7 @@ export default {
       name: 'Smart Pipeline',
       highlight: 'Inbox omnicanal + Kanban',
       description:
-        'Organiza el proceso comercial de tu clínica desde lead hasta cita confirmada con actualizaciones de IA en tiempo real.',
+        'Organiza el proceso comercial de tu centro desde lead hasta cita confirmada con actualizaciones de IA en tiempo real.',
     },
     calendar: {
       name: 'Smart Calendar',
@@ -80,7 +75,7 @@ export default {
   cta: {
     title: '¿Listo para ver Grialink en acción?',
     subtitle:
-      'Agenda una demo personalizada y descubre cómo automatizar la captación, citas y retención de leads en tu clínica.',
+      'Empieza gratis o escríbenos para una demo. Automatiza captación, citas y retención en una sola plataforma.',
     primaryButton: 'Comenzar gratis',
     secondaryButton: 'Ver planes y precios',
     disclaimer: 'Sin tarjeta de crédito • Configuración en 5 minutos • Cancela cuando quieras',
@@ -88,179 +83,127 @@ export default {
 
   showcase: {
     prospector: {
-      badge: 'Prospector AI',
-      title: 'Encuentra tus leads ideales con IA',
+      badge: 'Prospector IA',
+      title: 'Encuentra centros que encajan, no listas frías',
       subtitle:
-        'Busca leads potenciales usando lenguaje natural. Grialink se conecta con Apollo.io para enriquecer automáticamente cada contacto con teléfono, email, empresa y más.',
-      step1Title: 'Búsqueda en lenguaje natural',
-      step1Description:
-        'Escribe lo que buscas en español — "dermatólogos en Miami con más de 50 empleados" — y Prospector AI encuentra al instante leads que coinciden.',
-      step1Features: [
-        'Búsqueda por rol, industria, ubicación, tamaño de empresa',
-        'Comprensión de consultas con IA',
-        'Resultados en tiempo real de la base de datos de Apollo.io',
-        'Filtrar por emails y teléfonos verificados',
+        'Describes a quién buscas en lenguaje natural y Prospector devuelve responsables reales con email verificado.',
+      featuresTitle: 'De la búsqueda a la secuencia sin salir del panel',
+      featuresDescription:
+        'Filtra por cargo, especialidad y zona, revisa los resultados y envía los que te sirven directo a una secuencia.',
+      features: [
+        'Búsqueda en lenguaje natural o por filtros manuales',
+        'Email verificado antes de gastar crédito',
+        'Enriquecimiento de teléfono y datos de empresa',
+        'Importación directa a Contactos y secuencias',
+        'Créditos incluidos según plan, sin coste por asiento',
       ],
-      step1ImageAlt: 'Interfaz de búsqueda de Prospector AI con consulta en lenguaje natural',
-      step2Title: 'Resultados enriquecidos de un vistazo',
-      step2Description:
-        'Cada resultado viene pre-enriquecido con datos de contacto, información de la empresa, perfiles sociales y puntuación de relevancia — listo para agregar a tu pipeline.',
-      step2Features: [
-        'Hasta 800 contactos enriquecidos por mes',
-        'Teléfono, email, LinkedIn y datos de empresa',
-        'Agregar al pipeline o secuencia con un clic',
-        'Exportar contactos a CSV o sincronizar con SES',
-      ],
-      step2ImageAlt: 'Resultados de búsqueda de Prospector AI mostrando datos de contacto enriquecidos',
-      step3Title: 'Inteligencia profunda de contactos',
-      step3Description:
-        'Haz clic en cualquier contacto para ver su perfil completo: historial laboral, perfiles sociales, ingresos de la empresa, tecnologías usadas y sugerencias de outreach generadas por IA.',
-      step3Features: [
-        'Historial laboral completo y rol actual',
-        'Detalles de empresa: ingresos, tamaño, industria',
-        'Ángulos de outreach personalizados sugeridos por IA',
-        'Integración directa con Outreach Engine',
-      ],
-      step3ImageAlt: 'Modal de detalle de contacto con datos de perfil enriquecidos',
-      demoTitle: 'Mira Prospector AI en acción',
+      alt: 'Búsqueda inteligente de Prospector en Grialink, describiendo el público objetivo en lenguaje natural',
     },
     outreach: {
       badge: 'Outreach Engine',
-      title: 'Secuencias automáticas que mantienen el interés',
+      title: 'Secuencias que hacen el seguimiento por ti',
       subtitle:
-        'Crea cadencias de email multietapa, optimiza el copy con IA y rastrea aperturas y respuestas desde el mismo workspace que tu pipeline.',
-      featuresTitle: 'Sequences + Email AI Optimizer',
+        'Cadencias multipaso por tratamiento que se detienen solas cuando el cliente responde.',
+      featuresTitle: 'Seguimiento constante sin trabajo manual',
       featuresDescription:
-        'Inscribe contactos desde Prospector o tu CRM, envía desde dominios verificados y deja que la IA refine asuntos y cuerpos antes de cada envío.',
+        'Defines los pasos una vez y la secuencia se ejecuta en la ventana horaria que elijas, día tras día.',
       features: [
-        'Secuencias de email multietapa con dominios propios',
-        'Email AI Optimizer para asuntos y cuerpos',
-        'Tracking de aperturas, clics y rebotes vía SendGrid',
-        'Inscripción en un clic desde Prospector o Contactos',
-        'A/B testing y programación inteligente de envíos',
+        'Pasos de email y espera con ventana de envío',
+        'Parada automática cuando el contacto responde',
+        'Aperturas, clics y rebotes por paso',
+        'Dominios propios con verificación DNS',
+        'Optimizador de copy con IA por secuencia',
       ],
+      alt: 'Listado de secuencias en Grialink con métricas de envío, apertura y clics',
     },
     pipeline: {
       badge: 'Smart Pipeline',
-      title: 'Rastrea cada oportunidad desde el primer contacto hasta el cierre',
+      title: 'Cada oportunidad con dueño y siguiente paso',
       subtitle:
-        'Pipelines visuales Kanban pre-configurados para salud. 7 etapas con seguimiento de SLA, vinculación de citas y analíticos de conversión en tiempo real.',
-      viewTitle: 'Gestión visual del pipeline',
-      viewDescription:
-        'Arrastra y suelta deals a través de etapas personalizables. Rastrea valor monetario, fechas de citas, cumplimiento de SLA y tasas de conversión — todo en una vista.',
-      viewFeatures: [
-        'Plantillas pre-construidas para clínicas dentales, estéticas y de dermatología',
-        'Pipeline de 7 etapas con SLA de 2h–72h por etapa',
-        'Seguimiento de valor monetario por oportunidad',
-        'Vincula citas directamente a deals del pipeline',
-        'Tasa de conversión en tiempo real por etapa',
+        'Un pipeline por etapas pensado para centros, no un CRM genérico al que hay que adaptarse.',
+      featuresTitle: 'El embudo completo en una pantalla',
+      featuresDescription:
+        'Arrastra entre etapas, asigna responsable y deja programado el siguiente contacto con fecha.',
+      features: [
+        'Etapas configurables por tipo de tratamiento',
+        'Valor, responsable y fecha de cierre por oportunidad',
+        'Vista Kanban y vista de tabla',
+        'Actividad y notas unidas a la ficha del cliente',
+        'Métricas de conversión por etapa',
       ],
-      viewImageAlt: 'Tablero Kanban de Smart Pipeline con etapas específicas para salud',
-      expandedTitle: 'Vista completa del pipeline',
-      expandedDescription:
-        'Ve tu embudo completo de adquisición de leads expandido. Identifica cuellos de botella, rastrea incumplimientos de SLA y optimiza cada etapa del proceso de conversión.',
-      expandedImageAlt: 'Vista expandida de Smart Pipeline mostrando todas las etapas y deals',
-      demoTitle: 'Mira Smart Pipeline en acción',
+      alt: 'Pipeline de oportunidades de Grialink en vista Kanban organizado por etapas',
     },
     calendar: {
       badge: 'Smart Calendar',
-      title: 'Agenda citas sin esfuerzo',
+      title: 'La agenda deja de depender de la memoria',
       subtitle:
-        'Calendario integrado con sincronización de Google Calendar, recordatorios automáticos y programación inteligente para reducir inasistencias y maximizar el tiempo de tu clínica.',
-      createTitle: 'Creación rápida de citas',
-      createDescription:
-        'Crea citas en segundos con auto-llenado desde tus contactos del pipeline. Vincula a deals específicos, configura recordatorios y sincroniza al instante con Google Calendar.',
-      createFeatures: [
-        'Auto-llenado de datos del lead desde contactos del pipeline',
+        'Citas sincronizadas con Google Calendar y recordatorios automáticos por WhatsApp.',
+      featuresTitle: 'Menos ausencias, menos llamadas de confirmación',
+      featuresDescription:
+        'La cita se crea desde la conversación y el recordatorio sale solo el día antes.',
+      features: [
         'Sincronización bidireccional con Google Calendar',
-        'Recordatorios automáticos por email y SMS',
-        'Tipos de cita personalizados por servicio',
-        'Programación con reconocimiento de zona horaria',
-        'Seguimiento de inasistencias y sugerencias de reagendamiento',
+        'Recordatorios por WhatsApp antes de la cita',
+        'Vistas de día, semana y mes',
+        'Estado de confirmación visible por cita',
+        'Creación de cita desde la propia conversación',
       ],
-      createImageAlt: 'Modal de crear cita con datos del lead y sincronización de calendario',
-      demoTitle: 'Mira Smart Calendar en acción',
-    },
-    salesDashboard: {
-      badge: 'AI Analytics Hub',
-      title: 'Ventas, marketing y llamadas en un hub',
-      subtitle:
-        'KPIs en tiempo real, rendimiento de Meta y Google Ads, y scoring IA de llamadas. Todo lo que tu equipo de ingresos necesita sin cambiar de herramienta.',
-      viewTitle: 'Vista general del Sales Hub',
-      viewDescription:
-        'Monitorea tasas de cierre, asistencia, salud del pipeline y rendimiento del equipo con insights de IA y alertas accionables.',
-      viewFeatures: [
-        'KPIs en tiempo real: cierre, asistencia, ROAS',
-        'AI Call Quality Score con coaching en cada llamada',
-        'Reporte de llamadas por agente y por servicio',
-        'Rankings de equipo y pronóstico de ingresos',
-        'Análisis del embudo por etapa del pipeline',
-      ],
-      viewImageAlt: 'AI Analytics Hub Sales Dashboard con KPIs en tiempo real',
-      marketingTitle: 'Marketing Insights',
-      marketingDescription:
-        'Analíticos unificados de Meta Ads y Google Ads. Detecta fatiga creativa, compara CPL entre campañas y actúa con recomendaciones de IA.',
-      marketingFeatures: [
-        'Seguimiento de ROAS y CPL en cuentas publicitarias',
-        'Detección de fatiga creativa en campañas activas',
-        'Comparación de canales: Meta vs Google',
-        'Insights de presupuesto y audiencia con IA',
-      ],
-      marketingRoas: 'ROAS',
-      marketingCpl: 'CPL prom.',
-      marketingPeriod: 'Últimos 7 días',
-      marketingStatusHealthy: 'Saludable',
-      marketingStatusFatigue: 'Fatiga creativa',
+      alt: 'Calendario de Grialink con las citas del día y su estado de confirmación',
     },
     grialBots: {
       badge: 'Grial Bots',
-      title: 'Asistentes IA para WhatsApp y teléfono',
+      title: 'Responde fuera de horario sin contratar a nadie',
       subtitle:
-        'Automatiza reportes de negocio por WhatsApp y deja que AI Receptionist atienda llamadas, califique leads y agende citas. Incluido en Pro y Scale.',
-      whatsappTitle: 'WhatsApp Assistant',
-      whatsappDescription:
-        'Conecta tu número de WhatsApp Business, recibe reportes de ventas automáticos y haz preguntas de negocio en lenguaje natural.',
-      whatsappFeatures: [
-        'Verificación OTP y conexión segura',
-        'Reportes diarios, semanales o mensuales',
-        'Métricas de ventas y resúmenes del pipeline bajo demanda',
-        'Reportes en inglés y español',
+        'Asistente de WhatsApp y recepcionista con IA que atienden cuando tu equipo no está.',
+      featuresTitle: 'Atención continua, con control humano',
+      featuresDescription:
+        'El bot responde lo habitual y escala a una persona en cuanto la conversación lo requiere.',
+      features: [
+        'Asistente de WhatsApp con informes periódicos',
+        'Recepcionista IA conectada a flujos IVR',
+        'Traspaso a agente humano cuando hace falta',
+        'Verificación del número por código',
+        'Disponible en planes Pro y Scale',
       ],
-      receptionistTitle: 'AI Receptionist',
-      receptionistDescription:
-        'Atiende llamadas entrantes con IA, califica leads, agenda citas y transfiere a tu equipo cuando hace falta. Se integra con flujos IVR del Dialer.',
-      receptionistFeatures: [
-        'Voz, horarios y catálogo de servicios personalizables',
-        'Reserva de citas con sync a Calendar',
-        'Nodo IVR en flujos de Grialink Dialer',
-        'Transferencia a agentes cuando el lead califica',
-      ],
+      alt: 'Constructor de IVR de Grialink con un árbol de nodos conectados, incluido el de Grial Front Desk',
+      atmosphereAlt: {
+        whatsapp: 'Un móvil mostrando una conversación de WhatsApp con el asistente de Grialink',
+        frontDesk: 'Mostrador de recepción vacío de noche con el teléfono descolgado e iluminado',
+      },
     },
     dialer: {
       badge: 'Grialink Dialer',
-      title: 'Telefonía en la nube para equipos de ventas',
+      title: 'Telefonía integrada en la ficha del cliente',
       subtitle:
-        'Busca y compra números Twilio, llama desde el navegador, construye flujos IVR y revisa cada llamada con scoring IA.',
-      featuresTitle: 'Todo en un solo dialer',
+        'Compra números, llama desde el navegador y revisa cada llamada con puntuación de IA.',
+      featuresTitle: 'Todo el teléfono dentro del sistema',
       featuresDescription:
-        'Desde click-to-call en un contacto hasta árboles IVR completos con nodos de AI Receptionist. Minutos incluidos desde Starter.',
+        'Desde click-to-call en un contacto hasta árboles IVR con nodos de recepcionista IA.',
       features: [
-        'Compra y configura números en EE.UU.',
-        'Marcador en navegador e historial de llamadas',
-        'Constructor visual de IVR con nodo AI Receptionist',
-        'CNAM y configuración de perfil de negocio',
-        'AI Call Analytics scoring en llamadas completadas',
+        'Compra y configuración de números en EE. UU.',
+        'Marcador en navegador con historial completo',
+        'Constructor visual de IVR',
+        'CNAM y perfil de negocio verificado',
+        'Puntuación de IA en llamadas completadas',
       ],
-      previewTitle: 'Dialer / Llamadas recientes',
-      previewKpis: [
-        { label: 'Llamadas hoy', value: '24' },
-        { label: 'Duración prom.', value: '4m 12s' },
-        { label: 'Score IA', value: '8.6' },
+      alt: 'Registro de llamadas de Grialink con duración, resultado y puntuación de IA',
+    },
+    salesDashboard: {
+      badge: 'AI Analytics Hub',
+      title: 'Los números del mes, sin montar una hoja de cálculo',
+      subtitle:
+        'Ventas, marketing y llamadas en un mismo panel, actualizado solo.',
+      featuresTitle: 'Decidir con datos, no con sensaciones',
+      featuresDescription:
+        'Ves qué etapa atasca, qué tratamiento cierra y qué campaña merece más presupuesto.',
+      features: [
+        'KPIs de ventas y evolución del pipeline',
+        'Conversión por etapa y por responsable',
+        'Rendimiento de campañas y coste por lead',
+        'Analítica de llamadas con puntuación de IA',
+        'Previsión del periodo en curso',
       ],
-      previewCalls: [
-        { contact: 'María López', meta: 'Saliente · 5m 02s', score: 91 },
-        { contact: 'John Smith', meta: 'Entrante · 2m 48s', score: 74 },
-      ],
+      alt: 'Panel de Sales Insights de Grialink con los KPIs de ventas del periodo',
     },
   },
 };

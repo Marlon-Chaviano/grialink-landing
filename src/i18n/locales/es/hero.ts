@@ -1,10 +1,10 @@
 export default {
-  badge: 'SES con IA para Clínicas de Salud',
-  titleLine1: 'Deja de perseguir leads.',
-  titleHighlight: ' Deja que la IA los convierta. ',
+  badge: 'Crecimiento de clientes con IA',
+  titleLine1: 'Deja de perseguir clientes.',
+  titleHighlight: 'Que la IA llene la agenda.',
   subtitle:
-    'Grialink es el SES (Sales Engine System) omnicanal con inteligencia artificial que automatiza la captación, agendamiento y retención de leads en clínicas estéticas, dentales y de salud. Todo en una sola plataforma.',
-  ctaPrimary: 'Comenzar gratis',
+    'Grialink convierte cada consulta en una cita confirmada: WhatsApp, llamadas y seguimiento automáticos para centros de estética, dental y bienestar.',
+  ctaPrimary: 'Empezar gratis',
   ctaSecondary: 'Ver cómo funciona',
-  disclaimer: 'Sin tarjeta de crédito \u2022 Configuración en 5 minutos \u2022 Cancela cuando quieras',
+  disclaimer: 'Sin tarjeta • Listo en 5 minutos • Cancela cuando quieras',
 };

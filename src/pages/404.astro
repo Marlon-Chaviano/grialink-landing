@@ -23,20 +23,22 @@ const fallback = defaultLang;
 		<title>404 — Grialink</title>
 
 		<link
-			rel="preconnect"
-			href="https://fonts.googleapis.com"
-		/>
-		<link
-			rel="preconnect"
-			href="https://fonts.gstatic.com"
+			rel="preload"
+			href="/fonts/satoshi-variable.woff2"
+			as="font"
+			type="font/woff2"
 			crossorigin
-		/>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&display=swap"
-			rel="stylesheet"
 		/>
 
 		<style>
+			@font-face {
+				font-family: "Satoshi";
+				src: url("/fonts/satoshi-variable.woff2") format("woff2-variations");
+				font-weight: 300 900;
+				font-style: normal;
+				font-display: swap;
+			}
+
 			*,
 			*::before,
 			*::after {
@@ -48,7 +50,7 @@ const fallback = defaultLang;
 			body {
 				background: #0f1923;
 				color: #f1f5f9;
-				font-family: "Inter", system-ui, sans-serif;
+				font-family: "Satoshi", system-ui, sans-serif;
 				display: flex;
 				align-items: center;
 				justify-content: center;

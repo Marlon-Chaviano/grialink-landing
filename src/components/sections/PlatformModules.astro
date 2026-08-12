@@ -1,12 +1,19 @@
 ---
 /**
- * PlatformModules — home preview of all 7 product modules (uniform grid).
+ * PlatformModules — the home page's first look at the actual product.
+ *
+ * Replaces the previous seven-card grid: a single real capture carries the
+ * "this is a working system" message, and the modules read as an editorial
+ * index underneath rather than seven competing cards.
  */
 import Container from "@/components/ui/Container.astro";
-import ModuleArchitectureCard from "@/components/sections/ModuleArchitectureCard.astro";
+import ProductPreview from "@/components/ui/ProductPreview.astro";
+import CircuitAtmosphere from "@/components/background/CircuitAtmosphere.astro";
+import inboxDark from "@/assets/marketing/captures/inbox-thread-dark.webp";
+import inboxLight from "@/assets/marketing/captures/inbox-thread-light.webp";
 import { type Lang, localizedHref } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
-import { products } from "@/lib/products";
+import { products, productColorClasses, productSectionAnchor } from "@/lib/products";
 
 interface Props {
 	lang: Lang;
@@ -18,14 +25,14 @@ const productTranslations = getTranslations(lang, "productsPage").products as Re
 	string,
 	{ name: string; description: string; highlight?: string }
 >;
-
-const lastAlone = products.length % 3 === 1;
 ---
 
-<section id="platform-modules" class="section-spacing bg-background">
+<section id="platform-modules" class="section-spacing relative isolate bg-background">
+	<CircuitAtmosphere variant="divider" intensity="subtle" />
+
 	<Container>
-		<div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14" data-animate>
-			<h2 class="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+		<div class="mx-auto mb-12 max-w-2xl text-center lg:mb-16" data-animate>
+			<h2 class="mb-4 text-display-sm font-bold tracking-display text-foreground">
 				{section.title}
 			</h2>
 			<p class="text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -33,31 +40,67 @@ const lastAlone = products.length % 3 === 1;
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
+		<ProductPreview
+			dark={inboxDark}
+			light={inboxLight}
+			alt={section.previewAlt}
+			caption={section.previewCaption}
+			class="mx-auto max-w-5xl"
+		/>
+
+		<ul
+			class="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-x-10 border-t border-border-light sm:grid-cols-2 lg:mt-20 lg:grid-cols-3"
+			data-animate
+		>
 			{
-				products.map((product, index) => {
+				products.map((product) => {
 					const t = productTranslations[product.id];
-					const centerLast = lastAlone && index === products.length - 1;
+					const colors = productColorClasses[product.color];
+					const href = localizedHref(
+						`/products#${productSectionAnchor[product.slug] ?? product.slug}`,
+						lang,
+					);
+
+					// Seven modules never fill the last row, so the trailing rule would hang.
 					return (
-						<div
-							class:list={[centerLast && "xl:col-span-3 xl:flex xl:justify-center"]}
-						>
-							<ModuleArchitectureCard
-								lang={lang}
-								product={product}
-								name={t.name}
-								description={t.description}
-								highlight={t.highlight}
-								viewLabel={section.viewModule}
-								class:list={[centerLast && "xl:w-full xl:max-w-md"]}
-							/>
-						</div>
+						<li class="border-b border-border-light last:border-b-0">
+							<a
+								href={href}
+								class="group flex h-full gap-4 py-6 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+							>
+								<span
+									class:list={[
+										"mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-200",
+										colors.bg,
+										colors.text,
+									]}
+								>
+									<svg class="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+										<path d={product.iconPath} />
+									</svg>
+								</span>
+
+								<span class="min-w-0">
+									<span
+										class:list={[
+											"block text-base font-semibold text-foreground transition-colors duration-200",
+											colors.link,
+										]}
+									>
+										{t.name}
+									</span>
+									<span class="mt-1 block text-sm leading-relaxed text-muted-foreground">
+										{t.highlight ?? t.description}
+									</span>
+								</span>
+							</a>
+						</li>
 					);
 				})
 			}
-		</div>
+		</ul>
 
-		<div class="mt-10 text-center" data-animate>
+		<div class="mt-12 text-center" data-animate>
 			<a
 				href={localizedHref(section.ctaHref ?? "/products", lang)}
 				class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"

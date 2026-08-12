@@ -1,0 +1,63 @@
+---
+/**
+ * Frames a real dashboard capture. Ships the dark and light pair and lets the
+ * `.dark-only` / `.light-only` utilities swap them, so the screenshot always
+ * matches the theme the visitor is reading in.
+ */
+import { Image } from "astro:assets";
+
+interface Props {
+	dark: ImageMetadata;
+	light: ImageMetadata;
+	/** Describes what the screen shows — never leave this empty, it is the alt text. */
+	alt: string;
+	/** Renders below the frame as a caption. */
+	caption?: string;
+	/** Eager-load when the preview sits high enough to be the LCP element. */
+	eager?: boolean;
+	class?: string;
+}
+
+const { dark, light, alt, caption, eager = false, class: className } = Astro.props;
+
+const imageClass =
+	"w-full rounded-[inherit] border border-border-light bg-card object-cover object-top";
+const sizes = "(min-width: 1280px) 1100px, (min-width: 768px) 90vw, 100vw";
+const widths = [640, 960, 1280, 1600];
+---
+
+<figure class:list={["relative", className]} data-animate>
+	{/* Amber bloom anchoring the frame to the brand light direction. */}
+	<div
+		class="pointer-events-none absolute -inset-x-8 -bottom-6 -top-8 -z-10 rounded-[2rem] bg-primary/10 blur-3xl"
+		aria-hidden="true"
+	>
+	</div>
+
+	<div
+		class="overflow-hidden rounded-xl shadow-2xl shadow-black/25 ring-1 ring-border-light lg:rounded-2xl"
+	>
+		<Image
+			src={dark}
+			alt={alt}
+			class:list={[imageClass, "dark-only"]}
+			widths={widths}
+			sizes={sizes}
+			loading={eager ? "eager" : "lazy"}
+		/>
+		<Image
+			src={light}
+			alt={alt}
+			class:list={[imageClass, "light-only"]}
+			widths={widths}
+			sizes={sizes}
+			loading={eager ? "eager" : "lazy"}
+		/>
+	</div>
+
+	{
+		caption && (
+			<figcaption class="mt-4 text-center text-sm text-muted-foreground">{caption}</figcaption>
+		)
+	}
+</figure>

@@ -1,5 +1,5 @@
 export default {
-  heading: 'Cuatro módulos de IA que trabajan juntos para hacer crecer tu clínica',
+  heading: 'Cuatro módulos de IA que trabajan juntos para hacer crecer tu centro',
   learnMore: 'Ver detalles →',
   products: [
     {
@@ -14,7 +14,7 @@ export default {
     },
     {
       title: 'Smart Pipeline',
-      description: 'Pipelines de ventas pre-configurados para clínicas estéticas, dentales y de dermatología. 7 etapas con SLA y tracking de valor monetario.',
+      description: 'Pipelines de ventas pre-configurados para centros de estética, dental y dermatología. 7 etapas con SLA y tracking de valor monetario.',
       color: 'purple',
     },
     {
@@ -25,9 +25,9 @@ export default {
   ],
   caseStudy: {
     badge: 'El problema que resolvemos',
-    title: 'El caos operativo de las clínicas',
+    title: 'El caos operativo de los centros',
     quote:
-      '"Perdía 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo. Necesitaba una plataforma que hablara el idioma de mi clínica." — Especialista en estética',
+      '"Perdía 3 horas al día entre WhatsApp, mi agenda de Google y la hoja de cálculo. Necesitaba una plataforma que hablara el idioma de mi centro." — Especialista en estética',
     imgAlt: 'Profesional de la salud gestionando leads con tecnología moderna',
   },
 };

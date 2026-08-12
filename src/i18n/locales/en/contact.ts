@@ -1,16 +1,16 @@
 export default {
   seo: {
-    title: 'Contact — Grialink | Talk to Our Clinic SES Team',
+    title: 'Contact — Grialink | Talk to Our Practice SES Team',
     description:
-      'Schedule a personalized demo or contact our team. Technical support, sales inquiries, and partnerships for health, aesthetic, and dental clinics.',
+      'Schedule a personalized demo or contact our team. Technical support, sales inquiries, and partnerships for health, aesthetic, and dental practices.',
   },
 
   hero: {
-    badge: "Let's talk about your clinic",
-    titleLine1: 'Your clinic is unique.',
-    titleHighlight: 'Your solution should be too.',
+    badge: 'Demo via form',
+    titleLine1: 'Tell us about your practice.',
+    titleHighlight: 'We’ll reply.',
     subtitle:
-      'Tell us about your case and we\'ll show you how Grialink can automate lead acquisition, scheduling, and retention at your clinic.',
+      'Tell us what you need and we reply within 24 business hours. If you prefer, email us at info@grialink.com.',
   },
 
   info: {
@@ -42,11 +42,11 @@ export default {
       },
       email: {
         label: 'Email Address',
-        placeholder: 'name@yourclinic.com',
+        placeholder: 'name@yourpractice.com',
       },
       company: {
-        label: 'Clinic name (optional)',
-        placeholder: 'E.g.: DermaPro Clinic',
+        label: 'Practice name (optional)',
+        placeholder: 'E.g.: DermaPro Practice',
       },
       subject: {
         label: 'Subject',
@@ -60,7 +60,7 @@ export default {
       },
       message: {
         label: 'Message',
-        placeholder: 'Tell us about your clinic: how many leads do you manage per month? What channels do you use? What is your biggest operational challenge?',
+        placeholder: 'Tell us about your practice: how many leads do you manage per month? What channels do you use? What is your biggest operational challenge?',
       },
     },
     submit: 'Send Message',
@@ -102,7 +102,7 @@ export default {
   cta: {
     title: 'Already a Grialink customer?',
     subtitle:
-      'Access your dashboard directly to manage your clinic, review analytics, or contact support.',
+      'Access your dashboard directly to manage your practice, review analytics, or contact support.',
     button: 'Go to app.grialink.com',
   },
 };

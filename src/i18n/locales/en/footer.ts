@@ -1,6 +1,6 @@
 export default {
   brand: 'Grialink',
-  tagline: 'The omnichannel SES with AI designed for aesthetic, dental, and healthcare clinics.',
+  tagline: 'The omnichannel SES with AI designed for aesthetic, dental and wellness practices.',
   copyright: '© {year} Ezi Group LLC (DBA Grialink). All rights reserved.',
   groups: [
     {

@@ -6,6 +6,9 @@ interface Props {
   title: string;
   description: string;
   canonical?: string;
+  /** Picks the localized card in `public/og/` — see `scripts/generate-og.mjs`. */
+  page?: 'home' | 'products' | 'pricing' | 'about' | 'contact';
+  /** Escape hatch for pages without their own card (legal, 404). */
   ogImage?: string;
   robots?: string;
 }
@@ -15,12 +18,15 @@ const {
   title,
   description,
   canonical = Astro.url.href,
-  ogImage = '/logo.png',
+  page = 'home',
+  ogImage,
   robots = 'index, follow',
 } = Astro.props;
 
 const siteName = 'Grialink';
 const siteUrl = Astro.site?.origin ?? 'https://grialink.com';
+const ogPath = ogImage ?? `/og/${page}-${lang}.png`;
+const ogImageUrl = ogPath.startsWith('http') ? ogPath : `${siteUrl}${ogPath}`;
 
 // Build hreflang alternates
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
@@ -64,7 +70,10 @@ const alternates = supportedLanguages.map((l) => ({
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={ogImage} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
 
@@ -73,4 +82,4 @@ const alternates = supportedLanguages.map((l) => ({
 <meta name="twitter:url" content={canonical} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image" content={ogImageUrl} />

@@ -1,8 +1,19 @@
 ---
+/**
+ * HowItWorks — the four setup steps.
+ *
+ * Card-free and static: the old version hydrated a React island to render
+ * mock settings panels in fake browser chrome. The steps read better as a
+ * numbered editorial sequence, and the section now ships no JavaScript.
+ */
 import Container from "@/components/ui/Container.astro";
-import HowItWorksFlow, { type HowItWorksStep } from "./HowItWorksFlow";
 import { type Lang } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
+
+interface Step {
+	title: string;
+	description: string;
+}
 
 interface Props {
 	lang: Lang;
@@ -10,14 +21,18 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getTranslations(lang, "howItWorks") as Record<string, unknown>;
-const steps = t.steps as HowItWorksStep[];
-const cta = t.cta as string;
+const steps = t.steps as Step[];
+const registerHref = "https://app.grialink.com/app/auth/register";
 ---
 
-<section id="how-it-works" class="section-spacing relative overflow-hidden bg-background">
+{/*
+  No section-level circuit here: the `divider` seam lands mid-content on a
+  section this tall. The page backdrop already carries the atmosphere.
+*/}
+<section id="how-it-works" class="section-spacing relative isolate overflow-hidden bg-background">
 	<Container>
-		<div class="mx-auto mb-12 max-w-2xl text-center lg:mb-16" data-animate>
-			<h2 class="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+		<div class="mx-auto mb-14 max-w-2xl text-center lg:mb-20" data-animate>
+			<h2 class="mb-4 text-display-sm font-bold tracking-display text-foreground text-balance">
 				{t.title as string}
 			</h2>
 			<p class="text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -25,17 +40,39 @@ const cta = t.cta as string;
 			</p>
 		</div>
 
-		<div data-animate>
-			<HowItWorksFlow
-				steps={steps}
-				cta={cta}
-				statusLabels={{
-					connected: t.statusConnected as string,
-					pending: t.statusPending as string,
-					active: t.statusActive as string,
-				}}
-				client:visible
-			/>
+		<ol class="stagger-children mx-auto grid max-w-5xl gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8" data-animate>
+			{
+				steps.map((step, i) => (
+					<li class="relative">
+						{/*
+						  Rendered conditionally rather than toggled with `lg:hidden`: both
+						  display utilities have the same specificity, so the class order
+						  would not reliably win on the final step.
+						*/}
+						{i < steps.length - 1 && (
+							<span
+								class="absolute left-0 top-4 hidden h-px w-full bg-gradient-to-r from-primary/40 to-transparent lg:block"
+								aria-hidden="true"
+							/>
+						)}
+						<span class="relative flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-background text-sm font-semibold tabular-nums text-primary">
+							{i + 1}
+						</span>
+						<h3 class="mt-5 text-lg font-semibold text-foreground">{step.title}</h3>
+						<p class="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+					</li>
+				))
+			}
+		</ol>
+
+		<div class="mt-14 text-center" data-animate>
+			<a
+				href={registerHref}
+				data-cta="register-how-it-works"
+				class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 ease-in-out hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/35 active:scale-[0.98]"
+			>
+				{t.cta as string}
+			</a>
 		</div>
 	</Container>
 </section>

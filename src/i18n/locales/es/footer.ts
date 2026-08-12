@@ -1,6 +1,6 @@
 export default {
   brand: 'Grialink',
-  tagline: 'El SES omnicanal con IA diseñado para clínicas estéticas, dentales y de salud.',
+  tagline: 'El SES omnicanal con IA diseñado para centros de estética, dental y bienestar.',
   copyright: '© {year} Ezi Group LLC (DBA Grialink). Todos los derechos reservados.',
   groups: [
     {

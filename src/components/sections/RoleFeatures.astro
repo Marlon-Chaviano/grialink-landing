@@ -1,24 +1,150 @@
 ---
+/**
+ * RoleFeatures — the same product seen from each role's daily screen.
+ *
+ * Replaces a 300-line React island that drew fake Kanban boards with invented
+ * client names. Real captures now, and the tabs run on native radio inputs so
+ * the whole section costs no JavaScript.
+ */
 import Container from "@/components/ui/Container.astro";
-import RoleTabs, { type RoleTabsProps } from "./RoleTabs";
-import { type Lang } from "@/i18n/config";
+import ProductPreview from "@/components/ui/ProductPreview.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
+
+import marketingDark from "@/assets/marketing/captures/cadences-dark.webp";
+import marketingLight from "@/assets/marketing/captures/cadences-light.webp";
+import salesDark from "@/assets/marketing/captures/pipeline-dark.webp";
+import salesLight from "@/assets/marketing/captures/pipeline-light.webp";
+import receptionDark from "@/assets/marketing/captures/calendar-dark.webp";
+import receptionLight from "@/assets/marketing/captures/calendar-light.webp";
+import managementDark from "@/assets/marketing/captures/sales-insights-dark.webp";
+import managementLight from "@/assets/marketing/captures/sales-insights-light.webp";
+
+interface Tab {
+	id: string;
+	label: string;
+	title: string;
+	description: string;
+	alt: string;
+}
 
 interface Props {
 	lang: Lang;
 }
 
 const { lang } = Astro.props;
-const roleTabsData = getTranslations(lang, "roleTabs") as RoleTabsProps["translations"];
+const t = getTranslations(lang, "roleTabs") as Record<string, unknown>;
+const tabs = t.tabs as Tab[];
+
+const shots: Record<string, { dark: ImageMetadata; light: ImageMetadata }> = {
+	marketing: { dark: marketingDark, light: marketingLight },
+	sales: { dark: salesDark, light: salesLight },
+	reception: { dark: receptionDark, light: receptionLight },
+	management: { dark: managementDark, light: managementLight },
+};
+
+/**
+ * Selectors are `group-has-[…]` rather than `peer-…` on purpose: `peer` relies
+ * on the sibling combinator, and the labels sit one level deeper than the
+ * radios, so a peer variant would style the panels but never the pills.
+ * Tailwind needs these as literal strings.
+ */
+const LABEL_ON = [
+	"group-has-[#role-marketing:checked]:border-primary group-has-[#role-marketing:checked]:bg-primary group-has-[#role-marketing:checked]:text-primary-foreground",
+	"group-has-[#role-sales:checked]:border-primary group-has-[#role-sales:checked]:bg-primary group-has-[#role-sales:checked]:text-primary-foreground",
+	"group-has-[#role-reception:checked]:border-primary group-has-[#role-reception:checked]:bg-primary group-has-[#role-reception:checked]:text-primary-foreground",
+	"group-has-[#role-management:checked]:border-primary group-has-[#role-management:checked]:bg-primary group-has-[#role-management:checked]:text-primary-foreground",
+];
+const PANEL_ON = [
+	"group-has-[#role-marketing:checked]:block",
+	"group-has-[#role-sales:checked]:block",
+	"group-has-[#role-reception:checked]:block",
+	"group-has-[#role-management:checked]:block",
+];
+const FOCUS_RING = [
+	"group-has-[#role-marketing:focus-visible]:ring-2 group-has-[#role-marketing:focus-visible]:ring-primary/40",
+	"group-has-[#role-sales:focus-visible]:ring-2 group-has-[#role-sales:focus-visible]:ring-primary/40",
+	"group-has-[#role-reception:focus-visible]:ring-2 group-has-[#role-reception:focus-visible]:ring-primary/40",
+	"group-has-[#role-management:focus-visible]:ring-2 group-has-[#role-management:focus-visible]:ring-primary/40",
+];
 ---
 
-<section class="section-spacing bg-secondary">
+<section class="section-spacing bg-secondary" id="roles">
 	<Container>
-		<div data-animate>
-			<RoleTabs
-				translations={roleTabsData}
-				client:visible
-			/>
+		<div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14" data-animate>
+			<h2 class="mb-4 text-display-sm font-bold tracking-display text-foreground text-balance">
+				{t.title as string}
+			</h2>
+			<p class="text-base leading-relaxed text-muted-foreground lg:text-lg">
+				{t.subtitle as string}
+			</p>
+		</div>
+
+		<div class="group" data-animate role="radiogroup" aria-label={t.title as string}>
+			{
+				tabs.map((tab, i) => (
+					<input
+						type="radio"
+						name="role-tab"
+						id={`role-${tab.id}`}
+						class="sr-only"
+						checked={i === 0}
+					/>
+				))
+			}
+
+			<div class="mb-10 flex flex-wrap justify-center gap-2">
+				{
+					tabs.map((tab, i) => (
+						<label
+							for={`role-${tab.id}`}
+							class:list={[
+								"cursor-pointer rounded-full border border-border-light px-5 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary/30 hover:text-foreground",
+								LABEL_ON[i],
+								FOCUS_RING[i],
+							]}
+						>
+							{tab.label}
+						</label>
+					))
+				}
+			</div>
+
+			{
+				tabs.map((tab, i) => (
+					<div class:list={["hidden", PANEL_ON[i]]}>
+						<div class="mx-auto mb-8 max-w-2xl text-center">
+							<h3 class="text-xl font-semibold text-foreground lg:text-2xl">{tab.title}</h3>
+							<p class="mt-3 text-sm leading-relaxed text-muted-foreground lg:text-base">
+								{tab.description}
+							</p>
+						</div>
+						<ProductPreview
+							dark={shots[tab.id].dark}
+							light={shots[tab.id].light}
+							alt={tab.alt}
+							class="mx-auto max-w-5xl"
+						/>
+					</div>
+				))
+			}
+		</div>
+
+		<div class="mt-12 text-center" data-animate>
+			<a
+				href={localizedHref("/products", lang)}
+				class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+			>
+				{t.cta as string}
+				<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M17 8l4 4m0 0l-4 4m4-4H3"
+					/>
+				</svg>
+			</a>
 		</div>
 	</Container>
 </section>

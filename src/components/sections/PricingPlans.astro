@@ -1,0 +1,22 @@
+---
+/**
+ * PricingPlans — the plan grid.
+ *
+ * Static: it maps over `plans` and renders cards. The React version was
+ * hydrated with `client:visible` purely to run that map.
+ */
+import PricingCard from "@/components/sections/PricingCard.astro";
+import { plans } from "@/lib/pricing";
+import { type Lang } from "@/i18n/config";
+
+interface Props {
+	translations: Record<string, any>;
+	lang: Lang;
+}
+
+const { translations, lang } = Astro.props;
+---
+
+<div class="grid grid-cols-1 items-stretch gap-3 sm:grid-cols-2 lg:gap-4 xl:grid-cols-5">
+	{plans.map((plan) => <PricingCard plan={plan} translations={translations} lang={lang} />)}
+</div>

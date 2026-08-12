@@ -3,7 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 import SEO from "@/components/seo/SEO.astro";
 
 import PricingHero from "@/components/sections/PricingHero.astro";
-import PricingPlans from "@/components/sections/PricingPlans";
+import PricingPlans from "@/components/sections/PricingPlans.astro";
+import PricingCompare from "@/components/sections/PricingCompare.astro";
 import PricingIntegrations from "@/components/sections/PricingIntegrations.astro";
 import TrustBadges from "@/components/sections/TrustBadges.astro";
 import PricingAddons from "@/components/sections/PricingAddons.astro";
@@ -24,7 +25,12 @@ const seo = pricing.seo as Record<string, string>;
 
 <Layout lang={lang} circuitVariant="full">
 	<Fragment slot="head">
-		<SEO lang={lang} title={seo.title} description={seo.description} />
+		<SEO
+			lang={lang}
+			title={seo.title}
+			description={seo.description}
+			page="pricing"
+		/>
 		<script
 			type="application/ld+json"
 			set:html={JSON.stringify({
@@ -58,15 +64,16 @@ const seo = pricing.seo as Record<string, string>;
 	<main>
 		<PricingHero lang={lang} />
 
-		<section class="pb-16 pt-2 lg:pb-20" data-animate>
+		<section class="pb-10 pt-2 lg:pb-12" data-animate>
 			<div class="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-				<PricingPlans translations={pricing} lang={lang} client:visible />
+				<PricingPlans translations={pricing} lang={lang} />
 			</div>
 		</section>
 
+		<PricingCompare lang={lang} />
 		<PricingIntegrations lang={lang} />
 		<PricingAddons lang={lang} />
-		<TrustBadges lang={lang} />
+		<TrustBadges lang={lang} variant="standalone" />
 
 		<div class="mx-auto mb-20 max-w-4xl border-t border-border-light px-4 pt-8 text-center">
 			<p class="text-[11px] italic leading-normal text-muted-foreground">{pricing.disclaimer}</p>

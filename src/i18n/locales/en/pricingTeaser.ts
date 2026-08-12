@@ -1,5 +1,5 @@
 export default {
-  title: 'Plans that grow with your clinic',
+  title: 'Plans that grow with your practice',
   subtitle: 'Start free. Upgrade when you need dialer minutes, Grial Bots, or advanced AI.',
   seeAll: 'See all plans',
   perMonth: '/mo',
@@ -7,8 +7,14 @@ export default {
     free: {
       name: 'Free',
       price: '$0',
-      highlight: 'Try the essentials',
+      highlight: 'Try the essentials · 10 prospects',
       cta: 'Start free',
+    },
+    starter: {
+      name: 'Starter',
+      price: '$99',
+      highlight: 'Dialer + email sequences',
+      cta: 'Get started',
     },
     pro: {
       name: 'Pro',
@@ -20,9 +26,10 @@ export default {
     scale: {
       name: 'Scale',
       price: '$349',
-      highlight: 'Dialer · 6,000 min included',
+      highlight: 'More minutes · credits · sub-accounts',
       cta: 'Get started',
     },
   },
+  enterpriseNote: 'Need Enterprise? Contact us',
   disclaimer: 'No credit card required · 5-minute setup · Cancel anytime',
 };

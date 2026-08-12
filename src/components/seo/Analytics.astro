@@ -1,0 +1,52 @@
+---
+/**
+ * Optional analytics — GA4 and/or Plausible via public env vars.
+ * Set PUBLIC_GA_ID and/or PUBLIC_PLAUSIBLE_DOMAIN in the deploy environment.
+ */
+const gaId = (import.meta.env.PUBLIC_GA_ID as string | undefined)?.trim();
+const plausibleDomain = (import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined)?.trim();
+---
+
+{
+	gaId ? (
+		<>
+			<script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+			<script is:inline set:html={`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${gaId}', { anonymize_ip: true });
+`} />
+		</>
+	) : null
+}
+
+{
+	plausibleDomain ? (
+		<script
+			defer
+			data-domain={plausibleDomain}
+			src="https://plausible.io/js/script.js"
+		/>
+	) : null
+}
+
+<script is:inline>
+	document.addEventListener(
+		'click',
+		function (event) {
+			var t = event.target;
+			if (!t || !t.closest) return;
+			var el = t.closest('[data-cta]');
+			if (!el) return;
+			var name = el.getAttribute('data-cta') || 'cta';
+			if (typeof window.gtag === 'function') {
+				window.gtag('event', 'cta_click', { cta_id: name });
+			}
+			if (window.plausible) {
+				window.plausible('CTA Click', { props: { cta_id: name } });
+			}
+		},
+		true,
+	);
+</script>
