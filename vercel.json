@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/sms-signup",
+      "destination": "/en/sms-signup",
+      "permanent": false
+    },
+    {
+      "source": "/terms",
+      "destination": "/en/terms",
+      "permanent": false
+    },
+    {
+      "source": "/privacy",
+      "destination": "/en/privacy",
+      "permanent": false
+    }
+  ]
+}
