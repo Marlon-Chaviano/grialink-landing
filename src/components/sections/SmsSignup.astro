@@ -25,9 +25,9 @@ const f = s.form;
 const disclosures = s.disclosures;
 
 const linkClass = "text-primary hover:underline font-medium break-all";
-/* Bare canonical URLs — matches the Message Flow submitted to Twilio/TCR. */
-const termsUrl = "https://grialink.com/terms";
-const privacyUrl = "https://grialink.com/privacy";
+/* Must match the Message Flow submitted to Twilio/TCR character-for-character. */
+const termsUrl = "https://grialink.com/en/terms";
+const privacyUrl = "https://grialink.com/en/privacy";
 const consentHtml = f.consent
 	.replace(
 		"{termsUrl}",
