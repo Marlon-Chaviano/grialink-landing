@@ -1,6 +1,31 @@
 {
   "redirects": [
     {
+      "source": "/about",
+      "destination": "/en/about",
+      "permanent": false
+    },
+    {
+      "source": "/contact",
+      "destination": "/en/contact",
+      "permanent": false
+    },
+    {
+      "source": "/pricing",
+      "destination": "/en/pricing",
+      "permanent": false
+    },
+    {
+      "source": "/privacy",
+      "destination": "/en/privacy",
+      "permanent": false
+    },
+    {
+      "source": "/products",
+      "destination": "/en/products",
+      "permanent": false
+    },
+    {
       "source": "/sms-signup",
       "destination": "/en/sms-signup",
       "permanent": false
@@ -8,11 +33,6 @@
     {
       "source": "/terms",
       "destination": "/en/terms",
-      "permanent": false
-    },
-    {
-      "source": "/privacy",
-      "destination": "/en/privacy",
       "permanent": false
     }
   ]
