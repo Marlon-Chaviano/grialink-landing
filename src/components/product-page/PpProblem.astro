@@ -1,0 +1,45 @@
+---
+/**
+ * The cost of the status quo. Uses the home `Problem` section's card-free
+ * editorial treatment — numbered rules rather than boxes — so the two read as
+ * the same voice.
+ */
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	problem: {
+		title: string;
+		subtitle: string;
+		points: { title: string; body: string }[];
+	};
+}
+
+const { problem } = Astro.props;
+---
+
+<section class="section-spacing">
+	<Container>
+		<div class="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
+			<div class="lg:sticky lg:top-32 lg:self-start" data-animate>
+				<h2 class="text-display-sm font-bold tracking-display text-foreground">{problem.title}</h2>
+				<p class="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+					{problem.subtitle}
+				</p>
+			</div>
+
+			<ol class="stagger-children" data-animate>
+				{
+					problem.points.map((point, i) => (
+						<li class="border-t border-border-light py-7 first:border-t-0 first:pt-0">
+							<p class="mb-2 text-sm font-semibold tabular-nums text-primary">
+								{String(i + 1).padStart(2, "0")}
+							</p>
+							<h3 class="text-lg font-semibold tracking-tight text-foreground">{point.title}</h3>
+							<p class="mt-2 text-base leading-relaxed text-muted-foreground">{point.body}</p>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</Container>
+</section>

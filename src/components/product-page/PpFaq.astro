@@ -1,0 +1,52 @@
+---
+/**
+ * Objection handling. Native <details> with the site's shared accordion
+ * animation — same mechanism as the home FAQ, so no JS and no flash.
+ */
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	faq: { title: string; items: { question: string; answer: string }[] };
+	tinted?: boolean;
+}
+
+const { faq, tinted = false } = Astro.props;
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<h2
+			class="mx-auto mb-12 max-w-2xl text-center text-display-sm font-bold tracking-display text-foreground"
+			data-animate
+		>
+			{faq.title}
+		</h2>
+
+		<div class="mx-auto max-w-3xl space-y-3" data-animate>
+			{
+				faq.items.map((item) => (
+					<details class="group rounded-xl border border-border-light bg-card px-5 py-4">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 marker:content-none">
+							<h3 class="text-base font-semibold text-foreground">{item.question}</h3>
+							<svg
+								class="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M6 9l6 6 6-6" />
+							</svg>
+						</summary>
+						<div class="details-content">
+							<p class="pt-3 text-base leading-relaxed text-muted-foreground">{item.answer}</p>
+						</div>
+					</details>
+				))
+			}
+		</div>
+	</Container>
+</section>

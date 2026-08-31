@@ -1,0 +1,81 @@
+---
+/**
+ * One alternating deep-dive: copy on one side, the real screen on the other.
+ *
+ * This is the workhorse of every product page — the pattern Chatwoot repeats
+ * down its feature pages. Sections alternate sides so the page has a rhythm
+ * rather than a stack.
+ */
+import Container from "@/components/ui/Container.astro";
+import ProductPreview from "@/components/ui/ProductPreview.astro";
+
+interface Props {
+	block: {
+		eyebrow?: string;
+		title: string;
+		subtitle: string;
+		items?: string[];
+		captureAlt: string;
+		captureCaption?: string;
+	};
+	dark: ImageMetadata;
+	light: ImageMetadata;
+	reverse?: boolean;
+	tinted?: boolean;
+}
+
+const { block, dark, light, reverse = false, tinted = false } = Astro.props;
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+			<div class:list={[reverse && "lg:order-2"]} data-animate>
+				{
+					block.eyebrow && (
+						<p class="mb-3 text-xs font-semibold uppercase tracking-wider text-primary">
+							{block.eyebrow}
+						</p>
+					)
+				}
+				<h2 class="text-display-sm font-bold tracking-display text-foreground">{block.title}</h2>
+				<p class="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+					{block.subtitle}
+				</p>
+
+				{
+					block.items && (
+						<ul class="mt-8 space-y-3.5">
+							{block.items.map(item => (
+								<li class="flex gap-3">
+									<svg
+										class="mt-0.5 h-5 w-5 shrink-0 text-primary"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+									>
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+									<span class="text-sm leading-relaxed text-foreground sm:text-base">{item}</span>
+								</li>
+							))}
+						</ul>
+					)
+				}
+			</div>
+
+			<div class:list={[reverse && "lg:order-1"]}>
+				<ProductPreview
+					dark={dark}
+					light={light}
+					alt={block.captureAlt}
+					caption={block.captureCaption}
+				/>
+			</div>
+		</div>
+	</Container>
+</section>

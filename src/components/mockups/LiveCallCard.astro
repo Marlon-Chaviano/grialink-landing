@@ -1,0 +1,154 @@
+---
+/**
+ * Grial Front Desk — hand-built product mockup.
+ *
+ * Shows the whole arc of one call in a single glance: it rings, the AI answers,
+ * it captures who is calling and what they want, and it ends in a booked
+ * appointment. A screenshot of the config screen cannot tell that story — this
+ * is the *outcome*, not the settings page.
+ *
+ * Unlike the WhatsApp mockup this one is a Grialink surface, so it uses the
+ * theme tokens and follows light/dark.
+ */
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+	class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const c = (getTranslations(lang, "mockups") as Record<string, any>).call;
+---
+
+<div
+	class:list={["flex flex-col bg-card text-left", className]}
+	role="img"
+	aria-label={c.alt}
+>
+	{/* Call header */}
+	<div class="flex items-start justify-between gap-4 border-b border-border-light px-4 py-3.5 sm:px-5">
+		<div class="flex min-w-0 items-center gap-3">
+			<span
+				class="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/12 text-primary"
+				aria-hidden="true"
+			>
+				{/* Ring pulse — reads as "live" without a spinner */}
+				<span class="absolute inset-0 animate-ping rounded-full bg-primary/20"></span>
+				<svg
+					class="relative h-5 w-5"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.8"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path
+						d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+					></path>
+				</svg>
+			</span>
+			<div class="min-w-0">
+				<p class="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+					{c.heading}
+				</p>
+				<p class="truncate text-sm font-semibold tabular-nums text-foreground">{c.number}</p>
+			</div>
+		</div>
+		<p class="shrink-0 text-sm font-semibold tabular-nums text-muted-foreground">{c.timer}</p>
+	</div>
+
+	{/* Who is handling it */}
+	<div class="border-b border-border-light bg-surface px-4 py-2 sm:px-5">
+		<p
+			class="inline-flex items-center gap-1.5 rounded-full bg-primary/12 px-2.5 py-1 text-[11px] font-semibold text-primary"
+		>
+			<span class="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" aria-hidden="true"></span>
+			{c.statusPill}
+		</p>
+	</div>
+
+	{/* Live transcript */}
+	<div class="flex-1 px-4 py-3.5 sm:px-5">
+		<p class="mb-2.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+			{c.transcriptLabel}
+		</p>
+		<ul class="space-y-2.5">
+			{
+				c.lines.map((line: { speaker: string; name: string; text: string }) => (
+					<li class="flex gap-2.5">
+						<span
+							class:list={[
+								"mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full",
+								line.speaker === "ai" ? "bg-primary" : "bg-muted-foreground/40",
+							]}
+							aria-hidden="true"
+						/>
+						<span class="min-w-0">
+							<span
+								class:list={[
+									"block text-[10px] font-semibold uppercase tracking-wider",
+									line.speaker === "ai" ? "text-primary" : "text-muted-foreground",
+								]}
+							>
+								{line.name}
+							</span>
+							<span class="mt-0.5 block text-[13px] leading-snug text-foreground">
+								{line.text}
+							</span>
+						</span>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+
+	{/* What it pulled out of the conversation */}
+	<div class="border-t border-border-light bg-surface px-4 py-3 sm:px-5">
+		<p class="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+			{c.capturedLabel}
+		</p>
+		{/*
+		  The values wrap rather than truncate: Spanish runs 20-30% longer than
+		  English ("Blanqueamiento LED" vs "LED whitening") and was being
+		  ellipsised at 390px, which hid the very detail the mockup is proving
+		  the product captured.
+		*/}
+		<dl class="grid grid-cols-3 gap-3">
+			{
+				c.captured.map((f: { label: string; value: string }) => (
+					<div class="min-w-0">
+						<dt class="text-[10px] leading-tight text-muted-foreground">{f.label}</dt>
+						<dd class="mt-0.5 text-[12px] font-semibold leading-tight text-foreground">
+							{f.value}
+						</dd>
+					</div>
+				))
+			}
+		</dl>
+	</div>
+
+	{/* The outcome — the only part that actually matters to the buyer */}
+	<div
+		class="flex flex-wrap items-center justify-between gap-2 border-t border-primary/20 bg-primary/8 px-4 py-3 sm:px-5"
+	>
+		<p class="flex items-center gap-2 text-[13px] font-semibold text-primary">
+			<svg
+				class="h-4 w-4 shrink-0"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2.2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+			>
+				<path d="M20 6L9 17l-5-5"></path>
+			</svg>
+			{c.outcome}
+		</p>
+		<p class="text-[11px] text-muted-foreground">{c.outcomeNote}</p>
+	</div>
+</div>

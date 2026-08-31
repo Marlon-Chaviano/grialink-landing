@@ -1,15 +1,12 @@
 ---
 /**
- * ProductsHero — outcome-focused hero with a real product screen + register CTA.
+ * The /products hero.
  *
- * The previous version autoplayed a 27 MB MP4 here, roughly thirteen times the
- * whole page budget and the first thing the browser fetched. A real capture
- * tells the same story, matches the rest of the page, and costs ~50 KB.
+ * Deliberately light: this page is an index now, so the hero's only job is to
+ * frame the catalogue below it rather than sell any one product. The selling
+ * happens on each product's own page.
  */
 import Container from "@/components/ui/Container.astro";
-import ProductPreview from "@/components/ui/ProductPreview.astro";
-import inboxDark from "@/assets/marketing/captures/inbox-dark.webp";
-import inboxLight from "@/assets/marketing/captures/inbox-light.webp";
 import { type Lang, localizedHref } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
 
@@ -18,63 +15,63 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const p = getTranslations(lang, "productsPage") as Record<string, any>;
-const hero = p.hero as Record<string, any>;
+const c = getTranslations(lang, "productsCatalogue") as Record<string, any>;
+const hero = c.hero as Record<string, string>;
 const registerHref = "https://app.grialink.com/app/auth/register";
 ---
 
-<section class="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24">
+<section class="relative isolate overflow-hidden pb-14 pt-32 lg:pb-20 lg:pt-40">
 	<div
-		class="pointer-events-none absolute inset-0"
+		class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem] bg-gradient-to-b from-primary/[0.07] to-transparent"
 		aria-hidden="true"
-		style="background-image: radial-gradient(at 40% 20%, rgba(253,113,0,0.1) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(253,113,0,0.04) 0px, transparent 50%);"
 	>
 	</div>
 
-	<Container class="relative z-10">
-		<div class="mx-auto mb-12 max-w-3xl text-center" data-animate>
+	<Container>
+		<div class="mx-auto max-w-3xl text-center" data-animate>
 			<p
-				class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
+				class="mb-5 inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
 			>
-				<span class="h-2 w-2 animate-pulse rounded-full bg-primary" aria-hidden="true"></span>
 				{hero.badge}
 			</p>
 
-			<h1
-				class="mb-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-5xl md:text-6xl"
-			>
+			<h1 class="text-display-lg font-black tracking-display-tight text-foreground">
 				{hero.titleLine1}
-				<br class="hidden md:block" />
+				<br class="hidden sm:block" />
 				<span class="text-gradient-primary">{hero.titleHighlight}</span>
 			</h1>
 
-			<p class="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+			<p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
 				{hero.subtitle}
 			</p>
 
-			<div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+			<div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
 				<a
 					href={registerHref}
 					data-cta="register-products-hero"
-					class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 ease-in-out hover:bg-primary-hover sm:w-auto"
+					class="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 ease-in-out hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/35 active:scale-[0.98] sm:w-auto"
 				>
 					{hero.ctaPrimary}
+					<svg
+						class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+					</svg>
 				</a>
 				<a
 					href={localizedHref("/pricing", lang)}
-					class="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-border-light px-7 py-3.5 text-base font-medium text-muted-foreground transition-all duration-300 ease-in-out hover:border-primary/25 hover:text-foreground sm:w-auto"
+					class="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-border px-7 py-3.5 text-base font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary sm:w-auto"
 				>
 					{hero.ctaSecondary}
 				</a>
 			</div>
 		</div>
-
-		<ProductPreview
-			dark={inboxDark}
-			light={inboxLight}
-			alt={hero.previewAlt}
-			eager
-			class="mx-auto max-w-5xl"
-		/>
 	</Container>
 </section>

@@ -1,7 +1,7 @@
 ---
 /**
  * ContactInfo — Vertical sidebar with contact details.
- * Designed to sit alongside the form in a 2-column layout.
+ * Cards use a solid surface so copy stays readable over the circuit backdrop.
  */
 import Container from "@/components/ui/Container.astro";
 import { type Lang } from "@/i18n/config";
@@ -14,14 +14,14 @@ interface Props {
 const { lang } = Astro.props;
 const c = getTranslations(lang, "contact") as Record<string, any>;
 const info = c.info as Record<string, any>;
+
+const cardClass =
+	'rounded-2xl border border-foreground/25 bg-card p-6 transition-shadow duration-300 hover:shadow-lg hover:shadow-foreground/5';
 ---
 
-<div
-	class="space-y-5 lg:sticky lg:top-24"
-	data-animate
->
+<div class="space-y-5 lg:sticky lg:top-24">
 	<!-- Email -->
-	<div class="auth-panel rounded-2xl p-6 hover:shadow-lg hover:shadow-foreground/5 transition-shadow duration-300 group">
+	<div class:list={[cardClass, 'group']}>
 		<div class="flex items-center gap-5">
 			<svg
 				class="h-9 w-9 shrink-0 text-primary"
@@ -54,7 +54,7 @@ const info = c.info as Record<string, any>;
 	<button
 		type="button"
 		onclick="if(window.$chatwoot){window.$chatwoot.toggle('open')}else{window.open('https://app.grialink.com','_blank')}"
-		class="w-full text-left auth-panel rounded-2xl p-6 hover:shadow-lg hover:shadow-foreground/5 hover:border-primary/30 transition-all duration-300 group cursor-pointer"
+		class:list={[cardClass, 'group w-full cursor-pointer text-left transition-all duration-300 hover:border-primary/40']}
 	>
 		<div class="flex items-center gap-5">
 			<svg
@@ -82,7 +82,7 @@ const info = c.info as Record<string, any>;
 	</button>
 
 	<!-- Schedule -->
-	<div class="auth-panel rounded-2xl p-6 hover:shadow-lg hover:shadow-foreground/5 transition-shadow duration-300 group">
+	<div class:list={[cardClass, 'group']}>
 		<div class="flex items-center gap-5">
 			<svg
 				class="h-9 w-9 shrink-0 text-green-500"
@@ -108,7 +108,7 @@ const info = c.info as Record<string, any>;
 	</div>
 
 	<!-- Trust indicator -->
-	<div class="rounded-2xl p-5 auth-panel text-center">
+	<div class="rounded-2xl border border-foreground/25 bg-card p-5 text-center">
 		<div class="flex items-center justify-center gap-2 mb-2">
 			<svg
 				class="w-4 h-4 text-green-400"

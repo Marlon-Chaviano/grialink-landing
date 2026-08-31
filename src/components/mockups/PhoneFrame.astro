@@ -1,0 +1,101 @@
+---
+/**
+ * An iPhone-shaped device frame for phone-native mockups.
+ *
+ * Drawn in CSS rather than shipped as a PNG: it stays sharp at any density,
+ * costs nothing to download, and the screen inside is real DOM, so the content
+ * still switches language and stays selectable and legible.
+ *
+ * Proportions follow a modern iPhone: 19.5:9 screen, ~2.6rem corner radius on
+ * the body, a Dynamic-Island-style pill, and side buttons. The bezel is a fixed
+ * near-black in both themes because that is what the hardware looks like.
+ */
+interface Props {
+	/** Caps the device width; the aspect ratio does the rest. */
+	class?: string;
+	/** Hides the status bar when the screen content supplies its own header. */
+	statusBar?: boolean;
+	/** Right-hand status text (carrier clocks differ per locale). */
+	time?: string;
+}
+
+const { class: className, statusBar = true, time = "9:41" } = Astro.props;
+---
+
+<div class:list={["relative mx-auto w-full max-w-[19rem]", className]}>
+	{/* Side buttons — small details, but their absence is what makes a frame read as fake. */}
+	<span
+		class="absolute -left-[3px] top-[16%] h-9 w-[3px] rounded-l-sm bg-[#2a2a2c]"
+		aria-hidden="true"></span>
+	<span
+		class="absolute -left-[3px] top-[26%] h-14 w-[3px] rounded-l-sm bg-[#2a2a2c]"
+		aria-hidden="true"></span>
+	<span
+		class="absolute -right-[3px] top-[22%] h-16 w-[3px] rounded-r-sm bg-[#2a2a2c]"
+		aria-hidden="true"></span>
+
+	{/* Body */}
+	<div
+		class="relative overflow-hidden rounded-[2.6rem] bg-[#1c1c1e] p-[10px] shadow-2xl shadow-black/40 ring-1 ring-white/10"
+	>
+		{/* Screen */}
+		<div class="relative aspect-[9/19.5] overflow-hidden rounded-[2.1rem] bg-[#0b141a]">
+			{
+				statusBar && (
+					<div class="absolute inset-x-0 top-0 z-20 flex h-11 items-center justify-between px-6 text-[11px] font-semibold text-white">
+						<span class="tabular-nums">{time}</span>
+						<span class="flex items-center gap-1" aria-hidden="true">
+							{/* signal */}
+							<svg class="h-3 w-3.5" viewBox="0 0 18 12" fill="currentColor">
+								<rect x="0" y="8" width="3" height="4" rx="1" />
+								<rect x="5" y="5.5" width="3" height="6.5" rx="1" />
+								<rect x="10" y="3" width="3" height="9" rx="1" />
+								<rect x="15" y="0" width="3" height="12" rx="1" />
+							</svg>
+							{/* wifi */}
+							<svg class="h-3 w-3.5" viewBox="0 0 16 12" fill="currentColor">
+								<path d="M8 11.2 6.1 9.1a2.7 2.7 0 0 1 3.8 0L8 11.2Zm3.4-3.7a5.6 5.6 0 0 0-6.8 0L3.2 6a7.6 7.6 0 0 1 9.6 0l-1.4 1.5ZM14.6 4a10 10 0 0 0-13.2 0L0 2.5a12 12 0 0 1 16 0L14.6 4Z" />
+							</svg>
+							{/* battery */}
+							<svg class="h-3 w-6" viewBox="0 0 26 12" fill="none">
+								<rect
+									x="0.5"
+									y="0.5"
+									width="21"
+									height="11"
+									rx="3"
+									stroke="currentColor"
+									stroke-opacity="0.5"
+								/>
+								<rect x="2" y="2" width="18" height="8" rx="1.8" fill="currentColor" />
+								<path
+									d="M23.5 4.2v3.6c.9-.3 1.5-1 1.5-1.8s-.6-1.5-1.5-1.8Z"
+									fill="currentColor"
+									fill-opacity="0.5"
+								/>
+							</svg>
+						</span>
+					</div>
+				)
+			}
+
+			{/* Dynamic Island */}
+			<span
+				class="absolute left-1/2 top-2 z-30 h-[26px] w-[86px] -translate-x-1/2 rounded-full bg-black"
+				aria-hidden="true"></span>
+
+			{/*
+			  The screen content. `pt-11` clears the status bar; the slot is
+			  responsible for its own scrolling illusion.
+			*/}
+			<div class:list={["h-full", statusBar && "pt-11"]}>
+				<slot />
+			</div>
+
+			{/* Home indicator */}
+			<span
+				class="absolute bottom-1.5 left-1/2 z-20 h-1 w-28 -translate-x-1/2 rounded-full bg-white/45"
+				aria-hidden="true"></span>
+		</div>
+	</div>
+</div>

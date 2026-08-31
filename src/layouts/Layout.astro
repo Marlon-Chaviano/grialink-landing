@@ -13,8 +13,8 @@ interface Props {
 	noNav?: boolean;
 	/** Hide footer */
 	noFooter?: boolean;
-	/** Circuit background variant */
-	circuitVariant?: 'hero' | 'full';
+	/** Circuit background variant (`none` disables the fixed page backdrop). */
+	circuitVariant?: 'hero' | 'full' | 'none';
 	/** Page opens on a permanently dark hero band — the header adapts while unscrolled. */
 	darkHero?: boolean;
 }
@@ -88,7 +88,9 @@ const {
 		</noscript>
 	</head>
 	<body class:list={["bg-background text-foreground antialiased", className]}>
-		<CircuitPageBackground variant={circuitVariant} />
+		{circuitVariant !== 'none' && (
+			<CircuitPageBackground variant={circuitVariant} />
+		)}
 
 		<!-- Skip to content — keyboard a11y -->
 		<a

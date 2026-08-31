@@ -2,8 +2,10 @@
 import Container from "@/components/ui/Container.astro";
 import ThemeToggle from "@/components/shared/ThemeToggle.astro";
 import LangSwitch from "@/components/shared/LangSwitch.astro";
+import ProductsMenu from "@/components/layout/ProductsMenu.astro";
 import { type Lang, localizedHref } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
+import { productMenuEntries } from "@/lib/productMenu";
 
 interface Props {
 	lang: Lang;
@@ -18,6 +20,7 @@ interface Props {
 
 const { lang, class: className, overDarkHero = false } = Astro.props;
 const nav = getTranslations(lang, "navbar") as Record<string, any>;
+const productMenuCopy = nav.productMenu as Record<string, any>;
 
 const loginHref = nav.links?.login?.startsWith("http") ? nav.links.login : localizedHref(nav.links?.login ?? "/login", lang);
 const registerHref = nav.links?.register?.startsWith("http") ? nav.links.register : localizedHref(nav.links?.register ?? "/register", lang);
@@ -25,12 +28,24 @@ const registerHref = nav.links?.register?.startsWith("http") ? nav.links.registe
 /** Trailing slashes vary between dev and the built output — compare normalized. */
 const currentPath = Astro.url.pathname.replace(/\/$/, "");
 
+const productsHref = localizedHref(nav.links?.product ?? "/products", lang);
+/** Highlight "Product" on /products *and* on every /products/<slug> page. */
+const productCurrent = currentPath.startsWith(productsHref.replace(/\/$/, ""));
+
 const navLinks = [
-	{ href: localizedHref(nav.links?.product ?? "/products", lang), label: nav.product },
 	{ href: localizedHref(nav.links?.about ?? "/about", lang), label: nav.about },
 	{ href: localizedHref(nav.links?.pricing ?? "/pricing", lang), label: nav.pricing },
+	{ href: localizedHref(nav.links?.download ?? "/download", lang), label: nav.download },
 	{ href: localizedHref(nav.links?.contact ?? "/contact", lang), label: nav.contact },
 ].map((link) => ({ ...link, current: link.href.replace(/\/$/, "") === currentPath }));
+
+/** Same source as the desktop mega menu — the two lists cannot drift apart. */
+const catalogue = getTranslations(lang, "productsCatalogue") as Record<string, any>;
+const mobileProductItems = productMenuEntries.map((entry) => ({
+	href: localizedHref(`/products/${entry.slug}`, lang),
+	name: catalogue.items[entry.slug].name as string,
+	featured: entry.featured ?? false,
+}));
 ---
 
 <header
@@ -60,7 +75,8 @@ const navLinks = [
 				</a>
 
 				<!-- Desktop Nav -->
-				<div class="hidden md:flex space-x-8">
+				<div class="hidden lg:flex items-center space-x-8">
+					<ProductsMenu lang={lang} nav={nav} current={productCurrent} />
 					{
 						navLinks.map((link) => (
 							<a
@@ -78,7 +94,7 @@ const navLinks = [
 				</div>
 
 				<!-- Right side -->
-				<div class="hidden md:flex items-center space-x-4">
+				<div class="hidden lg:flex items-center space-x-4">
 					<LangSwitch lang={lang} />
 					<ThemeToggle lang={lang} />
 					<a
@@ -98,8 +114,10 @@ const navLinks = [
 				<!-- Mobile hamburger -->
 				<button
 					id="mobile-menu-btn"
-					class="md:hidden p-2 rounded-lg hover:bg-surface transition-colors"
+					class="lg:hidden p-2 rounded-lg hover:bg-surface transition-colors"
 					aria-label={nav.openMenu}
+					data-label-open={nav.openMenu}
+					data-label-close={nav.closeMenu}
 					aria-expanded="false"
 					aria-controls="mobile-menu"
 				>
@@ -130,48 +148,151 @@ const navLinks = [
 		</Container>
 	</nav>
 
-	<!-- Mobile Menu -->
+	<!--
+		Mobile Menu
+
+		Collapses with a `grid-template-rows: 0fr → 1fr` transition rather than a
+		`max-height` cap: the panel now holds a nested product accordion, and any
+		fixed cap silently clips whatever overflows it.
+	-->
 	<div
 		id="mobile-menu"
 		role="region"
 		aria-label={lang === "es" ? "Menú de navegación móvil" : "Mobile navigation menu"}
-		class="hidden md:hidden bg-background border-b border-border-light overflow-hidden transition-[max-height,opacity] duration-300 ease-out max-h-0 opacity-0"
+		class="collapsible lg:hidden bg-background border-b border-border-light overflow-y-auto max-h-[calc(100dvh-4rem)]"
 	>
-		<div class="px-4 py-4 space-y-3">
-			{
-				navLinks.map((link) => (
-					<a
-						href={link.href}
-						aria-current={link.current ? "page" : undefined}
+		<div class="collapsible-inner">
+			<div class="px-4 py-4 space-y-3">
+				<!-- Product accordion — same items as the desktop mega menu -->
+				<div>
+					<button
+						type="button"
+						id="mobile-products-btn"
 						class:list={[
-							"block transition-colors font-medium py-1",
-							link.current ? "text-primary" : "text-muted-foreground hover:text-primary",
+							"flex w-full items-center justify-between py-1 font-medium transition-colors",
+							productCurrent ? "text-primary" : "text-muted-foreground hover:text-primary",
 						]}
+						aria-expanded="false"
+						aria-controls="mobile-products-panel"
 					>
-						{link.label}
-					</a>
-				))
-			}
-			<hr class="border-border-light" />
-			<div class="flex items-center gap-3 py-1">
-				<LangSwitch lang={lang} />
-				<ThemeToggle lang={lang} />
+						{nav.product}
+						<svg
+							id="mobile-products-chevron"
+							class="h-4 w-4 transition-transform duration-200"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M6 9l6 6 6-6"></path>
+						</svg>
+					</button>
+					<div id="mobile-products-panel" class="collapsible">
+						<div class="collapsible-inner">
+							<ul class="mt-1 space-y-1 border-l border-border-light pl-4">
+								{
+									mobileProductItems.map((item) => (
+										<li>
+											<a
+												href={item.href}
+												class:list={[
+													"block py-1.5 text-sm transition-colors hover:text-primary",
+													item.featured
+														? "font-medium text-foreground"
+														: "text-muted-foreground",
+												]}
+											>
+												{item.name}
+											</a>
+										</li>
+									))
+								}
+								<li>
+									<a
+										href={productsHref}
+										class="block py-1.5 text-sm font-medium text-primary transition-colors hover:text-primary-hover"
+									>
+										{productMenuCopy.seeAll}
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				{
+					navLinks.map((link) => (
+						<a
+							href={link.href}
+							aria-current={link.current ? "page" : undefined}
+							class:list={[
+								"block transition-colors font-medium py-1",
+								link.current ? "text-primary" : "text-muted-foreground hover:text-primary",
+							]}
+						>
+							{link.label}
+						</a>
+					))
+				}
+				<hr class="border-border-light" />
+				<div class="flex items-center gap-3 py-1">
+					<LangSwitch lang={lang} />
+					<ThemeToggle lang={lang} />
+				</div>
+				<a
+					href={loginHref}
+					class="block text-muted-foreground hover:text-primary transition-colors font-medium py-1"
+				>
+					{nav.login}
+				</a>
+				<a
+					href={registerHref}
+					class="block bg-primary text-primary-foreground text-center px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary-hover transition-colors"
+				>
+					{nav.cta}
+				</a>
 			</div>
-			<a
-				href={loginHref}
-				class="block text-muted-foreground hover:text-primary transition-colors font-medium py-1"
-			>
-				{nav.login}
-			</a>
-			<a
-				href={registerHref}
-				class="block bg-primary text-primary-foreground text-center px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary-hover transition-colors"
-			>
-				{nav.cta}
-			</a>
 		</div>
 	</div>
 </header>
+
+<style>
+	/* Height-agnostic collapse. `max-height` needs a magic number that is always
+	   either too small (clips) or too large (lazy transition); `grid-template-rows`
+	   animates to the content's real height. */
+	.collapsible {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition:
+			grid-template-rows 300ms ease-out,
+			opacity 200ms ease-out;
+		opacity: 0;
+	}
+
+	.collapsible[data-open] {
+		grid-template-rows: 1fr;
+		opacity: 1;
+	}
+
+	.collapsible-inner {
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	#mobile-products-btn[aria-expanded="true"] #mobile-products-chevron {
+		transform: rotate(180deg);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.collapsible,
+		#mobile-products-chevron {
+			transition: none;
+		}
+	}
+</style>
 
 <script>
 	const btn = document.getElementById("mobile-menu-btn");
@@ -180,29 +301,44 @@ const navLinks = [
 	const iconClose = document.getElementById("menu-icon-close");
 
 	function openMenu() {
-		menu?.classList.remove("hidden");
-		// Trigger reflow for transition
-		requestAnimationFrame(() => {
-			menu?.classList.remove("max-h-0", "opacity-0");
-			menu?.classList.add("max-h-96", "opacity-100");
-		});
+		menu?.setAttribute("data-open", "");
 		iconOpen?.classList.add("hidden");
 		iconClose?.classList.remove("hidden");
 		btn?.setAttribute("aria-expanded", "true");
+		/* The label has to describe the *action*, which inverts once open. */
+		const close = btn?.getAttribute("data-label-close");
+		if (close) btn?.setAttribute("aria-label", close);
 	}
 
 	function closeMenu() {
-		menu?.classList.remove("max-h-96", "opacity-100");
-		menu?.classList.add("max-h-0", "opacity-0");
-		setTimeout(() => menu?.classList.add("hidden"), 300);
+		menu?.removeAttribute("data-open");
 		iconOpen?.classList.remove("hidden");
 		iconClose?.classList.add("hidden");
 		btn?.setAttribute("aria-expanded", "false");
+		const open = btn?.getAttribute("data-label-open");
+		if (open) btn?.setAttribute("aria-label", open);
 	}
 
 	btn?.addEventListener("click", () => {
-		const isOpen = btn.getAttribute("aria-expanded") === "true";
-		isOpen ? closeMenu() : openMenu();
+		if (btn.getAttribute("aria-expanded") === "true") {
+			closeMenu();
+		} else {
+			openMenu();
+		}
+	});
+
+	// Nested product accordion
+	const productsBtn = document.getElementById("mobile-products-btn");
+	const productsPanel = document.getElementById("mobile-products-panel");
+
+	productsBtn?.addEventListener("click", () => {
+		const open = productsBtn.getAttribute("aria-expanded") === "true";
+		productsBtn.setAttribute("aria-expanded", open ? "false" : "true");
+		if (open) {
+			productsPanel?.removeAttribute("data-open");
+		} else {
+			productsPanel?.setAttribute("data-open", "");
+		}
 	});
 
 	// Close on Escape key

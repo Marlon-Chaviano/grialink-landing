@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────
+   No horizontal scroll, ever.
+   Decorative layers (the MockupFrame bloom, the circuit traces) deliberately
+   bleed past the container. `clip` contains them without making <html> a
+   scroll container — which `overflow-x: hidden` would do, breaking every
+   `position: sticky` column on the site.
+   ───────────────────────────────────────────── */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* ─────────────────────────────────────────────
    Typefaces — self-hosted variable woff2
    Satoshi (display) + Switzer (body), Fontshare
    ───────────────────────────────────────────── */
@@ -99,8 +111,13 @@
 
 /* ── Light mode ── */
 :root.light {
-  --clr-primary: #E06500;
-  --clr-primary-hover: #C45800;
+  /* #E06500 measured 3.48:1 on white — fine for display headings (AA large
+     needs 3:1) but short of the 4.5:1 small text requires, which caught
+     eyebrows, "Learn more" links, step numbers and team roles. Light mode
+     already darkens the brand orange from #FD7100 for legibility; this takes
+     that one step further so every use passes. Dark mode is untouched. */
+  --clr-primary: #BA5000;
+  --clr-primary-hover: #9E4400;
   --clr-primary-foreground: #FFFFFF;
 
   --clr-secondary: #f4f6f8;
@@ -125,7 +142,10 @@
   --clr-card-foreground: #111827;
 
   --clr-muted: #E5E7EB;
-  --clr-muted-foreground: #6B7280;
+  /* #6B7280 measured 4.46:1 on the surface token — just under WCAG AA for
+     body text. Darkened one step so muted copy passes on white, card, surface
+     and background-lighter alike. */
+  --clr-muted-foreground: #636B78;
 
   --clr-border: #E5E7EB;
   --clr-border-light: rgba(0, 0, 0, 0.06);
@@ -270,7 +290,12 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
+    /* Delays matter as much as durations here: a staged transition (the product
+       menu defers `visibility` until the fade finishes) would otherwise still
+       make the user wait, with nothing animating to justify it. */
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
 
@@ -464,6 +489,16 @@
 
 #site-header[data-over-dark]:not(.is-scrolled) svg {
   color: rgb(255 255 255 / 0.85);
+}
+
+/* ...but the dropdown panels are not floating over the hero — they draw their
+   own opaque background. Forcing white type into them puts white on white in
+   light mode, so inside a panel the colour reverts to whatever the Tailwind
+   utility layer set. */
+#site-header[data-over-dark]:not(.is-scrolled)
+  :is(#products-menu-panel, #mobile-menu)
+  :is(a, button, span, svg, p, li) {
+  color: revert-layer;
 }
 
 /* ─────────────────────────────────────────────

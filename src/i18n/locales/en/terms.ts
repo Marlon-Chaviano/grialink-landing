@@ -35,9 +35,11 @@ export default {
         '• <strong>Prospector AI:</strong> Intelligent lead discovery and qualification tools.',
         '• <strong>Outreach Engine:</strong> Automated omnichannel communication workflows.',
         '• <strong>Smart Pipeline:</strong> Visual SES pipeline management with AI-powered insights.',
+        '• <strong>Smart Calendar:</strong> Appointment scheduling with Google Calendar synchronisation.',
         '• <strong>AI Analytics:</strong> Real-time dashboards, reporting, and performance metrics.',
         '• <strong>Copilot AI:</strong> AI assistant with contextual suggestions for agents.',
-        '• <strong>Call Brain:</strong> Call recording, transcription, and analysis.',
+        '• <strong>Grialink Dialer:</strong> Telephone numbers, outbound calling, IVR flows, and call recording, transcription and analysis.',
+        '• <strong>Grial Bots:</strong> AI assistants including WhatsApp Copilot (scheduled reports and account queries over WhatsApp), Grial Front Desk (answers calls and books appointments), Grial Scheduler (confirms appointments), and Grial Auditor (analyses calls).',
         'We reserve the right to modify, suspend, or discontinue any aspect of the Services at any time, with or without notice.',
       ],
     },
@@ -86,7 +88,7 @@ export default {
       title: '7. Data Protection and Privacy',
       content: [
         'Your privacy is important to us. Our Privacy Policy, available at the Privacy Policy page on our website, describes how we collect, use, and protect your personal information. By using the Services, you agree to the collection and use of information in accordance with our Privacy Policy.',
-        'As a healthcare-focused platform, we understand the sensitivity of data. We implement comprehensive security measures and comply with applicable data protection regulations. However, you are responsible for ensuring that your use of the Services complies with all applicable healthcare privacy laws and regulations in your jurisdiction.',
+        'As a healthcare-focused platform, we understand the sensitivity of data. We implement comprehensive security measures and comply with applicable data protection regulations. Grialink is not HIPAA certified and does not currently offer a Business Associate Agreement (BAA). You must not use the Services to store or process Protected Health Information (PHI) that requires HIPAA compliance. You are responsible for ensuring that your use of the Services complies with all applicable healthcare privacy laws and regulations in your jurisdiction.',
       ],
     },
     {

@@ -1,0 +1,98 @@
+---
+/**
+ * Grial Mind — static conversation-writing assistant mockup.
+ *
+ * It demonstrates the actual interaction model without shipping client JS:
+ * the teammate chooses an action, reviews the improved reply, then inserts it.
+ */
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+	class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const c = (getTranslations(lang, "mockups") as Record<string, any>).mind;
+---
+
+<div
+	class:list={["flex flex-col bg-card text-left", className]}
+	role="img"
+	aria-label={c.alt}
+>
+	<div class="flex items-center justify-between gap-4 border-b border-border-light px-4 py-3.5 sm:px-5">
+		<div class="flex min-w-0 items-center gap-3">
+			<span
+				class="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/12 text-sm font-bold text-primary"
+				aria-hidden="true"
+			>
+				{c.avatar}
+			</span>
+			<span class="min-w-0">
+				<span class="block truncate text-sm font-semibold text-foreground">{c.contact}</span>
+				<span class="block text-[11px] text-muted-foreground">{c.channel}</span>
+			</span>
+		</div>
+		<span class="flex shrink-0 items-center gap-1.5 text-[11px] font-medium text-muted-foreground">
+			<span class="size-1.5 rounded-full bg-primary" aria-hidden="true"></span>
+			{c.status}
+		</span>
+	</div>
+
+	<div class="space-y-3 bg-surface px-4 py-4 sm:px-5">
+		<div class="max-w-[84%] rounded-2xl rounded-bl-md border border-border-light bg-card px-3.5 py-2.5">
+			<p class="text-[12px] leading-relaxed text-foreground">{c.incoming}</p>
+			<p class="mt-1 text-right text-[9px] text-muted-foreground">{c.incomingTime}</p>
+		</div>
+
+		<div class="ml-auto max-w-[88%] rounded-2xl rounded-br-md bg-primary/10 px-3.5 py-2.5 ring-1 ring-primary/20">
+			<p class="mb-1 text-[9px] font-semibold uppercase tracking-wider text-primary">{c.draftLabel}</p>
+			<p class="text-[12px] leading-relaxed text-foreground">{c.draft}</p>
+		</div>
+	</div>
+
+	<div class="border-t border-border-light px-4 py-4 sm:px-5">
+		<div class="mb-3 flex items-center justify-between gap-3">
+			<p class="flex items-center gap-2 text-sm font-semibold text-foreground">
+				<span class="flex size-7 items-center justify-center rounded-lg bg-primary/12 text-primary" aria-hidden="true">
+					<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M9.5 4A2.5 2.5 0 007 6.5v.4A3.5 3.5 0 005 10a3.5 3.5 0 001.5 2.87A3.5 3.5 0 009 19.5c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h.5z M14.5 4A2.5 2.5 0 0117 6.5v.4A3.5 3.5 0 0119 10a3.5 3.5 0 01-1.5 2.87 3.5 3.5 0 01-2.5 6.63c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h-.5z M7.5 9.5H11 M13 9.5h3.5 M8 14h3 M13 14h3"></path>
+					</svg>
+				</span>
+				Grial Mind
+			</p>
+			<span class="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">{c.ready}</span>
+		</div>
+
+		<div class="mb-3 flex flex-wrap gap-2">
+			{c.actions.map((action: string, index: number) => (
+				<span
+					class:list={[
+						"rounded-full border px-2.5 py-1.5 text-[10px] font-medium",
+						index === 1
+							? "border-primary/30 bg-primary/10 text-primary"
+							: "border-border-light bg-surface text-muted-foreground",
+					]}
+				>
+					{action}
+				</span>
+			))}
+		</div>
+
+		<div class="rounded-xl border border-primary/20 bg-primary/[0.06] p-3.5">
+			<p class="mb-1.5 text-[9px] font-semibold uppercase tracking-wider text-primary">{c.suggestionLabel}</p>
+			<p class="text-[12px] leading-relaxed text-foreground">{c.suggestion}</p>
+			<div class="mt-3 flex items-center justify-between gap-3 border-t border-primary/15 pt-3">
+				<p class="text-[10px] text-muted-foreground">{c.reviewNote}</p>
+				<span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-[10px] font-semibold text-primary-foreground">
+					{c.insert}
+					<svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M5 12h14M13 6l6 6-6 6"></path>
+					</svg>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,51 @@
+---
+/**
+ * Grialink's position on AI and human care.
+ *
+ * The About page told the origin story and named the values but never said the
+ * thing a buyer in this category most wants to hear: where the automation stops
+ * and a person takes over. That is the objection behind "an AI answering my
+ * clients", and it deserves a direct answer rather than a reassuring adjective.
+ *
+ * Reuses `ValuesSection`'s card shape — no new pattern.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const b = (getTranslations(lang, "about") as Record<string, any>).beliefs;
+---
+
+<section class="section-spacing bg-secondary">
+	<Container>
+		<div class="mx-auto mb-14 max-w-3xl text-center" data-animate>
+			<p
+				class="mb-5 inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+			>
+				{b.badge}
+			</p>
+			<h2 class="text-display-sm font-bold tracking-display text-foreground text-balance">
+				{b.title}
+			</h2>
+			<p class="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">{b.subtitle}</p>
+		</div>
+
+		<ul class="grid gap-4 stagger-children md:grid-cols-3" data-animate>
+			{
+				b.items.map((item: { title: string; description: string }) => (
+					<li class="rounded-2xl border border-border-light bg-card p-7">
+						<h3 class="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
+						<p class="mt-2.5 text-base leading-relaxed text-muted-foreground">
+							{item.description}
+						</p>
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>

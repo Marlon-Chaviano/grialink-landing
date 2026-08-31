@@ -1,0 +1,33 @@
+---
+/** Three concrete scenarios — the "is this my situation?" check. */
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	useCases: { title: string; items: { title: string; body: string }[] };
+	tinted?: boolean;
+}
+
+const { useCases, tinted = false } = Astro.props;
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<h2
+			class="mx-auto mb-12 max-w-2xl text-center text-display-sm font-bold tracking-display text-foreground"
+			data-animate
+		>
+			{useCases.title}
+		</h2>
+
+		<ul class="grid gap-4 stagger-children md:grid-cols-3" data-animate>
+			{
+				useCases.items.map((item) => (
+					<li class="rounded-2xl border border-border-light bg-card p-7">
+						<h3 class="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
+						<p class="mt-2.5 text-base leading-relaxed text-muted-foreground">{item.body}</p>
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>

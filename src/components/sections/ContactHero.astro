@@ -1,32 +1,23 @@
 ---
 /**
  * ContactHero — Hero section for the Contact page.
- * Badge, gradient headline, subtitle with decorative blobs.
+ * Badge, gradient headline, subtitle. Background lives in contact.astro wrapper.
  */
-import Container from "@/components/ui/Container.astro";
-import { type Lang } from "@/i18n/config";
-import { getTranslations } from "@/i18n/utils";
+import Container from '@/components/ui/Container.astro';
+import { type Lang } from '@/i18n/config';
+import { getTranslations } from '@/i18n/utils';
 
 interface Props {
 	lang: Lang;
 }
 
 const { lang } = Astro.props;
-const c = getTranslations(lang, "contact") as Record<string, any>;
+const c = getTranslations(lang, 'contact') as Record<string, any>;
 const hero = c.hero as Record<string, string>;
 ---
 
-<section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden">
-	<!-- Decorative blobs -->
-	<div
-		class="absolute inset-0 overflow-hidden -z-10 pointer-events-none"
-		aria-hidden="true"
-	>
-		<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
-		<div class="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl"></div>
-	</div>
-
-	<Container class="text-center relative z-10">
+<section class="relative z-10 pt-32 pb-20 lg:pt-40 lg:pb-24">
+	<Container class="text-center">
 		<!-- Badge -->
 		<div
 			class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-6"
@@ -43,7 +34,7 @@ const hero = c.hero as Record<string, string>;
 			class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6 leading-[1.08]"
 			data-animate
 		>
-			{hero.titleLine1}{" "}
+			{hero.titleLine1}{' '}
 			<span class="text-gradient-primary">{hero.titleHighlight}</span>
 		</h1>
 

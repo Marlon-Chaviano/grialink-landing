@@ -1,0 +1,125 @@
+---
+/**
+ * WhatsApp Copilot — hand-built product mockup.
+ *
+ * Built in markup rather than shipped as an image for three reasons: the copy
+ * has to switch with the locale, the text stays crisp at every density, and it
+ * costs a few KB instead of a screenshot pair.
+ *
+ * The WhatsApp green is confined to the outgoing bubble and the presence dot —
+ * enough to read as WhatsApp, not enough to fight the Grialink palette. The
+ * surface stays WhatsApp-dark in both themes because that is what the app looks
+ * like; theming it would make it less recognisable, not more consistent.
+ *
+ * Designed to fill a `PhoneFrame` screen: WhatsApp is a phone product, and a
+ * chat rendered as a floating desktop card reads as a diagram of the product
+ * rather than the product. The thread column grows to push the composer to the
+ * bottom of the screen the way the real app does.
+ */
+import { type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+	class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const w = (getTranslations(lang, "mockups") as Record<string, any>).whatsapp;
+---
+
+<div
+	class:list={["flex h-full flex-col bg-[#0b141a] text-left", className]}
+	role="img"
+	aria-label={w.alt}
+>
+	{/* Chat header */}
+	<div class="flex shrink-0 items-center gap-3 border-b border-white/5 bg-[#1f2c33] px-3.5 py-2.5">
+		<span
+			class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]"
+			aria-hidden="true"
+		>
+			<svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="currentColor">
+				<path
+					d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.1c-.25.7-1.44 1.33-1.99 1.41-.53.08-1.2.11-1.94-.12-.45-.14-1.02-.33-1.76-.65-3.1-1.34-5.12-4.46-5.28-4.67-.15-.21-1.26-1.67-1.26-3.19s.8-2.27 1.08-2.58c.28-.31.61-.39.82-.39l.59.01c.19.01.44-.07.69.53.25.6.86 2.11.94 2.26.08.16.13.34.02.55-.1.21-.16.34-.31.52-.16.18-.33.4-.47.54-.16.15-.32.32-.14.63.19.31.83 1.36 1.78 2.2 1.22 1.09 2.25 1.42 2.56 1.58.31.16.5.13.68-.08.19-.21.79-.92 1-1.24.21-.31.42-.26.7-.16.29.11 1.81.86 2.12 1.01.31.16.52.23.6.36.07.13.07.75-.18 1.47z"
+				></path>
+			</svg>
+		</span>
+		<div class="min-w-0">
+			<p class="truncate text-sm font-semibold text-white">{w.contact}</p>
+			<p class="flex items-center gap-1.5 text-[11px] text-white/50">
+				<span class="h-1.5 w-1.5 rounded-full bg-[#25D366]" aria-hidden="true"></span>
+				{w.status}
+			</p>
+		</div>
+	</div>
+
+	{/* Thread */}
+	{/*
+	  A faint speckle stands in for WhatsApp's wallpaper. Without it the empty
+	  scrollback above the first message reads as a rendering gap rather than as
+	  a chat scrolled to the bottom.
+	*/}
+	<div class="wa-thread flex flex-1 flex-col justify-end gap-2 overflow-hidden px-2.5 py-3">
+		<p class="mx-auto rounded-md bg-white/5 px-2.5 py-0.5 text-[10px] font-medium text-white/50">
+			{w.day}
+		</p>
+
+		{/* Scheduled report — the thing the product does on its own */}
+		<div class="max-w-[85%] rounded-xl rounded-tl-sm bg-[#1f2c33] px-3.5 py-2.5 shadow-sm">
+			<p class="text-[13px] font-semibold text-white">{w.reportTitle}</p>
+			<dl class="mt-2 space-y-1">
+				{
+					w.metrics.map((m: { label: string; value: string }) => (
+						<div class="flex items-baseline justify-between gap-4">
+							<dt class="text-[12px] text-white/60">{m.label}</dt>
+							<dd class="text-[12px] font-semibold tabular-nums text-white">{m.value}</dd>
+						</div>
+					))
+				}
+			</dl>
+			<p class="mt-2 text-right text-[10px] text-white/40">{w.reportTime}</p>
+		</div>
+
+		{/* Owner asks a question */}
+		<div class="ml-auto max-w-[85%] rounded-xl rounded-tr-sm bg-[#005c4b] px-3.5 py-2.5 shadow-sm">
+			<p class="text-[13px] leading-snug text-white">{w.question}</p>
+			<p class="mt-1 flex items-center justify-end gap-1 text-[10px] text-white/50">
+				{w.questionTime}
+				<svg class="h-3 w-3 text-[#53bdeb]" viewBox="0 0 16 15" fill="currentColor" aria-hidden="true">
+					<path
+						d="M15.01 3.316l-.478-.372a.365.365 0 00-.51.063L8.666 9.879a.32.32 0 01-.484.033l-.358-.325a.32.32 0 00-.484.032l-.378.483a.418.418 0 00.036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 00-.064-.512zm-4.1 0l-.478-.372a.365.365 0 00-.51.063L4.566 9.879a.32.32 0 01-.484.033L1.891 7.769a.366.366 0 00-.515.006l-.423.433a.364.364 0 00.006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 00-.063-.51z"
+					></path>
+				</svg>
+			</p>
+		</div>
+
+		{/* Copilot answers from account data */}
+		<div class="max-w-[85%] rounded-xl rounded-tl-sm bg-[#1f2c33] px-3.5 py-2.5 shadow-sm">
+			<p class="text-[13px] leading-snug text-white/90">{w.answer}</p>
+			<p class="mt-1 text-right text-[10px] text-white/40">{w.answerTime}</p>
+		</div>
+	</div>
+
+	{/* Composer — inert, it exists to complete the frame */}
+	<div class="flex shrink-0 items-center gap-2 border-t border-white/5 bg-[#1f2c33] px-2.5 py-2 pb-4">
+		<p class="flex-1 truncate rounded-full bg-[#2a3942] px-3.5 py-2 text-[12px] text-white/40">
+			{w.inputPlaceholder}
+		</p>
+		<span
+			class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-[#0b141a]"
+			aria-hidden="true"
+		>
+			<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+			</svg>
+		</span>
+	</div>
+</div>
+
+<style>
+	.wa-thread {
+		background-image: radial-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px);
+		background-size: 18px 18px;
+	}
+</style>

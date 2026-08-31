@@ -1,0 +1,38 @@
+---
+/**
+ * Compact promo box for the mobile app, linking to /download.
+ * Placed on the home page; the /download page is the canonical landing spot
+ * for both platforms' download links.
+ */
+import Container from "@/components/ui/Container.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang, "download") as Record<string, any>;
+const teaser = t.homeTeaser as Record<string, string>;
+---
+
+<section class="pb-4" data-animate>
+	<Container>
+		<div
+			class="mx-auto flex max-w-4xl flex-col items-center gap-4 rounded-2xl border border-border-light bg-surface px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left"
+		>
+			<div>
+				<p class="text-lg font-bold tracking-tight text-foreground">{teaser.heading}</p>
+				<p class="mt-1 text-sm text-muted-foreground">{teaser.subtitle}</p>
+			</div>
+			<a
+				href={localizedHref("/download", lang)}
+				data-cta="mobile-app-teaser"
+				class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors duration-300 ease-in-out hover:bg-primary-hover"
+			>
+				{teaser.cta}
+			</a>
+		</div>
+	</Container>
+</section>

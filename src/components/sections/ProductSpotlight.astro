@@ -1,0 +1,115 @@
+---
+/**
+ * A single-product deep-dive on the home page.
+ *
+ * Used twice, mirrored, for the two flagship agents. The visual is the
+ * hand-built mockup rather than a screenshot of a settings screen: what sells
+ * these products is the *outcome* of one interaction, and a config page cannot
+ * show that.
+ */
+import Container from "@/components/ui/Container.astro";
+import MockupFrame from "@/components/ui/MockupFrame.astro";
+import PhoneFrame from "@/components/mockups/PhoneFrame.astro";
+import WhatsAppThread from "@/components/mockups/WhatsAppThread.astro";
+import LiveCallCard from "@/components/mockups/LiveCallCard.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+
+interface Props {
+	lang: Lang;
+	/** Key under the `spotlights` namespace. */
+	product: "whatsappCopilot" | "frontDesk";
+	/** Product page this links to, relative to the language root. */
+	href: string;
+	/** Flips the columns so the two instances zig-zag down the page. */
+	reverse?: boolean;
+	/** Tints the band so consecutive spotlights separate without a divider. */
+	tinted?: boolean;
+}
+
+const { lang, product, href, reverse = false, tinted = false } = Astro.props;
+const s = (getTranslations(lang, "spotlights") as Record<string, any>)[product];
+const productHref = localizedHref(href, lang);
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+			<div class:list={[reverse && "lg:order-2"]} data-animate>
+				<p
+					class="mb-4 inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
+				>
+					{s.badge}
+				</p>
+
+				<h2 class="text-display-sm font-bold tracking-display text-foreground">{s.title}</h2>
+
+				<p class="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+					{s.subtitle}
+				</p>
+
+				<ul class="mt-7 space-y-3.5">
+					{
+						s.points.map((point: string) => (
+							<li class="flex gap-3">
+								<svg
+									class="mt-0.5 h-5 w-5 shrink-0 text-primary"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M20 6L9 17l-5-5" />
+								</svg>
+								<span class="text-sm leading-relaxed text-foreground sm:text-base">{point}</span>
+							</li>
+						))
+					}
+				</ul>
+
+				<a
+					href={productHref}
+					class="group mt-8 inline-flex min-h-11 items-center gap-2 text-base font-semibold text-primary transition-colors hover:text-primary-hover"
+				>
+					{s.cta}
+					<svg
+						class="h-4 w-4 transition-transform group-hover:translate-x-1"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M5 12h14M13 6l6 6-6 6"></path>
+					</svg>
+				</a>
+			</div>
+
+			<div class:list={[reverse && "lg:order-1"]}>
+				{/*
+				  WhatsApp is a phone product, so it is shown in a phone. The call
+				  card is a Grialink surface and takes the flat frame.
+				*/}
+				{
+					product === "whatsappCopilot" && (
+						<PhoneFrame>
+							<WhatsAppThread lang={lang} />
+						</PhoneFrame>
+					)
+				}
+				{
+					product === "frontDesk" && (
+						<MockupFrame>
+							<LiveCallCard lang={lang} />
+						</MockupFrame>
+					)
+				}
+			</div>
+		</div>
+	</Container>
+</section>

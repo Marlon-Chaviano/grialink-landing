@@ -1,0 +1,42 @@
+---
+/**
+ * A thin strip of four claims directly under the hero.
+ *
+ * Chatwoot puts a feature-tab bar here. We use static pills instead: with two
+ * to four deep-dive sections below, tabs would hide content the visitor has
+ * not asked to hide, and a strip that scans in two seconds does the same job.
+ */
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="border-b border-border-light bg-surface py-5">
+	<Container>
+		<ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3" data-animate>
+			{
+				items.map((item) => (
+					<li class="flex items-center gap-2 text-sm text-muted-foreground">
+						<svg
+							class="h-4 w-4 shrink-0 text-primary"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2.4"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M20 6L9 17l-5-5" />
+						</svg>
+						{item}
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>

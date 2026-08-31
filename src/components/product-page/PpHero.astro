@@ -1,0 +1,143 @@
+---
+/**
+ * Product page hero.
+ *
+ * Copy left, product right — the same shape as the home hero, so the two feel
+ * like one site. Agents carry the Grial cup mark beside the badge, exactly as
+ * they appear in the dashboard, so the product is recognisable across both.
+ */
+import Container from "@/components/ui/Container.astro";
+import MockupFrame from "@/components/ui/MockupFrame.astro";
+import ProductPreview from "@/components/ui/ProductPreview.astro";
+import GrialCupIcon from "@/components/ui/GrialCupIcon.astro";
+import PhoneFrame from "@/components/mockups/PhoneFrame.astro";
+import WhatsAppThread from "@/components/mockups/WhatsAppThread.astro";
+import LiveCallCard from "@/components/mockups/LiveCallCard.astro";
+import SchedulerReminderCard from "@/components/mockups/SchedulerReminderCard.astro";
+import GrialMindComposer from "@/components/mockups/GrialMindComposer.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
+import type { ProductMockup, ProductGroup } from "@/lib/productPages";
+
+interface Props {
+	lang: Lang;
+	hero: Record<string, string>;
+	group: ProductGroup;
+	iconPath: string;
+	mockup?: ProductMockup;
+	/** Fallback visual when the product has no hand-built mockup. */
+	capture?: { dark: ImageMetadata; light: ImageMetadata };
+	/** Distinguishes the register CTA per product in analytics. */
+	ctaId: string;
+}
+
+const { lang, hero, group, iconPath, mockup, capture, ctaId } = Astro.props;
+const registerHref = "https://app.grialink.com/app/auth/register";
+const pricingHref = localizedHref("/pricing", lang);
+
+/* A phone product is shown in a phone. Everything else gets the flat frame. */
+const isPhoneMockup = mockup === "whatsappThread";
+---
+
+<section
+	class="relative isolate overflow-hidden border-b border-border-light pb-16 pt-32 lg:pb-24 lg:pt-40"
+>
+	<div
+		class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[38rem] bg-gradient-to-b from-primary/[0.07] to-transparent"
+		aria-hidden="true"
+	>
+	</div>
+
+	<Container>
+		<div class="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-16">
+			<div class="min-w-0" data-animate>
+				<div class="mb-5 flex items-center gap-3">
+					{group === "agents" && <GrialCupIcon iconPath={iconPath} class="size-10" />}
+					<p
+						class="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+					>
+						{hero.badge}
+					</p>
+				</div>
+
+				<h1 class="text-display-md font-black tracking-display-tight text-foreground">
+					{hero.title}
+				</h1>
+
+				<p class="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+					{hero.subtitle}
+				</p>
+
+				<div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+					<a
+						href={registerHref}
+						data-cta={`register-${ctaId}-hero`}
+						class="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 ease-in-out hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/35 active:scale-[0.98] sm:w-auto"
+					>
+						{hero.ctaPrimary}
+						<svg
+							class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+						</svg>
+					</a>
+					<a
+						href={pricingHref}
+						class="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-border px-7 py-3.5 text-base font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary sm:w-auto"
+					>
+						{hero.ctaSecondary}
+					</a>
+				</div>
+
+				<p class="mt-5 text-sm text-muted-foreground">{hero.note}</p>
+			</div>
+
+			<div class="min-w-0">
+				{
+					isPhoneMockup && (
+						<PhoneFrame>
+							<WhatsAppThread lang={lang} />
+						</PhoneFrame>
+					)
+				}
+				{
+					mockup === "liveCall" && (
+						<MockupFrame>
+							<LiveCallCard lang={lang} />
+						</MockupFrame>
+					)
+				}
+				{
+					mockup === "schedulerReminder" && (
+						<MockupFrame>
+							<SchedulerReminderCard lang={lang} />
+						</MockupFrame>
+					)
+				}
+				{
+					mockup === "grialMindComposer" && (
+						<MockupFrame>
+							<GrialMindComposer lang={lang} />
+						</MockupFrame>
+					)
+				}
+				{
+					!mockup && capture && (
+						<ProductPreview
+							dark={capture.dark}
+							light={capture.light}
+							alt={hero.previewAlt}
+							eager
+						/>
+					)
+				}
+			</div>
+		</div>
+	</Container>
+</section>

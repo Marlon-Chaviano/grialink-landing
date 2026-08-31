@@ -7,7 +7,8 @@ interface Props {
   description: string;
   canonical?: string;
   /** Picks the localized card in `public/og/` — see `scripts/generate-og.mjs`. */
-  page?: 'home' | 'products' | 'pricing' | 'about' | 'contact';
+  /** Picks the localized card in `public/og/` — one per page, see the OG script. */
+  page?: string;
   /** Escape hatch for pages without their own card (legal, 404). */
   ogImage?: string;
   robots?: string;

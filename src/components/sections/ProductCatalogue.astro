@@ -1,0 +1,118 @@
+---
+/**
+ * The product catalogue on /products.
+ *
+ * Replaces the old single-page showcase, which stacked every module into one
+ * very long scroll. This is an index: two groups, a card per product, each
+ * going to its own page.
+ *
+ * Agents carry the Grial cup mark, the same one the dashboard uses, so the
+ * bots are recognisable across the product and the site.
+ */
+import Container from "@/components/ui/Container.astro";
+import GrialCupIcon from "@/components/ui/GrialCupIcon.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+import { agentPages, platformPages, type ProductPageEntry } from "@/lib/productPages";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = getTranslations(lang, "productsCatalogue") as Record<string, any>;
+
+const decorate = (entry: ProductPageEntry) => ({
+	...entry,
+	href: localizedHref(`/products/${entry.slug}`, lang),
+	name: c.items[entry.slug].name as string,
+	tagline: c.items[entry.slug].tagline as string,
+});
+
+const groups = [
+	{ key: "agents", entries: agentPages.map(decorate) },
+	{ key: "platform", entries: platformPages.map(decorate) },
+];
+---
+
+<section id="catalogue" class="scroll-mt-24 pb-24 pt-2 lg:pb-32 lg:pt-4">
+	<Container>
+		{
+			groups.map((group, gi) => (
+				<div class:list={[gi > 0 && "mt-20 lg:mt-28"]}>
+					<div class="mx-auto mb-10 max-w-2xl text-center" data-animate>
+						<p class="mb-3 text-xs font-semibold uppercase tracking-wider text-primary">
+							{c.groups[group.key].eyebrow}
+						</p>
+						<h2 class="text-display-sm font-bold tracking-display text-foreground">
+							{c.groups[group.key].title}
+						</h2>
+						<p class="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+							{c.groups[group.key].subtitle}
+						</p>
+					</div>
+
+					<ul class="grid gap-4 stagger-children sm:grid-cols-2 lg:grid-cols-4" data-animate>
+						{group.entries.map(item => (
+							<li>
+								<a
+									href={item.href}
+									class:list={[
+										"group card-hover flex h-full flex-col rounded-2xl border p-6 transition-colors",
+										item.featured
+											? "border-primary/25 bg-primary/[0.04] hover:border-primary/45"
+											: "border-border-light bg-card hover:border-border",
+									]}
+								>
+									{group.key === "agents" ? (
+										<GrialCupIcon iconPath={item.iconPath} class="mb-4 size-11" />
+									) : (
+										<span
+											class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-surface text-muted-foreground transition-colors group-hover:text-primary"
+											aria-hidden="true"
+										>
+											<svg
+												class="h-[22px] w-[22px]"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="1.7"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d={item.iconPath} />
+											</svg>
+										</span>
+									)}
+
+									<h3 class="text-base font-semibold tracking-tight text-foreground group-hover:text-primary">
+										{item.name}
+									</h3>
+									<p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+										{item.tagline}
+									</p>
+
+									<span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+										{c.explore}
+										<svg
+											class="h-4 w-4 transition-transform group-hover:translate-x-1"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											aria-hidden="true"
+										>
+											<path d="M5 12h14M13 6l6 6-6 6" />
+										</svg>
+									</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			))
+		}
+	</Container>
+</section>

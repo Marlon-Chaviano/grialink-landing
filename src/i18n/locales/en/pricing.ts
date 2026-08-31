@@ -178,7 +178,7 @@ export default {
       {
         question: 'Is my data secure?',
         answer:
-          'We use MFA, roles & permissions (RBAC), audit logs, anti-bot protection, and encryption in transit and at rest. We do not claim HIPAA or SOC 2 certifications we do not hold yet.',
+          'We use MFA, roles & permissions (RBAC), audit logs, anti-bot protection, and encryption in transit and at rest. Grialink is not HIPAA or SOC 2 certified. Do not use the platform to store or process PHI that requires HIPAA compliance.',
       },
       {
         question: 'Is there a paid-plan trial?',

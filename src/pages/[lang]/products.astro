@@ -1,70 +1,60 @@
 ---
+/**
+ * /products — the catalogue index.
+ *
+ * This used to be the whole product story in one long scroll, with nothing
+ * linkable. It is now an index, and every product has its own page.
+ */
 import Layout from "@/layouts/Layout.astro";
 import SEO from "@/components/seo/SEO.astro";
 
 import ProductsHero from "@/components/sections/ProductsHero.astro";
-import ProductsGrid from "@/components/sections/ProductsGrid.astro";
-import ProductShowcase from "@/components/sections/ProductShowcase.astro";
+import ProductCatalogue from "@/components/sections/ProductCatalogue.astro";
 import ProductIntegrations from "@/components/sections/ProductIntegrations.astro";
+import MobileAppTeaser from "@/components/sections/MobileAppTeaser.astro";
 import ProductsCTA from "@/components/sections/ProductsCTA.astro";
 
 import { supportedLanguages, type Lang } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
+import { productPages } from "@/lib/productPages";
 
 export function getStaticPaths() {
 	return supportedLanguages.map((lang) => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params as { lang: Lang };
-const pp = getTranslations(lang, "productsPage") as Record<string, any>;
-const seo = pp.seo as Record<string, string>;
+const c = getTranslations(lang, "productsCatalogue") as Record<string, any>;
+const seo = c.seo as Record<string, string>;
+const siteUrl = "https://grialink.com";
 ---
 
 <Layout lang={lang}>
 	<Fragment slot="head">
-		<SEO
-			lang={lang}
-			title={seo.title}
-			description={seo.description}
-			page="products"
-		/>
-		{/* Structured data — SoftwareApplication schema */}
+		<SEO lang={lang} title={seo.title} description={seo.description} page="products" />
+
+		{/* An index of products is an ItemList — it tells search engines the set. */}
 		<script
 			type="application/ld+json"
 			set:html={JSON.stringify({
 				"@context": "https://schema.org",
-				"@type": "SoftwareApplication",
-				name: "Grialink",
-				applicationCategory: "BusinessApplication",
-				description: seo.description,
-				operatingSystem: "Web",
-				brand: { "@type": "Brand", name: "Grialink" },
-				offers: {
-					"@type": "Offer",
-					price: "0",
-					priceCurrency: "USD",
-					url: `https://grialink.com/${lang}/pricing`,
-				},
-				featureList: [
-					"Prospector AI",
-					"Outreach Engine",
-					"Smart Pipeline",
-					"Smart Calendar",
-					"AI Analytics Hub",
-					"Grialink Dialer",
-					"Grial Bots",
-					"Natural Language Processing",
-					"Predictive Models",
-				],
+				"@type": "ItemList",
+				name: seo.title,
+				itemListElement: productPages.map((product, i) => ({
+					"@type": "ListItem",
+					position: i + 1,
+					name: c.items[product.slug].name,
+					description: c.items[product.slug].tagline,
+					url: `${siteUrl}/${lang}/products/${product.slug}`,
+				})),
 			})}
 		/>
 	</Fragment>
 
 	<main>
 		<ProductsHero lang={lang} />
-		<ProductsGrid lang={lang} />
-		<ProductShowcase lang={lang} />
+		<ProductCatalogue lang={lang} />
 		<ProductIntegrations lang={lang} />
+		<MobileAppTeaser lang={lang} />
 		<ProductsCTA lang={lang} />
 	</main>
 </Layout>

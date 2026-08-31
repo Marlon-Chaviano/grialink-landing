@@ -7,7 +7,12 @@ import { Image } from "astro:assets";
 import Container from "@/components/ui/Container.astro";
 import { type Lang } from "@/i18n/config";
 import { getTranslations } from "@/i18n/utils";
-import heroWorkspace from "@/assets/marketing/about-workspace.webp";
+/*
+ * The previous hero was an empty room with two blank monitors — and its alt
+ * text described a clinic reception it did not contain. The About page is about
+ * who Grialink is for, so the image is now the people it is for.
+ */
+import heroWorkspace from "@/assets/marketing/about-hero-team.webp";
 
 interface Props {
 	lang: Lang;

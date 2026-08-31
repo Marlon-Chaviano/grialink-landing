@@ -13,8 +13,9 @@ export default {
     titleHighlight: 'realmente necesitan',
     subtitle:
       'Nacimos observando cómo los profesionales de la salud perdían horas entre Excel, WhatsApp y agendas manuales. Creamos Grialink para que se enfoquen en lo único que importa: hacer crecer su centro.',
-    imageOverlay: 'Operación inteligente',
-    imageAlt: 'Recepción de centro moderna con tecnología integrada',
+    imageOverlay: 'Primero las personas, siempre',
+    imageAlt:
+      'Una recepcionista en el mostrador de un centro sonríe mientras recibe a una clienta, con un compañero cruzando la zona de tratamiento al fondo',
   },
 
   /* ── Historia ── */
@@ -51,6 +52,31 @@ export default {
         description:
           'Dashboards con métricas reales: tasa de conversión, valor de pipeline, speed-to-lead, ROI de campañas. Lo que Grialink mide, tu centro mejora.',
         icon: 'chart',
+      },
+    ],
+  },
+
+  /* ── Creencias: dónde termina la IA y empieza una persona ── */
+  beliefs: {
+    badge: 'En qué creemos',
+    title: 'La IA debería contestar el teléfono. Decidir sigue siendo cosa de personas.',
+    subtitle:
+      'Automatizar la recepción no busca sacar a las personas de la conversación. Busca que dejen de pasar el día en las partes que nunca las necesitaron.',
+    items: [
+      {
+        title: 'Automatiza la repetición, no la relación',
+        description:
+          'Las preguntas de precio, la disponibilidad, los recordatorios y los informes van solos. La consulta, la objeción y la llamada difícil siguen siendo de tu equipo, que es donde deben estar.',
+      },
+      {
+        title: 'Siempre hay una persona a un paso',
+        description:
+          'Todos nuestros bots tienen traspaso. Cuando una conversación deja de ser rutinaria, pasa a una persona: la IA no se atrinchera para intentar ganarla.',
+      },
+      {
+        title: 'Tiene que dejar rastro',
+        description:
+          'Las transcripciones, los resúmenes y los informes existen para que tu equipo vea exactamente qué se dijo en su nombre. Una automatización que no puedes auditar no es automatización, es suponer.',
       },
     ],
   },

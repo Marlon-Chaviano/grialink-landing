@@ -179,7 +179,7 @@ export default {
       {
         question: '¿Mis datos están seguros?',
         answer:
-          'Usamos MFA, roles y permisos (RBAC), audit logs, protección anti-bot y cifrado en tránsito y en reposo. No afirmamos certificaciones HIPAA o SOC 2 que aún no tenemos.',
+          'Usamos MFA, roles y permisos (RBAC), audit logs, protección anti-bot y cifrado en tránsito y en reposo. Grialink no está certificado HIPAA ni SOC 2. No uses la plataforma para almacenar ni procesar PHI que requiera cumplimiento HIPAA.',
       },
       {
         question: '¿Hay trial en planes de pago?',

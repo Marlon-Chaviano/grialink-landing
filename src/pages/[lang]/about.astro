@@ -27,6 +27,7 @@ import SEO from "@/components/seo/SEO.astro";
 import AboutHero from "@/components/sections/AboutHero.astro";
 import HistorySection from "@/components/sections/HistorySection.astro";
 import ValuesSection from "@/components/sections/ValuesSection.astro";
+import BeliefsSection from "@/components/sections/BeliefsSection.astro";
 import IdentitySection from "@/components/sections/IdentitySection.astro";
 import TeamSection from "@/components/sections/TeamSection.astro";
 import AboutCTA from "@/components/sections/AboutCTA.astro";
@@ -57,6 +58,12 @@ const seo = about.seo as Record<string, string>;
 		<AboutHero lang={lang} />
 		<HistorySection lang={lang} />
 		<ValuesSection lang={lang} />
+		{/*
+		  Beliefs sits after the values and before the brand story: the values say
+		  how we build, this says where the automation stops — which is the
+		  objection a buyer actually arrives with.
+		*/}
+		<BeliefsSection lang={lang} />
 		<IdentitySection lang={lang} />
 		<TeamSection lang={lang} />
 		<AboutCTA lang={lang} />

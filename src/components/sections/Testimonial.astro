@@ -1,0 +1,100 @@
+---
+/**
+ * A single customer quote.
+ *
+ * ⚠️ NOT RENDERED YET — this component is deliberately not imported by any page.
+ *
+ * Grialink has no published customer testimonials, and inventing one (or
+ * shipping a visible placeholder) would be worse than having none. The
+ * component and its slot in the page order exist so that the moment real
+ * quotes arrive, adding them is an import and a props object.
+ *
+ * To ship one: add the quote to a `testimonials` locale namespace in EN *and*
+ * ES, drop a headshot in `src/assets/testimonials/`, and place the component
+ * between two `ProductSpotlight` sections in `src/pages/[lang]/index.astro`
+ * (the pattern Chatwoot uses — proof right after the claim, not batched at the
+ * bottom).
+ *
+ * Required content per quote: verbatim text, full name, role, company, consent
+ * to publish, and optionally a case-study URL.
+ */
+import { Image } from "astro:assets";
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	quote: string;
+	name: string;
+	role: string;
+	company: string;
+	/** Headshot. Falls back to an initial when absent. */
+	avatar?: ImageMetadata;
+	/** Optional link to a longer write-up. */
+	caseStudyHref?: string;
+	caseStudyLabel?: string;
+	tinted?: boolean;
+}
+
+const { quote, name, role, company, avatar, caseStudyHref, caseStudyLabel, tinted = false } =
+	Astro.props;
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<figure class="mx-auto max-w-3xl text-center" data-animate>
+			<blockquote
+				class="text-xl font-medium leading-relaxed tracking-display text-foreground sm:text-2xl"
+			>
+				{quote}
+			</blockquote>
+
+			<figcaption class="mt-8 flex items-center justify-center gap-3.5">
+				{
+					avatar ? (
+						<Image
+							src={avatar}
+							alt=""
+							class="h-12 w-12 rounded-full object-cover"
+							widths={[48, 96]}
+							sizes="48px"
+							loading="lazy"
+						/>
+					) : (
+						<span
+							class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/12 text-lg font-semibold text-primary"
+							aria-hidden="true"
+						>
+							{name.charAt(0)}
+						</span>
+					)
+				}
+				<span class="text-left">
+					<span class="block text-sm font-semibold text-foreground">{name}</span>
+					<span class="block text-sm text-muted-foreground">{role}, {company}</span>
+				</span>
+			</figcaption>
+
+			{
+				caseStudyHref && caseStudyLabel && (
+					<a
+						href={caseStudyHref}
+						class="group mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary-hover"
+					>
+						{caseStudyLabel}
+						<svg
+							class="h-4 w-4 transition-transform group-hover:translate-x-1"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M5 12h14M13 6l6 6-6 6" />
+						</svg>
+					</a>
+				)
+			}
+		</figure>
+	</Container>
+</section>

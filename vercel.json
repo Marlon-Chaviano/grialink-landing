@@ -11,6 +11,11 @@
       "permanent": false
     },
     {
+      "source": "/download",
+      "destination": "/en/download",
+      "permanent": false
+    },
+    {
       "source": "/pricing",
       "destination": "/en/pricing",
       "permanent": false
@@ -23,6 +28,91 @@
     {
       "source": "/products",
       "destination": "/en/products",
+      "permanent": false
+    },
+    {
+      "source": "/products/ai-receptionist",
+      "destination": "/en/products/grial-front-desk",
+      "statusCode": 301
+    },
+    {
+      "source": "/products/grial-front-desk",
+      "destination": "/en/products/grial-front-desk",
+      "permanent": false
+    },
+    {
+      "source": "/products/analytics",
+      "destination": "/en/products/analytics",
+      "permanent": false
+    },
+    {
+      "source": "/products/calendar",
+      "destination": "/en/products/calendar",
+      "permanent": false
+    },
+    {
+      "source": "/products/dialer",
+      "destination": "/en/products/dialer",
+      "permanent": false
+    },
+    {
+      "source": "/products/grial-scheduler",
+      "destination": "/en/products/grial-scheduler",
+      "permanent": false
+    },
+    {
+      "source": "/products/grial-voice",
+      "destination": "/en/products/grial-auditor",
+      "statusCode": 301
+    },
+    {
+      "source": "/products/grial-auditor",
+      "destination": "/en/products/grial-auditor",
+      "permanent": false
+    },
+    {
+      "source": "/en/products/ai-receptionist",
+      "destination": "/en/products/grial-front-desk",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/products/ai-receptionist",
+      "destination": "/es/products/grial-front-desk",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/products/grial-voice",
+      "destination": "/en/products/grial-auditor",
+      "statusCode": 301
+    },
+    {
+      "source": "/es/products/grial-voice",
+      "destination": "/es/products/grial-auditor",
+      "statusCode": 301
+    },
+    {
+      "source": "/products/inbox-pipeline",
+      "destination": "/en/products/inbox-pipeline",
+      "permanent": false
+    },
+    {
+      "source": "/products/grial-mind",
+      "destination": "/en/products/grial-mind",
+      "permanent": false
+    },
+    {
+      "source": "/products/outreach",
+      "destination": "/en/products/outreach",
+      "permanent": false
+    },
+    {
+      "source": "/products/prospector",
+      "destination": "/en/products/prospector",
+      "permanent": false
+    },
+    {
+      "source": "/products/whatsapp-copilot",
+      "destination": "/en/products/whatsapp-copilot",
       "permanent": false
     },
     {

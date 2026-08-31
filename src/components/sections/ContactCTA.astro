@@ -2,22 +2,24 @@
 /**
  * ContactCTA — "Already a customer?" CTA with login link.
  */
-import Container from "@/components/ui/Container.astro";
-import { type Lang, localizedHref } from "@/i18n/config";
-import { getTranslations } from "@/i18n/utils";
+import Container from '@/components/ui/Container.astro';
+import { type Lang, localizedHref } from '@/i18n/config';
+import { getTranslations } from '@/i18n/utils';
 
 interface Props {
 	lang: Lang;
 }
 
 const { lang } = Astro.props;
-const c = getTranslations(lang, "contact") as Record<string, any>;
+const c = getTranslations(lang, 'contact') as Record<string, any>;
 const cta = c.cta as Record<string, string>;
 ---
 
-<section class="section-spacing bg-background-lighter">
+<section class="section-spacing">
 	<Container class="max-w-5xl">
-		<div class="bg-card rounded-3xl p-10 md:p-16 shadow-xl border border-border-light text-center relative overflow-hidden">
+		<div
+			class="bg-card rounded-3xl p-10 md:p-16 shadow-xl border border-border-light text-center relative overflow-hidden"
+		>
 			<!-- Decorative blobs -->
 			<div
 				class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"

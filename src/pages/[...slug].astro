@@ -6,11 +6,40 @@ import { defaultLang, supportedLanguages } from "@/i18n/config";
  * Detects browser language at runtime and redirects to the correct locale.
  */
 
-const knownPages = ["about", "contact", "pricing", "privacy", "products", "sms-signup", "terms"];
-
 export function getStaticPaths() {
-	const pages = ["about", "contact", "pricing", "privacy", "products", "sms-signup", "terms"];
-	return pages.map((slug) => ({ params: { slug } }));
+	/*
+	 * Declared inside the function on purpose: Astro hoists `getStaticPaths`
+	 * into an isolated scope, so it cannot close over anything in the
+	 * frontmatter above.
+	 *
+	 * Keep in sync with the `redirects` array in `vercel.json` — on Vercel the
+	 * server-side redirect wins and these shells are the local/dev fallback.
+	 */
+	const knownPages = [
+		"about",
+		"contact",
+		"download",
+		"pricing",
+		"privacy",
+		"products",
+		"products/whatsapp-copilot",
+		"products/grial-front-desk",
+		"products/ai-receptionist",
+		"products/grial-scheduler",
+		"products/grial-auditor",
+		"products/grial-voice",
+		"products/prospector",
+		"products/outreach",
+		"products/inbox-pipeline",
+		"products/grial-mind",
+		"products/calendar",
+		"products/dialer",
+		"products/analytics",
+		"sms-signup",
+		"terms",
+	];
+
+	return knownPages.map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;

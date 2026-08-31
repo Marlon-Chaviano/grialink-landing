@@ -1,0 +1,54 @@
+---
+/**
+ * How it works, in three steps. Reuses the numbered-badge language and the
+ * connecting hairline from the home `HowItWorks` section.
+ */
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	steps: { title: string; subtitle: string; items: { title: string; body: string }[] };
+	tinted?: boolean;
+}
+
+const { steps, tinted = false } = Astro.props;
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<div class="mx-auto mb-14 max-w-2xl text-center" data-animate>
+			<h2 class="text-display-sm font-bold tracking-display text-foreground">{steps.title}</h2>
+			<p class="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+				{steps.subtitle}
+			</p>
+		</div>
+
+		<ol class="grid gap-10 stagger-children md:grid-cols-3 md:gap-8" data-animate>
+			{
+				steps.items.map((step, i) => (
+					<li class="relative">
+						<span
+							class="mb-5 flex h-11 w-11 items-center justify-center rounded-full border border-primary/25 bg-primary/10 text-base font-bold tabular-nums text-primary"
+							aria-hidden="true"
+						>
+							{i + 1}
+						</span>
+
+						{/*
+						  Connector between steps. Rendered conditionally rather than hidden
+						  on the last item, so no stray rule can escape past the final step.
+						*/}
+						{i < steps.items.length - 1 && (
+							<span
+								class="pointer-events-none absolute left-14 top-5 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-primary/40 to-transparent md:block"
+								aria-hidden="true"
+							/>
+						)}
+
+						<h3 class="text-lg font-semibold tracking-tight text-foreground">{step.title}</h3>
+						<p class="mt-2.5 text-base leading-relaxed text-muted-foreground">{step.body}</p>
+					</li>
+				))
+			}
+		</ol>
+	</Container>
+</section>

@@ -15,7 +15,7 @@ export default {
     {
       question: '¿Incluye WhatsApp?',
       answer:
-        'Sí. Puedes centralizar conversaciones y, en planes superiores, activar Grial Bots (asistente WhatsApp y recepcionista IA).',
+        'Sí. Puedes centralizar conversaciones y, en planes superiores, activar Grial Bots como WhatsApp Copilot, Grial Front Desk, Grial Scheduler y Grial Auditor.',
     },
     {
       question: '¿Hay prueba en planes de pago?',
@@ -25,7 +25,7 @@ export default {
     {
       question: '¿Cómo protegen los datos?',
       answer:
-        'Usamos MFA, roles y permisos (RBAC), audit logs, protección anti-bot y cifrado en tránsito y en reposo. No afirmamos certificaciones HIPAA/SOC 2 que aún no tenemos.',
+        'Usamos MFA, roles y permisos (RBAC), audit logs, protección anti-bot y cifrado en tránsito y en reposo. Grialink no está certificado HIPAA ni SOC 2. No uses la plataforma para almacenar ni procesar PHI que requiera cumplimiento HIPAA.',
     },
     {
       question: '¿Puedo agendar una demo?',

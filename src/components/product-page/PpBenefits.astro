@@ -1,0 +1,46 @@
+---
+/** Three outcome cards. Results the buyer gets, not features the product has. */
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	benefits: { title: string; items: { title: string; body: string }[] };
+	tinted?: boolean;
+}
+
+const { benefits, tinted = false } = Astro.props;
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<h2 class="mx-auto mb-12 max-w-2xl text-center text-display-sm font-bold tracking-display text-foreground" data-animate>
+			{benefits.title}
+		</h2>
+
+		<ul class="grid gap-4 stagger-children md:grid-cols-3" data-animate>
+			{
+				benefits.items.map((item) => (
+					<li class="rounded-2xl border border-border-light bg-card p-7">
+						<span
+							class="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/12 text-primary"
+							aria-hidden="true"
+						>
+							<svg
+								class="h-5 w-5"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path d="M20 6L9 17l-5-5" />
+							</svg>
+						</span>
+						<h3 class="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
+						<p class="mt-2.5 text-base leading-relaxed text-muted-foreground">{item.body}</p>
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>

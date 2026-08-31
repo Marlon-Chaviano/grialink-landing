@@ -4,13 +4,14 @@ import SEO from "@/components/seo/SEO.astro";
 import Hero from "@/components/sections/Hero.astro";
 import LogoCloud from "@/components/sections/LogoCloud.astro";
 import Problem from "@/components/sections/Problem.astro";
-import PlatformModules from "@/components/sections/PlatformModules.astro";
+import ProductPillars from "@/components/sections/ProductPillars.astro";
+import ProductSpotlight from "@/components/sections/ProductSpotlight.astro";
 import RoleFeatures from "@/components/sections/RoleFeatures.astro";
 import HowItWorks from "@/components/sections/HowItWorks.astro";
-import AIImpact from "@/components/sections/AIImpact.astro";
 import TrustBadges from "@/components/sections/TrustBadges.astro";
 import PricingTeaser from "@/components/sections/PricingTeaser.astro";
 import HomeFAQ from "@/components/sections/HomeFAQ.astro";
+import MobileAppTeaser from "@/components/sections/MobileAppTeaser.astro";
 import CTA from "@/components/sections/CTA.astro";
 
 import { supportedLanguages, type Lang } from "@/i18n/config";
@@ -71,15 +72,35 @@ const siteUrl = "https://grialink.com";
 	</Fragment>
 
 	<main>
+		{/*
+		  Section order is an argument, not a list. Each one answers the next
+		  question a visitor has:
+		    Hero            — what is this?
+		    LogoCloud       — does it work with what I already run?
+		    Problem         — do you understand my day?
+		    ProductPillars  — what exactly do I get?
+		    Spotlight ×2    — show me the two that matter most
+		    RoleFeatures    — is this for someone in my job?
+		    HowItWorks      — how much work is it to start?
+		    TrustBadges     — is my data safe?
+		    PricingTeaser   — what does it cost?
+		    FAQ / CTA       — anything left, then the ask.
+
+		  A `Testimonial` slot belongs between the two spotlights (proof right
+		  after the claim). It is left out until there are real quotes to put in
+		  it — see the header comment in `Testimonial.astro`.
+		*/}
 		<Hero lang={lang} />
 		<LogoCloud lang={lang} />
 		<Problem lang={lang} />
-		<PlatformModules lang={lang} />
+		<ProductPillars lang={lang} />
+		<ProductSpotlight lang={lang} product="whatsappCopilot" href="/products/whatsapp-copilot" tinted />
+		<ProductSpotlight lang={lang} product="frontDesk" href="/products/grial-front-desk" reverse />
 		<RoleFeatures lang={lang} />
 		<HowItWorks lang={lang} />
-		<AIImpact lang={lang} />
 		<TrustBadges lang={lang} variant="standalone" />
 		<PricingTeaser lang={lang} />
+		<MobileAppTeaser lang={lang} />
 		<HomeFAQ lang={lang} />
 		<CTA lang={lang} />
 	</main>

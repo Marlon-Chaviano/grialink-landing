@@ -5,6 +5,6 @@ export default {
   subtitle:
     'Grialink convierte cada consulta en una cita confirmada: WhatsApp, llamadas y seguimiento automáticos para centros de estética, dental y bienestar.',
   ctaPrimary: 'Empezar gratis',
-  ctaSecondary: 'Ver cómo funciona',
+  ctaSecondary: 'Verlo en acción',
   disclaimer: 'Sin tarjeta • Listo en 5 minutos • Cancela cuando quieras',
 };

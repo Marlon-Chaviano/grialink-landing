@@ -1,0 +1,37 @@
+---
+/** A six-card grid of capabilities — the "everything else it does" block. */
+import Container from "@/components/ui/Container.astro";
+
+interface Props {
+	block: { title: string; subtitle?: string; items: { title: string; body: string }[] };
+	tinted?: boolean;
+}
+
+const { block, tinted = false } = Astro.props;
+---
+
+<section class:list={["section-spacing", tinted && "bg-secondary"]}>
+	<Container>
+		<div class="mx-auto mb-12 max-w-2xl text-center" data-animate>
+			<h2 class="text-display-sm font-bold tracking-display text-foreground">{block.title}</h2>
+			{
+				block.subtitle && (
+					<p class="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+						{block.subtitle}
+					</p>
+				)
+			}
+		</div>
+
+		<ul class="grid gap-4 stagger-children sm:grid-cols-2 lg:grid-cols-3" data-animate>
+			{
+				block.items.map((item) => (
+					<li class="rounded-2xl border border-border-light bg-card p-6">
+						<h3 class="text-base font-semibold tracking-tight text-foreground">{item.title}</h3>
+						<p class="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>

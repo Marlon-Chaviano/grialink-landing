@@ -1,0 +1,180 @@
+---
+/**
+ * One template, every product page.
+ *
+ * Routes come from `src/lib/productPages.ts` × the supported locales, so adding
+ * a product is a registry entry plus an EN/ES locale file.
+ *
+ * The template is *block-driven*: it renders whichever optional blocks the
+ * locale file defines, in a fixed order. That lets the two flagship agents keep
+ * a deeper argument (problem → benefits → steps) while the other eight run the
+ * leaner shape, without forking the template or shipping empty sections.
+ *
+ * Captures are pulled through `import.meta.glob` because the registry only
+ * knows capture *names* — Astro's asset pipeline needs a static import graph,
+ * and the glob supplies it.
+ */
+import Layout from "@/layouts/Layout.astro";
+import SEO from "@/components/seo/SEO.astro";
+
+import PpHero from "@/components/product-page/PpHero.astro";
+import PpHighlights from "@/components/product-page/PpHighlights.astro";
+import PpProblem from "@/components/product-page/PpProblem.astro";
+import PpBenefits from "@/components/product-page/PpBenefits.astro";
+import PpSteps from "@/components/product-page/PpSteps.astro";
+import PpSection from "@/components/product-page/PpSection.astro";
+import PpFeatureGrid from "@/components/product-page/PpFeatureGrid.astro";
+import PpUseCases from "@/components/product-page/PpUseCases.astro";
+import PpFaq from "@/components/product-page/PpFaq.astro";
+import CTA from "@/components/sections/CTA.astro";
+
+import { supportedLanguages, type Lang } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+import { productPages, type ProductPageEntry } from "@/lib/productPages";
+
+export function getStaticPaths() {
+	return supportedLanguages.flatMap((lang) =>
+		productPages.flatMap((product) => [
+			{
+				params: { lang, slug: product.slug },
+				props: { product },
+			},
+			...(product.legacySlugs ?? []).map((legacySlug) => ({
+				params: { lang, slug: legacySlug },
+				props: { product, redirectTo: product.slug },
+			})),
+		]),
+	);
+}
+
+const { lang } = Astro.params as { lang: Lang; slug: string };
+const { product, redirectTo } = Astro.props as {
+	product: ProductPageEntry;
+	redirectTo?: string;
+};
+
+if (redirectTo) {
+	return Astro.redirect(`/${lang}/products/${redirectTo}`, 301);
+}
+
+const captureModules = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/assets/marketing/captures/*.webp",
+	{ eager: true },
+);
+
+/** Resolves a capture *name* to its dark/light pair. */
+function pair(name: string) {
+	return {
+		dark: captureModules[`/src/assets/marketing/captures/${name}-dark.webp`].default,
+		light: captureModules[`/src/assets/marketing/captures/${name}-light.webp`].default,
+	};
+}
+
+const captures = product.captures.map(pair);
+const p = getTranslations(lang, product.namespace) as Record<string, any>;
+const seo = p.seo as Record<string, string>;
+const siteUrl = "https://grialink.com";
+
+/** The shape `PpSection` expects — declared here so the cast is checked. */
+interface DeepDive {
+	eyebrow?: string;
+	title: string;
+	subtitle: string;
+	items?: string[];
+	captureAlt: string;
+	captureCaption?: string;
+}
+
+/**
+ * Deep-dive sections consume captures in order. When the hero already used one
+ * (products without a hand-built mockup), the sections start at the next.
+ */
+const sectionCaptureOffset = product.mockup ? 0 : 1;
+const sections = (p.sections ?? []) as DeepDive[];
+
+/* Alternate the tint so consecutive bands separate without a divider rule. */
+let band = 0;
+const nextTint = () => band++ % 2 === 1;
+---
+
+<Layout lang={lang}>
+	<Fragment slot="head">
+		<SEO lang={lang} title={seo.title} description={seo.description} page={product.ogPage as any} />
+
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "SoftwareApplication",
+				name: p.hero.badge,
+				applicationCategory: "BusinessApplication",
+				operatingSystem: "Web",
+				description: seo.description,
+				brand: { "@type": "Brand", name: "Grialink" },
+				isPartOf: { "@type": "SoftwareApplication", name: "Grialink" },
+				featureList: (p.featureGrid?.items ?? []).map((i: { title: string }) => i.title),
+				offers: {
+					"@type": "Offer",
+					price: "0",
+					priceCurrency: "USD",
+					url: `${siteUrl}/${lang}/pricing`,
+				},
+			})}
+		/>
+
+		{
+			p.faq && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "FAQPage",
+						mainEntity: p.faq.items.map((item: { question: string; answer: string }) => ({
+							"@type": "Question",
+							name: item.question,
+							acceptedAnswer: { "@type": "Answer", text: item.answer },
+						})),
+					})}
+				/>
+			)
+		}
+	</Fragment>
+
+	<main>
+		<PpHero
+			lang={lang}
+			hero={p.hero}
+			group={product.group}
+			iconPath={product.iconPath}
+			mockup={product.mockup}
+			capture={product.mockup ? undefined : captures[0]}
+			ctaId={product.slug}
+		/>
+
+		{p.highlights && <PpHighlights items={p.highlights} />}
+		{p.problem && <PpProblem problem={p.problem} />}
+		{p.benefits && <PpBenefits benefits={p.benefits} tinted={nextTint()} />}
+		{p.steps && <PpSteps steps={p.steps} tinted={nextTint()} />}
+
+		{
+			sections.map((block, i) => {
+				const capture = captures[i + sectionCaptureOffset] ?? captures[0];
+				return (
+					<PpSection
+						block={block}
+						dark={capture.dark}
+						light={capture.light}
+						reverse={i % 2 === 1}
+						tinted={nextTint()}
+					/>
+				);
+			})
+		}
+
+		{p.featureGrid && <PpFeatureGrid block={p.featureGrid} tinted={nextTint()} />}
+		{p.useCases && <PpUseCases useCases={p.useCases} tinted={nextTint()} />}
+		{p.faq && <PpFaq faq={p.faq} tinted={nextTint()} />}
+
+		<CTA lang={lang} />
+	</main>
+</Layout>

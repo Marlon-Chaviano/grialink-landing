@@ -10,33 +10,38 @@
  * optional server-side and every extra field costs conversion. `subject` stays:
  * `LandingContact` validates it against a fixed list, so it cannot be inferred.
  */
-import { type Lang } from "@/i18n/config";
-import { getTranslations } from "@/i18n/utils";
+import { type Lang } from '@/i18n/config';
+import { getTranslations } from '@/i18n/utils';
 
 interface Props {
 	lang: Lang;
 }
 
 const { lang } = Astro.props;
-const c = getTranslations(lang, "contact") as Record<string, any>;
+const c = getTranslations(lang, 'contact') as Record<string, any>;
 const t = c.form;
 
 /** Must stay in sync with `LandingContact::VALID_SUBJECTS` in the suite. */
-const SUBJECTS = ["demo", "support", "partners", "other"] as const;
+const SUBJECTS = ['demo', 'support', 'partners', 'other'] as const;
 
 const fieldClass =
-	"w-full rounded-xl border border-border-light bg-surface px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20";
+	'w-full appearance-none rounded-xl border border-foreground/25 bg-card px-4 py-3 text-sm text-foreground shadow-none placeholder:text-muted-foreground/70 transition-colors focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20';
+
+const selectClass = `${fieldClass} pr-10`;
 ---
 
 <form
 	id="contact-form"
 	class="space-y-5"
 	novalidate
-	data-endpoint={`${import.meta.env.PUBLIC_BACKEND_URL?.replace(/\/$/, "") || "https://app.grialink.com"}/api/contact`}
+	data-endpoint={`${import.meta.env.PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'https://app.grialink.com'}/api/contact`}
 >
 	<div class="grid gap-5 sm:grid-cols-2">
 		<div>
-			<label for="cf-name" class="mb-2 block text-sm font-medium text-foreground">
+			<label
+				for="cf-name"
+				class="mb-2 block text-sm font-medium text-foreground"
+			>
 				{t.fields.name.label}
 			</label>
 			<input
@@ -50,11 +55,18 @@ const fieldClass =
 				placeholder={t.fields.name.placeholder}
 				class={fieldClass}
 			/>
-			<p data-error-for="name" class="mt-1.5 hidden text-xs text-destructive"></p>
+			<p
+				data-error-for="name"
+				class="mt-1.5 hidden text-xs text-destructive"
+			>
+			</p>
 		</div>
 
 		<div>
-			<label for="cf-email" class="mb-2 block text-sm font-medium text-foreground">
+			<label
+				for="cf-email"
+				class="mb-2 block text-sm font-medium text-foreground"
+			>
 				{t.fields.email.label}
 			</label>
 			<input
@@ -66,23 +78,62 @@ const fieldClass =
 				placeholder={t.fields.email.placeholder}
 				class={fieldClass}
 			/>
-			<p data-error-for="email" class="mt-1.5 hidden text-xs text-destructive"></p>
+			<p
+				data-error-for="email"
+				class="mt-1.5 hidden text-xs text-destructive"
+			>
+			</p>
 		</div>
 	</div>
 
 	<div>
-		<label for="cf-subject" class="mb-2 block text-sm font-medium text-foreground">
+		<label
+			for="cf-subject"
+			class="mb-2 block text-sm font-medium text-foreground"
+		>
 			{t.fields.subject.label}
 		</label>
-		<select id="cf-subject" name="subject" required class={fieldClass}>
-			<option value="">{t.fields.subject.placeholder}</option>
-			{SUBJECTS.map((key) => <option value={key}>{t.fields.subject.options[key]}</option>)}
-		</select>
-		<p data-error-for="subject" class="mt-1.5 hidden text-xs text-destructive"></p>
+		<div class="relative">
+			<select
+				id="cf-subject"
+				name="subject"
+				required
+				class={selectClass}
+			>
+				<option value="">{t.fields.subject.placeholder}</option>
+				{
+					SUBJECTS.map(key => (
+						<option value={key}>{t.fields.subject.options[key]}</option>
+					))
+				}
+			</select>
+			<svg
+				class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				aria-hidden="true"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M19 9l-7 7-7-7"
+				></path>
+			</svg>
+		</div>
+		<p
+			data-error-for="subject"
+			class="mt-1.5 hidden text-xs text-destructive"
+		>
+		</p>
 	</div>
 
 	<div>
-		<label for="cf-message" class="mb-2 block text-sm font-medium text-foreground">
+		<label
+			for="cf-message"
+			class="mb-2 block text-sm font-medium text-foreground"
+		>
 			{t.fields.message.label}
 		</label>
 		<textarea
@@ -93,14 +144,28 @@ const fieldClass =
 			maxlength="5000"
 			rows="5"
 			placeholder={t.fields.message.placeholder}
-			class={fieldClass}></textarea>
-		<p data-error-for="message" class="mt-1.5 hidden text-xs text-destructive"></p>
+			class={fieldClass}
+		></textarea>
+		<p
+			data-error-for="message"
+			class="mt-1.5 hidden text-xs text-destructive"
+		>
+		</p>
 	</div>
 
 	{/* Honeypot — hidden from people, filled by bots. */}
-	<div class="absolute left-[-9999px]" aria-hidden="true">
+	<div
+		class="absolute left-[-9999px]"
+		aria-hidden="true"
+	>
 		<label for="cf-hp">Company</label>
-		<input id="cf-hp" name="_hp" type="text" tabindex="-1" autocomplete="off" />
+		<input
+			id="cf-hp"
+			name="_hp"
+			type="text"
+			tabindex="-1"
+			autocomplete="off"
+		/>
 	</div>
 
 	<button
@@ -109,23 +174,39 @@ const fieldClass =
 		class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/35 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
 	>
 		<span data-submit-idle>{t.submit}</span>
-		<span data-submit-loading class="hidden">{t.sending}</span>
+		<span
+			data-submit-loading
+			class="hidden"
+			>{t.sending}</span
+		>
 	</button>
 
-	<p data-form-status role="status" aria-live="polite" class="hidden text-sm"></p>
+	<p
+		data-form-status
+		role="status"
+		aria-live="polite"
+		class="hidden text-sm"
+	>
+	</p>
 </form>
 
-<script is:inline define:vars={{ messages: t.validation, states: { success: t.success, error: t.error } }}>
+<script
+	is:inline
+	define:vars={{
+		messages: t.validation,
+		states: { success: t.success, error: t.error },
+	}}
+>
 	(() => {
-		const form = document.getElementById("contact-form");
+		const form = document.getElementById('contact-form');
 		if (!form) return;
 
-		const status = form.querySelector("[data-form-status]");
+		const status = form.querySelector('[data-form-status]');
 		const button = form.querySelector('button[type="submit"]');
-		const idle = form.querySelector("[data-submit-idle]");
-		const loading = form.querySelector("[data-submit-loading]");
+		const idle = form.querySelector('[data-submit-idle]');
+		const loading = form.querySelector('[data-submit-loading]');
 
-		const errorFor = (name) => form.querySelector(`[data-error-for="${name}"]`);
+		const errorFor = name => form.querySelector(`[data-error-for="${name}"]`);
 
 		function messageFor(field) {
 			if (field.validity.valueMissing) {
@@ -133,9 +214,11 @@ const fieldClass =
 			}
 			if (field.validity.typeMismatch) return messages.emailInvalid;
 			if (field.validity.tooShort) {
-				return field.name === "message" ? messages.messageMin : messages.nameMin;
+				return field.name === 'message'
+					? messages.messageMin
+					: messages.nameMin;
 			}
-			return "";
+			return '';
 		}
 
 		function showError(field) {
@@ -143,26 +226,26 @@ const fieldClass =
 			if (!node) return false;
 			const text = messageFor(field);
 			node.textContent = text;
-			node.classList.toggle("hidden", !text);
-			field.setAttribute("aria-invalid", text ? "true" : "false");
+			node.classList.toggle('hidden', !text);
+			field.setAttribute('aria-invalid', text ? 'true' : 'false');
 			return !text;
 		}
 
-		form.querySelectorAll("input, select, textarea").forEach((field) => {
-			field.addEventListener("blur", () => {
-				if (field.name !== "_hp") showError(field);
+		form.querySelectorAll('input, select, textarea').forEach(field => {
+			field.addEventListener('blur', () => {
+				if (field.name !== '_hp') showError(field);
 			});
 		});
 
-		form.addEventListener("submit", async (event) => {
+		form.addEventListener('submit', async event => {
 			event.preventDefault();
 
-			const fields = [...form.querySelectorAll("input, select, textarea")].filter(
-				(f) => f.name !== "_hp"
-			);
+			const fields = [
+				...form.querySelectorAll('input, select, textarea'),
+			].filter(f => f.name !== '_hp');
 			const allValid = fields.map(showError).every(Boolean);
 			if (!allValid) {
-				fields.find((f) => !f.checkValidity())?.focus();
+				fields.find(f => !f.checkValidity())?.focus();
 				return;
 			}
 
@@ -170,34 +253,32 @@ const fieldClass =
 			if (form.querySelector('[name="_hp"]').value) return;
 
 			button.disabled = true;
-			idle.classList.add("hidden");
-			loading.classList.remove("hidden");
-			status.classList.add("hidden");
+			idle.classList.add('hidden');
+			loading.classList.remove('hidden');
+			status.classList.add('hidden');
 
 			try {
-				const body = Object.fromEntries(
-					fields.map((f) => [f.name, f.value])
-				);
+				const body = Object.fromEntries(fields.map(f => [f.name, f.value]));
 				const res = await fetch(form.dataset.endpoint, {
-					method: "POST",
+					method: 'POST',
 					headers: {
-						"Content-Type": "application/json",
-						"Accept-Language": document.documentElement.lang || "en",
+						'Content-Type': 'application/json',
+						'Accept-Language': document.documentElement.lang || 'en',
 					},
 					body: JSON.stringify(body),
 				});
 
 				status.textContent = res.ok ? states.success : states.error;
-				status.className = `text-sm ${res.ok ? "text-primary" : "text-destructive"}`;
+				status.className = `text-sm ${res.ok ? 'text-primary' : 'text-destructive'}`;
 				if (res.ok) form.reset();
 			} catch {
 				status.textContent = states.error;
-				status.className = "text-sm text-destructive";
+				status.className = 'text-sm text-destructive';
 			} finally {
 				button.disabled = false;
-				idle.classList.remove("hidden");
-				loading.classList.add("hidden");
-				status.classList.remove("hidden");
+				idle.classList.remove('hidden');
+				loading.classList.add('hidden');
+				status.classList.remove('hidden');
 			}
 		});
 	})();

@@ -20,7 +20,12 @@ type WordmarkBrand = { name: string; kind: "gohighlevel" | "ringcentral" };
 
 /** Brand marks — local SVGs where Simple Icons CDN no longer hosts the brand */
 const integrations: Array<ColoredBrand | ThemeBrand | ApolloBrand | WordmarkBrand> = [
-	{ name: "WhatsApp", kind: "colored", icon: "https://cdn.simpleicons.org/whatsapp/25D366" },
+	/*
+	 * Self-hosted rather than pulled from cdn.simpleicons.org: every visitor was
+	 * making a third-party request for one 1.2 KB icon, which is a privacy leak
+	 * and a hard dependency on someone else's uptime and rate limit.
+	 */
+	{ name: "WhatsApp", kind: "colored", icon: "/assets/integrations/whatsapp.svg" },
 	{
 		name: "Google Calendar",
 		kind: "theme",

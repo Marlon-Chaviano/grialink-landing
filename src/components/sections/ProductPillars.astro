@@ -1,0 +1,138 @@
+---
+/**
+ * The named-products section.
+ *
+ * Replaces `PlatformModules`, which listed seven icons and never said a product
+ * name the visitor could remember or search for. Here each card is a product,
+ * with the outcome it produces and a link to its own page or section.
+ *
+ * The first two are the flagship AI agents and carry a primary ring; everything
+ * else recedes so the eye lands on them first.
+ */
+import Container from "@/components/ui/Container.astro";
+import CircuitAtmosphere from "@/components/background/CircuitAtmosphere.astro";
+import GrialCupIcon from "@/components/ui/GrialCupIcon.astro";
+import { type Lang, localizedHref } from "@/i18n/config";
+import { getTranslations } from "@/i18n/utils";
+import { findProductPage } from "@/lib/productPages";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const p = getTranslations(lang, "productPillars") as Record<string, any>;
+
+/**
+ * The six products the home page leads with, in strategic order: the two
+ * flagship agents first, then the funnel in the sequence a practice lives it.
+ * Every one now has its own page — the home page's job is to pick which six
+ * are worth the visitor's first click, not to list all eleven.
+ */
+const pillars = [
+	"whatsapp-copilot",
+	"grial-front-desk",
+	"dialer",
+	"prospector",
+	"inbox-pipeline",
+	"analytics",
+].map((slug) => {
+	const entry = findProductPage(slug)!;
+	return {
+		...entry,
+		href: localizedHref(`/products/${slug}`, lang),
+		name: p.items[slug].name as string,
+		outcome: p.items[slug].outcome as string,
+	};
+});
+
+const allProductsHref = localizedHref("/products", lang);
+---
+
+<section id="products" class="section-spacing relative scroll-mt-24">
+	<CircuitAtmosphere variant="divider" intensity="subtle" />
+
+	<Container class="relative">
+		<div class="mx-auto mb-14 max-w-2xl text-center" data-animate>
+			<p class="mb-3 text-xs font-semibold uppercase tracking-wider text-primary">{p.eyebrow}</p>
+			<h2 class="text-display-sm font-bold tracking-display text-foreground">{p.title}</h2>
+			<p class="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">{p.subtitle}</p>
+		</div>
+
+		<ul class="grid gap-4 stagger-children sm:grid-cols-2 lg:grid-cols-3" data-animate>
+			{
+				pillars.map((pillar) => (
+					<li>
+						<a
+							href={pillar.href}
+							class:list={[
+								"group card-hover flex h-full flex-col rounded-2xl border p-6 transition-colors",
+								pillar.featured
+									? "border-primary/25 bg-primary/[0.04] hover:border-primary/45"
+									: "border-border-light bg-card hover:border-border",
+							]}
+						>
+						{pillar.group === "agents" ? (
+								<GrialCupIcon iconPath={pillar.iconPath} class="mb-4 size-11" />
+							) : (
+								<span
+									class:list={[
+										"mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition-colors",
+										pillar.featured
+											? "bg-primary/15 text-primary"
+											: "bg-surface text-muted-foreground group-hover:text-primary",
+									]}
+									aria-hidden="true"
+								>
+									<svg
+										class="h-[22px] w-[22px]"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.7"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path d={pillar.iconPath} />
+									</svg>
+								</span>
+							)}
+
+							<h3 class="text-lg font-semibold tracking-tight text-foreground group-hover:text-primary">
+								{pillar.name}
+							</h3>
+							<p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+								{pillar.outcome}
+							</p>
+
+							<span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+								{p.learnMore}
+								<svg
+									class="h-4 w-4 transition-transform group-hover:translate-x-1"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M5 12h14M13 6l6 6-6 6" />
+								</svg>
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="mt-10 text-center" data-animate>
+			<a
+				href={allProductsHref}
+				class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+			>
+				{p.seeAll}
+			</a>
+		</div>
+	</Container>
+</section>

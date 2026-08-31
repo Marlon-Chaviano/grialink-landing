@@ -13,8 +13,9 @@ export default {
     titleHighlight: 'actually need',
     subtitle:
       'We were born watching healthcare professionals waste hours between Excel, WhatsApp, and manual schedules. We created Grialink so they can focus on the only thing that matters: growing their practice.',
-    imageOverlay: 'Intelligent operations',
-    imageAlt: 'Modern practice reception with integrated technology',
+    imageOverlay: 'People first, always',
+    imageAlt:
+      'A receptionist at a practice front desk smiling as she welcomes a client, with a colleague walking through the treatment area behind her',
   },
 
   /* ── History ── */
@@ -51,6 +52,31 @@ export default {
         description:
           'Dashboards with real metrics: conversion rate, pipeline value, speed-to-lead, campaign ROI. What Grialink measures, your practice improves.',
         icon: 'chart',
+      },
+    ],
+  },
+
+  /* ── Beliefs: where AI stops and a person starts ── */
+  beliefs: {
+    badge: 'What we believe',
+    title: 'AI should answer the phone. A person should still decide.',
+    subtitle:
+      'The point of automating the front desk is not to remove people from the conversation. It is to stop them spending their day on the parts of it that never needed them.',
+    items: [
+      {
+        title: 'Automate the repetition, not the relationship',
+        description:
+          'Price questions, availability, reminders and reports run on their own. The consultation, the objection and the difficult call stay with your team, where they belong.',
+      },
+      {
+        title: 'A person is always one step away',
+        description:
+          'Every bot we ship has a handover. When a conversation stops being routine, it goes to a human — the AI does not dig in and try to win it.',
+      },
+      {
+        title: 'It has to leave a trace',
+        description:
+          'Transcripts, summaries and reports exist so your team can see exactly what was said on their behalf. Automation you cannot audit is not automation, it is guesswork.',
       },
     ],
   },
